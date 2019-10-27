@@ -1,0 +1,30 @@
+﻿<Application x:Class="NuclearPhysicsProgram.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:NuclearPhysicsProgram"
+             xmlns:viewModels="clr-namespace:NuclearPhysicsProgram.ViewModels"
+             xmlns:elementInfoViewModels="clr-namespace:NuclearPhysicsProgram.ViewModels.ElementInfoViewModels"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <Style x:Key="NoStyle" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="Transparent">
+                            <ContentPresenter/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <FontFamily x:Key="OpenSansBold">pack://application:,,,/Fonts/#Open Sans Bold</FontFamily>
+        <FontFamily x:Key="OpenSansExtraBold">pack://application:,,,/Fonts/#Open Sans ExtraBold</FontFamily>
+        <FontFamily x:Key="OpenSansLight">pack://application:,,,/Fonts/#Open Sans Light</FontFamily>
+        <FontFamily x:Key="OpenSansRegular">pack://application:,,,/Fonts/#Open Sans Regular</FontFamily>
+        <FontFamily x:Key="OpenSansSemiBold">pack://application:,,,/Fonts/#Open Sans SemiBold</FontFamily>
+
+        <viewModels:MainViewModel x:Key="mainVM"/>
+        <elementInfoViewModels:ElementInfoViewModel x:Key="elementInfoVM"/>
+    </Application.Resources>
+</Application>

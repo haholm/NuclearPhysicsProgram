@@ -1,0 +1,158 @@
+﻿<UserControl x:Class="NuclearPhysicsProgram.Views.PeriodicTableViews.PeriodicTableView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NuclearPhysicsProgram.Views.PeriodicTableViews"
+             xmlns:viewModels="clr-namespace:NuclearPhysicsProgram.ViewModels"
+             mc:Ignorable="d"
+             IsEnabled="{Binding PeriodicTableViewIsEnabled, Mode=OneWay, Source={StaticResource mainVM}}"
+             >
+    <UserControl.Resources>
+        <viewModels:PeriodicTableViewModel x:Key="pTableVM"/>
+
+        <Style x:Key="PeriodicTableStyle" 
+               TargetType="UserControl">
+            <Setter Property="Width" Value="{Binding ActualWidth, Source={StaticResource pTableVM}}"/>
+            <Setter Property="Height" Value="{Binding ActualHeight, Source={StaticResource pTableVM}}"/>
+        </Style>
+
+
+        <Style x:Key="PeriodicTableItemStyle"
+               BasedOn="{StaticResource NoStyle}"
+               TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="Transparent"
+                                Width="{Binding PeriodicTableItemWidth, Source={StaticResource pTableVM}}"
+                                Height="{Binding PeriodicTableItemHeight, Source={StaticResource pTableVM}}">
+                            <ContentPresenter/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform />
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX"
+                                                 From="1"
+                                                 To="1.08"
+                                                 Duration="0:0:0.12"/>
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY"
+                                                 From="1"
+                                                 To="1.08"
+                                                 Duration="0:0:0.12"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX"
+                                                 To="1"
+                                                 Duration="0:0:0.12"/>
+                                <!--LEAVING OUT FROM PROPERTY DEFAULTS TO DEFAULT-->
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY"
+                                                 To="1"
+                                                 Duration="0:0:0.12"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <UserControl.Style>
+        <Binding Mode="OneWay" Source="{StaticResource PeriodicTableStyle}"/>
+    </UserControl.Style>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <ItemsControl ItemsSource="{Binding ElementViewModel.FirstElements, Source={StaticResource pTableVM}}"
+                      HorizontalContentAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+                      Background="Transparent">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0,0,495,0">
+                        <Border BorderBrush="#FFEBEBEB" 
+                                BorderThickness="1" 
+                                CornerRadius="6" 
+                                Margin="{Binding PeriodicTableItemMargin, Source={StaticResource pTableVM}}"
+                                RenderTransformOrigin="0.5,0.5">
+                            <Border.RenderTransform>
+                                <ScaleTransform ScaleX="{Binding RenderTransform.ScaleX, ElementName=ItemButton}"
+                                                ScaleY="{Binding RenderTransform.ScaleY, ElementName=ItemButton}"/>
+                            </Border.RenderTransform>
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="6" 
+                                                  ShadowDepth="2" 
+                                                  Direction="-36" 
+                                                  Opacity="0.25" 
+                                                  Color="Black" />
+                            </Border.Effect>
+                        </Border>
+                        <Button x:Name="ItemButton" 
+                                Style="{StaticResource PeriodicTableItemStyle}" 
+                                Margin="{Binding PeriodicTableItemMargin, Source={StaticResource pTableVM}}"
+                                Command="{Binding OpenElementInfoCommand, Source={StaticResource mainVM}}"
+                                CommandParameter="{Binding Symbol}" 
+                                RenderTransformOrigin="0.5,0.5">
+                            <local:ItemView HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Stretch"
+                                            Symbol="{Binding Symbol}"
+                                            >
+                                <!--Symbol GES FRÅN ItemsSource-->
+                            </local:ItemView>
+                        </Button>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"
+                               MaxWidth="{Binding Path=ActualWidth, Mode=OneWay, 
+                                RelativeSource={RelativeSource FindAncestor, 
+                                AncestorType={x:Type UserControl}}}"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+
+        <!--<ItemsControl ItemsSource="{Binding ElementViewModel.FirstElements, Source={StaticResource pTableVM}}"
+                      HorizontalContentAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+                      Background="Transparent">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal"
+                               MaxWidth="{Binding Path=ActualWidth, Mode=OneWay, 
+                                RelativeSource={RelativeSource FindAncestor, 
+                                AncestorType={x:Type UserControl}}}"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>-->
+    </Grid>
+</UserControl>

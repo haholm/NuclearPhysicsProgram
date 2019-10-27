@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="NuclearPhysicsProgram.Views.PeriodicTableViews.SideMenuView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NuclearPhysicsProgram.Views.PeriodicTableViews"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="60">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0"
+                Content="NPP"
+                Foreground="LightGray"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"/>
+
+        <Border Grid.Row="2"
+                Margin="5"
+                CornerRadius="4"
+                Background="LightGray">
+            <TextBlock Text="Instability"
+                       TextWrapping="Wrap"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+        </Border>
+
+        <Border Grid.Row="3"
+                Margin="5"
+                CornerRadius="4"
+                Background="LightGray">
+            <TextBlock Text="Energy"
+                       TextWrapping="Wrap"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+        </Border>
+    </Grid>
+</UserControl>
