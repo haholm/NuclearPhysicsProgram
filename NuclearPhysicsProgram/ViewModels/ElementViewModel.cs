@@ -18,10 +18,14 @@ namespace NuclearPhysicsProgram.ViewModels {
         public static Dictionary<string, ElementDataModel> ElementDataDictionary { get; private set; }
         public static Dictionary<string, IsotopeDataModel> IsotopeDataDictionary { get; private set; }
 
-        public ObservableCollection<ElementDataModel> FirstElements { get; private set; }
-        public ObservableCollection<ElementDataModel> SecondElements { get; private set; }
-        public ObservableCollection<ElementDataModel> ThirdElements { get; private set; }
-        public ObservableCollection<ElementDataModel> FourthFifthElements { get; private set; }
+        public ObservableCollection<ElementDataModel> FirstLeftElements { get; private set; }
+        public ObservableCollection<ElementDataModel> FirstRightElements { get; private set; }
+        public ObservableCollection<ElementDataModel> SecondLeftElements { get; private set; }
+        public ObservableCollection<ElementDataModel> SecondRightElements { get; private set; }
+        public ObservableCollection<ElementDataModel> ThirdLeftElements { get; private set; }
+        public ObservableCollection<ElementDataModel> ThirdRightElements { get; private set; }
+        public ObservableCollection<ElementDataModel> FourthElements { get; private set; }
+        public ObservableCollection<ElementDataModel> FifthElements { get; private set; }
         public ObservableCollection<ElementDataModel> SixthLeftElements { get; private set; }
         public ObservableCollection<ElementDataModel> SixthHiddenElements { get; private set; }
         public ObservableCollection<ElementDataModel> SixthRightElements { get; private set; }
@@ -33,10 +37,14 @@ namespace NuclearPhysicsProgram.ViewModels {
             ElementDataDictionary = new Dictionary<string, ElementDataModel>();
             IsotopeDataDictionary = new Dictionary<string, IsotopeDataModel>();
 
-            FirstElements = new ObservableCollection<ElementDataModel>();
-            SecondElements = new ObservableCollection<ElementDataModel>();
-            ThirdElements = new ObservableCollection<ElementDataModel>();
-            FourthFifthElements = new ObservableCollection<ElementDataModel>();
+            FirstLeftElements = new ObservableCollection<ElementDataModel>();
+            FirstRightElements = new ObservableCollection<ElementDataModel>();
+            SecondLeftElements = new ObservableCollection<ElementDataModel>();
+            SecondRightElements = new ObservableCollection<ElementDataModel>();
+            ThirdLeftElements = new ObservableCollection<ElementDataModel>();
+            ThirdRightElements = new ObservableCollection<ElementDataModel>();
+            FourthElements = new ObservableCollection<ElementDataModel>();
+            FifthElements = new ObservableCollection<ElementDataModel>();
             SixthLeftElements = new ObservableCollection<ElementDataModel>();
             SixthHiddenElements = new ObservableCollection<ElementDataModel>();
             SixthRightElements = new ObservableCollection<ElementDataModel>();
@@ -60,17 +68,29 @@ namespace NuclearPhysicsProgram.ViewModels {
             (Elements, Isotopes) = LoadElementData();
             FillDictionaries();
             
-            for (int i = 0; i < 2; i++) 
-                FirstElements.Add(Elements[i]);
-            
-            for (int i = 2; i < 10; i++) 
-                SecondElements.Add(Elements[i]);
+            for (int i = 0; i < 1; i++) 
+                FirstLeftElements.Add(Elements[i]);
 
-            for (int i = 10; i < 18; i++) 
-                ThirdElements.Add(Elements[i]);
+            for (int i = 1; i < 2; i++)
+                FirstRightElements.Add(Elements[i]);
 
-            for (int i = 18; i < 54; i++) 
-                FourthFifthElements.Add(Elements[i]);
+            for (int i = 2; i < 4; i++) 
+                SecondLeftElements.Add(Elements[i]);
+
+            for (int i = 4; i < 10; i++)
+                SecondRightElements.Add(Elements[i]);
+
+            for (int i = 10; i < 12; i++) 
+                ThirdLeftElements.Add(Elements[i]);
+
+            for (int i = 12; i < 18; i++)
+                ThirdRightElements.Add(Elements[i]);
+
+            for (int i = 18; i < 36; i++) 
+                FourthElements.Add(Elements[i]);
+
+            for (int i = 36; i < 54; i++)
+                FifthElements.Add(Elements[i]);
 
             for (int i = 54; i < 56; i++) 
                 SixthLeftElements.Add(Elements[i]);

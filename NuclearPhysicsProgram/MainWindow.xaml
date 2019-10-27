@@ -12,8 +12,8 @@
         Title="MainWindow" 
         Width="1000" 
         Height="600"
-        MinWidth="800"
-        MinHeight="500"
+        MinWidth="1200"
+        MinHeight="650"
         FontFamily="{StaticResource OpenSansRegular}">
     <!-- TESTA BLUR EFFECT! -->
     <Grid Background="#174047">
@@ -33,13 +33,13 @@
                 <Border Grid.Column="1"
                         Background="#f8f8f8"
                         CornerRadius="20 0 0 20">
-                    <periodicTableViews:PeriodicTableView Padding="80, 40"
+                    <periodicTableViews:PeriodicTableView Padding="80, 80, 80, 0"
                                                           HorizontalAlignment="Stretch"
                                                           VerticalAlignment="Stretch"/>
                 </Border>
 
-                <TextBlock Grid.Column="1"
-                           FontSize="60">Larger card up here?</TextBlock>
+                <!--<TextBlock Grid.Column="1"
+                           FontSize="60">Larger card up here?</TextBlock>-->
             </Grid>
         </Border>
         <views:ElementInfoView 
