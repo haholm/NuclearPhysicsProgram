@@ -25,6 +25,13 @@ namespace NuclearPhysicsProgram.Views.PeriodicTableViews {
         }
         public static readonly DependencyProperty SymbolProperty = DependencyProperty.Register(
             "Symbol", typeof(string), typeof(ItemView), new PropertyMetadata("A"));
+
+        public int? MassNumber { // DO I REALLY NEED THIS?
+            get => GetValue(MassNumberProperty) as int?;
+            set => SetValue(MassNumberProperty, value);
+        }
+        public static readonly DependencyProperty MassNumberProperty = DependencyProperty.Register(
+            "MassNumber", typeof(int?), typeof(ItemView), new PropertyMetadata(0));
         #endregion
 
         public ItemView() {

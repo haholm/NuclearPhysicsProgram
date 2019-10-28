@@ -13,13 +13,13 @@
 
         <Style x:Key="PeriodicTableStyle" 
                TargetType="UserControl">
-            <Setter Property="Width" Value="{Binding ActualWidth, Source={StaticResource pTableVM}}"/>
-            <Setter Property="Height" Value="{Binding ActualHeight, Source={StaticResource pTableVM}}"/>
+            <Setter Property="Width" Value="{Binding ActualWidth, TargetNullValue='1142', Source={StaticResource pTableVM}}"/>
+            <Setter Property="Height" Value="{Binding ActualHeight, TargetNullValue='550', Source={StaticResource pTableVM}}"/>
         </Style>
 
         <Style x:Key="PeriodicTableBorderStyle"
                TargetType="{x:Type Border}">
-            
+
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="BorderBrush" Value="#FFEBEBEB"/>
             <Setter Property="BorderThickness" Value="1"/>
@@ -36,7 +36,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
         <Style x:Key="PeriodicTableItemStyle"
                BasedOn="{StaticResource NoStyle}"
                TargetType="{x:Type Button}">
@@ -44,13 +44,15 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border Background="Transparent"
-                                Width="{Binding PeriodicTableItemWidth, Source={StaticResource pTableVM}}"
-                                Height="{Binding PeriodicTableItemHeight, Source={StaticResource pTableVM}}">
+                                Width="{Binding PeriodicTableItemWidth, TargetNullValue='60', Source={StaticResource pTableVM}}"
+                                Height="{Binding PeriodicTableItemHeight, TargetNullValue='60', Source={StaticResource pTableVM}}">
                             <ContentPresenter/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+
+            <Setter Property="Margin" Value="{Binding PeriodicTableItemMargin, Source={StaticResource pTableVM}}"/>
 
             <Setter Property="RenderTransform">
                 <Setter.Value>
@@ -122,13 +124,13 @@
                         </Border>
                         <Button x:Name="ItemButton" 
                                 Style="{DynamicResource PeriodicTableItemStyle}" 
-                                Margin="{Binding PeriodicTableItemMargin, Source={StaticResource pTableVM}}"
                                 Command="{Binding OpenElementInfoCommand, Source={StaticResource mainVM}}"
                                 CommandParameter="{Binding Symbol}" 
                                 RenderTransformOrigin="0.5,0.5">
                             <local:ItemView HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"
                                             Symbol="{Binding Symbol}"
+                                            MassNumber="{Binding MassNumber}"
                                             >
                                 <!--Symbol GES FRÅN ItemsSource-->
                             </local:ItemView>
@@ -163,13 +165,14 @@
                         </Border>
                         <Button x:Name="ItemButton" 
                                 Style="{DynamicResource PeriodicTableItemStyle}" 
-                                Margin="{Binding PeriodicTableItemMargin, Source={StaticResource pTableVM}}"
+                                
                                 Command="{Binding OpenElementInfoCommand, Source={StaticResource mainVM}}"
                                 CommandParameter="{Binding Symbol}" 
                                 RenderTransformOrigin="0.5,0.5">
                             <local:ItemView HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"
                                             Symbol="{Binding Symbol}"
+                                            MassNumber="{Binding MassNumber}"
                                             >
                                 <!--Symbol GES FRÅN ItemsSource-->
                             </local:ItemView>
@@ -202,13 +205,13 @@
                         </Border>
                         <Button x:Name="ItemButton" 
                                 Style="{DynamicResource PeriodicTableItemStyle}" 
-                                Margin="{Binding PeriodicTableItemMargin, Source={StaticResource pTableVM}}"
                                 Command="{Binding OpenElementInfoCommand, Source={StaticResource mainVM}}"
                                 CommandParameter="{Binding Symbol}" 
                                 RenderTransformOrigin="0.5,0.5">
                             <local:ItemView HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"
                                             Symbol="{Binding Symbol}"
+                                            MassNumber="{Binding MassNumber}"
                                             >
                                 <!--Symbol GES FRÅN ItemsSource-->
                             </local:ItemView>
@@ -240,13 +243,14 @@
                         </Border>
                         <Button x:Name="ItemButton" 
                                 Style="{DynamicResource PeriodicTableItemStyle}" 
-                                Margin="{Binding PeriodicTableItemMargin, Source={StaticResource pTableVM}}"
+                                
                                 Command="{Binding OpenElementInfoCommand, Source={StaticResource mainVM}}"
                                 CommandParameter="{Binding Symbol}" 
                                 RenderTransformOrigin="0.5,0.5">
                             <local:ItemView HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"
                                             Symbol="{Binding Symbol}"
+                                            MassNumber="{Binding MassNumber}"
                                             >
                                 <!--Symbol GES FRÅN ItemsSource-->
                             </local:ItemView>
@@ -279,13 +283,14 @@
                         </Border>
                         <Button x:Name="ItemButton" 
                                 Style="{DynamicResource PeriodicTableItemStyle}" 
-                                Margin="{Binding PeriodicTableItemMargin, Source={StaticResource pTableVM}}"
+                                
                                 Command="{Binding OpenElementInfoCommand, Source={StaticResource mainVM}}"
                                 CommandParameter="{Binding Symbol}" 
                                 RenderTransformOrigin="0.5,0.5">
                             <local:ItemView HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"
                                             Symbol="{Binding Symbol}"
+                                            MassNumber="{Binding MassNumber}"
                                             >
                                 <!--Symbol GES FRÅN ItemsSource-->
                             </local:ItemView>
@@ -317,13 +322,14 @@
                         </Border>
                         <Button x:Name="ItemButton" 
                                 Style="{DynamicResource PeriodicTableItemStyle}" 
-                                Margin="{Binding PeriodicTableItemMargin, Source={StaticResource pTableVM}}"
+                                
                                 Command="{Binding OpenElementInfoCommand, Source={StaticResource mainVM}}"
                                 CommandParameter="{Binding Symbol}" 
                                 RenderTransformOrigin="0.5,0.5">
                             <local:ItemView HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"
                                             Symbol="{Binding Symbol}"
+                                            MassNumber="{Binding MassNumber}"
                                             >
                                 <!--Symbol GES FRÅN ItemsSource-->
                             </local:ItemView>
@@ -356,13 +362,14 @@
                         </Border>
                         <Button x:Name="ItemButton" 
                                 Style="{DynamicResource PeriodicTableItemStyle}" 
-                                Margin="{Binding PeriodicTableItemMargin, Source={StaticResource pTableVM}}"
+                                
                                 Command="{Binding OpenElementInfoCommand, Source={StaticResource mainVM}}"
                                 CommandParameter="{Binding Symbol}" 
                                 RenderTransformOrigin="0.5,0.5">
                             <local:ItemView HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"
                                             Symbol="{Binding Symbol}"
+                                            MassNumber="{Binding MassNumber}"
                                             >
                                 <!--Symbol GES FRÅN ItemsSource-->
                             </local:ItemView>

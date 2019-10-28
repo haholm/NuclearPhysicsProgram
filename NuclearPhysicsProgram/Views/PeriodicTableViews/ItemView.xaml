@@ -12,19 +12,24 @@
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch">
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
 
-            <Label Content="{Binding Path=Symbol, RelativeSource={RelativeSource AncestorType=local:ItemView}}"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top" 
-                   Margin="2,2,0,0"/>
+            <StackPanel Orientation="Horizontal" 
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Center">
+                <Label Content="{Binding Path=MassNumber, RelativeSource={RelativeSource AncestorType=local:ItemView}}"
+                       FontSize="10"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Top" 
+                       Padding="1 10"/>
+
+                <Label 
+                       Content="{Binding Path=Symbol, FallbackValue='Sy', RelativeSource={RelativeSource AncestorType=local:ItemView}}"
+                       FontFamily="{StaticResource OpenSansLight}"
+                       FontSize="20"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center" 
+                       Padding="1 0"/>
+            </StackPanel>
         </Grid>
     </Border>
 </UserControl>
