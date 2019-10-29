@@ -20,6 +20,7 @@ namespace NuclearPhysicsProgram.ViewModels {
             IsotopeDecayChain = new ObservableCollection<IsotopeModel>();
         }
 
+        //make multi-threaded
         private void SetupDecayChain() {
             decayChains.Clear();
             IsotopeDecayChain.Clear();

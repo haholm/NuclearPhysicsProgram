@@ -10,23 +10,23 @@ using System.Windows.Media;
 
 namespace NuclearPhysicsProgram.ViewModels {
     public class AnimationViewModel {
-        public void TransitionEffect(Action<double> PropertyUpdater, double from, double to, double seconds, double multiplier) {
+        public void TransitionEffect(Action<double?> PropertyUpdater, double from, double to, double seconds, double multiplier) {
             double stepsPerSecond = 1 / seconds;
             TransitionEffectAnimation animation = new TransitionEffectAnimation(PropertyUpdater, from, to, stepsPerSecond, multiplier);
-            CompositionTarget.Rendering += animation.PerformStep;
+            animation.Start();
         }
 
-        public async Task AsyncTransitionEffect(Action<double> PropertyUpdater, double from, double to, double seconds, double multiplier) {
+        public async Task AsyncTransitionEffect(Action<double?> PropertyUpdater, double from, double to, double seconds, double multiplier) {
             double stepsPerSecond = (float)1 / seconds;
             TransitionEffectAnimation animation = new TransitionEffectAnimation(PropertyUpdater, from, to, stepsPerSecond, multiplier);
-            CompositionTarget.Rendering += animation.PerformStep;
+            animation.Start();
             while (!animation.Finished)
                 await Task.Delay((int)(seconds * 1000));
         }
     }
 
     public class TransitionEffectAnimation {
-        private readonly Action<double> PropertyUpdater;
+        private readonly Action<double?> PropertyUpdater;
         private readonly double from;
         private readonly double to;
         private readonly double step;
@@ -34,10 +34,12 @@ namespace NuclearPhysicsProgram.ViewModels {
         private double progress;
         private DateTime currentTime;
         private DateTime previousTime;
+        private double accumulatedTime;
 
+        public double Progress { get => progress; }
         public bool Finished { get => progress == to; }
 
-        public TransitionEffectAnimation(Action<double> PropertyUpdater, double from, double to, double step, double multiplier) {
+        public TransitionEffectAnimation(Action<double?> PropertyUpdater, double from, double to, double step, double multiplier) {
             this.PropertyUpdater = PropertyUpdater;
             this.from = from;
             this.to = to;
@@ -48,15 +50,27 @@ namespace NuclearPhysicsProgram.ViewModels {
             previousTime = new DateTime(0);
         }
 
-        public void PerformStep(object sender, EventArgs args) {
+        public void Start() => CompositionTarget.Rendering += PerformStep;
+
+        public void Stop() {
+            progress = to;
+            CompositionTarget.Rendering -= PerformStep;
+        }
+
+        private void PerformStep(object sender, EventArgs args) {
             double deltaTime = CalculateDeltaTime();
+            accumulatedTime += deltaTime;
 
             if (from < to)
                 Increase(deltaTime);
             else if (from > to)
                 Decrease(deltaTime);
 
-            PropertyUpdater(progress);
+            //update property only ~60x/s
+            if (accumulatedTime > 0.017) {
+                accumulatedTime = 0;
+                PropertyUpdater(progress);
+            }
         }
 
         private double CalculateDeltaTime() {
@@ -69,24 +83,23 @@ namespace NuclearPhysicsProgram.ViewModels {
         }
 
         private void Increase(double deltaTime) {
-            if (progress < to)
-                progress += GetSteppedProgress(deltaTime);
-            else if (progress > to || progress == to)
-                StopAnimating();
+            double newProgress = progress + (step + Math.Pow(Math.Abs(progress), multiplier)) * deltaTime;
+            if (newProgress < to) { 
+                progress = newProgress;
+                return;
+            }
+            
+            Stop();
         }
 
         private void Decrease(double deltaTime) {
-            if (progress > to) 
-                progress -= GetSteppedProgress(deltaTime);
-            else if (progress < to || progress == to) 
-                StopAnimating();
-        }
-
-        private double GetSteppedProgress(double deltaTime) => (step + Math.Pow(progress, multiplier)) * deltaTime;
-
-        private void StopAnimating() {
-            progress = to;
-            CompositionTarget.Rendering -= PerformStep;
+            double newProgress = progress - (step + Math.Pow(Math.Abs(progress), multiplier)) * deltaTime;
+            if (newProgress > to) {
+                progress = newProgress;
+                return;
+            }
+            
+            Stop();
         }
     }
 }

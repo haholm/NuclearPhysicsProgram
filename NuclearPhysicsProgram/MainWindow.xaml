@@ -10,42 +10,39 @@
         xmlns:blur="clr-namespace:BlurryControls.Controls;assembly=BlurryControls"
         mc:Ignorable="d"
         Title="MainWindow" 
-        Width="1000" 
-        Height="600"
-        MinWidth="1200"
+        Width="1242" 
+        Height="650"
+        MinWidth="1242"
         MinHeight="650"
         FontFamily="{StaticResource OpenSansRegular}">
     <!-- TESTA BLUR EFFECT! -->
     <Grid Background="#174047">
         <!--Background="#353C3F"-->
-        <Border Margin="{Binding MainWindowMagnification, Mode=OneWay, Source={StaticResource mainVM}}" RenderTransformOrigin="0.5,0.5">
+        <Border Margin="{Binding MainWindowMagnification, TargetNullValue='0', Mode=OneWay, Source={StaticResource mainVM}}" 
+                RenderTransformOrigin="0.5,0.5">
             <Border.Effect>
-                <BlurEffect Radius="{Binding MainWindowBlurRadius, Mode=OneWay, Source={StaticResource mainVM}}" RenderingBias="Performance" />
+                <BlurEffect Radius="{Binding MainWindowBlurRadius, TargetNullValue='0', Mode=OneWay, Source={StaticResource mainVM}}" 
+                            RenderingBias="Performance" />
             </Border.Effect>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <periodicTableViews:SideMenuView Grid.Column="0"
-                                                     />
+            <DockPanel>
+                <periodicTableViews:SideMenuView DockPanel.Dock="Left" />
 
-                <Border Grid.Column="1"
+                <Border DockPanel.Dock="Right" 
                         Background="#f8f8f8"
                         CornerRadius="20 0 0 20">
+                    <!--HMMM PADDING-->
                     <periodicTableViews:PeriodicTableView Padding="80, 80, 80, 0"
                                                           HorizontalAlignment="Stretch"
                                                           VerticalAlignment="Stretch"/>
                 </Border>
 
-                <!--<TextBlock Grid.Column="1"
-                           FontSize="60">Larger card up here?</TextBlock>-->
-            </Grid>
+                <!--<TextBlock FontSize="60">Larger card up here?</TextBlock>-->
+            </DockPanel>
         </Border>
-        <views:ElementInfoView 
-                               HorizontalAlignment="Stretch"
+        
+        <views:ElementInfoView HorizontalAlignment="Stretch"
                                VerticalAlignment="Stretch"
-                               Opacity="{Binding ElementInfoViewOpacity, Mode=OneWay, Source={StaticResource mainVM}}" 
+                               Opacity="{Binding ElementInfoViewOpacity, TargetNullValue='0' , Mode=OneWay, Source={StaticResource mainVM}}" 
                                Visibility="{Binding ElementInfoViewVisibility, Mode=OneWay, Source={StaticResource mainVM}}"
                                />
     </Grid>

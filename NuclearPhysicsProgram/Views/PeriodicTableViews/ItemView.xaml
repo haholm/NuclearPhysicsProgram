@@ -16,7 +16,7 @@
             <StackPanel Orientation="Horizontal" 
                         VerticalAlignment="Stretch"
                         HorizontalAlignment="Center">
-                <Label Content="{Binding Path=MassNumber, RelativeSource={RelativeSource AncestorType=local:ItemView}}"
+                <Label Content="{Binding Path=AtomicNumber, RelativeSource={RelativeSource AncestorType=local:ItemView}}"
                        FontSize="10"
                        HorizontalAlignment="Right"
                        VerticalAlignment="Top" 
