@@ -34,24 +34,48 @@ namespace NuclearPhysicsProgram.ViewModels {
 
             foreach (var isotope in currentIsotopeData.Isotopes) {
                 decayChains.Add(new List<(IsotopeModel, int)>());
-                AnalyzeDecays(isotope, 0);   //analyze first base isotope of decay tree
+                AnalyzeDecays(isotope, 0, null);   //analyze first base isotope of decay tree
+                if (conflict) {
+                    rerun = true;
+                    decayChains.Add(new List<(IsotopeModel, int)>());
+                    //analyze decays of isotope again but on new chain and analyzing 
+                    AnalyzeDecays(isotope, 0, null);
+                }
+
+                conflict = false; 
+                rerun = false;
             }
 
             for (int i = 0; i < decayChains[0].Count; i++)
                 ConstructSortedDecayChain(i);
         }
 
-        private void AnalyzeDecays(IsotopeModel isotope, int index) {
+        ///Related to fix for multiple-decays-of-same-isotope-but-different-decay-type problem causing
+        ///multiple consecutive isotopes of the same symbol to show up in the same decay chain instead
+        ///of showing up as two different decay chains respectively
+        (IsotopeModel, int) lastIsotope = new ValueTuple<IsotopeModel, int>();
+        bool conflict;
+        bool rerun;
+
+        private void AnalyzeDecays(IsotopeModel isotope, int index, string isotopeDecayType) {
+            if (lastIsotope == (isotope, index)) {
+                conflict = true;
+                return;
+            }
+
+            lastIsotope = (isotope, index);
+
             decayChains.Last().Add((isotope, index));  //add isotope as branch to decay tree
+
             if (isotope.Decays.Length < 1)  //does isotope contain any decays?
                 return;
 
             for (int i = 0; i < isotope.Decays.Length; i++) {  //iterate through decays of isotope
                 if (isotope.Decays[i].ProductSymbol == "-")
-                    break;  ///hmm should this break;
+                    return;
 
                 var nextIsotope = ElementViewModel.GetIsotope(isotope.Decays[i].ProductSymbol, isotope.Decays[i].MassNumber);
-                AnalyzeDecays(nextIsotope, index + 1);
+                AnalyzeDecays(nextIsotope, index + 1, isotope.Decays[rerun && nextIsotope == isotope ? i + 1 : i].Type);  //rerun && nextIsotope == isotope ? i + 1 : i to get the second decay in the second decay chain
             }
         }
 
