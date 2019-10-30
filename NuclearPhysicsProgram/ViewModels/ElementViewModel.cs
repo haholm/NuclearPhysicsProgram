@@ -57,6 +57,10 @@ namespace NuclearPhysicsProgram.ViewModels {
 
         public static IsotopeModel GetIsotope(string symbol, int massNumber) {
             IsotopeDataDictionary.TryGetValue(symbol, out var isotopeData);
+            ///
+            if (isotopeData == null)
+                return new IsotopeModel(symbol, massNumber, "?", new DecayModel[0]);
+            ///
             IEnumerable<IsotopeModel> isotopeList = isotopeData.Isotopes.Where(i => i.MassNumber == massNumber);
             if (isotopeList.Count() == 0)
                 return new IsotopeModel(symbol, massNumber, "", Array.Empty<DecayModel>());

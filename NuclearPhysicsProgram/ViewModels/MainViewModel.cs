@@ -37,7 +37,7 @@ namespace NuclearPhysicsProgram.ViewModels {
         }
         public Visibility ElementInfoViewVisibility { get => elementInfoViewVisibility; private set { elementInfoViewVisibility = value; SetPropertyChanged(this, "ElementInfoViewVisibility"); } }
         public bool PeriodicTableViewIsEnabled { get => periodicTableViewIsEnabled; private set { periodicTableViewIsEnabled = value; SetPropertyChanged(this, "PeriodicTableViewIsEnabled"); } }
-        public IsotopeDataModel CurrentIsotopeData { get => currentIsotopeData; private set { currentIsotopeData = value; SetPropertyChanged(this, "CurrentIsotope"); } }
+        public IsotopeDataModel CurrentIsotopeData { get => currentIsotopeData; private set { currentIsotopeData = value; SetPropertyChanged(this, "CurrentIsotopeData"); } }
 
         public MainViewModel() {
             elementInfoViewVisibility = Visibility.Collapsed; //ahem...
@@ -63,16 +63,26 @@ namespace NuclearPhysicsProgram.ViewModels {
             AnimationViewModel.TransitionEffect(UpdateMainWindowBlurRadius, 2.5, 0, 0.1, 1.5);
             AnimationViewModel.TransitionEffect(UpdateMainWindowMagnification, -1, 0, 0.1, 1.5);
             await AnimationViewModel.AsyncTransitionEffect(UpdateElementInfoViewOpacity, 1, 0, 0.1, 1.5);
+
             CurrentIsotopeData = null;
-            ElementInfoViewVisibility = Visibility.Collapsed;
             PeriodicTableViewIsEnabled = true;
+            ElementInfoViewVisibility = Visibility.Collapsed;
         }
 
         public void InitializeIsotopeData(string symbol) {
-            ElementViewModel.IsotopeDataDictionary.TryGetValue(symbol, out IsotopeDataModel isotopeData);
+            if (ElementViewModel.IsotopeDataDictionary.TryGetValue(symbol, out IsotopeDataModel isotopeData))
+                SetIsotopeDatas(isotopeData);
+            else if(ElementViewModel.ElementDataDictionary.TryGetValue(symbol, out ElementDataModel elementData)) {
+                var templateIsotope = new IsotopeModel[] { new IsotopeModel(symbol, elementData.MassNumber, "?", new DecayModel[0]) };
+                SetIsotopeDatas(new IsotopeDataModel(symbol, templateIsotope));
+            }
+        }
+
+        private async void SetIsotopeDatas(IsotopeDataModel isotopeData) {
             CurrentIsotopeData = isotopeData;
-            ElementInfoViewModels.ElementInfoViewModel.CurrentIsotopeData = CurrentIsotopeData;
-            DecayChainViewModel.CurrentIsotopeData = CurrentIsotopeData;
+            ElementInfoViewModels.ElementInfoViewModel.CurrentIsotopeData = isotopeData;
+            //temporary fix instead of multi-threading
+            DecayChainViewModel.SetupDecayChain(isotopeData);
         }
 
         private void UpdateElementInfoViewOpacity(double? value) => ElementInfoViewOpacity = value;

@@ -22,9 +22,9 @@
                 CornerRadius="16"
                 MaxWidth="1600"
                 MaxHeight="800">
-            <Grid Margin="6">
-                <Border HorizontalAlignment="Right"
-                        VerticalAlignment="Top"
+            <DockPanel Margin="16">
+                <Border DockPanel.Dock="Top"
+                        HorizontalAlignment="Right"
                         Width="32"
                         Height="24"
                         Margin="2"
@@ -39,14 +39,35 @@
                 </Border>
 
                 <elementInfoViews:ElementInfoIsotopeDropDownView HorizontalAlignment="Left" 
-                                                                 VerticalAlignment="Top" 
+                                                                 DockPanel.Dock="Top"
                                                                  >
                 </elementInfoViews:ElementInfoIsotopeDropDownView>
 
-                <elementInfoViews:IsotopeDecayChainView VerticalAlignment="Bottom"
-                                                        HorizontalAlignment="Stretch"
-                                                        Height="200"/>
-            </Grid>
+                <Canvas VerticalAlignment="Bottom"
+                        HorizontalAlignment="Center"
+                        Width="600"
+                        Height="80">
+                    <Border Canvas.Top="2" 
+                            Canvas.Left="2" 
+                            Width="596"
+                            Height="76" 
+                            BorderBrush="Black" 
+                            BorderThickness="1"
+                            CornerRadius="6">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="32" />
+                        </Border.Effect>
+                    </Border>
+                    <Border Width="600"
+                            Height="80"
+                            BorderBrush="#22000000"
+                            CornerRadius="6"
+                            Background="White">
+                    <elementInfoViews:IsotopeDecayChainView 
+                                                            />
+                    </Border>
+                </Canvas>
+            </DockPanel>
         </Border>
     </Grid>
 </UserControl>

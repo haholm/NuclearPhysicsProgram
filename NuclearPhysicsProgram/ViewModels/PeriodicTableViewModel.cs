@@ -49,17 +49,17 @@ namespace NuclearPhysicsProgram.ViewModels {
             ContractHiddenElementsCommand = new ContractHiddenElementsCommand(this);
         }
 
-        public void ExpandHiddenElements(int item) {
+        public async void ExpandHiddenElements(int item) {
             MainViewModel.AnimationViewModel.TransitionEffect(UpdatePeriodicTableOpacity, 1, 0.5, 0.1, 1);
             if (item == 1) {
                 FirstHiddenElementsWidth = 870;
                 FirstHiddenElementsVisibility = Visibility.Visible;
-                MainViewModel.AnimationViewModel.TransitionEffect(UpdateFirstHiddenElementsOpacity, 0, 1, 0.1, 1);
+                await MainViewModel.AnimationViewModel.AsyncTransitionEffect(UpdateFirstHiddenElementsOpacity, 0, 1, 0.1, 1);
             }
             else if (item == 2) {
                 SecondHiddenElementsWidth = 870;
                 SecondHiddenElementsVisibility = Visibility.Visible;
-                MainViewModel.AnimationViewModel.TransitionEffect(UpdateSecondHiddenElementsOpacity, 0, 1, 0.1, 1);
+                await MainViewModel.AnimationViewModel.AsyncTransitionEffect(UpdateSecondHiddenElementsOpacity, 0, 1, 0.1, 1);
             }
         }
 

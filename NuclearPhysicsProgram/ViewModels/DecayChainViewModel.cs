@@ -10,24 +10,29 @@ namespace NuclearPhysicsProgram.ViewModels {
     public class DecayChainViewModel : PropertyHandler.NotifyPropertyChanged {
         private IsotopeDataModel currentIsotopeData;
         private List<List<(IsotopeModel, int)>> decayChains;
+        private double? itemWidth = 58;
+        private double? itemHeight = 58;
 
-        public IsotopeDataModel CurrentIsotopeData { get => currentIsotopeData; set { currentIsotopeData = value; SetupDecayChain(); } }
-        public ObservableCollection<IsotopeModel> IsotopeDecayChain { get; private set; }
+        //public IsotopeDataModel CurrentIsotopeData { get => currentIsotopeData; set { currentIsotopeData = value; } }
+        public ObservableCollection<Tuple<IsotopeModel, ElementDataModel>> IsotopeDecayChain { get; private set; }
+        public double? ItemWidth { get => itemWidth; set { itemWidth = value; SetPropertyChanged(this, "ItemWidth"); } }
+        public double? ItemHeight { get => itemHeight; set { itemHeight = value; SetPropertyChanged(this, "ItemHeight"); } }
 
         public DecayChainViewModel() {
             currentIsotopeData = new IsotopeDataModel("", new IsotopeModel[0]);
             decayChains = new List<List<(IsotopeModel, int)>>();
-            IsotopeDecayChain = new ObservableCollection<IsotopeModel>();
+            IsotopeDecayChain = new ObservableCollection<Tuple<IsotopeModel, ElementDataModel>>();
         }
 
         //make multi-threaded
-        private void SetupDecayChain() {
+        public void SetupDecayChain(IsotopeDataModel isotopeData) {
+            currentIsotopeData = isotopeData;
             decayChains.Clear();
             IsotopeDecayChain.Clear();
-            if (CurrentIsotopeData.Isotopes.Length < 1)
+            if (currentIsotopeData.Isotopes.Length < 1)
                 return;
 
-            foreach (var isotope in CurrentIsotopeData.Isotopes) {
+            foreach (var isotope in currentIsotopeData.Isotopes) {
                 decayChains.Add(new List<(IsotopeModel, int)>());
                 AnalyzeDecays(isotope, 0);   //analyze first base isotope of decay tree
             }
@@ -51,8 +56,10 @@ namespace NuclearPhysicsProgram.ViewModels {
         }
 
         private void ConstructSortedDecayChain(int index) {
-            foreach (var decayChainItem in decayChains[0].Where(isotopeModel => isotopeModel.Item2 == index))
-                IsotopeDecayChain.Add(decayChainItem.Item1);
+            foreach (var decayChainItem in decayChains[0].Where(isotopeModel => isotopeModel.Item2 == index)) {
+                ElementViewModel.ElementDataDictionary.TryGetValue(decayChainItem.Item1.Symbol, out ElementDataModel element);
+                IsotopeDecayChain.Add(new Tuple<IsotopeModel, ElementDataModel>(decayChainItem.Item1, element));
+            }
         }
     }
 }

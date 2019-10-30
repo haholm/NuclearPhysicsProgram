@@ -32,6 +32,13 @@ namespace NuclearPhysicsProgram.Views.PeriodicTableViews {
         }
         public static readonly DependencyProperty AtomicNumberProperty = DependencyProperty.Register(
             "AtomicNumber", typeof(int?), typeof(ItemView), new PropertyMetadata(0));
+
+        public double? SymbolFontSize { // DO I REALLY NEED THIS?
+            get => GetValue(SymbolFontSizeProperty) as double?;
+            set => SetValue(SymbolFontSizeProperty, value);
+        }
+        public static readonly DependencyProperty SymbolFontSizeProperty = DependencyProperty.Register(
+            "SymbolFontSize", typeof(double?), typeof(ItemView), new PropertyMetadata(0.0));
         #endregion
 
         public ItemView() {

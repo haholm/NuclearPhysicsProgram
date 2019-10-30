@@ -14,19 +14,46 @@
                       >
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
+                    <Canvas Width="76" 
+                            Margin="11">
+                        <Border BorderBrush="#FFEBEBEB"
+                                Width="{Binding DecayChainViewModel.ItemWidth, TargetNullValue='60', Source={StaticResource mainVM}}"
+                                Height="{Binding DecayChainViewModel.ItemHeight, TargetNullValue='60', Source={StaticResource mainVM}}"
+                                BorderThickness="1"
+                                CornerRadius="6" >
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="6" 
+                                                  ShadowDepth="2" 
+                                                  Direction="-36" 
+                                                  Opacity="0.25" 
+                                                  Color="Black" />
+                            </Border.Effect>
+                        </Border>
                         <Button Style="{Binding Mode=OneWay, Source={StaticResource NoStyle}}"
                                 HorizontalAlignment="Left"
-                                Width="100"
-                                Height="100"
-                                Margin="4"
+                                Width="{Binding DecayChainViewModel.ItemWidth, TargetNullValue='60', Source={StaticResource mainVM}}"
+                                Height="{Binding DecayChainViewModel.ItemHeight, TargetNullValue='60', Source={StaticResource mainVM}}"
                                 Command="{Binding OpenElementInfoCommand, Source={StaticResource mainVM}}"
-                                CommandParameter="{Binding Symbol}">
-                            <periodicTableViews:ItemView Symbol="{Binding Symbol}">
-
-                            </periodicTableViews:ItemView>
+                                CommandParameter="{Binding Item1.Symbol}">
+                            <periodicTableViews:ItemView Symbol="{Binding Item1.Symbol}"
+                                                         AtomicNumber="{Binding Item1.MassNumber}"
+                                                         SymbolFontSize="22"/>
                         </Button>
-                    </Grid>
+                        <DockPanel Canvas.Left="68" 
+                                   Width="20"
+                                   Height="{Binding DecayChainViewModel.ItemHeight, TargetNullValue='60', Source={StaticResource mainVM}}">
+                            <Button DockPanel.Dock="Top"
+                                    VerticalAlignment="Top"
+                                    Height="20">
+                                
+                            </Button>
+                            <Button DockPanel.Dock="Bottom"
+                                    VerticalAlignment="Bottom"
+                                    Height="20">
+                                
+                            </Button>
+                        </DockPanel>
+                    </Canvas>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
             <ItemsControl.ItemsPanel>
