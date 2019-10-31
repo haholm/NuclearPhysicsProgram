@@ -150,7 +150,7 @@
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal"
-                               MaxWidth="{Binding Path=ActualWidth, Mode=OneWay, 
+                                MaxWidth="{Binding Path=ActualWidth, Mode=OneWay, 
                                 RelativeSource={RelativeSource FindAncestor, 
                                 AncestorType={x:Type UserControl}}}"/>
                 </ItemsPanelTemplate>
