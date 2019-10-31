@@ -10,38 +10,38 @@ using System.Windows.Media;
 
 namespace NuclearPhysicsProgram.ViewModels {
     public class AnimationViewModel {
-        private Dictionary<(Action<double?> PropertyUpdater, double from, double to, double stepsPerSecond, double multiplier), TransitionEffectAnimation> previousAnimations;
+        private Dictionary<(Action<double?> PropertyUpdater, double from, double to, double stepsPerSecond, double multiplier), TransitionAnimation> previousAnimations;
 
         public AnimationViewModel() {
-            previousAnimations = new Dictionary<(Action<double?>, double, double, double, double), TransitionEffectAnimation>();
+            previousAnimations = new Dictionary<(Action<double?>, double, double, double, double), TransitionAnimation>();
         }
 
-        public void TransitionEffect(Action<double?> PropertyUpdater, double from, double to, double seconds, double multiplier) {
+        public void Transition(Action<double?> PropertyUpdater, double from, double to, double seconds, double multiplier) {
             double stepsPerSecond = 1 / seconds;
-            TransitionEffectAnimation animation = ConstructTransitionEffectAnimation(PropertyUpdater, from, to, stepsPerSecond, multiplier);
+            TransitionAnimation animation = ConstructTransitionEffectAnimation(PropertyUpdater, from, to, stepsPerSecond, multiplier);
             animation.Start();
         }
 
-        public async Task AsyncTransitionEffect(Action<double?> PropertyUpdater, double from, double to, double seconds, double multiplier) {
+        public async Task AsyncTransition(Action<double?> PropertyUpdater, double from, double to, double seconds, double multiplier) {
             double stepsPerSecond = (float)1 / seconds;
-            TransitionEffectAnimation animation = ConstructTransitionEffectAnimation(PropertyUpdater, from, to, stepsPerSecond, multiplier);
+            TransitionAnimation animation = ConstructTransitionEffectAnimation(PropertyUpdater, from, to, stepsPerSecond, multiplier);
             animation.Start();
             while (!animation.Finished)
-                await Task.Delay((int)(seconds * 1000));
+                await Task.Delay((int)(seconds * 1010));
         }
 
-        private TransitionEffectAnimation ConstructTransitionEffectAnimation(Action<double?> PropertyUpdater, double from, double to, double stepsPerSecond, double multiplier) {
-            (Action<double?>, double, double, double, double) args = (PropertyUpdater, from, to, stepsPerSecond, multiplier);
+        private TransitionAnimation ConstructTransitionEffectAnimation(Action<double?> PropertyUpdater, double from, double to, double stepsPerSecond, double multiplier) {
+            var args = (PropertyUpdater, from, to, stepsPerSecond, multiplier);
             if (previousAnimations.TryGetValue(args, out var existingAnimation))
                 return existingAnimation;
 
-            var animation = new TransitionEffectAnimation(PropertyUpdater, from, to, stepsPerSecond, multiplier);
+            var animation = new TransitionAnimation(PropertyUpdater, from, to, stepsPerSecond, multiplier);
             previousAnimations.Add(args, animation);
             return animation;
         }
     }
 
-    public class TransitionEffectAnimation {
+    public class TransitionAnimation {
         private readonly Action<double?> PropertyUpdater;
         private readonly double from;
         private readonly double to;
@@ -54,7 +54,7 @@ namespace NuclearPhysicsProgram.ViewModels {
 
         public bool Finished { get => progress == to; }
 
-        public TransitionEffectAnimation(Action<double?> PropertyUpdater, double from, double to, double step, double multiplier) {
+        public TransitionAnimation(Action<double?> PropertyUpdater, double from, double to, double step, double multiplier) {
             this.PropertyUpdater = PropertyUpdater;
             this.from = from;
             this.to = to;
@@ -63,19 +63,15 @@ namespace NuclearPhysicsProgram.ViewModels {
         }
 
         public void Start() {
-            InitializeAnimation(); 
+            progress = from;
+            currentTime = new DateTime(0);
+            previousTime = new DateTime(0);
             CompositionTarget.Rendering += PerformStep;
         }
 
         public void Stop() {
             progress = to;
             CompositionTarget.Rendering -= PerformStep;
-        }
-
-        private void InitializeAnimation() {
-            progress = from;
-            currentTime = new DateTime(0);
-            previousTime = new DateTime(0);
         }
 
         private void PerformStep(object sender, EventArgs args) {

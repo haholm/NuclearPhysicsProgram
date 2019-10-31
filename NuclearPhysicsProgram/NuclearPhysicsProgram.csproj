@@ -83,7 +83,8 @@
     <Compile Include="ViewModels\Commands\ElementInfoCommands\ExpandHiddenElementsCommand.cs" />
     <Compile Include="ViewModels\Commands\ElementInfoCommands\OpenIsotopeDropDownCommand.cs" />
     <Compile Include="ViewModels\Commands\OpenElementInfoCommand.cs" />
-    <Compile Include="ViewModels\DecayChainViewModel.cs" />
+    <Compile Include="ViewModels\Converters\MultipleCommandParameterConverter.cs" />
+    <Compile Include="ViewModels\ElementInfoViewModels\DecayChainViewModel.cs" />
     <Compile Include="ViewModels\ElementInfoViewModels\ElementInfoViewModel.cs" />
     <Compile Include="ViewModels\ElementInfoViewModels\IsotopeDropDownViewModel.cs" />
     <Compile Include="ViewModels\ElementInfoViewModels\PlotViewModel.cs" />
@@ -99,6 +100,9 @@
     </Compile>
     <Compile Include="Views\ElementInfoViews\IsotopeDecayChainView.xaml.cs">
       <DependentUpon>IsotopeDecayChainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ElementInfoViews\PlotView.xaml.cs">
+      <DependentUpon>PlotView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PeriodicTableViews\ItemView.xaml.cs">
       <DependentUpon>ItemView.xaml</DependentUpon>
@@ -130,6 +134,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ElementInfoViews\IsotopeDecayChainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ElementInfoViews\PlotView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

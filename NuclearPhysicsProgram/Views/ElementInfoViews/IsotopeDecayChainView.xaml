@@ -34,9 +34,15 @@
                                 Width="{Binding DecayChainViewModel.ItemWidth, TargetNullValue='60', Source={StaticResource mainVM}}"
                                 Height="{Binding DecayChainViewModel.ItemHeight, TargetNullValue='60', Source={StaticResource mainVM}}"
                                 Command="{Binding OpenElementInfoCommand, Source={StaticResource mainVM}}"
-                                CommandParameter="{Binding Item1.Symbol}">
-                            <periodicTableViews:ItemView Symbol="{Binding Item1.Symbol}"
-                                                         AtomicNumber="{Binding Item1.MassNumber}"
+                                >
+                            <Button.CommandParameter>
+                                <MultiBinding Converter="{StaticResource multipleCommandParameterConverter}">
+                                    <Binding Path="Symbol"/>
+                                    <Binding Path="MassNumber"/>
+                                </MultiBinding>
+                            </Button.CommandParameter>
+                            <periodicTableViews:ItemView Symbol="{Binding Symbol}"
+                                                         AtomicNumber="{Binding MassNumber}"
                                                          SymbolFontSize="22"/>
                         </Button>
                         <DockPanel Canvas.Left="68" 

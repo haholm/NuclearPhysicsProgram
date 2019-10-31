@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:NuclearPhysicsProgram"
              xmlns:viewModels="clr-namespace:NuclearPhysicsProgram.ViewModels"
              xmlns:elementInfoViewModels="clr-namespace:NuclearPhysicsProgram.ViewModels.ElementInfoViewModels"
+             xmlns:converters="clr-namespace:NuclearPhysicsProgram.ViewModels.Converters"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <Style x:Key="NoStyle" TargetType="{x:Type Button}">
@@ -26,5 +27,6 @@
 
         <viewModels:MainViewModel x:Key="mainVM"/>
         <elementInfoViewModels:ElementInfoViewModel x:Key="elementInfoVM"/>
+        <converters:MultipleCommandParameterConverter x:Key="multipleCommandParameterConverter"/>
     </Application.Resources>
 </Application>

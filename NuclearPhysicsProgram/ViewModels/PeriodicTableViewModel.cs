@@ -50,29 +50,29 @@ namespace NuclearPhysicsProgram.ViewModels {
         }
 
         public async void ExpandHiddenElements(int item) {
-            MainViewModel.AnimationViewModel.TransitionEffect(UpdatePeriodicTableOpacity, 1, 0.5, 0.1, 1);
-            if (item == 1) {
+            MainViewModel.AnimationViewModel.Transition(UpdatePeriodicTableOpacity, 1, 0.5, 0.1, 1);
+            if (item == 1 && FirstHiddenElementsVisibility != Visibility.Visible) {
                 FirstHiddenElementsWidth = 870;
                 FirstHiddenElementsVisibility = Visibility.Visible;
-                await MainViewModel.AnimationViewModel.AsyncTransitionEffect(UpdateFirstHiddenElementsOpacity, 0, 1, 0.1, 1);
+                await MainViewModel.AnimationViewModel.AsyncTransition(UpdateFirstHiddenElementsOpacity, 0, 1, 0.1, 1);
             }
-            else if (item == 2) {
+            else if (item == 2 && SecondHiddenElementsVisibility != Visibility.Visible) {
                 SecondHiddenElementsWidth = 870;
                 SecondHiddenElementsVisibility = Visibility.Visible;
-                await MainViewModel.AnimationViewModel.AsyncTransitionEffect(UpdateSecondHiddenElementsOpacity, 0, 1, 0.1, 1);
+                await MainViewModel.AnimationViewModel.AsyncTransition(UpdateSecondHiddenElementsOpacity, 0, 1, 0.1, 1);
             }
         }
 
         public async void ContractHiddenElements(int item) {
-            MainViewModel.AnimationViewModel.TransitionEffect(UpdatePeriodicTableOpacity, 0.5, 1, 0.1, 1);
+            MainViewModel.AnimationViewModel.Transition(UpdatePeriodicTableOpacity, 0.5, 1, 0.1, 1);
             if (item == 1) {
                 FirstHiddenElementsWidth = 58;
-                await MainViewModel.AnimationViewModel.AsyncTransitionEffect(UpdateFirstHiddenElementsOpacity, 1, 0, 0.1, 1);
+                await MainViewModel.AnimationViewModel.AsyncTransition(UpdateFirstHiddenElementsOpacity, 1, 0, 0.1, 1);
                 FirstHiddenElementsVisibility = Visibility.Collapsed;
             }
             else if (item == 2) {
                 SecondHiddenElementsWidth = 58;
-                await MainViewModel.AnimationViewModel.AsyncTransitionEffect(UpdateSecondHiddenElementsOpacity, 1, 0, 0.1, 1);
+                await MainViewModel.AnimationViewModel.AsyncTransition(UpdateSecondHiddenElementsOpacity, 1, 0, 0.1, 1);
                 SecondHiddenElementsVisibility = Visibility.Collapsed;
             }
         }

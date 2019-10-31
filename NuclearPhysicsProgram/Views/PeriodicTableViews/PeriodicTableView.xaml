@@ -7,7 +7,8 @@
              xmlns:viewModels="clr-namespace:NuclearPhysicsProgram.ViewModels"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              mc:Ignorable="d"
-             IsEnabled="{Binding PeriodicTableViewIsEnabled, Mode=OneWay, Source={StaticResource mainVM}}"
+             Visibility="{Binding PeriodicTableViewVisibility, TargetNullValue='Visible', Mode=OneWay, Source={StaticResource mainVM}}"
+             Opacity="{Binding PeriodicTableViewOpacity, TargetNullValue='1', Mode=OneWay, Source={StaticResource mainVM}}"
              >
     <UserControl.Resources>
         <viewModels:PeriodicTableViewModel x:Key="pTableVM"/>
@@ -134,8 +135,13 @@
                         <Button x:Name="ItemButton" 
                                 Style="{DynamicResource PeriodicTableItemStyle}" 
                                 Command="{Binding OpenElementInfoCommand, Source={StaticResource mainVM}}"
-                                CommandParameter="{Binding Symbol}" 
                                 RenderTransformOrigin="0.5,0.5">
+                            <Button.CommandParameter>
+                                <MultiBinding Converter="{StaticResource multipleCommandParameterConverter}">
+                                    <Binding Path="Symbol"/>
+                                    <Binding Path="MassNumber"/>
+                                </MultiBinding>
+                            </Button.CommandParameter>
                             <local:ItemView HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"
                                             Symbol="{Binding Symbol}"
@@ -159,7 +165,7 @@
 
         <ItemsControl Grid.Row="0" 
                       Margin="900 0 0 0"
-                      Padding="0 0 2 0"
+                      Padding="0 0 6 0"
                       ItemsSource="{Binding ElementViewModel.FirstRightElements, Source={StaticResource pTableVM}}"
                       HorizontalContentAlignment="Right"
                       VerticalAlignment="Stretch"
@@ -177,8 +183,13 @@
                         <Button x:Name="ItemButton" 
                                 Style="{DynamicResource PeriodicTableItemStyle}" 
                                 Command="{Binding OpenElementInfoCommand, Source={StaticResource mainVM}}"
-                                CommandParameter="{Binding Symbol}" 
                                 RenderTransformOrigin="0.5,0.5">
+                            <Button.CommandParameter>
+                                <MultiBinding Converter="{StaticResource multipleCommandParameterConverter}">
+                                    <Binding Path="Symbol"/>
+                                    <Binding Path="MassNumber"/>
+                                </MultiBinding>
+                            </Button.CommandParameter>
                             <local:ItemView HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"
                                             Symbol="{Binding Symbol}"
@@ -217,8 +228,13 @@
                         <Button x:Name="ItemButton" 
                                 Style="{DynamicResource PeriodicTableItemStyle}" 
                                 Command="{Binding OpenElementInfoCommand, Source={StaticResource mainVM}}"
-                                CommandParameter="{Binding Symbol}" 
                                 RenderTransformOrigin="0.5,0.5">
+                            <Button.CommandParameter>
+                                <MultiBinding Converter="{StaticResource multipleCommandParameterConverter}">
+                                    <Binding Path="Symbol"/>
+                                    <Binding Path="MassNumber"/>
+                                </MultiBinding>
+                            </Button.CommandParameter>
                             <local:ItemView HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"
                                             Symbol="{Binding Symbol}"
@@ -239,7 +255,7 @@
 
         <ItemsControl Grid.Row="1"
                       Margin="618 0 0 0"
-                      Padding="0 0 2 0"
+                      Padding="0 0 6 0"
                       ItemsSource="{Binding ElementViewModel.SecondRightElements, Source={StaticResource pTableVM}}"
                       HorizontalContentAlignment="Right"
                       VerticalAlignment="Stretch"
@@ -258,8 +274,13 @@
                                 Style="{DynamicResource PeriodicTableItemStyle}" 
                                 
                                 Command="{Binding OpenElementInfoCommand, Source={StaticResource mainVM}}"
-                                CommandParameter="{Binding Symbol}" 
                                 RenderTransformOrigin="0.5,0.5">
+                            <Button.CommandParameter>
+                                <MultiBinding Converter="{StaticResource multipleCommandParameterConverter}">
+                                    <Binding Path="Symbol"/>
+                                    <Binding Path="MassNumber"/>
+                                </MultiBinding>
+                            </Button.CommandParameter>
                             <local:ItemView HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"
                                             Symbol="{Binding Symbol}"
@@ -299,8 +320,13 @@
                                 Style="{DynamicResource PeriodicTableItemStyle}" 
                                 
                                 Command="{Binding OpenElementInfoCommand, Source={StaticResource mainVM}}"
-                                CommandParameter="{Binding Symbol}" 
                                 RenderTransformOrigin="0.5,0.5">
+                            <Button.CommandParameter>
+                                <MultiBinding Converter="{StaticResource multipleCommandParameterConverter}">
+                                    <Binding Path="Symbol"/>
+                                    <Binding Path="MassNumber"/>
+                                </MultiBinding>
+                            </Button.CommandParameter>
                             <local:ItemView HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"
                                             Symbol="{Binding Symbol}"
@@ -321,7 +347,7 @@
 
         <ItemsControl Grid.Row="2"
                       Margin="618 0 0 0"
-                      Padding="0 0 2 0"
+                      Padding="0 0 6 0"
                       ItemsSource="{Binding ElementViewModel.ThirdRightElements, Source={StaticResource pTableVM}}"
                       HorizontalContentAlignment="Right"
                       VerticalAlignment="Stretch"
@@ -339,8 +365,13 @@
                         <Button x:Name="ItemButton" 
                                 Style="{DynamicResource PeriodicTableItemStyle}" 
                                 Command="{Binding OpenElementInfoCommand, Source={StaticResource mainVM}}"
-                                CommandParameter="{Binding Symbol}" 
                                 RenderTransformOrigin="0.5,0.5">
+                            <Button.CommandParameter>
+                                <MultiBinding Converter="{StaticResource multipleCommandParameterConverter}">
+                                    <Binding Path="Symbol"/>
+                                    <Binding Path="MassNumber"/>
+                                </MultiBinding>
+                            </Button.CommandParameter>
                             <local:ItemView HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"
                                             Symbol="{Binding Symbol}"
@@ -379,8 +410,13 @@
                         <Button x:Name="ItemButton" 
                                 Style="{DynamicResource PeriodicTableItemStyle}" 
                                 Command="{Binding OpenElementInfoCommand, Source={StaticResource mainVM}}"
-                                CommandParameter="{Binding Symbol}" 
                                 RenderTransformOrigin="0.5,0.5">
+                            <Button.CommandParameter>
+                                <MultiBinding Converter="{StaticResource multipleCommandParameterConverter}">
+                                    <Binding Path="Symbol"/>
+                                    <Binding Path="MassNumber"/>
+                                </MultiBinding>
+                            </Button.CommandParameter>
                             <local:ItemView HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"
                                             Symbol="{Binding Symbol}"
@@ -419,8 +455,13 @@
                                 Style="{DynamicResource PeriodicTableItemStyle}" 
                                 
                                 Command="{Binding OpenElementInfoCommand, Source={StaticResource mainVM}}"
-                                CommandParameter="{Binding Symbol}" 
                                 RenderTransformOrigin="0.5,0.5">
+                            <Button.CommandParameter>
+                                <MultiBinding Converter="{StaticResource multipleCommandParameterConverter}">
+                                    <Binding Path="Symbol"/>
+                                    <Binding Path="MassNumber"/>
+                                </MultiBinding>
+                            </Button.CommandParameter>
                             <local:ItemView HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"
                                             Symbol="{Binding Symbol}"
@@ -458,8 +499,13 @@
                         <Button x:Name="ItemButton" 
                                 Style="{DynamicResource PeriodicTableItemStyle}" 
                                 Command="{Binding OpenElementInfoCommand, Source={StaticResource mainVM}}"
-                                CommandParameter="{Binding Symbol}" 
                                 RenderTransformOrigin="0.5,0.5">
+                            <Button.CommandParameter>
+                                <MultiBinding Converter="{StaticResource multipleCommandParameterConverter}">
+                                    <Binding Path="Symbol"/>
+                                    <Binding Path="MassNumber"/>
+                                </MultiBinding>
+                            </Button.CommandParameter>
                             <local:ItemView HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"
                                             Symbol="{Binding Symbol}"
@@ -498,8 +544,13 @@
                         <Button x:Name="ItemButton" 
                                 Style="{DynamicResource PeriodicTableItemStyle}" 
                                 Command="{Binding OpenElementInfoCommand, Source={StaticResource mainVM}}"
-                                CommandParameter="{Binding Symbol}" 
                                 RenderTransformOrigin="0.5,0.5">
+                            <Button.CommandParameter>
+                                <MultiBinding Converter="{StaticResource multipleCommandParameterConverter}">
+                                    <Binding Path="Symbol"/>
+                                    <Binding Path="MassNumber"/>
+                                </MultiBinding>
+                            </Button.CommandParameter>
                             <local:ItemView HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"
                                             Symbol="{Binding Symbol}"
@@ -586,8 +637,13 @@
                                 <Button x:Name="ItemButton" 
                                         Style="{DynamicResource PeriodicTableItemStyle}" 
                                         Command="{Binding OpenElementInfoCommand, Source={StaticResource mainVM}}"
-                                        CommandParameter="{Binding Symbol}" 
                                         RenderTransformOrigin="0.5,0.5">
+                                    <Button.CommandParameter>
+                                        <MultiBinding Converter="{StaticResource multipleCommandParameterConverter}">
+                                            <Binding Path="Symbol"/>
+                                            <Binding Path="MassNumber"/>
+                                        </MultiBinding>
+                                    </Button.CommandParameter>
                                     <local:ItemView HorizontalAlignment="Stretch"
                                                     VerticalAlignment="Stretch"
                                                     Symbol="{Binding Symbol}"
@@ -628,8 +684,13 @@
                         <Button x:Name="ItemButton" 
                                 Style="{DynamicResource PeriodicTableItemStyle}" 
                                 Command="{Binding OpenElementInfoCommand, Source={StaticResource mainVM}}"
-                                CommandParameter="{Binding Symbol}" 
                                 RenderTransformOrigin="0.5,0.5">
+                            <Button.CommandParameter>
+                                <MultiBinding Converter="{StaticResource multipleCommandParameterConverter}">
+                                    <Binding Path="Symbol"/>
+                                    <Binding Path="MassNumber"/>
+                                </MultiBinding>
+                            </Button.CommandParameter>
                             <local:ItemView HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"
                                             Symbol="{Binding Symbol}"
@@ -668,8 +729,13 @@
                         <Button x:Name="ItemButton" 
                                 Style="{DynamicResource PeriodicTableItemStyle}" 
                                 Command="{Binding OpenElementInfoCommand, Source={StaticResource mainVM}}"
-                                CommandParameter="{Binding Symbol}" 
                                 RenderTransformOrigin="0.5,0.5">
+                            <Button.CommandParameter>
+                                <MultiBinding Converter="{StaticResource multipleCommandParameterConverter}">
+                                    <Binding Path="Symbol"/>
+                                    <Binding Path="MassNumber"/>
+                                </MultiBinding>
+                            </Button.CommandParameter>
                             <local:ItemView HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"
                                             Symbol="{Binding Symbol}"
@@ -756,8 +822,13 @@
                                 <Button x:Name="ItemButton" 
                                         Style="{DynamicResource PeriodicTableItemStyle}" 
                                         Command="{Binding OpenElementInfoCommand, Source={StaticResource mainVM}}"
-                                        CommandParameter="{Binding Symbol}" 
                                         RenderTransformOrigin="0.5,0.5">
+                                    <Button.CommandParameter>
+                                        <MultiBinding Converter="{StaticResource multipleCommandParameterConverter}">
+                                            <Binding Path="Symbol"/>
+                                            <Binding Path="MassNumber"/>
+                                        </MultiBinding>
+                                    </Button.CommandParameter>
                                     <local:ItemView HorizontalAlignment="Stretch"
                                                     VerticalAlignment="Stretch"
                                                     Symbol="{Binding Symbol}"

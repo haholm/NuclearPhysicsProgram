@@ -12,7 +12,7 @@
         Title="MainWindow" 
         Width="1242" 
         Height="650"
-        MinWidth="1242"
+        MinWidth="1290"
         MinHeight="650"
         FontFamily="{StaticResource OpenSansRegular}">
     <!-- TESTA BLUR EFFECT! -->
@@ -43,7 +43,7 @@
         <views:ElementInfoView HorizontalAlignment="Stretch"
                                VerticalAlignment="Stretch"
                                Opacity="{Binding ElementInfoViewOpacity, TargetNullValue='0' , Mode=OneWay, Source={StaticResource mainVM}}" 
-                               Visibility="{Binding ElementInfoViewVisibility, Mode=OneWay, Source={StaticResource mainVM}}"
+                               Visibility="{Binding ElementInfoViewVisibility, TargetNullValue='Collapsed', Mode=OneWay, Source={StaticResource mainVM}}"
                                />
     </Grid>
 </Window>

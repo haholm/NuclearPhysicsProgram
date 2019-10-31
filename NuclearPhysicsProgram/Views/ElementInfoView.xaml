@@ -15,59 +15,64 @@
 
         </Style>
     </UserControl.Resources>
-    <Grid>
-        <Border x:Name="Border"
-                Margin="100,40,50,40"
-                Background="#f0f2f0"
-                CornerRadius="16"
-                MaxWidth="1600"
-                MaxHeight="800">
-            <DockPanel Margin="16">
-                <Border DockPanel.Dock="Top"
-                        HorizontalAlignment="Right"
-                        Width="32"
-                        Height="24"
-                        Margin="2"
-                        Background="#15000000"
-                        CornerRadius="2">
-                    <Button Style="{StaticResource CloseButtonStyle}" 
+    <Border x:Name="Border"
+            Margin="100,40,50,40"
+            Background="#f0f2f0"
+            CornerRadius="16"
+            MaxWidth="1600"
+            MaxHeight="800">
+        <Grid Margin="16">
+            <Border HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Width="32"
+                    Height="24"
+                    Margin="2"
+                    Background="#15000000"
+                    CornerRadius="2">
+                <Button Style="{StaticResource CloseButtonStyle}" 
                             Background="Red"
                             Command="{Binding CloseElementInfoCommand, Source={StaticResource mainVM}}" >
-                        <TextBlock HorizontalAlignment="Center"
+                    <TextBlock HorizontalAlignment="Center"
                                    VerticalAlignment="Center">x</TextBlock>
-                    </Button>
-                </Border>
+                </Button>
+            </Border>
 
-                <elementInfoViews:ElementInfoIsotopeDropDownView HorizontalAlignment="Left" 
-                                                                 DockPanel.Dock="Top"
-                                                                 >
-                </elementInfoViews:ElementInfoIsotopeDropDownView>
+            <elementInfoViews:ElementInfoIsotopeDropDownView HorizontalAlignment="Left"
+                                                             VerticalAlignment="Top"
+                                                             >
+            </elementInfoViews:ElementInfoIsotopeDropDownView>
 
-                <Canvas VerticalAlignment="Bottom"
-                        HorizontalAlignment="Center"
-                        Width="600"
-                        Height="80">
-                    <Border Canvas.Top="2" 
+            <elementInfoViews:PlotView Padding="100"
+                                       MinWidth="500"
+                                       MinHeight="250"
+                                       MaxWidth="1600"
+                                       MaxHeight="1000"
+                                       />
+
+            <Canvas VerticalAlignment="Bottom"
+                    HorizontalAlignment="Center"
+                    Width="600"
+                    Height="80">
+                <Border Canvas.Top="2" 
                             Canvas.Left="2" 
                             Width="596"
                             Height="76" 
                             BorderBrush="Black" 
                             BorderThickness="1"
                             CornerRadius="6">
-                        <Border.Effect>
-                            <DropShadowEffect BlurRadius="32" />
-                        </Border.Effect>
-                    </Border>
-                    <Border Width="600"
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="32" />
+                    </Border.Effect>
+                </Border>
+                <Border Width="600"
                             Height="80"
                             BorderBrush="#22000000"
                             CornerRadius="6"
                             Background="White">
                     <elementInfoViews:IsotopeDecayChainView 
                                                             />
-                    </Border>
-                </Canvas>
-            </DockPanel>
-        </Border>
-    </Grid>
+                </Border>
+            </Canvas>
+        </Grid>
+    </Border>
 </UserControl>
