@@ -11,21 +11,17 @@ using System.Windows.Input;
 
 namespace NuclearPhysicsProgram.ViewModels {
     public class MainViewModel : PropertyHandler.NotifyPropertyChanged {
-        private const double magnificationMultiplier = 1;
-        private const double blurMultiplier = 2.5;
-
         private double? mainWindowMagnification;
         private double? mainWindowBlurRadius;
         private double? elementInfoViewOpacity;
         private Visibility? elementInfoViewVisibility;
         private Visibility? periodicTableViewVisibility;
-        private bool? periodicTableViewIsEnabled;
         private double? periodicTableViewOpacity;
         private IsotopeDataModel currentIsotopeData;
 
         public static AnimationViewModel AnimationViewModel { get; set; }
-        public DecayChainViewModel DecayChainViewModel { get; private set; }
         public PlotViewModel PlotViewModel { get; private set; }
+        public DecayChainViewModel DecayChainViewModel { get; private set; }
         public static ICommand OpenElementInfoCommand { get; private set; }
         public static ICommand CloseElementInfoCommand { get; private set; }
         public double? MainWindowMagnification { get => mainWindowMagnification; set { mainWindowMagnification = value; SetPropertyChanged(this, "MainWindowMagnification"); } }
@@ -44,8 +40,8 @@ namespace NuclearPhysicsProgram.ViewModels {
 
         public MainViewModel() {
             AnimationViewModel = new AnimationViewModel();
-            DecayChainViewModel = new DecayChainViewModel();
             PlotViewModel = new PlotViewModel();
+            DecayChainViewModel = new DecayChainViewModel(PlotViewModel);
 
             OpenElementInfoCommand = new OpenElementInfoCommand(this); 
             CloseElementInfoCommand = new CloseElementInfoCommand(this);
@@ -82,12 +78,10 @@ namespace NuclearPhysicsProgram.ViewModels {
             }
         }
 
-        private async void SetIsotopeDatas(IsotopeDataModel isotopeData, int massNumber) {
+        private void SetIsotopeDatas(IsotopeDataModel isotopeData, int massNumber) {
             CurrentIsotopeData = isotopeData;
             ElementInfoViewModels.ElementInfoViewModel.CurrentIsotopeData = isotopeData;
-            //temporary fix instead of multi-threading
             DecayChainViewModel.SetupDecayChain(isotopeData);
-            PlotViewModel.SetupPlot(DecayChainViewModel.IsotopeDecayChain.First());
         }
 
         private void UpdateElementInfoViewOpacity(double? value) => ElementInfoViewOpacity = value;

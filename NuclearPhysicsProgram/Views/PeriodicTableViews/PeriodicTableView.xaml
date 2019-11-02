@@ -71,11 +71,11 @@
                                 <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX"
                                                  From="1"
                                                  To="1.08"
-                                                 Duration="0:0:0.12"/>
+                                                 Duration="0:0:0.1"/>
                                 <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY"
                                                  From="1"
                                                  To="1.08"
-                                                 Duration="0:0:0.12"/>
+                                                 Duration="0:0:0.1"/>
                             </Storyboard>
                         </BeginStoryboard>
                     </Trigger.EnterActions>
@@ -84,11 +84,11 @@
                             <Storyboard>
                                 <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX"
                                                  To="1"
-                                                 Duration="0:0:0.12"/>
+                                                 Duration="0:0:0.1"/>
                                 <!--LEAVING OUT FROM PROPERTY DEFAULTS TO DEFAULT-->
                                 <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY"
                                                  To="1"
-                                                 Duration="0:0:0.12"/>
+                                                 Duration="0:0:0.1"/>
                             </Storyboard>
                         </BeginStoryboard>
                     </Trigger.ExitActions>

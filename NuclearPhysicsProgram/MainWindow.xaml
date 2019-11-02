@@ -15,7 +15,6 @@
         MinWidth="1290"
         MinHeight="650"
         FontFamily="{StaticResource OpenSansRegular}">
-    <!-- TESTA BLUR EFFECT! -->
     <Grid Background="#174047">
         <!--Background="#353C3F"-->
         <Border Margin="{Binding MainWindowMagnification, TargetNullValue='0', Mode=OneWay, Source={StaticResource mainVM}}" 
@@ -30,10 +29,14 @@
                 <Border DockPanel.Dock="Right" 
                         Background="#f8f8f8"
                         CornerRadius="20 0 0 20">
-                    <!--HMMM PADDING-->
                     <periodicTableViews:PeriodicTableView Padding="80, 80, 80, 0"
                                                           HorizontalAlignment="Stretch"
-                                                          VerticalAlignment="Stretch"/>
+                                                          VerticalAlignment="Stretch"
+                                                          RenderTransformOrigin="0.5 0.5">
+                        <periodicTableViews:PeriodicTableView.LayoutTransform>
+                            <ScaleTransform ScaleX="1" ScaleY="1"/>
+                        </periodicTableViews:PeriodicTableView.LayoutTransform>
+                    </periodicTableViews:PeriodicTableView>
                 </Border>
 
                 <!--<TextBlock FontSize="60">Larger card up here?</TextBlock>-->

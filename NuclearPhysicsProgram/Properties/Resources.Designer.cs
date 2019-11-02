@@ -22,7 +22,7 @@ namespace NuclearPhysicsProgram.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace NuclearPhysicsProgram.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NuclearPhysicsProgram.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace NuclearPhysicsProgram.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -95,7 +95,7 @@ namespace NuclearPhysicsProgram.Properties {
         ///  {
         /// [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string Elements {
+        public static string Elements {
             get {
                 return ResourceManager.GetString("Elements", resourceCulture);
             }
@@ -132,7 +132,7 @@ namespace NuclearPhysicsProgram.Properties {
         ///            &quot;Product&quot;: &quot;He&quot;,
         ///            &quot;AtomicNum [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string Isotopes {
+        public static string Isotopes {
             get {
                 return ResourceManager.GetString("Isotopes", resourceCulture);
             }

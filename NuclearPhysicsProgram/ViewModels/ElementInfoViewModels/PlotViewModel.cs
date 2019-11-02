@@ -12,13 +12,13 @@ using System.Windows.Media.Effects;
 
 namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
     public class PlotViewModel : PropertyHandler.NotifyPropertyChanged {
-        private BlurEffect blurEffect;
+        private Effect effect;
         private double? maximumTime;
         private string unit;
         private double? unitTitlePosition;
         private BlurEffect blurryEffect;
 
-        public BlurEffect BlurEffect { get => blurEffect; private set { blurEffect = value; SetPropertyChanged(this, "BlurEffect"); } }
+        public Effect Effect { get => effect; private set { effect = value; SetPropertyChanged(this, "Effect"); } }
         public double? MaximumTime { get => maximumTime; private set { maximumTime = value; SetPropertyChanged(this, "MaximumTime"); } }
         public string Unit { get => unit; private set { unit = value; SetPropertyChanged(this, "Unit"); } }
         public double? UnitTitlePosition { get => unitTitlePosition; set { unitTitlePosition = value; SetPropertyChanged(this, "UnitTitlePosition"); } }
@@ -34,13 +34,13 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
             DataPoints.Clear();
             double halfLife = GetHalfLife(isotope);
             if (halfLife == 0) {
-                BlurEffect = blurryEffect;
-                Unit = "";
+                Effect = blurryEffect;
+                Unit = " ";
                 MaximumTime = 10;
                 return;
             }
 
-            BlurEffect = null;
+            Effect = null;
             string unit = ConvertToAppropriateUnit(ref halfLife);
             Unit = unit;
             UnitTitlePosition = 1.02 + ((double)(unit.Length - 5) / 1000 * 4);
@@ -57,7 +57,7 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
             }
         }
 
-        private double CalculateNumberOfNuclides(double halfLife, double time) => 10 * Math.Pow((double)1 / 2, time / halfLife);
+        private double CalculateNumberOfNuclides(double halfLife, double time) => 10 * Math.Pow(0.5, time / halfLife);
 
         private double GetHalfLife(IsotopeModel isotope) {
             string halfLifeString = isotope.HalfLife.Replace(",", "").Replace(".", ",");

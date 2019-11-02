@@ -3,20 +3,46 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:props="clr-namespace:NuclearPhysicsProgram.Properties"
              xmlns:local="clr-namespace:NuclearPhysicsProgram.Views.ElementInfoViews"
              xmlns:viewModels="clr-namespace:NuclearPhysicsProgram.ViewModels"
              xmlns:periodicTableViews="clr-namespace:NuclearPhysicsProgram.Views.PeriodicTableViews"
+             xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="800">
     <Grid>
+        <DockPanel HorizontalAlignment="Left"
+                   Margin="11 0 0 0"
+                   Width="16"
+                   Height="{Binding DecayChainViewModel.ItemHeight, TargetNullValue='60', Source={StaticResource mainVM}}">
+            <Button Style="{StaticResource NoStyle}" 
+                    DockPanel.Dock="Top"
+                    VerticalAlignment="Top"
+                    Height="20"
+                    Command="{Binding DecayChainViewModel.SwitchDecayChainIsotopeCommand, Source={StaticResource mainVM}}"
+                    CommandParameter="previous">
+                <Image Source="{svgc:SvgImage /Images/arrowup.svg}" 
+                       Width="12"/>
+            </Button>
+            <Button Style="{StaticResource NoStyle}" 
+                    DockPanel.Dock="Bottom"
+                    VerticalAlignment="Bottom"
+                    Height="20"
+                    Command="{Binding DecayChainViewModel.SwitchDecayChainIsotopeCommand, Source={StaticResource mainVM}}"
+                    CommandParameter="next">
+                <Image Source="{svgc:SvgImage /Images/arrowdown.svg}" 
+                       Width="12"/>
+            </Button>
+        </DockPanel>
         <ItemsControl VerticalAlignment="Stretch" 
                       ItemsSource="{Binding DecayChainViewModel.IsotopeDecayChain, Source={StaticResource mainVM}}" 
                       >
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Canvas Width="76" 
+                    <Canvas Width="56" 
                             Margin="11">
-                        <Border BorderBrush="#FFEBEBEB"
+                        <Border Canvas.Left="26" 
+                                BorderBrush="#FFEBEBEB"
                                 Width="{Binding DecayChainViewModel.ItemWidth, TargetNullValue='60', Source={StaticResource mainVM}}"
                                 Height="{Binding DecayChainViewModel.ItemHeight, TargetNullValue='60', Source={StaticResource mainVM}}"
                                 BorderThickness="1"
@@ -29,7 +55,8 @@
                                                   Color="Black" />
                             </Border.Effect>
                         </Border>
-                        <Button Style="{Binding Mode=OneWay, Source={StaticResource NoStyle}}"
+                        <Button Canvas.Left="26" 
+                                Style="{Binding Mode=OneWay, Source={StaticResource NoStyle}}"
                                 HorizontalAlignment="Left"
                                 Width="{Binding DecayChainViewModel.ItemWidth, TargetNullValue='60', Source={StaticResource mainVM}}"
                                 Height="{Binding DecayChainViewModel.ItemHeight, TargetNullValue='60', Source={StaticResource mainVM}}"
@@ -45,20 +72,6 @@
                                                          AtomicNumber="{Binding MassNumber}"
                                                          SymbolFontSize="22"/>
                         </Button>
-                        <DockPanel Canvas.Left="68" 
-                                   Width="20"
-                                   Height="{Binding DecayChainViewModel.ItemHeight, TargetNullValue='60', Source={StaticResource mainVM}}">
-                            <Button DockPanel.Dock="Top"
-                                    VerticalAlignment="Top"
-                                    Height="20">
-                                
-                            </Button>
-                            <Button DockPanel.Dock="Bottom"
-                                    VerticalAlignment="Bottom"
-                                    Height="20">
-                                
-                            </Button>
-                        </DockPanel>
                     </Canvas>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

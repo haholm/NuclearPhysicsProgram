@@ -65,12 +65,12 @@ namespace NuclearPhysicsProgram.ViewModels {
 
         public async void ContractHiddenElements(int item) {
             MainViewModel.AnimationViewModel.Transition(UpdatePeriodicTableOpacity, 0.5, 1, 0.1, 1);
-            if (item == 1) {
+            if (item == 1 && FirstHiddenElementsVisibility != Visibility.Collapsed) {
                 FirstHiddenElementsWidth = 58;
                 await MainViewModel.AnimationViewModel.AsyncTransition(UpdateFirstHiddenElementsOpacity, 1, 0, 0.1, 1);
                 FirstHiddenElementsVisibility = Visibility.Collapsed;
             }
-            else if (item == 2) {
+            else if (item == 2 && SecondHiddenElementsVisibility != Visibility.Collapsed) {
                 SecondHiddenElementsWidth = 58;
                 await MainViewModel.AnimationViewModel.AsyncTransition(UpdateSecondHiddenElementsOpacity, 1, 0, 0.1, 1);
                 SecondHiddenElementsVisibility = Visibility.Collapsed;
