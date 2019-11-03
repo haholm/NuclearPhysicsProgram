@@ -20,7 +20,9 @@
                     VerticalAlignment="Top"
                     Height="20"
                     Command="{Binding DecayChainViewModel.SwitchDecayChainIsotopeCommand, Source={StaticResource mainVM}}"
-                    CommandParameter="previous">
+                    CommandParameter="previous"
+                    IsEnabled="{Binding DecayChainViewModel.IsArrowUpEnabled, TargetNullValue=true, Source={StaticResource mainVM}}"
+                    Opacity="{Binding DecayChainViewModel.ArrowUpOpacity, TargetNullValue='1', Source={StaticResource mainVM}}">
                 <Image Source="{svgc:SvgImage /Images/arrowup.svg}" 
                        Width="12"/>
             </Button>
@@ -29,7 +31,9 @@
                     VerticalAlignment="Bottom"
                     Height="20"
                     Command="{Binding DecayChainViewModel.SwitchDecayChainIsotopeCommand, Source={StaticResource mainVM}}"
-                    CommandParameter="next">
+                    CommandParameter="next"
+                    IsEnabled="{Binding DecayChainViewModel.IsArrowDownEnabled, TargetNullValue=true, Source={StaticResource mainVM}}"
+                    Opacity="{Binding DecayChainViewModel.ArrowDownOpacity, TargetNullValue='1', Source={StaticResource mainVM}}">
                 <Image Source="{svgc:SvgImage /Images/arrowdown.svg}" 
                        Width="12"/>
             </Button>

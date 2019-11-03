@@ -3200,23 +3200,5 @@
         ]
       }
     ]
-  },
-  {
-    "Symbol": "",
-    "Isotopes": [
-      {
-        "Symbol": "",
-        "MassNumber": 0,
-        "HalfLife": "",
-        "Decays": [
-          {
-            "Type": "",
-            "Product": "",
-            "AtomicNumber": 0,
-            "MassNumber": 0
-          }
-        ]
-      }
-    ]
   }
 ]

@@ -20,7 +20,6 @@ namespace NuclearPhysicsProgram.ViewModels {
         private Visibility? firstHiddenElementsVisibility;
         private Visibility? secondHiddenElementsVisibility;
 
-        public ElementViewModel ElementViewModel { get; private set; }
         public ElementInfoViewModels.ElementInfoViewModel ElementInfoViewModel { get; private set; }
         public ICommand ExpandHiddenElementsCommand { get; private set; }
         public ICommand ContractHiddenElementsCommand { get; private set; }
@@ -43,7 +42,6 @@ namespace NuclearPhysicsProgram.ViewModels {
             firstHiddenElementsSize = new Size(58, (double)ActualWidth / 18);
             secondHiddenElementsSize = new Size(58, (double)ActualWidth / 18);
 
-            ElementViewModel = new ElementViewModel();
             ElementInfoViewModel = new ElementInfoViewModels.ElementInfoViewModel();
             ExpandHiddenElementsCommand = new ExpandHiddenElementsCommand(this);
             ContractHiddenElementsCommand = new ContractHiddenElementsCommand(this);

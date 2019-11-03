@@ -19,7 +19,10 @@ namespace NuclearPhysicsProgram.ViewModels {
         private double? periodicTableViewOpacity;
         private IsotopeDataModel currentIsotopeData;
 
+        /// Ta med binding energy
+
         public static AnimationViewModel AnimationViewModel { get; set; }
+        public ElementViewModel ElementViewModel { get; private set; }
         public PlotViewModel PlotViewModel { get; private set; }
         public DecayChainViewModel DecayChainViewModel { get; private set; }
         public static ICommand OpenElementInfoCommand { get; private set; }
@@ -42,6 +45,7 @@ namespace NuclearPhysicsProgram.ViewModels {
             AnimationViewModel = new AnimationViewModel();
             PlotViewModel = new PlotViewModel();
             DecayChainViewModel = new DecayChainViewModel(PlotViewModel);
+            ElementViewModel = new ElementViewModel(this);
 
             OpenElementInfoCommand = new OpenElementInfoCommand(this); 
             CloseElementInfoCommand = new CloseElementInfoCommand(this);
@@ -81,7 +85,7 @@ namespace NuclearPhysicsProgram.ViewModels {
         private void SetIsotopeDatas(IsotopeDataModel isotopeData, int massNumber) {
             CurrentIsotopeData = isotopeData;
             ElementInfoViewModels.ElementInfoViewModel.CurrentIsotopeData = isotopeData;
-            DecayChainViewModel.SetupDecayChain(isotopeData);
+            DecayChainViewModel.SetupDecayChains(isotopeData, true);
         }
 
         private void UpdateElementInfoViewOpacity(double? value) => ElementInfoViewOpacity = value;

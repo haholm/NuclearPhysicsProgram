@@ -106,7 +106,7 @@
         <Binding Mode="OneWay" Source="{StaticResource PeriodicTableStyle}"/>
     </UserControl.Style>
 
-    <Grid>
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -118,7 +118,7 @@
         </Grid.RowDefinitions>
 
         <ItemsControl Grid.Row="0" 
-                      ItemsSource="{Binding ElementViewModel.FirstLeftElements, Source={StaticResource pTableVM}}"
+                      ItemsSource="{Binding ElementViewModel.FirstLeftElements, Source={StaticResource mainVM}}"
                       HorizontalContentAlignment="Left"
                       VerticalAlignment="Stretch"
                       Background="Transparent"
@@ -166,7 +166,7 @@
         <ItemsControl Grid.Row="0" 
                       Margin="900 0 0 0"
                       Padding="0 0 6 0"
-                      ItemsSource="{Binding ElementViewModel.FirstRightElements, Source={StaticResource pTableVM}}"
+                      ItemsSource="{Binding ElementViewModel.FirstRightElements, Source={StaticResource mainVM}}"
                       HorizontalContentAlignment="Right"
                       VerticalAlignment="Stretch"
                       Background="Transparent"
@@ -211,7 +211,7 @@
 
         
         <ItemsControl Grid.Row="1" 
-                      ItemsSource="{Binding ElementViewModel.SecondLeftElements, Source={StaticResource pTableVM}}"
+                      ItemsSource="{Binding ElementViewModel.SecondLeftElements, Source={StaticResource mainVM}}"
                       HorizontalContentAlignment="Left"
                       VerticalAlignment="Stretch"
                       Background="Transparent"
@@ -256,7 +256,7 @@
         <ItemsControl Grid.Row="1"
                       Margin="618 0 0 0"
                       Padding="0 0 6 0"
-                      ItemsSource="{Binding ElementViewModel.SecondRightElements, Source={StaticResource pTableVM}}"
+                      ItemsSource="{Binding ElementViewModel.SecondRightElements, Source={StaticResource mainVM}}"
                       HorizontalContentAlignment="Right"
                       VerticalAlignment="Stretch"
                       Background="Transparent"
@@ -302,7 +302,7 @@
 
         
         <ItemsControl Grid.Row="2" 
-                      ItemsSource="{Binding ElementViewModel.ThirdLeftElements, Source={StaticResource pTableVM}}"
+                      ItemsSource="{Binding ElementViewModel.ThirdLeftElements, Source={StaticResource mainVM}}"
                       HorizontalContentAlignment="Left"
                       VerticalAlignment="Stretch"
                       Background="Transparent"
@@ -348,7 +348,7 @@
         <ItemsControl Grid.Row="2"
                       Margin="618 0 0 0"
                       Padding="0 0 6 0"
-                      ItemsSource="{Binding ElementViewModel.ThirdRightElements, Source={StaticResource pTableVM}}"
+                      ItemsSource="{Binding ElementViewModel.ThirdRightElements, Source={StaticResource mainVM}}"
                       HorizontalContentAlignment="Right"
                       VerticalAlignment="Stretch"
                       Background="Transparent"
@@ -393,7 +393,7 @@
 
 
         <ItemsControl Grid.Row="3" 
-                      ItemsSource="{Binding ElementViewModel.FourthElements, Source={StaticResource pTableVM}}"
+                      ItemsSource="{Binding ElementViewModel.FourthElements, Source={StaticResource mainVM}}"
                       HorizontalContentAlignment="Left"
                       VerticalAlignment="Stretch"
                       Background="Transparent"
@@ -437,7 +437,7 @@
 
 
         <ItemsControl Grid.Row="4" 
-                      ItemsSource="{Binding ElementViewModel.FifthElements, Source={StaticResource pTableVM}}"
+                      ItemsSource="{Binding ElementViewModel.FifthElements, Source={StaticResource mainVM}}"
                       HorizontalContentAlignment="Left"
                       VerticalAlignment="Stretch"
                       Background="Transparent"
@@ -482,7 +482,7 @@
 
 
         <ItemsControl Grid.Row="5" 
-                      ItemsSource="{Binding ElementViewModel.SixthLeftElements, Source={StaticResource pTableVM}}"
+                      ItemsSource="{Binding ElementViewModel.SixthLeftElements, Source={StaticResource mainVM}}"
                       HorizontalContentAlignment="Left"
                       VerticalAlignment="Stretch"
                       Background="Transparent"
@@ -527,7 +527,7 @@
         <ItemsControl Grid.Row="5"
                       Margin="160 0 0 0"
                       Padding="0 0 6 0"
-                      ItemsSource="{Binding ElementViewModel.SixthRightElements, Source={StaticResource pTableVM}}"
+                      ItemsSource="{Binding ElementViewModel.SixthRightElements, Source={StaticResource mainVM}}"
                       HorizontalContentAlignment="Right"
                       VerticalAlignment="Stretch"
                       Background="Transparent"
@@ -622,7 +622,7 @@
                                           />
                     </Border.Effect>
                 </Border>
-                <ItemsControl ItemsSource="{Binding ElementViewModel.SixthHiddenElements, Source={StaticResource pTableVM}}"
+                <ItemsControl ItemsSource="{Binding ElementViewModel.SixthHiddenElements, Source={StaticResource mainVM}}"
                               HorizontalAlignment="Stretch"
                               >
                     <ItemsControl.ItemTemplate>
@@ -667,7 +667,7 @@
 
 
         <ItemsControl Grid.Row="6" 
-                      ItemsSource="{Binding ElementViewModel.SeventhLeftElements, Source={StaticResource pTableVM}}"
+                      ItemsSource="{Binding ElementViewModel.SeventhLeftElements, Source={StaticResource mainVM}}"
                       HorizontalContentAlignment="Left"
                       VerticalAlignment="Stretch"
                       Background="Transparent"
@@ -712,7 +712,7 @@
         <ItemsControl Grid.Row="6"
                       Margin="160 0 0 0"
                       Padding="0 0 6 0"
-                      ItemsSource="{Binding ElementViewModel.SeventhRightElements, Source={StaticResource pTableVM}}"
+                      ItemsSource="{Binding ElementViewModel.SeventhRightElements, Source={StaticResource mainVM}}"
                       HorizontalContentAlignment="Right"
                       VerticalAlignment="Stretch"
                       Background="Transparent"
@@ -807,7 +807,7 @@
                                           />
                     </Border.Effect>
                 </Border>
-                <ItemsControl ItemsSource="{Binding ElementViewModel.SeventhHiddenElements, Source={StaticResource pTableVM}}"
+                <ItemsControl ItemsSource="{Binding ElementViewModel.SeventhHiddenElements, Source={StaticResource mainVM}}"
                               HorizontalAlignment="Stretch"
                               >
                     <ItemsControl.ItemTemplate>
