@@ -5,8 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NuclearPhysicsProgram.Views"
              xmlns:elementInfoViews="clr-namespace:NuclearPhysicsProgram.Views.ElementInfoViews"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="#55000000"
+             >
     <UserControl.Resources>
         <Style x:Key="CloseButtonStyle" 
                BasedOn="{StaticResource NoStyle}"
@@ -15,39 +18,151 @@
 
         </Style>
     </UserControl.Resources>
+    <!--Margin="100,40,50,40"-->
     <Border x:Name="Border"
-            Margin="100,40,50,40"
+            
             Background="#f0f2f0"
-            CornerRadius="16"
+            CornerRadius="0"
             MaxWidth="1600"
             MaxHeight="800">
         <Grid Margin="16">
-            <Border HorizontalAlignment="Right"
+            <Border Name="CloseBorder"
+                    HorizontalAlignment="Right"
                     VerticalAlignment="Top"
                     Width="32"
                     Height="24"
                     Margin="2"
-                    Background="#15000000"
-                    CornerRadius="2">
-                <Button Style="{StaticResource CloseButtonStyle}" 
-                            Background="Red"
-                            Command="{Binding CloseElementInfoCommand, Source={StaticResource mainVM}}" >
-                    <TextBlock HorizontalAlignment="Center"
-                                   VerticalAlignment="Center">x</TextBlock>
+                    Background="#dddddd"
+                    CornerRadius="4">
+                <Button Style="{StaticResource CloseButtonStyle}"
+                        Command="{Binding CloseElementInfoCommand, Source={StaticResource mainVM}}" >
+                    <Button.Triggers>
+                        <EventTrigger RoutedEvent="MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation To="#ff4040" 
+                                                    Duration="0:0:0.1" 
+                                                    Storyboard.TargetName="CloseBorder" 
+                                                    Storyboard.TargetProperty="Background.Color"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation To="#dddddd" 
+                                                    Duration="0:0:0.1" 
+                                                    Storyboard.TargetName="CloseBorder" 
+                                                    Storyboard.TargetProperty="Background.Color"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation To="White" 
+                                                    Duration="0:0:0.1"
+                                                    Storyboard.TargetName="CloseTextBlock" 
+                                                    Storyboard.TargetProperty="Foreground.Color"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation To="Black" 
+                                                    Duration="0:0:0.1" 
+                                                    Storyboard.TargetName="CloseTextBlock" 
+                                                    Storyboard.TargetProperty="Foreground.Color"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Button.Triggers>
+                    <TextBlock x:Name="CloseTextBlock" HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="18"
+                               Padding="0.3"
+                               FontFamily="{StaticResource OpenSansLight}">
+                        <TextBlock.RenderTransform>
+                            <ScaleTransform ScaleY="0.85"/>
+                        </TextBlock.RenderTransform>x</TextBlock>
                 </Button>
             </Border>
-
-            <elementInfoViews:ElementInfoIsotopeDropDownView HorizontalAlignment="Left"
+            
+            <!--<elementInfoViews:ElementInfoIsotopeDropDownView HorizontalAlignment="Left"
                                                              VerticalAlignment="Top"
                                                              >
-            </elementInfoViews:ElementInfoIsotopeDropDownView>
+            </elementInfoViews:ElementInfoIsotopeDropDownView>-->
 
-            <elementInfoViews:PlotView Padding="100"
-                                       MinWidth="500"
-                                       MinHeight="250"
-                                       MaxWidth="1600"
-                                       MaxHeight="1000"
-                                       />
+            <Border x:Name="InfoPageBorder"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    MinWidth="500"
+                    MinHeight="250"
+                    MaxWidth="1600"
+                    MaxHeight="1000">
+                <Canvas >
+                    <!--<Grid Width="{Binding ActualWidth, ElementName=InfoCanvas}" 
+                          Height="{Binding ActualHeight, ElementName=InfoCanvas}"
+                          Canvas.Left="0">
+                        <TextBlock HorizontalAlignment="Center"
+                                   VerticalAlignment="Center" 
+                                   Margin="0 0 450 120"
+                                   FontSize="15"
+                                   Text="Protons"/>
+                        <TextBlock HorizontalAlignment="Center"
+                                   VerticalAlignment="Center" 
+                                   Margin="0 0 450 120"
+                                   FontSize="15"
+                                   Text="{Binding InfoProtons, Source={StaticResource elementInfoVM}}"/>
+                    </Grid>-->
+                    <elementInfoViews:PlotView x:Name="PlotView" 
+                                               Width="{Binding ActualWidth, ElementName=InfoPageBorder}" 
+                                               Height="{Binding ActualHeight, ElementName=InfoPageBorder}"
+                                               Canvas.Left="{Binding ActualWidth, Mode=OneWay, ElementName=InfoPageBorder}"
+                                               Opacity="{Binding PlotViewOpacity, TargetNullValue='1', Source={StaticResource elementInfoVM}}"
+                                               Padding="100"
+                                               />
+                </Canvas>
+            </Border>
+            <Button HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    Margin="0 0 50 80"
+                    Width="10"
+                    Height="10"
+                    Command="{Binding SwitchInfoCommand, Source={StaticResource elementInfoVM}}"
+                    CommandParameter="right">
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="PreviewMouseDown">
+                        <BeginStoryboard Storyboard="{Binding PlotViewStoryboard, Source={StaticResource elementInfoVM}}">
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
+            <Button HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    Margin="50 0 0 80"
+                    Width="10"
+                    Height="10">
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="PreviewMouseDown" >
+                        <BeginStoryboard>
+                            <Storyboard >
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PlotView"
+                                                               Storyboard.TargetProperty="(Canvas.Left)"
+                                                               Duration="0:0:0.8" 
+                                                               FillBehavior="HoldEnd">
+                                    <EasingDoubleKeyFrame Value="0" >
+                                        <EasingDoubleKeyFrame.EasingFunction>
+                                            <ElasticEase Springiness="12" Oscillations="1" EasingMode="EaseOut"/>
+                                        </EasingDoubleKeyFrame.EasingFunction>
+                                    </EasingDoubleKeyFrame>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
 
             <Canvas VerticalAlignment="Bottom"
                     HorizontalAlignment="Center"

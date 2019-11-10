@@ -29,13 +29,7 @@ namespace NuclearPhysicsProgram.ViewModels {
         public static ICommand CloseElementInfoCommand { get; private set; }
         public double? MainWindowMagnification { get => mainWindowMagnification; set { mainWindowMagnification = value; SetPropertyChanged(this, "MainWindowMagnification"); } }
         public double? MainWindowBlurRadius { get => mainWindowBlurRadius; set { mainWindowBlurRadius = value; SetPropertyChanged(this, "MainWindowBlurRadius"); } }
-        public double? ElementInfoViewOpacity {
-            get => elementInfoViewOpacity;
-            private set {
-                elementInfoViewOpacity = value; 
-                SetPropertyChanged(this, "ElementInfoViewOpacity");
-            }
-        }
+        public double? ElementInfoViewOpacity { get => elementInfoViewOpacity; private set { elementInfoViewOpacity = value; SetPropertyChanged(this, "ElementInfoViewOpacity"); } }
         public Visibility? ElementInfoViewVisibility { get => elementInfoViewVisibility; private set { elementInfoViewVisibility = value; SetPropertyChanged(this, "ElementInfoViewVisibility"); } }
         public Visibility? PeriodicTableViewVisibility { get => periodicTableViewVisibility; private set { periodicTableViewVisibility = value; SetPropertyChanged(this, "PeriodicTableViewVisibility"); } }
         public double? PeriodicTableViewOpacity { get => periodicTableViewOpacity; private set { periodicTableViewOpacity = value; SetPropertyChanged(this, "PeriodicTableViewOpacity"); } }
@@ -57,17 +51,18 @@ namespace NuclearPhysicsProgram.ViewModels {
             InitializeIsotopeData(symbol, massNumber);
 
             ElementInfoViewVisibility = Visibility.Visible;
+            //Doesn't work well
             AnimationViewModel.Transition(UpdateMainWindowBlurRadius, 0, 2.5, 0.05, 1.5);
             AnimationViewModel.Transition(UpdateMainWindowMagnification, 0, -1, 0.05, 1.5);
-            await AnimationViewModel.AsyncTransition(UpdateElementInfoViewOpacity, 0, 1, 0.05, 1.5);
+            await AnimationViewModel.AsyncTransition((opacity) => ElementInfoViewOpacity = opacity, 0, 1, 0.1, 1.5);
         }
 
         public async void CloseElementInfo() {
-            AnimationViewModel.Transition(UpdateElementInfoViewOpacity, 1, 0, 0.05, 1.5);
+            AnimationViewModel.Transition((opacity) => ElementInfoViewOpacity = opacity, 1, 0, 0.1, 1.5);
             AnimationViewModel.Transition(UpdateMainWindowMagnification, -1, 0, 0.05, 1.5);
+            //Doesn't work well, reset effect after
             await AnimationViewModel.AsyncTransition(UpdateMainWindowBlurRadius, 2.5, 0, 0.05, 1.5);
 
-            CurrentIsotopeData = null;
             PeriodicTableViewVisibility = Visibility.Visible;
             await AnimationViewModel.AsyncTransition(UpdatePeriodicTableViewOpacity, 0, 1, 0.05, 1);
             ElementInfoViewVisibility = Visibility.Collapsed;
@@ -84,7 +79,7 @@ namespace NuclearPhysicsProgram.ViewModels {
 
         private void SetIsotopeDatas(IsotopeDataModel isotopeData, int massNumber) {
             CurrentIsotopeData = isotopeData;
-            ElementInfoViewModels.ElementInfoViewModel.CurrentIsotopeData = isotopeData;
+            ElementInfoViewModel.CurrentIsotopeData = isotopeData;
             DecayChainViewModel.SetupDecayChains(isotopeData, true);
         }
 

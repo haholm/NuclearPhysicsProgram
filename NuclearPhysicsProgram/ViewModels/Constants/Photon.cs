@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace NuclearPhysicsProgram.ViewModels.Constants {
     public static class Photon {
-        public const double Velocity = 299792458;
+        public const double Speed = 299792458;
     }
 }

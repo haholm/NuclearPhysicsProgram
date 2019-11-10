@@ -37,9 +37,6 @@
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BlurryControls, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\BlurryControls.1.0.24\lib\net452\BlurryControls.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -107,6 +104,7 @@
     <Compile Include="ViewModels\Commands\ElementInfoCommands\ExpandHiddenElementsCommand.cs" />
     <Compile Include="ViewModels\Commands\ElementInfoCommands\OpenIsotopeDropDownCommand.cs" />
     <Compile Include="ViewModels\Commands\ElementInfoCommands\SwitchDecayChainIsotopeCommand.cs" />
+    <Compile Include="ViewModels\Commands\ElementInfoCommands\SwitchInfoCommand.cs" />
     <Compile Include="ViewModels\Commands\OpenElementInfoCommand.cs" />
     <Compile Include="ViewModels\Constants\Mass.cs" />
     <Compile Include="ViewModels\Constants\Neutron.cs" />

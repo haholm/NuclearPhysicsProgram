@@ -7,7 +7,6 @@
         xmlns:viewModels="clr-namespace:NuclearPhysicsProgram.ViewModels"
         xmlns:views="clr-namespace:NuclearPhysicsProgram.Views"
         xmlns:periodicTableViews="clr-namespace:NuclearPhysicsProgram.Views.PeriodicTableViews"
-        xmlns:blur="clr-namespace:BlurryControls.Controls;assembly=BlurryControls"
         mc:Ignorable="d"
         Title="MainWindow" 
         Width="1242" 

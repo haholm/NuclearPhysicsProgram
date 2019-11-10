@@ -11,40 +11,20 @@
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="800">
     <Grid>
-        <DockPanel HorizontalAlignment="Left"
-                   Margin="11 0 0 0"
-                   Width="16"
-                   Height="{Binding DecayChainViewModel.ItemHeight, TargetNullValue='60', Source={StaticResource mainVM}}">
-            <Button Style="{StaticResource NoStyle}" 
-                    DockPanel.Dock="Top"
-                    VerticalAlignment="Top"
-                    Height="20"
-                    Command="{Binding DecayChainViewModel.SwitchDecayChainIsotopeCommand, Source={StaticResource mainVM}}"
-                    CommandParameter="previous"
-                    IsEnabled="{Binding DecayChainViewModel.IsArrowUpEnabled, TargetNullValue=true, Source={StaticResource mainVM}}"
-                    Opacity="{Binding DecayChainViewModel.ArrowUpOpacity, TargetNullValue='1', Source={StaticResource mainVM}}">
-                <Image Source="{svgc:SvgImage /Images/arrowup.svg}" 
-                       Width="12"/>
-            </Button>
-            <Button Style="{StaticResource NoStyle}" 
-                    DockPanel.Dock="Bottom"
-                    VerticalAlignment="Bottom"
-                    Height="20"
-                    Command="{Binding DecayChainViewModel.SwitchDecayChainIsotopeCommand, Source={StaticResource mainVM}}"
-                    CommandParameter="next"
-                    IsEnabled="{Binding DecayChainViewModel.IsArrowDownEnabled, TargetNullValue=true, Source={StaticResource mainVM}}"
-                    Opacity="{Binding DecayChainViewModel.ArrowDownOpacity, TargetNullValue='1', Source={StaticResource mainVM}}">
-                <Image Source="{svgc:SvgImage /Images/arrowdown.svg}" 
-                       Width="12"/>
-            </Button>
-        </DockPanel>
         <ItemsControl VerticalAlignment="Stretch" 
                       ItemsSource="{Binding DecayChainViewModel.IsotopeDecayChain, Source={StaticResource mainVM}}" 
                       >
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Canvas Width="56" 
+                    <!--SWITCH OVER TO GRID-->
+                    <Canvas Width="60" 
                             Margin="11">
+                        <TextBlock Canvas.Left="8" 
+                                   Canvas.Top="20"
+                                   Text="→"/>
+                        <TextBlock Canvas.Left="4" 
+                                   Canvas.Top="10"
+                                   Text="{Binding Item2, TargetNullValue='?'}"/>
                         <Border Canvas.Left="26" 
                                 BorderBrush="#FFEBEBEB"
                                 Width="{Binding DecayChainViewModel.ItemWidth, TargetNullValue='60', Source={StaticResource mainVM}}"
@@ -72,8 +52,8 @@
                                     <Binding Path="MassNumber"/>
                                 </MultiBinding>
                             </Button.CommandParameter>
-                            <periodicTableViews:ItemView Symbol="{Binding Symbol}"
-                                                         AtomicNumber="{Binding MassNumber}"
+                            <periodicTableViews:ItemView Symbol="{Binding Item1.Symbol}"
+                                                         AtomicNumber="{Binding Item1.MassNumber}"
                                                          SymbolFontSize="22"/>
                         </Button>
                     </Canvas>
@@ -85,5 +65,33 @@
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
+        <DockPanel HorizontalAlignment="Left"
+                   Margin="4 0 0 0"
+                   Width="30"
+                   Height="{Binding DecayChainViewModel.ItemHeight, TargetNullValue='60', Source={StaticResource mainVM}}"
+                   Background="White">
+            <Button Style="{StaticResource NoStyle}" 
+                    DockPanel.Dock="Top"
+                    VerticalAlignment="Top"
+                    Height="20"
+                    Command="{Binding DecayChainViewModel.SwitchDecayChainIsotopeCommand, Source={StaticResource mainVM}}"
+                    CommandParameter="previous"
+                    IsEnabled="{Binding DecayChainViewModel.IsArrowUpEnabled, TargetNullValue=true, Source={StaticResource mainVM}}"
+                    Opacity="{Binding DecayChainViewModel.ArrowUpOpacity, TargetNullValue='1', Source={StaticResource mainVM}}">
+                <Image Source="{svgc:SvgImage /Images/arrowup.svg}" 
+                       Width="12"/>
+            </Button>
+            <Button Style="{StaticResource NoStyle}" 
+                    DockPanel.Dock="Bottom"
+                    VerticalAlignment="Bottom"
+                    Height="20"
+                    Command="{Binding DecayChainViewModel.SwitchDecayChainIsotopeCommand, Source={StaticResource mainVM}}"
+                    CommandParameter="next"
+                    IsEnabled="{Binding DecayChainViewModel.IsArrowDownEnabled, TargetNullValue=true, Source={StaticResource mainVM}}"
+                    Opacity="{Binding DecayChainViewModel.ArrowDownOpacity, TargetNullValue='1', Source={StaticResource mainVM}}">
+                <Image Source="{svgc:SvgImage /Images/arrowdown.svg}" 
+                       Width="12"/>
+            </Button>
+        </DockPanel>
     </Grid>
 </UserControl>

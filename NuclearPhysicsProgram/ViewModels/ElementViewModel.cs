@@ -20,20 +20,20 @@ namespace NuclearPhysicsProgram.ViewModels {
         public static Dictionary<string, ElementDataModel> ElementDataDictionary { get; private set; }
         public static Dictionary<string, IsotopeDataModel> IsotopeDataDictionary { get; private set; }
 
-        public ObservableCollection<(ElementDataModel element, double avarageEnergyReleased)> FirstLeftElements { get; private set; }
-        public ObservableCollection<(ElementDataModel element, double avarageEnergyReleased)> FirstRightElements { get; private set; }
-        public ObservableCollection<(ElementDataModel element, double avarageEnergyReleased)> SecondLeftElements { get; private set; }
-        public ObservableCollection<(ElementDataModel element, double avarageEnergyReleased)> SecondRightElements { get; private set; }
-        public ObservableCollection<(ElementDataModel element, double avarageEnergyReleased)> ThirdLeftElements { get; private set; }
-        public ObservableCollection<(ElementDataModel element, double avarageEnergyReleased)> ThirdRightElements { get; private set; }
-        public ObservableCollection<(ElementDataModel element, double avarageEnergyReleased)> FourthElements { get; private set; }
-        public ObservableCollection<(ElementDataModel element, double avarageEnergyReleased)> FifthElements { get; private set; }
-        public ObservableCollection<(ElementDataModel element, double avarageEnergyReleased)> SixthLeftElements { get; private set; }
-        public ObservableCollection<(ElementDataModel element, double avarageEnergyReleased)> SixthHiddenElements { get; private set; }
-        public ObservableCollection<(ElementDataModel element, double avarageEnergyReleased)> SixthRightElements { get; private set; }
-        public ObservableCollection<(ElementDataModel element, double avarageEnergyReleased)> SeventhLeftElements { get; private set; }
-        public ObservableCollection<(ElementDataModel element, double avarageEnergyReleased)> SeventhHiddenElements { get; private set; }
-        public ObservableCollection<(ElementDataModel element, double avarageEnergyReleased)> SeventhRightElements { get; private set; }
+        public ObservableCollection<ElementDataModel > FirstLeftElements { get; private set; }
+        public ObservableCollection<ElementDataModel > FirstRightElements { get; private set; }
+        public ObservableCollection<ElementDataModel > SecondLeftElements { get; private set; }
+        public ObservableCollection<ElementDataModel > SecondRightElements { get; private set; }
+        public ObservableCollection<ElementDataModel > ThirdLeftElements { get; private set; }
+        public ObservableCollection<ElementDataModel > ThirdRightElements { get; private set; }
+        public ObservableCollection<ElementDataModel > FourthElements { get; private set; }
+        public ObservableCollection<ElementDataModel > FifthElements { get; private set; }
+        public ObservableCollection<ElementDataModel > SixthLeftElements { get; private set; }
+        public ObservableCollection<ElementDataModel > SixthHiddenElements { get; private set; }
+        public ObservableCollection<ElementDataModel > SixthRightElements { get; private set; }
+        public ObservableCollection<ElementDataModel > SeventhLeftElements { get; private set; }
+        public ObservableCollection<ElementDataModel > SeventhHiddenElements { get; private set; }
+        public ObservableCollection<ElementDataModel > SeventhRightElements { get; private set; }
 
         public ElementViewModel(MainViewModel mainViewModel) {
             this.mainViewModel = mainViewModel;
@@ -41,20 +41,20 @@ namespace NuclearPhysicsProgram.ViewModels {
             ElementDataDictionary = new Dictionary<string, ElementDataModel>();
             IsotopeDataDictionary = new Dictionary<string, IsotopeDataModel>();
 
-            FirstLeftElements = new ObservableCollection<(ElementDataModel, double)>();
-            FirstRightElements = new ObservableCollection<(ElementDataModel, double)>();
-            SecondLeftElements = new ObservableCollection<(ElementDataModel, double)>();
-            SecondRightElements = new ObservableCollection<(ElementDataModel, double)>();
-            ThirdLeftElements = new ObservableCollection<(ElementDataModel, double)>();
-            ThirdRightElements = new ObservableCollection<(ElementDataModel, double)>();
-            FourthElements = new ObservableCollection<(ElementDataModel, double)>();
-            FifthElements = new ObservableCollection<(ElementDataModel, double)>();
-            SixthLeftElements = new ObservableCollection<(ElementDataModel, double)>();
-            SixthHiddenElements = new ObservableCollection<(ElementDataModel, double)>();
-            SixthRightElements = new ObservableCollection<(ElementDataModel, double)>();
-            SeventhLeftElements = new ObservableCollection<(ElementDataModel, double)>();
-            SeventhHiddenElements = new ObservableCollection<(ElementDataModel, double)>();
-            SeventhRightElements = new ObservableCollection<(ElementDataModel, double)>();
+            FirstLeftElements = new ObservableCollection<ElementDataModel>();
+            FirstRightElements = new ObservableCollection<ElementDataModel>();
+            SecondLeftElements = new ObservableCollection<ElementDataModel>();
+            SecondRightElements = new ObservableCollection<ElementDataModel>();
+            ThirdLeftElements = new ObservableCollection<ElementDataModel>();
+            ThirdRightElements = new ObservableCollection<ElementDataModel>();
+            FourthElements = new ObservableCollection<ElementDataModel>();
+            FifthElements = new ObservableCollection<ElementDataModel>();
+            SixthLeftElements = new ObservableCollection<ElementDataModel>();
+            SixthHiddenElements = new ObservableCollection<ElementDataModel>();
+            SixthRightElements = new ObservableCollection<ElementDataModel>();
+            SeventhLeftElements = new ObservableCollection<ElementDataModel>();
+            SeventhHiddenElements = new ObservableCollection<ElementDataModel>();
+            SeventhRightElements = new ObservableCollection<ElementDataModel>();
 
             InitializeElements();
         }
@@ -122,9 +122,9 @@ namespace NuclearPhysicsProgram.ViewModels {
                 AddPeriodicTableElement(Elements[i], SeventhRightElements);
         }
 
-        private void AddPeriodicTableElement(ElementDataModel element, ObservableCollection<(ElementDataModel, double)> to) {
+        private void AddPeriodicTableElement(ElementDataModel element, ObservableCollection<ElementDataModel> to) {
             double avarageEnergyReleased = mainViewModel.DecayChainViewModel.SetupDecayChains(element);
-            to.Add((element, avarageEnergyReleased));
+            to.Add(element/*, avarageEnergyReleased)*/);
         }
 
         private ValueTuple<ObservableCollection<ElementDataModel>, ObservableCollection<IsotopeDataModel>> LoadElementData() => 

@@ -30,8 +30,10 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
         bool conflict;
         bool rerun;
 
+
+
         public ICommand SwitchDecayChainIsotopeCommand { get; private set; }
-        public ObservableCollection<IsotopeModel> IsotopeDecayChain { get; private set; }
+        public ObservableCollection<Tuple<IsotopeModel, string>> IsotopeDecayChain { get; private set; }
         public double? ItemWidth { get => itemWidth; private set { itemWidth = value; SetPropertyChanged(this, "ItemWidth"); } }
         public double? ItemHeight { get => itemHeight; private set { itemHeight = value; SetPropertyChanged(this, "ItemHeight"); } }
         public bool? IsArrowUpEnabled {
@@ -58,7 +60,7 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
             currentIsotopeData = new IsotopeDataModel("", new IsotopeModel[0]);
             decayChains = new List<List<(IsotopeModel, int, string)>>();
             SwitchDecayChainIsotopeCommand = new SwitchDecayChainIsotopeCommand(this);
-            IsotopeDecayChain = new ObservableCollection<IsotopeModel>();
+            IsotopeDecayChain = new ObservableCollection<Tuple<IsotopeModel, string>>();
         }
 
         public void SwitchDecayChainIsotope(string direction) {
@@ -90,7 +92,7 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
                 double secondMass = (firstProtonAmount * Constants.Proton.Mass.Kilograms) + (secondNeutronAmount * Constants.Neutron.Mass.Kilograms);
                 //mass defect?
                 double massDifference = firstMass - secondMass;
-                energiesReleased.Add(massDifference * (Constants.Photon.Velocity * Constants.Photon.Velocity));
+                energiesReleased.Add(massDifference * (Constants.Photon.Speed * Constants.Photon.Speed));
             }
 
             double avarageEnergyReleased = 0;
@@ -155,12 +157,30 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
             var decayChain = decayChains[decayChainIndex];
             for (int i = 0; i < decayChain.Count; i++) {
                 var decayChainItem = decayChain.Where(decayChainItemData => decayChainItemData.index == i).First();
-                IsotopeDecayChain.Add(decayChainItem.isotope);
+                string decaySymbol = GetDecaySymbol(decayChainItem.decayType);
+                IsotopeDecayChain.Add(new Tuple<IsotopeModel, string>(decayChainItem.isotope, decaySymbol));
             }
 
             IsArrowUpEnabled = decayChainIndex == 0 ? false : true;
             IsArrowDownEnabled = decayChainIndex == decayChains.Count - 1 ? false : true;
-            plotViewModel.SetupPlot(IsotopeDecayChain.First());
+            plotViewModel.SetupPlot(IsotopeDecayChain.First().Item1);
+        }
+
+        private string GetDecaySymbol(string decayType) {
+            switch (decayType) {
+                case "Alpha":
+                    return "α";
+                case "Beta+":
+                    return "β+";
+                case "Beta-":
+                    return "β-";
+                case "Beta-Beta-":
+                    return "β-β-";
+                case "Gamma":
+                    return "γ";
+                default:
+                    return decayType;
+            }
         }
     }
 }

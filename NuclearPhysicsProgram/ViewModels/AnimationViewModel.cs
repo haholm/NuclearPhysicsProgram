@@ -17,25 +17,23 @@ namespace NuclearPhysicsProgram.ViewModels {
         }
 
         public void Transition(Action<double?> PropertyUpdater, double from, double to, double seconds, double multiplier) {
-            double stepsPerSecond = 1 / seconds;
-            TransitionAnimation animation = ConstructTransitionEffectAnimation(PropertyUpdater, from, to, stepsPerSecond, multiplier);
+            TransitionAnimation animation = ConstructTransitionEffectAnimation(PropertyUpdater, from, to, seconds, multiplier);
             animation.Start();
         }
 
         public async Task AsyncTransition(Action<double?> PropertyUpdater, double from, double to, double seconds, double multiplier) {
-            double stepsPerSecond = (float)1 / seconds;
-            TransitionAnimation animation = ConstructTransitionEffectAnimation(PropertyUpdater, from, to, stepsPerSecond, multiplier);
+            TransitionAnimation animation = ConstructTransitionEffectAnimation(PropertyUpdater, from, to, seconds, multiplier);
             animation.Start();
             while (!animation.Finished)
-                await Task.Delay((int)(seconds * 1010));
+                await Task.Delay((int)(seconds * 1000));
         }
 
-        private TransitionAnimation ConstructTransitionEffectAnimation(Action<double?> PropertyUpdater, double from, double to, double stepsPerSecond, double multiplier) {
-            var args = (PropertyUpdater, from, to, stepsPerSecond, multiplier);
+        private TransitionAnimation ConstructTransitionEffectAnimation(Action<double?> PropertyUpdater, double from, double to, double seconds, double multiplier) {
+            var args = (PropertyUpdater, from, to, seconds, multiplier);
             if (previousAnimations.TryGetValue(args, out var existingAnimation))
                 return existingAnimation;
 
-            var animation = new TransitionAnimation(PropertyUpdater, from, to, stepsPerSecond, multiplier);
+            var animation = new TransitionAnimation(PropertyUpdater, from, to, seconds, multiplier);
             previousAnimations.Add(args, animation);
             return animation;
         }
@@ -54,11 +52,15 @@ namespace NuclearPhysicsProgram.ViewModels {
 
         public bool Finished { get => progress == to; }
 
-        public TransitionAnimation(Action<double?> PropertyUpdater, double from, double to, double step, double multiplier) {
+        public TransitionAnimation(Action<double?> PropertyUpdater, double from, double to, double seconds, double multiplier) {
             this.PropertyUpdater = PropertyUpdater;
             this.from = from;
             this.to = to;
-            this.step = step;
+            if (from < to && to != 0)
+                this.step = Math.Abs(to) / seconds;
+            else if (from != 0)
+                this.step = Math.Abs(from) / seconds;
+
             this.multiplier = multiplier;
         }
 
@@ -84,7 +86,7 @@ namespace NuclearPhysicsProgram.ViewModels {
                 Decrease(deltaTime);
 
             //update property only ~60x/s
-            if (accumulatedTime > 0.017) {
+            if (accumulatedTime > 0.016) {
                 accumulatedTime = 0;
                 PropertyUpdater(progress);
             }
@@ -100,7 +102,7 @@ namespace NuclearPhysicsProgram.ViewModels {
         }
 
         private void Increase(double deltaTime) {
-            double newProgress = progress + (step + Math.Pow(Math.Abs(progress), multiplier)) * deltaTime;
+            double newProgress = progress + (CalculateChange() * deltaTime);
             if (newProgress < to) { 
                 progress = newProgress;
                 return;
@@ -110,13 +112,20 @@ namespace NuclearPhysicsProgram.ViewModels {
         }
 
         private void Decrease(double deltaTime) {
-            double newProgress = progress - (step + Math.Pow(Math.Abs(progress), multiplier)) * deltaTime;
+            double newProgress = progress - (CalculateChange() * deltaTime);
             if (newProgress > to) {
                 progress = newProgress;
                 return;
             }
             
             Stop();
+        }
+
+        private double CalculateChange() {
+            if (multiplier == 1)
+                return step;
+            else
+                return step + Math.Pow(Math.Abs(progress), multiplier);
         }
     }
 }
