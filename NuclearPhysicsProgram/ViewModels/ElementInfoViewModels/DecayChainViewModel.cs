@@ -10,6 +10,7 @@ using System.Windows.Input;
 
 namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
     public class DecayChainViewModel : PropertyHandler.NotifyPropertyChanged {
+        private ElementInfoViewModel elementInfoViewModel;
         private PlotViewModel plotViewModel;
         private IsotopeDataModel currentIsotopeData;
         /// <summary>
@@ -55,7 +56,8 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
         public double? ArrowUpOpacity { get => isArrowUpEnabled.GetValueOrDefault() ? 1 : 0.25; }
         public double? ArrowDownOpacity { get => isArrowDownEnabled.GetValueOrDefault() ? 1 : 0.25; }
 
-        public DecayChainViewModel(PlotViewModel plotViewModel) {
+        public DecayChainViewModel(ElementInfoViewModel elementInfoViewModel, PlotViewModel plotViewModel) {
+            this.elementInfoViewModel = elementInfoViewModel;
             this.plotViewModel = plotViewModel;
             currentIsotopeData = new IsotopeDataModel("", new IsotopeModel[0]);
             decayChains = new List<List<(IsotopeModel, int, string)>>();
@@ -163,7 +165,11 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
 
             IsArrowUpEnabled = decayChainIndex == 0 ? false : true;
             IsArrowDownEnabled = decayChainIndex == decayChains.Count - 1 ? false : true;
-            plotViewModel.SetupPlot(IsotopeDecayChain.First().Item1);
+            IsotopeModel isotope = IsotopeDecayChain.First().Item1;
+            ElementViewModel.ElementDataDictionary.TryGetValue(isotope.Symbol, out var elementData);
+            elementInfoViewModel.InfoProtons = elementData.AtomicNumber;
+            elementInfoViewModel.InfoNeutrons = -elementData.AtomicNumber + isotope.MassNumber;
+            plotViewModel.SetupPlot(isotope);
         }
 
         private string GetDecaySymbol(string decayType) {

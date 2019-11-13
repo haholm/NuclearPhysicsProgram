@@ -8,14 +8,17 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <oxy:Plot Background="Transparent"
+              x:Name="Plotview"
               Effect="{Binding PlotViewModel.Effect, Mode=OneWay, Source={StaticResource mainVM}}"
+              PlotAreaBorderColor="Transparent"
+              IsEnabled="True"
               >
         <oxy:Plot.Axes>
-            <oxy:LinearAxis Position="Left" 
-                        Maximum="10" 
-                        Minimum="0"
-                        IsPanEnabled="False"/>
-            <oxy:LinearAxis Position="Bottom" 
+            <oxy:LinearAxis Position="Left" IsZoomEnabled="False"
+                            Maximum="10" 
+                            Minimum="0"
+                            IsPanEnabled="False"/>
+            <oxy:LinearAxis Position="Bottom" IsZoomEnabled="False"
                             Minimum="0" 
                             Maximum="{Binding PlotViewModel.MaximumTime, Mode=OneWay, Source={StaticResource mainVM}, TargetNullValue=10}" 
                             IsPanEnabled="False" 

@@ -26,7 +26,6 @@
         <FontFamily x:Key="OpenSansSemiBold">pack://application:,,,/Fonts/#Open Sans SemiBold</FontFamily>
 
         <viewModels:MainViewModel x:Key="mainVM"/>
-        <elementInfoViewModels:ElementInfoViewModel x:Key="elementInfoVM"/>
         <converters:MultipleCommandParameterConverter x:Key="multipleCommandParameterConverter"/>
     </Application.Resources>
 </Application>

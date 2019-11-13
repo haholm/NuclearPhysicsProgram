@@ -23,6 +23,7 @@ namespace NuclearPhysicsProgram.ViewModels {
 
         public static AnimationViewModel AnimationViewModel { get; set; }
         public ElementViewModel ElementViewModel { get; private set; }
+        public ElementInfoViewModel ElementInfoViewModel { get; private set; }
         public PlotViewModel PlotViewModel { get; private set; }
         public DecayChainViewModel DecayChainViewModel { get; private set; }
         public static ICommand OpenElementInfoCommand { get; private set; }
@@ -37,8 +38,9 @@ namespace NuclearPhysicsProgram.ViewModels {
 
         public MainViewModel() {
             AnimationViewModel = new AnimationViewModel();
+            ElementInfoViewModel = new ElementInfoViewModel();
             PlotViewModel = new PlotViewModel();
-            DecayChainViewModel = new DecayChainViewModel(PlotViewModel);
+            DecayChainViewModel = new DecayChainViewModel(ElementInfoViewModel, PlotViewModel);
             ElementViewModel = new ElementViewModel(this);
 
             OpenElementInfoCommand = new OpenElementInfoCommand(this); 

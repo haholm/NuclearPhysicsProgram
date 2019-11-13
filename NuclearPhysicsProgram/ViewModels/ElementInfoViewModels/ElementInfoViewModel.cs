@@ -13,7 +13,7 @@ using System.Windows.Media.Animation;
 
 namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
 
-    class ElementInfoViewModel : PropertyHandler.NotifyPropertyChanged {
+    public class ElementInfoViewModel : PropertyHandler.NotifyPropertyChanged {
         private const int infoPages = 2;
         private int currentInfoPage = 0;
         private double? infoProtons;
