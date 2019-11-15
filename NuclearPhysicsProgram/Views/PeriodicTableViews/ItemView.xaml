@@ -5,14 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NuclearPhysicsProgram.Views.PeriodicTableViews"
              mc:Ignorable="d" 
-             d:DesignHeight="80" d:DesignWidth="80">
+             d:DesignHeight="80" d:DesignWidth="80"
+             Cursor="Hand">
     <Border x:Name="Border" 
             Background="#FFEBEBEB" 
             CornerRadius="6"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch">
         <Grid>
-
             <StackPanel Orientation="Horizontal" 
                         VerticalAlignment="Stretch"
                         HorizontalAlignment="Center">
@@ -29,6 +29,33 @@
                            VerticalAlignment="Center" 
                            Padding="1 0"/>
             </StackPanel>
+
+            <Border Background="{Binding Path=PropertiesColor, RelativeSource={RelativeSource AncestorType=local:ItemView}}"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Right"
+                    Margin="3"
+                    Width="8"
+                    Height="8"
+                    CornerRadius="4"
+                    BorderThickness="0.5"
+                    BorderBrush="Black">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="8"
+                                      ShadowDepth="1"
+                                      Opacity="0.25" 
+                                      Color="Black"/>
+                </Border.Effect>
+            </Border>
+
+            <Viewbox Stretch="Uniform" 
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Bottom"
+                     MaxHeight="12"
+                     Margin="3 0 1 0">
+                <TextBlock Text="{Binding Path=EName, FallbackValue='', RelativeSource={RelativeSource AncestorType=local:ItemView}}"
+                           FontFamily="{StaticResource OpenSansRegular}"
+                           FontSize="12"/>
+            </Viewbox>
         </Grid>
     </Border>
 </UserControl>

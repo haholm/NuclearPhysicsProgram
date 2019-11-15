@@ -138,14 +138,16 @@
                                 RenderTransformOrigin="0.5,0.5">
                             <Button.CommandParameter>
                                 <MultiBinding Converter="{StaticResource multipleCommandParameterConverter}">
-                                    <Binding Path="Symbol"/>
-                                    <Binding Path="MassNumber"/>
+                                    <Binding Path="Element.Symbol"/>
+                                    <Binding Path="Element.MassNumber"/>
                                 </MultiBinding>
                             </Button.CommandParameter>
                             <local:ItemView HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"
-                                            Symbol="{Binding Symbol}"
-                                            AtomicNumber="{Binding AtomicNumber}"
+                                            Symbol="{Binding Element.Symbol}"
+                                            AtomicNumber="{Binding Element.AtomicNumber}"
+                                            PropertiesColor="{Binding AERColor}"
+                                            EName="{Binding Element.Name}"
                                             >
                                 <!--Symbol GES FRÅN ItemsSource-->
                             </local:ItemView>
@@ -186,17 +188,18 @@
                                 RenderTransformOrigin="0.5,0.5">
                             <Button.CommandParameter>
                                 <MultiBinding Converter="{StaticResource multipleCommandParameterConverter}">
-                                    <Binding Path="Symbol"/>
-                                    <Binding Path="MassNumber"/>
+                                    <Binding Path="Element.Symbol"/>
+                                    <Binding Path="Element.MassNumber"/>
                                 </MultiBinding>
                             </Button.CommandParameter>
                             <local:ItemView HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"
-                                            Symbol="{Binding Symbol}"
-                                            AtomicNumber="{Binding AtomicNumber}"
-                                            >
-                                <!--Symbol GES FRÅN ItemsSource-->
-                            </local:ItemView>
+                                            Symbol="{Binding Element.Symbol}"
+                                            AtomicNumber="{Binding Element.AtomicNumber}"
+                                            PropertiesColor="{Binding AERColor}"
+                                            EName="{Binding Element.Name}"
+                                            />
+                            <!--Symbol GES FRÅN ItemsSource-->
                         </Button>
                     </Canvas>
                 </DataTemplate>
@@ -231,14 +234,16 @@
                                 RenderTransformOrigin="0.5,0.5">
                             <Button.CommandParameter>
                                 <MultiBinding Converter="{StaticResource multipleCommandParameterConverter}">
-                                    <Binding Path="Symbol"/>
-                                    <Binding Path="MassNumber"/>
+                                    <Binding Path="Element.Symbol"/>
+                                    <Binding Path="Element.MassNumber"/>
                                 </MultiBinding>
                             </Button.CommandParameter>
                             <local:ItemView HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"
-                                            Symbol="{Binding Symbol}"
-                                            AtomicNumber="{Binding AtomicNumber}"
+                                            Symbol="{Binding Element.Symbol}"
+                                            AtomicNumber="{Binding Element.AtomicNumber}"
+                                            PropertiesColor="{Binding AERColor}"
+                                            EName="{Binding Element.Name}"
                                             >
                                 <!--Symbol GES FRÅN ItemsSource-->
                             </local:ItemView>
@@ -277,14 +282,16 @@
                                 RenderTransformOrigin="0.5,0.5">
                             <Button.CommandParameter>
                                 <MultiBinding Converter="{StaticResource multipleCommandParameterConverter}">
-                                    <Binding Path="Symbol"/>
-                                    <Binding Path="MassNumber"/>
+                                    <Binding Path="Element.Symbol"/>
+                                    <Binding Path="Element.MassNumber"/>
                                 </MultiBinding>
                             </Button.CommandParameter>
                             <local:ItemView HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"
-                                            Symbol="{Binding Symbol}"
-                                            AtomicNumber="{Binding AtomicNumber}"
+                                            Symbol="{Binding Element.Symbol}"
+                                            AtomicNumber="{Binding Element.AtomicNumber}"
+                                            PropertiesColor="{Binding AERColor}"
+                                            EName="{Binding Element.Name}"
                                             >
                                 <!--Symbol GES FRÅN ItemsSource-->
                             </local:ItemView>
@@ -323,14 +330,16 @@
                                 RenderTransformOrigin="0.5,0.5">
                             <Button.CommandParameter>
                                 <MultiBinding Converter="{StaticResource multipleCommandParameterConverter}">
-                                    <Binding Path="Symbol"/>
-                                    <Binding Path="MassNumber"/>
+                                    <Binding Path="Element.Symbol"/>
+                                    <Binding Path="Element.MassNumber"/>
                                 </MultiBinding>
                             </Button.CommandParameter>
                             <local:ItemView HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"
-                                            Symbol="{Binding Symbol}"
-                                            AtomicNumber="{Binding AtomicNumber}"
+                                            Symbol="{Binding Element.Symbol}"
+                                            AtomicNumber="{Binding Element.AtomicNumber}"
+                                            PropertiesColor="{Binding AERColor}"
+                                            EName="{Binding Element.Name}"
                                             >
                                 <!--Symbol GES FRÅN ItemsSource-->
                             </local:ItemView>
@@ -368,14 +377,16 @@
                                 RenderTransformOrigin="0.5,0.5">
                             <Button.CommandParameter>
                                 <MultiBinding Converter="{StaticResource multipleCommandParameterConverter}">
-                                    <Binding Path="Symbol"/>
-                                    <Binding Path="MassNumber"/>
+                                    <Binding Path="Element.Symbol"/>
+                                    <Binding Path="Element.MassNumber"/>
                                 </MultiBinding>
                             </Button.CommandParameter>
                             <local:ItemView HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"
-                                            Symbol="{Binding Symbol}"
-                                            AtomicNumber="{Binding AtomicNumber}"
+                                            Symbol="{Binding Element.Symbol}"
+                                            AtomicNumber="{Binding Element.AtomicNumber}"
+                                            PropertiesColor="{Binding AERColor}"
+                                            EName="{Binding Element.Name}"
                                             >
                                 <!--Symbol GES FRÅN ItemsSource-->
                             </local:ItemView>
@@ -413,14 +424,16 @@
                                 RenderTransformOrigin="0.5,0.5">
                             <Button.CommandParameter>
                                 <MultiBinding Converter="{StaticResource multipleCommandParameterConverter}">
-                                    <Binding Path="Symbol"/>
-                                    <Binding Path="MassNumber"/>
+                                    <Binding Path="Element.Symbol"/>
+                                    <Binding Path="Element.MassNumber"/>
                                 </MultiBinding>
                             </Button.CommandParameter>
                             <local:ItemView HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"
-                                            Symbol="{Binding Symbol}"
-                                            AtomicNumber="{Binding AtomicNumber}"
+                                            Symbol="{Binding Element.Symbol}"
+                                            AtomicNumber="{Binding Element.AtomicNumber}"
+                                            PropertiesColor="{Binding AERColor}"
+                                            EName="{Binding Element.Name}"
                                             >
                                 <!--Symbol GES FRÅN ItemsSource-->
                             </local:ItemView>
@@ -458,14 +471,16 @@
                                 RenderTransformOrigin="0.5,0.5">
                             <Button.CommandParameter>
                                 <MultiBinding Converter="{StaticResource multipleCommandParameterConverter}">
-                                    <Binding Path="Symbol"/>
-                                    <Binding Path="MassNumber"/>
+                                    <Binding Path="Element.Symbol"/>
+                                    <Binding Path="Element.MassNumber"/>
                                 </MultiBinding>
                             </Button.CommandParameter>
                             <local:ItemView HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"
-                                            Symbol="{Binding Symbol}"
-                                            AtomicNumber="{Binding AtomicNumber}"
+                                            Symbol="{Binding Element.Symbol}"
+                                            AtomicNumber="{Binding Element.AtomicNumber}"
+                                            PropertiesColor="{Binding AERColor}"
+                                            EName="{Binding Element.Name}"
                                             >
                                 <!--Symbol GES FRÅN ItemsSource-->
                             </local:ItemView>
@@ -502,14 +517,16 @@
                                 RenderTransformOrigin="0.5,0.5">
                             <Button.CommandParameter>
                                 <MultiBinding Converter="{StaticResource multipleCommandParameterConverter}">
-                                    <Binding Path="Symbol"/>
-                                    <Binding Path="MassNumber"/>
+                                    <Binding Path="Element.Symbol"/>
+                                    <Binding Path="Element.MassNumber"/>
                                 </MultiBinding>
                             </Button.CommandParameter>
                             <local:ItemView HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"
-                                            Symbol="{Binding Symbol}"
-                                            AtomicNumber="{Binding AtomicNumber}"
+                                            Symbol="{Binding Element.Symbol}"
+                                            AtomicNumber="{Binding Element.AtomicNumber}"
+                                            PropertiesColor="{Binding AERColor}"
+                                            EName="{Binding Element.Name}"
                                             >
                                 <!--Symbol GES FRÅN ItemsSource-->
                             </local:ItemView>
@@ -547,14 +564,16 @@
                                 RenderTransformOrigin="0.5,0.5">
                             <Button.CommandParameter>
                                 <MultiBinding Converter="{StaticResource multipleCommandParameterConverter}">
-                                    <Binding Path="Symbol"/>
-                                    <Binding Path="MassNumber"/>
+                                    <Binding Path="Element.Symbol"/>
+                                    <Binding Path="Element.MassNumber"/>
                                 </MultiBinding>
                             </Button.CommandParameter>
                             <local:ItemView HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"
-                                            Symbol="{Binding Symbol}"
-                                            AtomicNumber="{Binding AtomicNumber}"
+                                            Symbol="{Binding Element.Symbol}"
+                                            AtomicNumber="{Binding Element.AtomicNumber}"
+                                            PropertiesColor="{Binding AERColor}"
+                                            EName="{Binding Element.Name}"
                                             >
                                 <!--Symbol GES FRÅN ItemsSource-->
                             </local:ItemView>
@@ -640,14 +659,16 @@
                                         RenderTransformOrigin="0.5,0.5">
                                     <Button.CommandParameter>
                                         <MultiBinding Converter="{StaticResource multipleCommandParameterConverter}">
-                                            <Binding Path="Symbol"/>
-                                            <Binding Path="MassNumber"/>
+                                            <Binding Path="Element.Symbol"/>
+                                            <Binding Path="Element.MassNumber"/>
                                         </MultiBinding>
                                     </Button.CommandParameter>
                                     <local:ItemView HorizontalAlignment="Stretch"
                                                     VerticalAlignment="Stretch"
-                                                    Symbol="{Binding Symbol}"
-                                                    AtomicNumber="{Binding AtomicNumber}"
+                                                    Symbol="{Binding Element.Symbol}"
+                                                    AtomicNumber="{Binding Element.AtomicNumber}"
+                                                    PropertiesColor="{Binding AERColor}"
+                                                    EName="{Binding Element.Name}"
                                                     >
                                         <!--Symbol GES FRÅN ItemsSource-->
                                     </local:ItemView>
@@ -687,14 +708,16 @@
                                 RenderTransformOrigin="0.5,0.5">
                             <Button.CommandParameter>
                                 <MultiBinding Converter="{StaticResource multipleCommandParameterConverter}">
-                                    <Binding Path="Symbol"/>
-                                    <Binding Path="MassNumber"/>
+                                    <Binding Path="Element.Symbol"/>
+                                    <Binding Path="Element.MassNumber"/>
                                 </MultiBinding>
                             </Button.CommandParameter>
                             <local:ItemView HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"
-                                            Symbol="{Binding Symbol}"
-                                            AtomicNumber="{Binding AtomicNumber}"
+                                            Symbol="{Binding Element.Symbol}"
+                                            AtomicNumber="{Binding Element.AtomicNumber}"
+                                            PropertiesColor="{Binding AERColor}"
+                                            EName="{Binding Element.Name}"
                                             >
                                 <!--Symbol GES FRÅN ItemsSource-->
                             </local:ItemView>
@@ -732,14 +755,16 @@
                                 RenderTransformOrigin="0.5,0.5">
                             <Button.CommandParameter>
                                 <MultiBinding Converter="{StaticResource multipleCommandParameterConverter}">
-                                    <Binding Path="Symbol"/>
-                                    <Binding Path="MassNumber"/>
+                                    <Binding Path="Element.Symbol"/>
+                                    <Binding Path="Element.MassNumber"/>
                                 </MultiBinding>
                             </Button.CommandParameter>
                             <local:ItemView HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"
-                                            Symbol="{Binding Symbol}"
-                                            AtomicNumber="{Binding AtomicNumber}"
+                                            Symbol="{Binding Element.Symbol}"
+                                            AtomicNumber="{Binding Element.AtomicNumber}"
+                                            PropertiesColor="{Binding AERColor}"
+                                            EName="{Binding Element.Name}"
                                             >
                                 <!--Symbol GES FRÅN ItemsSource-->
                             </local:ItemView>
@@ -825,14 +850,16 @@
                                         RenderTransformOrigin="0.5,0.5">
                                     <Button.CommandParameter>
                                         <MultiBinding Converter="{StaticResource multipleCommandParameterConverter}">
-                                            <Binding Path="Symbol"/>
-                                            <Binding Path="MassNumber"/>
+                                            <Binding Path="Element.Symbol"/>
+                                            <Binding Path="Element.MassNumber"/>
                                         </MultiBinding>
                                     </Button.CommandParameter>
                                     <local:ItemView HorizontalAlignment="Stretch"
                                                     VerticalAlignment="Stretch"
-                                                    Symbol="{Binding Symbol}"
-                                                    AtomicNumber="{Binding AtomicNumber}"
+                                                    Symbol="{Binding Element.Symbol}"
+                                                    AtomicNumber="{Binding Element.AtomicNumber}"
+                                                    PropertiesColor="{Binding AERColor}"
+                                                    EName="{Binding Element.Name}"
                                                     >
                                         <!--Symbol GES FRÅN ItemsSource-->
                                     </local:ItemView>

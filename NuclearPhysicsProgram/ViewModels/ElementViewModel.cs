@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -20,20 +21,20 @@ namespace NuclearPhysicsProgram.ViewModels {
         public static Dictionary<string, ElementDataModel> ElementDataDictionary { get; private set; }
         public static Dictionary<string, IsotopeDataModel> IsotopeDataDictionary { get; private set; }
 
-        public ObservableCollection<ElementDataModel > FirstLeftElements { get; private set; }
-        public ObservableCollection<ElementDataModel > FirstRightElements { get; private set; }
-        public ObservableCollection<ElementDataModel > SecondLeftElements { get; private set; }
-        public ObservableCollection<ElementDataModel > SecondRightElements { get; private set; }
-        public ObservableCollection<ElementDataModel > ThirdLeftElements { get; private set; }
-        public ObservableCollection<ElementDataModel > ThirdRightElements { get; private set; }
-        public ObservableCollection<ElementDataModel > FourthElements { get; private set; }
-        public ObservableCollection<ElementDataModel > FifthElements { get; private set; }
-        public ObservableCollection<ElementDataModel > SixthLeftElements { get; private set; }
-        public ObservableCollection<ElementDataModel > SixthHiddenElements { get; private set; }
-        public ObservableCollection<ElementDataModel > SixthRightElements { get; private set; }
-        public ObservableCollection<ElementDataModel > SeventhLeftElements { get; private set; }
-        public ObservableCollection<ElementDataModel > SeventhHiddenElements { get; private set; }
-        public ObservableCollection<ElementDataModel > SeventhRightElements { get; private set; }
+        public ObservableCollection<PeriodicTableElementModel> FirstLeftElements { get; private set; }
+        public ObservableCollection<PeriodicTableElementModel> FirstRightElements { get; private set; }
+        public ObservableCollection<PeriodicTableElementModel> SecondLeftElements { get; private set; }
+        public ObservableCollection<PeriodicTableElementModel> SecondRightElements { get; private set; }
+        public ObservableCollection<PeriodicTableElementModel> ThirdLeftElements { get; private set; }
+        public ObservableCollection<PeriodicTableElementModel> ThirdRightElements { get; private set; }
+        public ObservableCollection<PeriodicTableElementModel> FourthElements { get; private set; }
+        public ObservableCollection<PeriodicTableElementModel> FifthElements { get; private set; }
+        public ObservableCollection<PeriodicTableElementModel> SixthLeftElements { get; private set; }
+        public ObservableCollection<PeriodicTableElementModel> SixthHiddenElements { get; private set; }
+        public ObservableCollection<PeriodicTableElementModel> SixthRightElements { get; private set; }
+        public ObservableCollection<PeriodicTableElementModel> SeventhLeftElements { get; private set; }
+        public ObservableCollection<PeriodicTableElementModel> SeventhHiddenElements { get; private set; }
+        public ObservableCollection<PeriodicTableElementModel > SeventhRightElements { get; private set; }
 
         public ElementViewModel(MainViewModel mainViewModel) {
             this.mainViewModel = mainViewModel;
@@ -41,20 +42,20 @@ namespace NuclearPhysicsProgram.ViewModels {
             ElementDataDictionary = new Dictionary<string, ElementDataModel>();
             IsotopeDataDictionary = new Dictionary<string, IsotopeDataModel>();
 
-            FirstLeftElements = new ObservableCollection<ElementDataModel>();
-            FirstRightElements = new ObservableCollection<ElementDataModel>();
-            SecondLeftElements = new ObservableCollection<ElementDataModel>();
-            SecondRightElements = new ObservableCollection<ElementDataModel>();
-            ThirdLeftElements = new ObservableCollection<ElementDataModel>();
-            ThirdRightElements = new ObservableCollection<ElementDataModel>();
-            FourthElements = new ObservableCollection<ElementDataModel>();
-            FifthElements = new ObservableCollection<ElementDataModel>();
-            SixthLeftElements = new ObservableCollection<ElementDataModel>();
-            SixthHiddenElements = new ObservableCollection<ElementDataModel>();
-            SixthRightElements = new ObservableCollection<ElementDataModel>();
-            SeventhLeftElements = new ObservableCollection<ElementDataModel>();
-            SeventhHiddenElements = new ObservableCollection<ElementDataModel>();
-            SeventhRightElements = new ObservableCollection<ElementDataModel>();
+            FirstLeftElements = new ObservableCollection<PeriodicTableElementModel>();
+            FirstRightElements = new ObservableCollection<PeriodicTableElementModel>();
+            SecondLeftElements = new ObservableCollection<PeriodicTableElementModel>();
+            SecondRightElements = new ObservableCollection<PeriodicTableElementModel>();
+            ThirdLeftElements = new ObservableCollection<PeriodicTableElementModel>();
+            ThirdRightElements = new ObservableCollection<PeriodicTableElementModel>();
+            FourthElements = new ObservableCollection<PeriodicTableElementModel>();
+            FifthElements = new ObservableCollection<PeriodicTableElementModel>();
+            SixthLeftElements = new ObservableCollection<PeriodicTableElementModel>();
+            SixthHiddenElements = new ObservableCollection<PeriodicTableElementModel>();
+            SixthRightElements = new ObservableCollection<PeriodicTableElementModel>();
+            SeventhLeftElements = new ObservableCollection<PeriodicTableElementModel>();
+            SeventhHiddenElements = new ObservableCollection<PeriodicTableElementModel>();
+            SeventhRightElements = new ObservableCollection<PeriodicTableElementModel>();
 
             InitializeElements();
         }
@@ -122,9 +123,15 @@ namespace NuclearPhysicsProgram.ViewModels {
                 AddPeriodicTableElement(Elements[i], SeventhRightElements);
         }
 
-        private void AddPeriodicTableElement(ElementDataModel element, ObservableCollection<ElementDataModel> to) {
+        List<double> energies = new List<double>();
+
+        private void AddPeriodicTableElement(ElementDataModel element, ObservableCollection<PeriodicTableElementModel> to) {
             double avarageEnergyReleased = mainViewModel.DecayChainViewModel.SetupDecayChains(element);
-            to.Add(element/*, avarageEnergyReleased)*/);
+            energies.Add(avarageEnergyReleased);
+            double normalizedAER = avarageEnergyReleased / 2.4085595817117E-09;
+            var aerColor = System.Windows.Media.Color.FromArgb(255, 255, (byte)(255 - (Math.Abs(normalizedAER)/* hm */ * 255)), (byte)(255 - (Math.Abs(normalizedAER)/* hm */ * 255)));
+            var aerSolidColorBrush = new System.Windows.Media.SolidColorBrush(aerColor);
+            to.Add(new PeriodicTableElementModel(element, aerSolidColorBrush));
         }
 
         private ValueTuple<ObservableCollection<ElementDataModel>, ObservableCollection<IsotopeDataModel>> LoadElementData() => 

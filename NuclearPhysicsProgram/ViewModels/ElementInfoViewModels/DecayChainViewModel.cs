@@ -99,8 +99,10 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
 
             double avarageEnergyReleased = 0;
             energiesReleased.ForEach(energy => avarageEnergyReleased += energy);
+            if (energiesReleased.Count == 0)
+                return 0;
             avarageEnergyReleased /= energiesReleased.Count;
-            return avarageEnergyReleased;
+            return avarageEnergyReleased; //return decaychain instead?
         }
 
         //make multi-threaded
@@ -181,9 +183,11 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
                 case "Beta-":
                     return "β-";
                 case "Beta-Beta-":
-                    return "β-β-";
+                    return "β-,β-";
                 case "Gamma":
                     return "γ";
+                case "Beta-Gamma":
+                    return "β-,γ";
                 default:
                     return decayType;
             }

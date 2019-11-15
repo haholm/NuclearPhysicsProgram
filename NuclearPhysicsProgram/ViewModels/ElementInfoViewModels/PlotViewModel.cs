@@ -17,9 +17,12 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
         private string unit;
         private double? unitTitlePosition;
         private BlurEffect blurryEffect;
+        private int? maximumNuclides;
+        private IsotopeModel currentIsotope;
 
         public Effect Effect { get => effect; private set { effect = value; SetPropertyChanged(this, "Effect"); } }
         public double? MaximumTime { get => maximumTime; private set { maximumTime = value; SetPropertyChanged(this, "MaximumTime"); } }
+        public int? MaximumNuclides { get => maximumNuclides; set { maximumNuclides = value; SetPropertyChanged(this, "MaximumNuclides"); SetupPlot(currentIsotope); } }
         public string Unit { get => unit; private set { unit = value; SetPropertyChanged(this, "Unit"); } }
         public double? UnitTitlePosition { get => unitTitlePosition; set { unitTitlePosition = value; SetPropertyChanged(this, "UnitTitlePosition"); } }
         public ObservableCollection<DataPoint> DataPoints { get; private set; }
@@ -31,6 +34,7 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
         }
 
         public void SetupPlot(IsotopeModel isotope) {
+            currentIsotope = isotope;
             DataPoints.Clear();
             double halfLife = GetHalfLife(isotope);
             if (halfLife == 0) {
@@ -44,7 +48,7 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
             string unit = ConvertToAppropriateUnit(ref halfLife);
             Unit = unit;
             UnitTitlePosition = 1.02 + ((double)(unit.Length - 5) / 1000 * 4);
-            MaximumTime = 2 * Math.PI * halfLife;
+            MaximumTime = ((double)Math.Pow(MaximumNuclides.GetValueOrDefault(100), 1d / 5.5) / 0.70) * Math.PI * halfLife;
             double time = 0;
             double timeStep = 1;
             if (unit == "years" && halfLife > 1000)
@@ -57,7 +61,7 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
             }
         }
 
-        private double CalculateNumberOfNuclides(double halfLife, double time) => 10 * Math.Pow(0.5, time / halfLife);
+        private double CalculateNumberOfNuclides(double halfLife, double time) => MaximumNuclides.GetValueOrDefault(100) * Math.Pow(0.5, time / halfLife);
 
         private double GetHalfLife(IsotopeModel isotope) {
             string halfLifeString = isotope.HalfLife.Replace(",", "").Replace(".", ",");

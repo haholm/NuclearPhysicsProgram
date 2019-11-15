@@ -39,6 +39,20 @@ namespace NuclearPhysicsProgram.Views.PeriodicTableViews {
         }
         public static readonly DependencyProperty SymbolFontSizeProperty = DependencyProperty.Register(
             "SymbolFontSize", typeof(double?), typeof(ItemView), new PropertyMetadata(0.0));
+
+        public SolidColorBrush PropertiesColor { // DO I REALLY NEED THIS?
+            get => GetValue(PropertiesColorProperty) as SolidColorBrush;
+            set => SetValue(PropertiesColorProperty, value);
+        }
+        public static readonly DependencyProperty PropertiesColorProperty = DependencyProperty.Register(
+            "PropertiesColor", typeof(SolidColorBrush), typeof(ItemView), new PropertyMetadata(new SolidColorBrush()));
+
+        public string EName { // DO I REALLY NEED THIS?
+            get => GetValue(ENameProperty) as string;
+            set => SetValue(ENameProperty, value);
+        }
+        public static readonly DependencyProperty ENameProperty = DependencyProperty.Register(
+            "EName", typeof(string), typeof(ItemView), new PropertyMetadata(""));
         #endregion
 
         public ItemView() {

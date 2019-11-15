@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NuclearPhysicsProgram.Views.PeriodicTableViews"
+             xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="60">
     <Grid>
@@ -14,11 +15,12 @@
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0"
-                Content="NPP"
-                Foreground="LightGray"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"/>
+        <!--<Image Grid.Row="0" 
+               Source="/Images/radiation128.png" 
+               Width="22"
+               RenderTransformOrigin="0.5 0.5"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"/>-->
 
         <Border Grid.Row="2"
                 Margin="5"

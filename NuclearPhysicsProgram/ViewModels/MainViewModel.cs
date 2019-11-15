@@ -8,9 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace NuclearPhysicsProgram.ViewModels {
     public class MainViewModel : PropertyHandler.NotifyPropertyChanged {
+        private double? mainWindowWidth;
+        private double? mainWindowHeight;
+        private WindowState mainWindowState;
         private double? mainWindowMagnification;
         private double? mainWindowBlurRadius;
         private double? elementInfoViewOpacity;
@@ -18,6 +22,7 @@ namespace NuclearPhysicsProgram.ViewModels {
         private Visibility? periodicTableViewVisibility;
         private double? periodicTableViewOpacity;
         private IsotopeDataModel currentIsotopeData;
+        private double? periodicTableScale;
 
         /// Ta med binding energy
 
@@ -28,12 +33,16 @@ namespace NuclearPhysicsProgram.ViewModels {
         public DecayChainViewModel DecayChainViewModel { get; private set; }
         public static ICommand OpenElementInfoCommand { get; private set; }
         public static ICommand CloseElementInfoCommand { get; private set; }
+        public double? MainWindowWidth { get => mainWindowWidth; set { mainWindowWidth = value; SetPropertyChanged(this, "MainWindowWidth"); MainWindowSizeChanged(); } }
+        public double? MainWindowHeight { get => mainWindowHeight; set { mainWindowHeight = value; SetPropertyChanged(this, "MainWindowHeight"); MainWindowSizeChanged(); } }
+        public WindowState MainWindowState { get => mainWindowState; set { mainWindowState = value; SetPropertyChanged(this, "MainWindowState"); MainWindowSizeChanged(); } }
         public double? MainWindowMagnification { get => mainWindowMagnification; set { mainWindowMagnification = value; SetPropertyChanged(this, "MainWindowMagnification"); } }
         public double? MainWindowBlurRadius { get => mainWindowBlurRadius; set { mainWindowBlurRadius = value; SetPropertyChanged(this, "MainWindowBlurRadius"); } }
         public double? ElementInfoViewOpacity { get => elementInfoViewOpacity; private set { elementInfoViewOpacity = value; SetPropertyChanged(this, "ElementInfoViewOpacity"); } }
         public Visibility? ElementInfoViewVisibility { get => elementInfoViewVisibility; private set { elementInfoViewVisibility = value; SetPropertyChanged(this, "ElementInfoViewVisibility"); } }
         public Visibility? PeriodicTableViewVisibility { get => periodicTableViewVisibility; private set { periodicTableViewVisibility = value; SetPropertyChanged(this, "PeriodicTableViewVisibility"); } }
         public double? PeriodicTableViewOpacity { get => periodicTableViewOpacity; private set { periodicTableViewOpacity = value; SetPropertyChanged(this, "PeriodicTableViewOpacity"); } }
+        public double? PeriodicTableScale { get => periodicTableScale; private set { periodicTableScale = value; SetPropertyChanged(this, "PeriodicTableScale"); } }
         public IsotopeDataModel CurrentIsotopeData { get => currentIsotopeData; private set { currentIsotopeData = value; SetPropertyChanged(this, "CurrentIsotopeData"); } }
 
         public MainViewModel() {
@@ -43,8 +52,15 @@ namespace NuclearPhysicsProgram.ViewModels {
             DecayChainViewModel = new DecayChainViewModel(ElementInfoViewModel, PlotViewModel);
             ElementViewModel = new ElementViewModel(this);
 
-            OpenElementInfoCommand = new OpenElementInfoCommand(this); 
+            OpenElementInfoCommand = new OpenElementInfoCommand(this);
             CloseElementInfoCommand = new CloseElementInfoCommand(this);
+        }
+
+        public async void MainWindowSizeChanged() {
+            if (MainWindowState == WindowState.Maximized)
+                PeriodicTableScale = 1.5;
+            else if (!double.IsNaN(MainWindowWidth.GetValueOrDefault()))
+                PeriodicTableScale = ((MainWindowWidth / 1340) + (MainWindowHeight / 650)) / 2;
         }
 
         public async void OpenElementInfo(string symbol, int massNumber) {
@@ -73,7 +89,7 @@ namespace NuclearPhysicsProgram.ViewModels {
         public void InitializeIsotopeData(string symbol, int massNumber) {
             if (ElementViewModel.IsotopeDataDictionary.TryGetValue(symbol, out IsotopeDataModel isotopeData))
                 SetIsotopeDatas(isotopeData, massNumber);
-            else if(ElementViewModel.ElementDataDictionary.TryGetValue(symbol, out ElementDataModel elementData)) {
+            else if (ElementViewModel.ElementDataDictionary.TryGetValue(symbol, out ElementDataModel elementData)) {
                 var templateIsotope = new IsotopeModel[] { new IsotopeModel(symbol, elementData.MassNumber, "?", new DecayModel[0]) };
                 SetIsotopeDatas(new IsotopeDataModel(symbol, templateIsotope), massNumber);
             }

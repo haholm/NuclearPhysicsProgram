@@ -11,14 +11,6 @@
              d:DesignHeight="600" d:DesignWidth="1000"
              Background="#55000000"
              DataContext="{Binding ElementInfoViewModel, Source={StaticResource mainVM}}">
-    <UserControl.Resources>
-        <Style x:Key="CloseButtonStyle" 
-               BasedOn="{StaticResource NoStyle}"
-               TargetType="Button"
-               >
-
-        </Style>
-    </UserControl.Resources>
     <!--Margin="100,40,50,40"-->
     <Border x:Name="Border"
             
@@ -33,7 +25,7 @@
                     Margin="2"
                     Background="#dddddd"
                     CornerRadius="4">
-                <Button Style="{StaticResource CloseButtonStyle}"
+                <Button Style="{StaticResource NoStyle}"
                         Command="{Binding CloseElementInfoCommand, Source={StaticResource mainVM}}" >
                     <Button.Triggers>
                         <EventTrigger RoutedEvent="MouseEnter">
@@ -96,18 +88,16 @@
             <Border x:Name="InfoPagesBorder"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
-                    MinWidth="500"
-                    MinHeight="250"
-                    MaxWidth="500"
-                    MaxHeight="300"
+                    MaxWidth="600"
+                    MaxHeight="360"
                     Background="#5555dd"
                     CornerRadius="16"
                     ClipToBounds="True">
                 <Canvas x:Name="InfoPagesCanvas"
-                        Margin="500 0 0 0">
+                        Margin="00 0 0 0">
                     <Grid Width="{Binding ActualWidth, ElementName=InfoPagesBorder}" 
                           Height="{Binding ActualHeight, ElementName=InfoPagesBorder}"
-                          Canvas.Left="-500">
+                          Canvas.Left="-600">
                         <Border>
                             <Border.Effect>
                                 <DropShadowEffect BlurRadius="6"
@@ -117,6 +107,7 @@
                                                   Color="Black"/>
                             </Border.Effect>
                         </Border>
+
                         <Border HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 Margin="0 0 240 0"
@@ -124,7 +115,8 @@
                                 Height="100"
                                 Background="#dfdfdf"
                                 CornerRadius="6"
-                                Padding="12">
+                                Padding="12"
+                                RenderTransformOrigin="0.8 0.1">
                             <StackPanel HorizontalAlignment="Center">
                                 <TextBlock HorizontalAlignment="Center"
                                            Padding="2"
@@ -135,6 +127,7 @@
                                            Text="{Binding InfoProtons, TargetNullValue='0'}" />
                             </StackPanel>
                         </Border>
+
                         <Border HorizontalAlignment="Center"
                                 VerticalAlignment="Center" 
                                 Width="100"
@@ -171,13 +164,14 @@
                             </StackPanel>
                         </Border>
                     </Grid>
-                    <elementInfoViews:PlotView x:Name="PlotView" 
-                                               Width="{Binding ActualWidth, ElementName=InfoPagesBorder}" 
-                                               Height="{Binding ActualHeight, ElementName=InfoPagesBorder}"
-                                               
-                                               Opacity="{Binding PlotViewOpacity, TargetNullValue='1'}"
-                                               Padding="20"
-                                               />
+                    <Grid>
+                        <elementInfoViews:PlotView x:Name="PlotView" 
+                                                   Width="{Binding ActualWidth, ElementName=InfoPagesBorder}" 
+                                                   Height="{Binding ActualHeight, ElementName=InfoPagesBorder}"
+                                                   Opacity="{Binding PlotViewOpacity, TargetNullValue='1'}"
+                                                   Padding="30 30 30 40"
+                                                   />
+                    </Grid>
                 </Canvas>
             </Border>
             <StackPanel HorizontalAlignment="Center"
@@ -199,7 +193,7 @@
                                                         Storyboard.TargetProperty="Margin"
                                                         Duration="0:0:0.8" 
                                                         FillBehavior="HoldEnd"
-                                                        To="500 0 0 0">
+                                                        To="600 0 0 0">
                                         <ThicknessAnimation.EasingFunction>
                                             <ElasticEase Springiness="12" 
                                                          Oscillations="1" 
