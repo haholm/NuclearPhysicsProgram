@@ -6,23 +6,22 @@
              xmlns:local="clr-namespace:NuclearPhysicsProgram.Views.PeriodicTableViews"
              xmlns:viewModels="clr-namespace:NuclearPhysicsProgram.ViewModels"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
-             Visibility="{Binding PeriodicTableViewVisibility, TargetNullValue='Visible', Mode=OneWay, Source={StaticResource mainVM}}"
-             Opacity="{Binding PeriodicTableViewOpacity, TargetNullValue='1', Mode=OneWay, Source={StaticResource mainVM}}"
              >
     <UserControl.Resources>
         <viewModels:PeriodicTableViewModel x:Key="pTableVM"/>
 
         <Style x:Key="PeriodicTableStyle" 
-               TargetType="UserControl">
-            <Setter Property="Width" Value="{Binding ActualWidth, TargetNullValue='1142', Source={StaticResource pTableVM}}"/>
-            <Setter Property="Height" Value="{Binding ActualHeight, TargetNullValue='550', Source={StaticResource pTableVM}}"/>
+               TargetType="{x:Type UserControl}">
+            <Setter Property="Width" Value="{Binding ActualWidth, Source={StaticResource pTableVM}}"/>
+            <Setter Property="Height" Value="{Binding ActualHeight, Source={StaticResource pTableVM}}"/>
         </Style>
 
         <Style x:Key="PeriodicTableBorderStyle"
                TargetType="{x:Type Border}">
-            <Setter Property="Width" Value="{Binding PeriodicTableItemWidth, TargetNullValue='60', Source={StaticResource pTableVM}}"/>
-            <Setter Property="Height" Value="{Binding PeriodicTableItemHeight, TargetNullValue='60', Source={StaticResource pTableVM}}"/>
+            <Setter Property="Width" Value="{Binding PeriodicTableItemWidth, Source={StaticResource pTableVM}, TargetNullValue=60}"/>
+            <Setter Property="Height" Value="{Binding PeriodicTableItemHeight, Source={StaticResource pTableVM}, TargetNullValue=60}"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="BorderBrush" Value="#FFEBEBEB"/>
             <Setter Property="BorderThickness" Value="1"/>
@@ -47,8 +46,8 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border Background="Transparent"
-                                Width="{Binding PeriodicTableItemWidth, TargetNullValue='60', Source={StaticResource pTableVM}}"
-                                Height="{Binding PeriodicTableItemHeight, TargetNullValue='60', Source={StaticResource pTableVM}}">
+                                Width="{Binding PeriodicTableItemWidth, Source={StaticResource pTableVM}, TargetNullValue=60}"
+                                Height="{Binding PeriodicTableItemHeight, Source={StaticResource pTableVM}, TargetNullValue=60}">
                             <ContentPresenter/>
                         </Border>
                     </ControlTemplate>
@@ -96,17 +95,23 @@
             </Style.Triggers>
         </Style>
     </UserControl.Resources>
-    <UserControl.Height>
-        <Binding Mode="OneWay" Path="ActualHeight" Source="{StaticResource pTableVM}"/>
-    </UserControl.Height>
+    <UserControl.Visibility>
+        <Binding Mode="OneWay" Path="PeriodicTableViewVisibility" Source="{StaticResource mainVM}" TargetNullValue="Visible"/>
+    </UserControl.Visibility>
+    <UserControl.Opacity>
+        <Binding Mode="OneWay" Path="PeriodicTableViewOpacity" Source="{StaticResource mainVM}" TargetNullValue="1"/>
+    </UserControl.Opacity>
     <UserControl.Width>
         <Binding Mode="OneWay" Path="ActualWidth" Source="{StaticResource pTableVM}"/>
     </UserControl.Width>
+    <UserControl.Height>
+        <Binding Mode="OneWay" Path="ActualHeight" Source="{StaticResource pTableVM}"/>
+    </UserControl.Height>
     <UserControl.Style>
         <Binding Mode="OneWay" Source="{StaticResource PeriodicTableStyle}"/>
     </UserControl.Style>
 
-    <Grid >
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -122,57 +127,7 @@
                       HorizontalContentAlignment="Left"
                       VerticalAlignment="Stretch"
                       Background="Transparent"
-                      Opacity="{Binding Path=PeriodicTableOpacity, TargetNullValue='1', Source={StaticResource pTableVM}}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Canvas Width="58">
-                        <Border Style="{StaticResource PeriodicTableBorderStyle}">
-                            <Border.RenderTransform>
-                                <ScaleTransform ScaleX="{Binding RenderTransform.ScaleX, ElementName=ItemButton}"
-                                                ScaleY="{Binding RenderTransform.ScaleY, ElementName=ItemButton}"/>
-                            </Border.RenderTransform>
-                        </Border>
-                        <Button x:Name="ItemButton" 
-                                Style="{DynamicResource PeriodicTableItemStyle}" 
-                                Command="{Binding OpenElementInfoCommand, Source={StaticResource mainVM}}"
-                                RenderTransformOrigin="0.5,0.5">
-                            <Button.CommandParameter>
-                                <MultiBinding Converter="{StaticResource multipleCommandParameterConverter}">
-                                    <Binding Path="Element.Symbol"/>
-                                    <Binding Path="Element.MassNumber"/>
-                                </MultiBinding>
-                            </Button.CommandParameter>
-                            <local:ItemView HorizontalAlignment="Stretch"
-                                            VerticalAlignment="Stretch"
-                                            Symbol="{Binding Element.Symbol}"
-                                            AtomicNumber="{Binding Element.AtomicNumber}"
-                                            PropertiesColor="{Binding AERColor}"
-                                            EName="{Binding Element.Name}"
-                                            >
-                                <!--Symbol GES FRÅN ItemsSource-->
-                            </local:ItemView>
-                        </Button>
-                    </Canvas>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal"
-                                MaxWidth="{Binding Path=ActualWidth, Mode=OneWay, 
-                                RelativeSource={RelativeSource FindAncestor, 
-                                AncestorType={x:Type UserControl}}}"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
-
-        <ItemsControl Grid.Row="0" 
-                      Margin="900 0 0 0"
-                      Padding="0 0 6 0"
-                      ItemsSource="{Binding ElementViewModel.FirstRightElements, Source={StaticResource mainVM}}"
-                      HorizontalContentAlignment="Right"
-                      VerticalAlignment="Stretch"
-                      Background="Transparent"
-                      Opacity="{Binding Path=PeriodicTableOpacity, TargetNullValue='1', Source={StaticResource pTableVM}}">
+                      Opacity="{Binding PeriodicTableOpacity, Source={StaticResource pTableVM}, TargetNullValue=1}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Canvas Width="58">
@@ -199,7 +154,6 @@
                                             PropertiesColor="{Binding AERColor}"
                                             EName="{Binding Element.Name}"
                                             />
-                            <!--Symbol GES FRÅN ItemsSource-->
                         </Button>
                     </Canvas>
                 </DataTemplate>
@@ -207,18 +161,19 @@
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal"
-                                HorizontalAlignment="Right"/>
+                                MaxWidth="{Binding ActualWidth, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
 
-        
-        <ItemsControl Grid.Row="1" 
-                      ItemsSource="{Binding ElementViewModel.SecondLeftElements, Source={StaticResource mainVM}}"
-                      HorizontalContentAlignment="Left"
+        <ItemsControl Grid.Row="0" 
+                      Margin="900 0 0 0"
+                      Padding="0 0 6 0"
+                      ItemsSource="{Binding ElementViewModel.FirstRightElements, Source={StaticResource mainVM}}"
+                      HorizontalContentAlignment="Right"
                       VerticalAlignment="Stretch"
                       Background="Transparent"
-                      Opacity="{Binding Path=PeriodicTableOpacity, TargetNullValue='1', Source={StaticResource pTableVM}}">
+                      Opacity="{Binding PeriodicTableOpacity, Source={StaticResource pTableVM}, TargetNullValue=1}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Canvas Width="58">
@@ -244,9 +199,52 @@
                                             AtomicNumber="{Binding Element.AtomicNumber}"
                                             PropertiesColor="{Binding AERColor}"
                                             EName="{Binding Element.Name}"
-                                            >
-                                <!--Symbol GES FRÅN ItemsSource-->
-                            </local:ItemView>
+                                            />
+                        </Button>
+                    </Canvas>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Right"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+
+
+        <ItemsControl Grid.Row="1" 
+                      ItemsSource="{Binding ElementViewModel.SecondLeftElements, Source={StaticResource mainVM}}"
+                      HorizontalContentAlignment="Left"
+                      VerticalAlignment="Stretch"
+                      Background="Transparent"
+                      Opacity="{Binding PeriodicTableOpacity, Source={StaticResource pTableVM}, TargetNullValue=1}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Canvas Width="58">
+                        <Border Style="{StaticResource PeriodicTableBorderStyle}">
+                            <Border.RenderTransform>
+                                <ScaleTransform ScaleX="{Binding RenderTransform.ScaleX, ElementName=ItemButton}"
+                                                ScaleY="{Binding RenderTransform.ScaleY, ElementName=ItemButton}"/>
+                            </Border.RenderTransform>
+                        </Border>
+                        <Button x:Name="ItemButton" 
+                                Style="{DynamicResource PeriodicTableItemStyle}" 
+                                Command="{Binding OpenElementInfoCommand, Source={StaticResource mainVM}}"
+                                RenderTransformOrigin="0.5,0.5">
+                            <Button.CommandParameter>
+                                <MultiBinding Converter="{StaticResource multipleCommandParameterConverter}">
+                                    <Binding Path="Element.Symbol"/>
+                                    <Binding Path="Element.MassNumber"/>
+                                </MultiBinding>
+                            </Button.CommandParameter>
+                            <local:ItemView HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Stretch"
+                                            Symbol="{Binding Element.Symbol}"
+                                            AtomicNumber="{Binding Element.AtomicNumber}"
+                                            PropertiesColor="{Binding AERColor}"
+                                            EName="{Binding Element.Name}"
+                                            />
                         </Button>
                     </Canvas>
                 </DataTemplate>
@@ -265,7 +263,7 @@
                       HorizontalContentAlignment="Right"
                       VerticalAlignment="Stretch"
                       Background="Transparent"
-                      Opacity="{Binding Path=PeriodicTableOpacity, TargetNullValue='1', Source={StaticResource pTableVM}}">
+                      Opacity="{Binding PeriodicTableOpacity, Source={StaticResource pTableVM}, TargetNullValue=1}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Canvas Width="58">
@@ -292,9 +290,7 @@
                                             AtomicNumber="{Binding Element.AtomicNumber}"
                                             PropertiesColor="{Binding AERColor}"
                                             EName="{Binding Element.Name}"
-                                            >
-                                <!--Symbol GES FRÅN ItemsSource-->
-                            </local:ItemView>
+                                            />
                         </Button>
                     </Canvas>
                 </DataTemplate>
@@ -307,13 +303,13 @@
             </ItemsControl.ItemsPanel>
         </ItemsControl>
 
-        
+
         <ItemsControl Grid.Row="2" 
                       ItemsSource="{Binding ElementViewModel.ThirdLeftElements, Source={StaticResource mainVM}}"
                       HorizontalContentAlignment="Left"
                       VerticalAlignment="Stretch"
                       Background="Transparent"
-                      Opacity="{Binding Path=PeriodicTableOpacity, TargetNullValue='1', Source={StaticResource pTableVM}}">
+                      Opacity="{Binding PeriodicTableOpacity, Source={StaticResource pTableVM}, TargetNullValue=1}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Canvas Width="58">
@@ -340,9 +336,7 @@
                                             AtomicNumber="{Binding Element.AtomicNumber}"
                                             PropertiesColor="{Binding AERColor}"
                                             EName="{Binding Element.Name}"
-                                            >
-                                <!--Symbol GES FRÅN ItemsSource-->
-                            </local:ItemView>
+                                            />
                         </Button>
                     </Canvas>
                 </DataTemplate>
@@ -361,7 +355,7 @@
                       HorizontalContentAlignment="Right"
                       VerticalAlignment="Stretch"
                       Background="Transparent"
-                      Opacity="{Binding Path=PeriodicTableOpacity, TargetNullValue='1', Source={StaticResource pTableVM}}">
+                      Opacity="{Binding PeriodicTableOpacity, Source={StaticResource pTableVM}, TargetNullValue=1}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Canvas Width="58">
@@ -387,9 +381,7 @@
                                             AtomicNumber="{Binding Element.AtomicNumber}"
                                             PropertiesColor="{Binding AERColor}"
                                             EName="{Binding Element.Name}"
-                                            >
-                                <!--Symbol GES FRÅN ItemsSource-->
-                            </local:ItemView>
+                                            />
                         </Button>
                     </Canvas>
                 </DataTemplate>
@@ -408,7 +400,7 @@
                       HorizontalContentAlignment="Left"
                       VerticalAlignment="Stretch"
                       Background="Transparent"
-                      Opacity="{Binding Path=PeriodicTableOpacity, TargetNullValue='1', Source={StaticResource pTableVM}}">
+                      Opacity="{Binding PeriodicTableOpacity, Source={StaticResource pTableVM}, TargetNullValue=1}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Canvas Width="58">
@@ -434,9 +426,7 @@
                                             AtomicNumber="{Binding Element.AtomicNumber}"
                                             PropertiesColor="{Binding AERColor}"
                                             EName="{Binding Element.Name}"
-                                            >
-                                <!--Symbol GES FRÅN ItemsSource-->
-                            </local:ItemView>
+                                            />
                         </Button>
                     </Canvas>
                 </DataTemplate>
@@ -454,7 +444,7 @@
                       HorizontalContentAlignment="Left"
                       VerticalAlignment="Stretch"
                       Background="Transparent"
-                      Opacity="{Binding Path=PeriodicTableOpacity, TargetNullValue='1', Source={StaticResource pTableVM}}">
+                      Opacity="{Binding PeriodicTableOpacity, Source={StaticResource pTableVM}, TargetNullValue=1}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Canvas Width="58">
@@ -481,9 +471,7 @@
                                             AtomicNumber="{Binding Element.AtomicNumber}"
                                             PropertiesColor="{Binding AERColor}"
                                             EName="{Binding Element.Name}"
-                                            >
-                                <!--Symbol GES FRÅN ItemsSource-->
-                            </local:ItemView>
+                                            />
                         </Button>
                     </Canvas>
                 </DataTemplate>
@@ -501,7 +489,7 @@
                       HorizontalContentAlignment="Left"
                       VerticalAlignment="Stretch"
                       Background="Transparent"
-                      Opacity="{Binding Path=PeriodicTableOpacity, TargetNullValue='1', Source={StaticResource pTableVM}}">
+                      Opacity="{Binding PeriodicTableOpacity, Source={StaticResource pTableVM}, TargetNullValue=1}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Canvas Width="58">
@@ -527,9 +515,7 @@
                                             AtomicNumber="{Binding Element.AtomicNumber}"
                                             PropertiesColor="{Binding AERColor}"
                                             EName="{Binding Element.Name}"
-                                            >
-                                <!--Symbol GES FRÅN ItemsSource-->
-                            </local:ItemView>
+                                            />
                         </Button>
                     </Canvas>
                 </DataTemplate>
@@ -548,7 +534,7 @@
                       HorizontalContentAlignment="Right"
                       VerticalAlignment="Stretch"
                       Background="Transparent"
-                      Opacity="{Binding Path=PeriodicTableOpacity, TargetNullValue='1', Source={StaticResource pTableVM}}">
+                      Opacity="{Binding PeriodicTableOpacity, Source={StaticResource pTableVM}, TargetNullValue=1}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Canvas Width="58">
@@ -574,9 +560,7 @@
                                             AtomicNumber="{Binding Element.AtomicNumber}"
                                             PropertiesColor="{Binding AERColor}"
                                             EName="{Binding Element.Name}"
-                                            >
-                                <!--Symbol GES FRÅN ItemsSource-->
-                            </local:ItemView>
+                                            />
                         </Button>
                     </Canvas>
                 </DataTemplate>
@@ -589,7 +573,7 @@
             </ItemsControl.ItemsPanel>
         </ItemsControl>
 
-        <Canvas Width="{Binding Path=FirstHiddenElementsWidth, Source={StaticResource pTableVM}}" 
+        <Canvas Width="{Binding FirstHiddenElementsWidth, Source={StaticResource pTableVM}}" 
                 Height="58"
                 Grid.Row="5"
                 Margin="116 0 0 0"
@@ -598,11 +582,11 @@
                 Background="#f8f8f8">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseEnter">
-                    <i:InvokeCommandAction Command="{Binding Path=ExpandHiddenElementsCommand, Source={StaticResource pTableVM}}"
+                    <i:InvokeCommandAction Command="{Binding ExpandHiddenElementsCommand, Source={StaticResource pTableVM}}"
                                            CommandParameter="1"/>
                 </i:EventTrigger>
                 <i:EventTrigger EventName="MouseLeave">
-                    <i:InvokeCommandAction Command="{Binding Path=ContractHiddenElementsCommand, Source={StaticResource pTableVM}}"
+                    <i:InvokeCommandAction Command="{Binding ContractHiddenElementsCommand, Source={StaticResource pTableVM}}"
                                            CommandParameter="1"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
@@ -622,18 +606,18 @@
                                     VerticalAlignment="Stretch"
                                     Symbol="+"
                                     AtomicNumber="14"
-                                    >
-                    </local:ItemView>
+                                    PropertiesColorVisibility="Hidden"
+                                    />
                 </Button>
             </Canvas>
 
             <Canvas HorizontalAlignment="Left"
                     VerticalAlignment="Stretch"
                     Width="870"
-                    Height="{Binding Path=FirstHiddenElementsSize.Value.Height, Source={StaticResource pTableVM}}"
-                    Visibility="{Binding Path=FirstHiddenElementsVisibility, TargetNullValue='Collapsed', Source={StaticResource pTableVM}}"
+                    Height="{Binding FirstHiddenElementsSize.Value.Height, Source={StaticResource pTableVM}}"
+                    Visibility="{Binding FirstHiddenElementsVisibility, Source={StaticResource pTableVM}, TargetNullValue=Collapsed}"
                     >
-                <Border >
+                <Border>
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="5" 
                                           Color="Black"
@@ -669,9 +653,7 @@
                                                     AtomicNumber="{Binding Element.AtomicNumber}"
                                                     PropertiesColor="{Binding AERColor}"
                                                     EName="{Binding Element.Name}"
-                                                    >
-                                        <!--Symbol GES FRÅN ItemsSource-->
-                                    </local:ItemView>
+                                                    />
                                 </Button>
                             </Canvas>
                         </DataTemplate>
@@ -692,7 +674,7 @@
                       HorizontalContentAlignment="Left"
                       VerticalAlignment="Stretch"
                       Background="Transparent"
-                      Opacity="{Binding Path=PeriodicTableOpacity, TargetNullValue='1', Source={StaticResource pTableVM}}">
+                      Opacity="{Binding PeriodicTableOpacity, Source={StaticResource pTableVM}, TargetNullValue=1}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Canvas Width="58">
@@ -718,9 +700,7 @@
                                             AtomicNumber="{Binding Element.AtomicNumber}"
                                             PropertiesColor="{Binding AERColor}"
                                             EName="{Binding Element.Name}"
-                                            >
-                                <!--Symbol GES FRÅN ItemsSource-->
-                            </local:ItemView>
+                                            />
                         </Button>
                     </Canvas>
                 </DataTemplate>
@@ -739,7 +719,7 @@
                       HorizontalContentAlignment="Right"
                       VerticalAlignment="Stretch"
                       Background="Transparent"
-                      Opacity="{Binding Path=PeriodicTableOpacity, TargetNullValue='1', Source={StaticResource pTableVM}}">
+                      Opacity="{Binding PeriodicTableOpacity, Source={StaticResource pTableVM}, TargetNullValue=1}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Canvas Width="58">
@@ -765,9 +745,7 @@
                                             AtomicNumber="{Binding Element.AtomicNumber}"
                                             PropertiesColor="{Binding AERColor}"
                                             EName="{Binding Element.Name}"
-                                            >
-                                <!--Symbol GES FRÅN ItemsSource-->
-                            </local:ItemView>
+                                            />
                         </Button>
                     </Canvas>
                 </DataTemplate>
@@ -780,7 +758,7 @@
             </ItemsControl.ItemsPanel>
         </ItemsControl>
 
-        <Canvas Width="{Binding Path=SecondHiddenElementsWidth, Source={StaticResource pTableVM}}" 
+        <Canvas Width="{Binding SecondHiddenElementsWidth, Source={StaticResource pTableVM}}" 
                 Height="58"
                 Grid.Row="6"
                 Margin="116 0 0 0"
@@ -789,14 +767,14 @@
                 Background="#f8f8f8">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseEnter">
-                    <i:InvokeCommandAction Command="{Binding Path=ExpandHiddenElementsCommand, Source={StaticResource pTableVM}}"
+                    <i:InvokeCommandAction Command="{Binding ExpandHiddenElementsCommand, Source={StaticResource pTableVM}}"
                                            CommandParameter="2"/>
                 </i:EventTrigger>
                 <i:EventTrigger EventName="MouseLeave">
-                    <i:InvokeCommandAction Command="{Binding Path=ContractHiddenElementsCommand, Source={StaticResource pTableVM}}"
+                    <i:InvokeCommandAction Command="{Binding ContractHiddenElementsCommand, Source={StaticResource pTableVM}}"
                                            CommandParameter="2"/>
                 </i:EventTrigger>
-                </i:Interaction.Triggers>
+            </i:Interaction.Triggers>
             <Canvas Width="58"
                     >
                 <Border Style="{StaticResource PeriodicTableBorderStyle}"
@@ -813,16 +791,16 @@
                                     VerticalAlignment="Stretch"
                                     Symbol="+"
                                     AtomicNumber="14"
-                                    >
-                    </local:ItemView>
+                                    PropertiesColorVisibility="Hidden"
+                                    />
                 </Button>
             </Canvas>
 
             <Canvas HorizontalAlignment="Left"
                     VerticalAlignment="Stretch"
                     Width="870"
-                    Height="{Binding Path=SecondHiddenElementsSize.Value.Height, Source={StaticResource pTableVM}}"
-                    Visibility="{Binding Path=SecondHiddenElementsVisibility, TargetNullValue='Collapsed', Source={StaticResource pTableVM}}"
+                    Height="{Binding SecondHiddenElementsSize.Value.Height, Source={StaticResource pTableVM}}"
+                    Visibility="{Binding SecondHiddenElementsVisibility, Source={StaticResource pTableVM}, TargetNullValue=Collapsed}"
                     >
                 <Border >
                     <Border.Effect>
@@ -860,9 +838,7 @@
                                                     AtomicNumber="{Binding Element.AtomicNumber}"
                                                     PropertiesColor="{Binding AERColor}"
                                                     EName="{Binding Element.Name}"
-                                                    >
-                                        <!--Symbol GES FRÅN ItemsSource-->
-                                    </local:ItemView>
+                                                    />
                                 </Button>
                             </Canvas>
                         </DataTemplate>

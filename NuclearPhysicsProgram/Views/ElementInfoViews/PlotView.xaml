@@ -26,22 +26,31 @@
                   Effect="{Binding PlotViewModel.Effect, Mode=OneWay, Source={StaticResource mainVM}}"
                   PlotAreaBorderColor="Transparent"
                   IsEnabled="True"
+                  FontFamily="{StaticResource OpenSansRegular}"
                   >
             <oxy:Plot.Axes>
-                <oxy:LinearAxis Position="Left" IsZoomEnabled="False"
+                <oxy:LinearAxis Position="Left" 
+                                IsZoomEnabled="False"
                                 Maximum="100" 
                                 Minimum="0"
-                                IsPanEnabled="False"/>
-                <oxy:LinearAxis Position="Bottom" IsZoomEnabled="False"
+                                IsPanEnabled="False"
+                                TicklineColor="LightGray"
+                                TextColor="LightGray"
+                                />
+                <oxy:LinearAxis Position="Bottom" 
+                                IsZoomEnabled="False"
                                 Minimum="0" 
                                 Maximum="{Binding PlotViewModel.MaximumTime, Mode=OneWay, Source={StaticResource mainVM}, TargetNullValue=10}" 
                                 IsPanEnabled="False" 
                                 Title="{Binding PlotViewModel.Unit, Mode=OneWay, Source={StaticResource mainVM}, TargetNullValue='Unit'}"
                                 TitlePosition="{Binding PlotViewModel.UnitTitlePosition, Mode=OneWay, Source={StaticResource mainVM}, TargetNullValue='1.02'}"
-                                AxisTitleDistance="-27"/>
+                                AxisTitleDistance="-27"
+                                TicklineColor="LightGray"
+                                TextColor="LightGray"/>
             </oxy:Plot.Axes>
             <oxy:Plot.Series>
-                <oxy:LineSeries Color="Black" ItemsSource="{Binding PlotViewModel.DataPoints, Mode=OneWay, Source={StaticResource mainVM}}"/>
+                <oxy:LineSeries Color="#f09819" 
+                                ItemsSource="{Binding PlotViewModel.DataPoints, Mode=OneWay, Source={StaticResource mainVM}}"/>
             </oxy:Plot.Series>
         </oxy:Plot>
     </DockPanel>

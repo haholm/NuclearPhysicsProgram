@@ -73,6 +73,10 @@ namespace NuclearPhysicsProgram.ViewModels {
             return isotopeList.First();
         }
 
+        public static double GetMassInAMU(ElementDataModel element) =>
+                (element.AtomicNumber * Constants.Proton.Mass.AtomicMassUnits) + 
+                ((element.MassNumber - element.AtomicNumber) * Constants.Neutron.Mass.AtomicMassUnits);
+
         private void InitializeElements() {
             (Elements, Isotopes) = LoadElementData();
             FillDictionaries();

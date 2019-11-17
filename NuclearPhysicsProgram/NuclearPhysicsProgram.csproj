@@ -107,6 +107,7 @@
     <Compile Include="ViewModels\Commands\ElementInfoCommands\SwitchDecayChainIsotopeCommand.cs" />
     <Compile Include="ViewModels\Commands\ElementInfoCommands\SwitchInfoCommand.cs" />
     <Compile Include="ViewModels\Commands\OpenElementInfoCommand.cs" />
+    <Compile Include="ViewModels\Commands\TogglePropertyColorCommand.cs" />
     <Compile Include="ViewModels\Constants\Mass.cs" />
     <Compile Include="ViewModels\Constants\Neutron.cs" />
     <Compile Include="ViewModels\Constants\Photon.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="ViewModels\ElementViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Models\PeriodicTableElementModel.cs" />
+    <Compile Include="ViewModels\PeriodicTablePlotViewModel.cs" />
     <Compile Include="ViewModels\PropertyHandler\NotifyPropertyChanged.cs" />
     <Compile Include="ViewModels\PeriodicTableViewModel.cs" />
     <Compile Include="Views\ElementInfoView.xaml.cs">
@@ -135,6 +137,9 @@
     </Compile>
     <Compile Include="Views\PeriodicTableViews\ItemView.xaml.cs">
       <DependentUpon>ItemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PeriodicTableViews\PeriodicTablePlotView.xaml.cs">
+      <DependentUpon>PeriodicTablePlotView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PeriodicTableViews\PeriodicTableView.xaml.cs">
       <DependentUpon>PeriodicTableView.xaml</DependentUpon>
@@ -171,6 +176,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PeriodicTableViews\ItemView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PeriodicTableViews\PeriodicTablePlotView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -232,9 +241,7 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\radiation128.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Resource Include="Images\radiation128.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions />

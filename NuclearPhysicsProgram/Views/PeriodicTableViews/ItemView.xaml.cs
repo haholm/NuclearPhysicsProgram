@@ -19,33 +19,40 @@ namespace NuclearPhysicsProgram.Views.PeriodicTableViews {
     /// </summary>
     public partial class ItemView : UserControl {
         #region DependencyProperties
-        public string Symbol { // DO I REALLY NEED THIS?
+        public string Symbol {
             get => GetValue(SymbolProperty) as string;
             set => SetValue(SymbolProperty, value);
         }
         public static readonly DependencyProperty SymbolProperty = DependencyProperty.Register(
             "Symbol", typeof(string), typeof(ItemView), new PropertyMetadata("A"));
 
-        public int? AtomicNumber { // DO I REALLY NEED THIS?
+        public int? AtomicNumber {
             get => GetValue(AtomicNumberProperty) as int?;
             set => SetValue(AtomicNumberProperty, value);
         }
         public static readonly DependencyProperty AtomicNumberProperty = DependencyProperty.Register(
             "AtomicNumber", typeof(int?), typeof(ItemView), new PropertyMetadata(0));
 
-        public double? SymbolFontSize { // DO I REALLY NEED THIS?
+        public double? SymbolFontSize {
             get => GetValue(SymbolFontSizeProperty) as double?;
             set => SetValue(SymbolFontSizeProperty, value);
         }
         public static readonly DependencyProperty SymbolFontSizeProperty = DependencyProperty.Register(
             "SymbolFontSize", typeof(double?), typeof(ItemView), new PropertyMetadata(0.0));
 
-        public SolidColorBrush PropertiesColor { // DO I REALLY NEED THIS?
+        public SolidColorBrush PropertiesColor {
             get => GetValue(PropertiesColorProperty) as SolidColorBrush;
             set => SetValue(PropertiesColorProperty, value);
         }
         public static readonly DependencyProperty PropertiesColorProperty = DependencyProperty.Register(
             "PropertiesColor", typeof(SolidColorBrush), typeof(ItemView), new PropertyMetadata(new SolidColorBrush()));
+
+        public Visibility? PropertiesColorVisibility {
+            get => GetValue(PropertiesColorVisibilityProperty) as Visibility?;
+            set => SetValue(PropertiesColorVisibilityProperty, value);
+        }
+        public static readonly DependencyProperty PropertiesColorVisibilityProperty = DependencyProperty.Register(
+            "PropertiesColorVisibility", typeof(Visibility), typeof(ItemView), new PropertyMetadata(Visibility.Visible));
 
         public string EName { // DO I REALLY NEED THIS?
             get => GetValue(ENameProperty) as string;

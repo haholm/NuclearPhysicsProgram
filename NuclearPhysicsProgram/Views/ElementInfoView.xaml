@@ -90,9 +90,15 @@
                     VerticalAlignment="Stretch"
                     MaxWidth="600"
                     MaxHeight="360"
-                    Background="#5555dd"
                     CornerRadius="16"
                     ClipToBounds="True">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0.5,0" 
+                                         EndPoint="0.6,1">
+                        <GradientStop Color="#29323c" Offset="-1"/>
+                        <GradientStop Color="#485563" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
                 <Canvas x:Name="InfoPagesCanvas"
                         Margin="00 0 0 0">
                     <Grid Width="{Binding ActualWidth, ElementName=InfoPagesBorder}" 

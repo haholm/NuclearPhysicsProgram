@@ -48,12 +48,13 @@
                                 >
                             <Button.CommandParameter>
                                 <MultiBinding Converter="{StaticResource multipleCommandParameterConverter}">
-                                    <Binding Path="Symbol"/>
-                                    <Binding Path="MassNumber"/>
+                                    <Binding Path="Item1.Symbol"/>
+                                    <Binding Path="Item1.MassNumber"/>
                                 </MultiBinding>
                             </Button.CommandParameter>
                             <periodicTableViews:ItemView Symbol="{Binding Item1.Symbol}"
                                                          AtomicNumber="{Binding Item1.MassNumber}"
+                                                         PropertiesColorVisibility="Hidden"
                                                          SymbolFontSize="22"/>
                         </Button>
                     </Canvas>

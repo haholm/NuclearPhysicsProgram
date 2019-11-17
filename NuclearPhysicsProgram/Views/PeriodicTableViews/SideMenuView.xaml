@@ -26,20 +26,30 @@
                 Margin="5"
                 CornerRadius="4"
                 Background="LightGray">
-            <TextBlock Text="Instability"
-                       TextWrapping="Wrap"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"/>
+            <Button Style="{StaticResource NoStyle}"
+                    Cursor="Hand"
+                    Command="{Binding TogglePropertyColorCommand, Source={StaticResource mainVM}}"
+                    CommandParameter="instability">
+                <TextBlock Text="Instability"
+                           TextWrapping="Wrap"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+            </Button>
         </Border>
 
         <Border Grid.Row="3"
                 Margin="5"
                 CornerRadius="4"
-                Background="LightGray">
-            <TextBlock Text="Energy"
-                       TextWrapping="Wrap"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"/>
+                Background="#CCCC00">
+            <Button Style="{StaticResource NoStyle}"
+                    Cursor="Hand"
+                    Command="{Binding TogglePropertyColorCommand, Source={StaticResource mainVM}}"
+                    CommandParameter="energy">
+                <TextBlock Text="Energy"
+                           TextWrapping="Wrap"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+            </Button>
         </Border>
     </Grid>
 </UserControl>

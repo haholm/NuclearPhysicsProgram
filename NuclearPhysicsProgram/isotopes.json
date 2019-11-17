@@ -802,7 +802,7 @@
         "HalfLife": "2.0196449e27",
         "Decays": [
           {
-            "Type": "Beta-Beat-",
+            "Type": "Beta-Beta-",
             "Product": "Ti",
             "AtomicNumber": 22,
             "MassNumber": 48
@@ -1100,7 +1100,7 @@
         "HalfLife": "26,959,392",
         "Decays": [
           {
-            "Type": "Ec",
+            "Type": "EC",
             "Product": "Cr",
             "AtomicNumber": 24,
             "MassNumber": 54
@@ -1341,7 +1341,7 @@
         "HalfLife": "45,720",
         "Decays": [
           {
-            "Type": "Ec",
+            "Type": "EC",
             "Product": "Ni",
             "AtomicNumber": 28,
             "MassNumber": 64
@@ -1858,7 +1858,7 @@
         "HalfLife": "126,000",
         "Decays": [
           {
-            "Type": "Ec",
+            "Type": "EC",
             "Product": "Br",
             "AtomicNumber": 35,
             "MassNumber": 79
@@ -2388,7 +2388,7 @@
         "HalfLife": "1.0950262e15",
         "Decays": [
           {
-            "Type": "Ec",
+            "Type": "EC",
             "Product": "Zr",
             "AtomicNumber": 40,
             "MassNumber": 92
@@ -2902,8 +2902,403 @@
     ]
   },
   {
+    "Symbol": "Ag",
+    "Isotopes": [
+      {
+        "Symbol": "Ag",
+        "MassNumber": 105,
+        "HalfLife": "3,559,680",
+        "Decays": [
+          {
+            "Type": "EC",
+            "Product": "Pd",
+            "AtomicNumber": 46,
+            "MassNumber": 105
+          },
+          {
+            "Type": "Gamma",
+            "Product": "-",
+            "AtomicNumber": 0,
+            "MassNumber": 0
+          }
+        ]
+      },
+      {
+        "Symbol": "Ag",
+        "MassNumber": 107,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Ag",
+        "MassNumber": 109,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Ag",
+        "MassNumber": 111,
+        "HalfLife": "643,680",
+        "Decays": [
+          {
+            "Type": "Beta-",
+            "Product": "Cd",
+            "AtomicNumber": 48,
+            "MassNumber": 111
+          },
+          {
+            "Type": "Gamma",
+            "Product": "-",
+            "AtomicNumber": 0,
+            "MassNumber": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Symbol": "Cd",
+    "Isotopes": [
+      {
+        "Symbol": "Cd",
+        "MassNumber": 106,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Cd",
+        "MassNumber": 107,
+        "HalfLife": "23,400",
+        "Decays": [
+          {
+            "Type": "EC",
+            "Product": "Ag",
+            "AtomicNumber": 47,
+            "MassNumber": 107
+          }
+        ]
+      },
+      {
+        "Symbol": "Cd",
+        "MassNumber": 108,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Cd",
+        "MassNumber": 109,
+        "HalfLife": "39,968,640",
+        "Decays": [
+          {
+            "Type": "EC",
+            "Product": "Ag",
+            "AtomicNumber": 47,
+            "MassNumber": 109
+          }
+        ]
+      },
+      {
+        "Symbol": "Cd",
+        "MassNumber": 110,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Cd",
+        "MassNumber": 111,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Cd",
+        "MassNumber": 112,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Cd",
+        "MassNumber": 113,
+        "HalfLife": "2.4298853e23",
+        "Decays": [
+          {
+            "Type": "Beta-",
+            "Product": "In",
+            "AtomicNumber": 49,
+            "MassNumber": 113
+          }
+        ]
+      },
+      {
+        "Symbol": "Cd",
+        "MassNumber": 114,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Cd",
+        "MassNumber": 115,
+        "HalfLife": "192,456",
+        "Decays": [
+          {
+            "Type": "Beta-",
+            "Product": "In",
+            "AtomicNumber": 49,
+            "MassNumber": 115
+          }
+        ]
+      },
+      {
+        "Symbol": "Cd",
+        "MassNumber": 116,
+        "HalfLife": "1.116e23",
+        "Decays": [
+          {
+            "Type": "Beta-Beta-",
+            "Product": "Sn",
+            "AtomicNumber": 50,
+            "MassNumber": 116
+          }
+        ]
+      },
+    ]
+  },
+  {
+    "Symbol": "In",
+    "Isotopes": [
+      {
+        "Symbol": "In",
+        "MassNumber": 111,
+        "HalfLife": "241,920",
+        "Decays": [
+          {
+            "Type": "EC",
+            "Product": "Cd",
+            "AtomicNumber": 48,
+            "MassNumber": 111
+          }
+        ]
+      },
+      {
+        "Symbol": "In",
+        "MassNumber": 113,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "In",
+        "MassNumber": 115,
+        "HalfLife": "1.3916616e22",
+        "Decays": [
+          {
+            "Type": "Beta-",
+            "Product": "Sn",
+            "AtomicNumber": 50,
+            "MassNumber": 115
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Symbol": "Sn",
+    "Isotopes": [
+      {
+        "Symbol": "Sn",
+        "MassNumber": 112,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Sn",
+        "MassNumber": 114,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Sn",
+        "MassNumber": 115,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Sn",
+        "MassNumber": 116,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Sn",
+        "MassNumber": 117,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Sn",
+        "MassNumber": 118,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Sn",
+        "MassNumber": 119,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Sn",
+        "MassNumber": 120,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Sn",
+        "MassNumber": 122,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Sn",
+        "MassNumber": 124,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Sn",
+        "MassNumber": 126,
+        "HalfLife": "7.2580990e12",
+        "Decays": [
+          {
+            "Type": "Beta-",
+            "Product": "Sb",
+            "AtomicNumber": 51,
+            "MassNumber": 126
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Symbol": "Sb",
+    "Isotopes": [
+      {
+        "Symbol": "Sb",
+        "MassNumber": 121,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Sb",
+        "MassNumber": 123,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Sb",
+        "MassNumber": 125,
+        "HalfLife": "87,040,385",
+        "Decays": [
+          {
+            "Type": "Beta-",
+            "Product": "Te",
+            "AtomicNumber": 52,
+            "MassNumber": 125
+          }
+        ]
+      }
+    ]
+  },
+  {
     "Symbol": "Te",
     "Isotopes": [
+      {
+        "Symbol": "Te",
+        "MassNumber": 120,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Te",
+        "MassNumber": 121,
+        "HalfLife": "1,449,792",
+        "Decays": [
+          {
+            "Type": "EC",
+            "Product": "Sb",
+            "AtomicNumber": 51,
+            "MassNumber": 121
+          }
+        ]
+      },
+      {
+        "Symbol": "Te",
+        "MassNumber": 122,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Te",
+        "MassNumber": 123,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Te",
+        "MassNumber": 124,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Te",
+        "MassNumber": 125,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Te",
+        "MassNumber": 126,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Te",
+        "MassNumber": 127,
+        "HalfLife": "33,660",
+        "Decays": [
+          {
+            "Type": "Beta-",
+            "Product": "I",
+            "AtomicNumber": 53,
+            "MassNumber": 127
+          }
+        ]
+      },
       {
         "Symbol": "Te",
         "MassNumber": 128,
@@ -2914,6 +3309,526 @@
             "Product": "Xe",
             "AtomicNumber": 54,
             "MassNumber": 128
+          }
+        ]
+      },
+      {
+        "Symbol": "Te",
+        "MassNumber": 129,
+        "HalfLife": "4,176",
+        "Decays": [
+          {
+            "Type": "Beta-",
+            "Product": "I",
+            "AtomicNumber": 53,
+            "MassNumber": 129
+          }
+        ]
+      },
+      {
+        "Symbol": "Te",
+        "MassNumber": 130,
+        "HalfLife": "2.4929992e28",
+        "Decays": [
+          {
+            "Type": "Beta-Beta-",
+            "Product": "Xe",
+            "AtomicNumber": 54,
+            "MassNumber": 130
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Symbol": "I",
+    "Isotopes": [
+      {
+        "Symbol": "I",
+        "MassNumber": 123,
+        "HalfLife": "46,800",
+        "Decays": [
+          {
+            "Type": "ECGamma",
+            "Product": "Te",
+            "AtomicNumber": 52,
+            "MassNumber": 123
+          }
+        ]
+      },
+      {
+        "Symbol": "I",
+        "MassNumber": 124,
+        "HalfLife": "360,806.4",
+        "Decays": [
+          {
+            "Type": "EC",
+            "Product": "Te",
+            "AtomicNumber": 52,
+            "MassNumber": 124
+          }
+        ]
+      },
+      {
+        "Symbol": "I",
+        "MassNumber": 125,
+        "HalfLife": "5,132,160",
+        "Decays": [
+          {
+            "Type": "EC",
+            "Product": "Te",
+            "AtomicNumber": 52,
+            "MassNumber": 125
+          }
+        ]
+      },
+      {
+        "Symbol": "I",
+        "MassNumber": 127,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "I",
+        "MassNumber": 129,
+        "HalfLife": "4.9544415e14",
+        "Decays": [
+          {
+            "Type": "Beta-",
+            "Product": "Xe",
+            "AtomicNumber": 54,
+            "MassNumber": 129
+          }
+        ]
+      },
+      {
+        "Symbol": "I",
+        "MassNumber": 131,
+        "HalfLife": "692,988.48",
+        "Decays": [
+          {
+            "Type": "Beta-Gamma",
+            "Product": "Xe",
+            "AtomicNumber": 54,
+            "MassNumber": 131
+          }
+        ]
+      },
+      {
+        "Symbol": "I",
+        "MassNumber": 135,
+        "HalfLife": "567,648",
+        "Decays": [
+          {
+            "Type": "Beta-",
+            "Product": "Xe",
+            "AtomicNumber": 54,
+            "MassNumber": 135
+          }
+        ]
+      },
+    ]
+  },
+  {
+    "Symbol": "Xe",
+    "Isotopes": [
+      {
+        "Symbol": "Xe",
+        "MassNumber": 124,
+        "HalfLife": "5.6802514e29",
+        "Decays": [
+          {
+            "Type": "ECEC",
+            "Product": "Te",
+            "AtomicNumber": 52,
+            "MassNumber": 124
+          }
+        ]
+      },
+      {
+        "Symbol": "Xe",
+        "MassNumber": 125,
+        "HalfLife": "60,840",
+        "Decays": [
+          {
+            "Type": "EC",
+            "Product": "I",
+            "AtomicNumber": 53,
+            "MassNumber": 125
+          }
+        ]
+      },
+      {
+        "Symbol": "Xe",
+        "MassNumber": 126,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Xe",
+        "MassNumber": 127,
+        "HalfLife": "3,140,208",
+        "Decays": [
+          {
+            "Type": "EC",
+            "Product": "I",
+            "AtomicNumber": 53,
+            "MassNumber": 127
+          }
+        ]
+      },
+      {
+        "Symbol": "Xe",
+        "MassNumber": 128,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Xe",
+        "MassNumber": 129,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Xe",
+        "MassNumber": 130,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Xe",
+        "MassNumber": 131,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Xe",
+        "MassNumber": 132,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Xe",
+        "MassNumber": 133,
+        "HalfLife": "453,340.8",
+        "Decays": [
+          {
+            "Type": "Beta-",
+            "Product": "Cs",
+            "AtomicNumber": 55,
+            "MassNumber": 133
+          }
+        ]
+      },
+      {
+        "Symbol": "Xe",
+        "MassNumber": 134,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Xe",
+        "MassNumber": 135,
+        "HalfLife": "32,904",
+        "Decays": [
+          {
+            "Type": "Beta-",
+            "Product": "Cs",
+            "AtomicNumber": 55,
+            "MassNumber": 135
+          }
+        ]
+      },
+      {
+        "Symbol": "Xe",
+        "MassNumber": 136,
+        "HalfLife": "6.8320801e28",
+        "Decays": [
+          {
+            "Type": "Beta-Beta-",
+            "Product": "Ba",
+            "AtomicNumber": 56,
+            "MassNumber": 136
+          }
+        ]
+      },
+    ]
+  },
+  {
+    "Symbol": "Cs",
+    "Isotopes": [
+      {
+        "Symbol": "Cs",
+        "MassNumber": 133,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Cs",
+        "MassNumber": 134,
+        "HalfLife": "65,158,794",
+        "Decays": [
+          {
+            "Type": "EC",
+            "Product": "Xe",
+            "AtomicNumber": 54,
+            "MassNumber": 134
+          },
+          {
+            "Type": "Beta",
+            "Product": "Ba",
+            "AtomicNumber": 56,
+            "MassNumber": 134
+          }
+        ]
+      },
+      {
+        "Symbol": "Cs",
+        "MassNumber": 135,
+        "HalfLife": "7.2580990e13",
+        "Decays": [
+          {
+            "Type": "Beta-",
+            "Product": "Ba",
+            "AtomicNumber": 56,
+            "MassNumber": 135
+          }
+        ]
+      },
+      {
+        "Symbol": "Cs",
+        "MassNumber": 137,
+        "HalfLife": "952,073,242",
+        "Decays": [
+          {
+            "Type": "Beta-",
+            "Product": "Ba",
+            "AtomicNumber": 56,
+            "MassNumber": 137
+          }
+        ]
+      },
+    ]
+  },
+  {
+    "Symbol": "Ba",
+    "Isotopes": [
+      {
+        "Symbol": "Ba",
+        "MassNumber": 130,
+        "HalfLife": "5.0491123e29",
+        "Decays": [
+          {
+            "Type": "ECEC",
+            "Product": "Xe",
+            "AtomicNumber": 54,
+            "MassNumber": 130
+          }
+        ]
+      },
+      {
+        "Symbol": "Ba",
+        "MassNumber": 132,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Ba",
+        "MassNumber": 133,
+        "HalfLife": "331,663,566",
+        "Decays": [
+          {
+            "Type": "EC",
+            "Product": "Cs",
+            "AtomicNumber": 55,
+            "MassNumber": 133
+          }
+        ]
+      },
+      {
+        "Symbol": "Ba",
+        "MassNumber": 134,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Ba",
+        "MassNumber": 135,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Ba",
+        "MassNumber": 136,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Ba",
+        "MassNumber": 137,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Ba",
+        "MassNumber": 138,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+    ]
+  },
+  {
+    "Symbol": "La",
+    "Isotopes": [
+      {
+        "Symbol": "La",
+        "MassNumber": 137,
+        "HalfLife": "1.8934171e12",
+        "Decays": [
+          {
+            "Type": "EC",
+            "Product": "Ba",
+            "AtomicNumber": 56,
+            "MassNumber": 137
+          }
+        ]
+      },
+      {
+        "Symbol": "La",
+        "MassNumber": 138,
+        "HalfLife": "3.3134800e18",
+        "Decays": [
+          {
+            "Type": "EC",
+            "Product": "Ba",
+            "AtomicNumber": 56,
+            "MassNumber": 138
+          },
+          {
+            "Type": "Beta-",
+            "Product": "Ce",
+            "AtomicNumber": 58,
+            "MassNumber": 138
+          }
+        ]
+      },
+      {
+        "Symbol": "La",
+        "MassNumber": 139,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      }
+    ]
+  },
+  {
+    "Symbol": "Ce",
+    "Isotopes": [
+      {
+        "Symbol": "Ce",
+        "MassNumber": 134,
+        "HalfLife": "273,024",
+        "Decays": [
+          {
+            "Type": "EC",
+            "Product": "La",
+            "AtomicNumber": 57,
+            "MassNumber": 134
+          }
+        ]
+      },
+      {
+        "Symbol": "Ce",
+        "MassNumber": 0,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Ce",
+        "MassNumber": 0,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Ce",
+        "MassNumber": 0,
+        "HalfLife": "11,892,096",
+        "Decays": [
+          {
+            "Type": "EC",
+            "Product": "La",
+            "AtomicNumber": 57,
+            "MassNumber": 139
+          }
+        ]
+      },
+      {
+        "Symbol": "Ce",
+        "MassNumber": 0,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Ce",
+        "MassNumber": 141,
+        "HalfLife": "2,808,086.4",
+        "Decays": [
+          {
+            "Type": "Beta-",
+            "Product": "Pr",
+            "AtomicNumber": 59,
+            "MassNumber": 143
+          }
+        ]
+      },
+      {
+        "Symbol": "Ce",
+        "MassNumber": 142,
+        "HalfLife": "",
+        "Decays": [
+        ]
+      },
+      {
+        "Symbol": "Ce",
+        "MassNumber": 143,
+        "HalfLife": "2,854,569.6",
+        "Decays": [
+          {
+            "Type": "Beta-",
+            "Product": "Pr",
+            "AtomicNumber": 59,
+            "MassNumber": 143
+          }
+        ]
+      },
+      {
+        "Symbol": "Ce",
+        "MassNumber": 144,
+        "HalfLife": "24,614,755",
+        "Decays": [
+          {
+            "Type": "Beta-",
+            "Product": "Pr",
+            "AtomicNumber": 59,
+            "MassNumber": 144
           }
         ]
       }
