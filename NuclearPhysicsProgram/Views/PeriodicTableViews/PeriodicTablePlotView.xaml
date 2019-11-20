@@ -7,28 +7,72 @@
              xmlns:oxy="http://oxyplot.org/wpf"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <oxy:Plot 
-              x:Name="Plotview"
-              PlotAreaBorderColor="Transparent"
-              IsEnabled="True">
-        <oxy:Plot.Axes>
-            <oxy:LinearAxis MinorStep="1" Position="Left"
-                            Title="Binding energy per nucleon (MeV)"
-                            Maximum="9"
-                            MajorTickSize="6"
-                            IntervalLength="22"
-                            AxisTitleDistance="10"
-                            />
-            <oxy:LinearAxis  Position="Bottom"
-                            Title="Nucleons in nucleus"
-                            Maximum="294"
-                            MinorTickSize="0"
-                            MajorTickSize="6"
-                            IntervalLength="30"
-                            />
-        </oxy:Plot.Axes>
-        <oxy:Plot.Series>
-            <oxy:LineSeries ItemsSource="{Binding PeriodicTablePlotViewModel.DataPoints, Mode=OneWay, Source={StaticResource mainVM}}"/>
-        </oxy:Plot.Series>
-    </oxy:Plot>
+    <Border x:Name="PlotBorder" 
+            CornerRadius="6"
+            BorderThickness="0">
+        <Border.Background>
+            <LinearGradientBrush>
+                <GradientStop Color="#a1c4fd" Offset="0"/>
+                <GradientStop Color="#FFC2E9FB" Offset="1"/>
+            </LinearGradientBrush>
+        </Border.Background>
+        <!--ANNOTATIONS - TO BE ADDED-->
+        <oxy:PlotView Model="">
+            <oxy:PlotView.DefaultTrackerTemplate>
+                <ControlTemplate>
+                    <oxy:TrackerControl Position="{Binding Position}" 
+                                        BorderBrush="Transparent"
+                                        BorderThickness="0"
+                                        VerticalLineVisibility="Collapsed"
+                                        HorizontalLineVisibility="Collapsed"
+                                        >
+                        <oxy:TrackerControl.Background>
+                            <SolidColorBrush Color="Transparent"/>
+                        </oxy:TrackerControl.Background>
+                        <oxy:TrackerControl.Content>
+                            <Border CornerRadius="6"
+                                    Background="#ccffffff">
+                                <TextBlock Text="{Binding}" Margin="7" Foreground="Black"/>
+                            </Border>
+                        </oxy:TrackerControl.Content>
+                    </oxy:TrackerControl>
+                </ControlTemplate>
+            </oxy:PlotView.DefaultTrackerTemplate>
+        </oxy:PlotView>
+        <oxy:Plot  PlotAreaBorderColor="Transparent"
+                  Background="{Binding Background, ElementName=PlotBorder}"
+                  IsEnabled="True"
+                  Margin="2"
+                  Padding="-1 10 -2 0"
+                  DefaultFont="Open Sans"
+                  SelectionColor="Blue">
+            <oxy:Plot.Axes>
+                <oxy:LinearAxis MinorStep="1" Position="Left"
+                                Title="Binding energy per nucleon (MeV)"
+                                Maximum="9"
+                                MajorTickSize="6"
+                                IntervalLength="22"
+                                AxisTitleDistance="10"
+                                FontSize="10"
+                                />
+                <oxy:LinearAxis Position="Bottom"
+                                Title="Nucleons in nucleus"
+                                Maximum="294"
+                                MinorTickSize="0"
+                                MajorTickSize="6"
+                                IntervalLength="30"
+                                FontSize="10"
+                                />
+            </oxy:Plot.Axes>
+            <oxy:Plot.Series>
+                <oxy:LineSeries ItemsSource="{Binding PeriodicTablePlotViewModel.DataPoints, Mode=OneWay, Source={StaticResource mainVM}}"
+                                MarkerFill="Black"
+                                MarkerType="Diamond"
+                                LineJoin="Round"
+                                LineStyle="Dash"
+                                >
+                </oxy:LineSeries>
+            </oxy:Plot.Series>
+        </oxy:Plot>
+    </Border>
 </UserControl>

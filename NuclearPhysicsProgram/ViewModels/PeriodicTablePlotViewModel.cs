@@ -20,16 +20,47 @@ namespace NuclearPhysicsProgram.ViewModels {
         private ObservableCollection<DataPoint> bindingEnergyDataPoints;
 
         public ObservableCollection<DataPoint> DataPoints { get; private set; }
+        public PlotModel PlotModel { get; private set; }
 
         public PeriodicTablePlotViewModel() {
             massDefects = new double[118];
             bindingEnergyDataPoints = new ObservableCollection<DataPoint>();
             DataPoints = new ObservableCollection<DataPoint>();
+            PlotModel = new PlotModel();
             SetupDataPoints();
+
+            var transparent = OxyColor.FromArgb(0, 0, 0, 0);
+            PlotModel.PlotAreaBorderColor = transparent;
+            PlotModel.Background = transparent;
+            PlotModel.PlotMargins = new OxyThickness(2);
+            PlotModel.Padding = new OxyThickness(-1, 10, -2, 0);
+            PlotModel.DefaultFont = "Open Sans";
+            var leftAxis = new OxyPlot.Axes.LinearAxis {
+                MinorStep = 1,
+                Position = OxyPlot.Axes.AxisPosition.Left,
+                Title = "Binding energy per nucleon (MeV)",
+                Maximum = 9,
+                MajorTickSize = 6,
+                IntervalLength = 22,
+                AxisTitleDistance = 10,
+                FontSize = 10
+            };
+            var rightAxis = new OxyPlot.Axes.LinearAxis {
+                Position = OxyPlot.Axes.AxisPosition.Bottom,
+                Title = "Nucleons in nucleus",
+                Maximum = 294,
+                MinorTickSize = 0,
+                MajorTickSize = 6,
+                IntervalLength = 30,
+                FontSize = 10
+            };
+            PlotModel.Axes.Add(leftAxis);
+            PlotModel.Axes.Add(rightAxis);
         }
 
         private async void SetupDataPoints() {
             await WaitForElements();
+            double lastBindingEnergy = 7;
             for (int i = 0; i < ElementViewModel.ElementDataDictionary.Count; i++) {
                 var element = ElementViewModel.ElementDataDictionary.Values.ElementAt(i);
                 double elementMass = ElementViewModel.GetMassInAMU(element);
@@ -38,7 +69,7 @@ namespace NuclearPhysicsProgram.ViewModels {
                 double bindingEnergyMeVPerNucleon = bindingEnergyMeV / element.MassNumber;
                 if (element.Symbol == "H")
                     bindingEnergyDataPoints.Add(new DataPoint(0, 0));
-                if (bindingEnergyMeVPerNucleon < 0 || bindingEnergyMeVPerNucleon > 9)
+                if (bindingEnergyMeVPerNucleon < 0 || bindingEnergyMeVPerNucleon > 9 || bindingEnergyMeVPerNucleon < lastBindingEnergy - 1 || bindingEnergyMeVPerNucleon > lastBindingEnergy + 1)
                     continue;
                 else {
                     bindingEnergyDataPoints.Add(new DataPoint(element.MassNumber, bindingEnergyMeVPerNucleon));

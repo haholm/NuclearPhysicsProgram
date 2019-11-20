@@ -41,16 +41,30 @@
                     Margin="0 60 0 0"
                     Width="1050"
                     Height="600">
+                <Border Canvas.Left="120" 
+                        Canvas.Top="-10" 
+                        Width="574"
+                        Height="280" 
+                        CornerRadius="6"
+                        Background="LightGray">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="8"
+                                          ShadowDepth="2"
+                                          Direction="-65"
+                                          Opacity="0.25"
+                                          Color="Black"/>
+                    </Border.Effect>
+                </Border>
+                <periodicTableViews:PeriodicTablePlotView Canvas.Left="120" 
+                                                          Canvas.Top="-10" 
+                                                          Width="574"
+                                                          Height="280"/>
                 <periodicTableViews:PeriodicTableView Canvas.Top="100"
                                                       Width="1050"
                                                       Height="400">
                 </periodicTableViews:PeriodicTableView>
-                <periodicTableViews:PeriodicTablePlotView Width="800"
-                                                          Height="500"/>
             </Canvas>
         </Border>
-
-        <!--<TextBlock FontSize="60">Larger card up here?</TextBlock>-->
 
         <views:ElementInfoView Grid.ColumnSpan="2" HorizontalAlignment="Stretch"
                                VerticalAlignment="Stretch"
