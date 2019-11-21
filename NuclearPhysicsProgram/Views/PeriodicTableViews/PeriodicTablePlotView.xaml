@@ -12,12 +12,18 @@
             BorderThickness="0">
         <Border.Background>
             <LinearGradientBrush>
-                <GradientStop Color="#a1c4fd" Offset="0"/>
-                <GradientStop Color="#FFC2E9FB" Offset="1"/>
+                <!--<GradientStop Color="#a1c4fd" Offset="0"/>
+                <GradientStop Color="#FFC2E9FB" Offset="1"/>-->
+                <GradientStop Color="#243949" Offset="-0.5"/>
+                <GradientStop Color="#517fa4" Offset="1"/>
             </LinearGradientBrush>
         </Border.Background>
         <!--ANNOTATIONS - TO BE ADDED-->
-        <oxy:PlotView Model="">
+        <oxy:PlotView Model="{Binding PeriodicTablePlotViewModel.PlotModel, Mode=OneWay, Source={StaticResource mainVM}}"
+                      Margin="2"
+                      Padding="-1 10 -2 0"
+                      Background="Transparent"
+                      >
             <oxy:PlotView.DefaultTrackerTemplate>
                 <ControlTemplate>
                     <oxy:TrackerControl Position="{Binding Position}" 
@@ -32,6 +38,7 @@
                         <oxy:TrackerControl.Content>
                             <Border CornerRadius="6"
                                     Background="#ccffffff">
+                                <!---->
                                 <TextBlock Text="{Binding}" Margin="7" Foreground="Black"/>
                             </Border>
                         </oxy:TrackerControl.Content>
@@ -39,7 +46,7 @@
                 </ControlTemplate>
             </oxy:PlotView.DefaultTrackerTemplate>
         </oxy:PlotView>
-        <oxy:Plot  PlotAreaBorderColor="Transparent"
+        <!--<oxy:Plot  PlotAreaBorderColor="Transparent"
                   Background="{Binding Background, ElementName=PlotBorder}"
                   IsEnabled="True"
                   Margin="2"
@@ -73,6 +80,6 @@
                                 >
                 </oxy:LineSeries>
             </oxy:Plot.Series>
-        </oxy:Plot>
+        </oxy:Plot>-->
     </Border>
 </UserControl>

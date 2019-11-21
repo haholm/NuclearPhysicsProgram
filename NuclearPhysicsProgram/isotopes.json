@@ -7951,13 +7951,13 @@
             "Product": "Rg",
             "AtomicNumber": 111,
             "MassNumber": 280
-          },
-          {
-            "Type": "EC",
-            "Product": "Cn",
-            "AtomicNumber": 112,
-            "MassNumber": 284
-          }
+          }//,
+          //{ Causes issues
+          //  "Type": "EC",
+          //  "Product": "Cn",
+          //  "AtomicNumber": 112,
+          //  "MassNumber": 284
+          //}
         ]
       },
       {

@@ -15,52 +15,55 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
 
     public class ElementInfoViewModel : PropertyHandler.NotifyPropertyChanged {
         private const int infoPages = 2;
-        private int currentInfoPage = 0;
+        private int currentInfoPage = 1;
         private double? infoProtons;
         private double? infoNeutrons;
         private double? plotViewCanvasLeft;
         private double? plotViewOpacity;
         private Storyboard plotViewStoryboard;
+        private bool? isArrowLeftEnabled;
+        private bool? isArrowRightEnabled;
 
         public static IsotopeDataModel CurrentIsotopeData { get; set; }
         public ICommand SwitchInfoCommand { get; private set; }
-        /// set from mainvm
         public double? InfoProtons { get => infoProtons; set { infoProtons = value; SetPropertyChanged(this, "InfoProtons"); } }
         public double? InfoNeutrons { get => infoNeutrons; set { infoNeutrons = value; SetPropertyChanged(this, "InfoNeutrons"); } }
         public double? PlotViewOpacity { get => plotViewOpacity; set { plotViewOpacity = value; SetPropertyChanged(this, "PlotViewOpacity"); } }
         public Storyboard PlotViewStoryboard { get => plotViewStoryboard; set { plotViewStoryboard = value; SetPropertyChanged(this, "PlotViewStoryboard"); } }
+        public bool? IsArrowLeftEnabled {
+            get => isArrowLeftEnabled;
+            private set {
+                isArrowLeftEnabled = value;
+                SetPropertyChanged(this, "IsArrowLeftEnabled");
+                SetPropertyChanged(this, "ArrowLeftOpacity");
+            }
+        }
+        public bool? IsArrowRightEnabled {
+            get => isArrowRightEnabled;
+            private set {
+                isArrowRightEnabled = value;
+                SetPropertyChanged(this, "IsArrowRightEnabled");
+                SetPropertyChanged(this, "ArrowRightOpacity");
+            }
+        }
+        public double? ArrowLeftOpacity { get => isArrowLeftEnabled.GetValueOrDefault() ? 1 : 0.25; }
+        public double? ArrowRightOpacity { get => isArrowRightEnabled.GetValueOrDefault() ? 1 : 0.25; }
 
         public ElementInfoViewModel() {
             SwitchInfoCommand = new SwitchInfoCommand(this);
+            IsArrowRightEnabled = true;
         }
 
         public void SwitchInfo(string direction) {
-            if (direction == "right" && currentInfoPage < infoPages) {
-                /// 
-                /// Quick prototype, will clean up
-                ///
-
+            if (direction == "r" && currentInfoPage < infoPages)
                 ++currentInfoPage;
-                plotViewStoryboard = new Storyboard();
-                Storyboard.SetTargetName(plotViewStoryboard, "PlotView");
-                Storyboard.SetTargetProperty(plotViewStoryboard, new PropertyPath("(Canvas.Left)"));
-                DoubleAnimation da = new DoubleAnimation();
-                ElasticEase ef = new ElasticEase();
-                ef.Springiness = 12;
-                ef.Oscillations = 1;
-                da.EasingFunction = ef;
-                da.FillBehavior = FillBehavior.HoldEnd;
-                 
-                da.Duration = new Duration(new TimeSpan(0, 0, 0, 0, 600));
-                plotViewStoryboard.Children.Add(da);
-                //NotifyPropertyChanged after configuration
-                SetPropertyChanged(this, "PlotViewStoryboard");
-            }
-            else if (currentInfoPage > 0) {
+            else if (currentInfoPage > 0)
                 --currentInfoPage;
-            }
             else
                 return;
+
+            IsArrowRightEnabled = currentInfoPage != 2 ? true : false;
+            IsArrowLeftEnabled = currentInfoPage != 1 ? true : false;
         }
     }
 }

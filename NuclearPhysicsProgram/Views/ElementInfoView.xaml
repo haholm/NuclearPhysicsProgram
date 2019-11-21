@@ -14,7 +14,7 @@
     <!--Margin="100,40,50,40"-->
     <Border x:Name="Border"
             
-            Background="#f0f2f0"
+            Background="#3F3F3F "
             CornerRadius="0">
         <Grid Margin="16">
             <Border Name="CloseBorder"
@@ -69,7 +69,8 @@
                             </BeginStoryboard>
                         </EventTrigger>
                     </Button.Triggers>
-                    <TextBlock x:Name="CloseTextBlock" HorizontalAlignment="Center"
+                    <TextBlock x:Name="CloseTextBlock" 
+                               HorizontalAlignment="Center"
                                VerticalAlignment="Center"
                                FontSize="18"
                                Padding="0.3"
@@ -95,12 +96,12 @@
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0.5,0" 
                                          EndPoint="0.6,1">
-                        <GradientStop Color="#29323c" Offset="-1"/>
-                        <GradientStop Color="#485563" Offset="1"/>
+                        <GradientStop Color="#505285" Offset="-1"/>
+                        <GradientStop Color="#65689f " Offset="1"/>
                     </LinearGradientBrush>
                 </Border.Background>
                 <Canvas x:Name="InfoPagesCanvas"
-                        Margin="00 0 0 0">
+                        Margin="600 0 0 0">
                     <Grid Width="{Binding ActualWidth, ElementName=InfoPagesBorder}" 
                           Height="{Binding ActualHeight, ElementName=InfoPagesBorder}"
                           Canvas.Left="-600">
@@ -177,7 +178,7 @@
                                                    Opacity="{Binding PlotViewOpacity, TargetNullValue='1'}"
                                                    Padding="30 30 30 40"
                                                    />
-                    </Grid>
+                    </Grid> <!--???-->
                 </Canvas>
             </Border>
             <StackPanel HorizontalAlignment="Center"
@@ -186,11 +187,13 @@
                         Margin="0 340 0 0"
                         >
                 <Button Style="{StaticResource NoStyle}" 
+                        IsEnabled="{Binding IsArrowLeftEnabled}"
+                        Opacity="{Binding ArrowLeftOpacity}"
                         Margin="0 0 10 0"
                         Width="20"
                         Height="20"
                         Command="{Binding SwitchInfoCommand}"
-                        CommandParameter="right">
+                        CommandParameter="l">
                     <Button.Triggers>
                         <EventTrigger RoutedEvent="PreviewMouseDown">
                             <BeginStoryboard>
@@ -219,9 +222,13 @@
                     </Image>
                 </Button>
                 <Button Style="{StaticResource NoStyle}"
+                        IsEnabled="{Binding IsArrowRightEnabled}"
+                        Opacity="{Binding ArrowRightOpacity, FallbackValue=1}"
                         Margin="10 0 0 0"
                         Width="20"
-                        Height="20">
+                        Height="20"
+                        Command="{Binding SwitchInfoCommand}"
+                        CommandParameter="r">
                     <Button.Triggers>
                         <EventTrigger RoutedEvent="PreviewMouseDown" >
                             <BeginStoryboard>
