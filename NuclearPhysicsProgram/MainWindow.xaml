@@ -29,7 +29,7 @@
         <periodicTableViews:SideMenuView Grid.Column="0" />
 
         <Border Grid.Column="1"
-                Background="#323232 "
+                Background="#323232"
                 CornerRadius="20 0 0 20"
                 RenderTransformOrigin="0.5 0.5">
             <Border.LayoutTransform>
@@ -61,7 +61,7 @@
                                                           Height="280"/>
                 <periodicTableViews:PeriodicTableView Canvas.Top="100"
                                                       Width="1050"
-                                                      Height="400">
+                                                      Height="400" >
                 </periodicTableViews:PeriodicTableView>
             </Canvas>
         </Border>

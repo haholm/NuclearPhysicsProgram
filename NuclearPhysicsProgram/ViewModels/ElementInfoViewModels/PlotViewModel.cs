@@ -36,7 +36,7 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
         public void SetupPlot(IsotopeModel isotope) {
             currentIsotope = isotope;
             DataPoints.Clear();
-            double halfLife = GetHalfLife(isotope);
+            double halfLife = ElementViewModel.GetHalfLife(isotope);
             if (halfLife == 0) {
                 Effect = blurryEffect;
                 Unit = " ";
@@ -62,21 +62,6 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
         }
 
         private double CalculateNumberOfNuclides(double halfLife, double time) => MaximumNuclides.GetValueOrDefault(100) * Math.Pow(0.5, time / halfLife);
-
-        private double GetHalfLife(IsotopeModel isotope) {
-            string halfLifeString = isotope.HalfLife.Replace(",", "").Replace(".", ",");
-            if (halfLifeString == string.Empty || halfLifeString == "?")
-                return 0;
-
-            if (halfLifeString.Contains("e")) {
-                double.TryParse(halfLifeString.Substring(0, halfLifeString.IndexOf("e")), out double firstNumber);
-                int.TryParse(halfLifeString.Substring(halfLifeString.IndexOf("e") + 1), out int power);
-                return firstNumber * Math.Pow(10, power);
-            }
-            else {
-                return double.Parse(halfLifeString);
-            }
-        }
 
         private string ConvertToAppropriateUnit(ref double halfLife) {
             if (halfLife > TimeSpan.MaxValue.TotalSeconds) {

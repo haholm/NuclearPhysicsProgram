@@ -24,7 +24,8 @@ namespace NuclearPhysicsProgram.ViewModels {
         private IsotopeDataModel currentIsotopeData;
         private double? periodicTableScale;
         private bool mainWindowSizeChanged;
-        private Visibility? itemViewPropertyColorVisibility;
+        private Visibility? itemViewAERColorVisibility;
+        private Visibility? itemViewInstabilityColorVisibility;
 
         /// Ta med binding energy
 
@@ -47,7 +48,8 @@ namespace NuclearPhysicsProgram.ViewModels {
         public Visibility? PeriodicTableViewVisibility { get => periodicTableViewVisibility; private set { periodicTableViewVisibility = value; SetPropertyChanged(this, "PeriodicTableViewVisibility"); } }
         public double? PeriodicTableViewOpacity { get => periodicTableViewOpacity; private set { periodicTableViewOpacity = value; SetPropertyChanged(this, "PeriodicTableViewOpacity"); } }
         public double? PeriodicTableScale { get => periodicTableScale; private set { periodicTableScale = value; SetPropertyChanged(this, "PeriodicTableScale"); } }
-        public Visibility? ItemViewPropertyColorVisibility { get => itemViewPropertyColorVisibility; set { itemViewPropertyColorVisibility = value; SetPropertyChanged(this, "ItemViewPropertyColorVisibility"); } }
+        public Visibility? ItemViewAERColorVisibility { get => itemViewAERColorVisibility; set { itemViewAERColorVisibility = value; SetPropertyChanged(this, "ItemViewAERColorVisibility"); } }
+        public Visibility? ItemViewInstabilityColorVisibility { get => itemViewInstabilityColorVisibility; set { itemViewInstabilityColorVisibility = value; SetPropertyChanged(this, "ItemViewInstabilityColorVisibility"); } }
         public IsotopeDataModel CurrentIsotopeData { get => currentIsotopeData; private set { currentIsotopeData = value; SetPropertyChanged(this, "CurrentIsotopeData"); } }
 
         public MainViewModel() {
@@ -107,22 +109,39 @@ namespace NuclearPhysicsProgram.ViewModels {
         }
 
         private void ToggleInstabilityColor() {
-            switch (ItemViewPropertyColorVisibility) {
+            if (ItemViewAERColorVisibility == Visibility.Visible)
+                ToggleEnergyColor();
+
+            switch (ItemViewInstabilityColorVisibility) {
                 case Visibility.Visible:
-                    ItemViewPropertyColorVisibility = Visibility.Hidden;
+                    ItemViewInstabilityColorVisibility = Visibility.Hidden;
                     return;
                 case Visibility.Hidden:
-                    ItemViewPropertyColorVisibility = Visibility.Visible;
+                    ItemViewInstabilityColorVisibility = Visibility.Visible;
                     return;
                 default:
-                    //In case ItemViewPropertyColorVisibility was never set;
-                    ItemViewPropertyColorVisibility = Visibility.Visible;
+                    //In case ItemViewAERColorVisibility was never set;
+                    ItemViewInstabilityColorVisibility = Visibility.Visible;
                     return;
             }
         }
 
         private void ToggleEnergyColor() {
+            if (ItemViewInstabilityColorVisibility == Visibility.Visible)
+                ToggleInstabilityColor();
 
+            switch (ItemViewAERColorVisibility) {
+                case Visibility.Visible:
+                    ItemViewAERColorVisibility = Visibility.Hidden;
+                    return;
+                case Visibility.Hidden:
+                    ItemViewAERColorVisibility = Visibility.Visible;
+                    return;
+                default:
+                    //In case ItemViewAERColorVisibility was never set;
+                    ItemViewAERColorVisibility = Visibility.Visible;
+                    return;
+            }
         }
 
         public void InitializeIsotopeData(string symbol, int massNumber) {

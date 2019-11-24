@@ -73,6 +73,21 @@ namespace NuclearPhysicsProgram.ViewModels {
             return isotopeList.First();
         }
 
+        public static double GetHalfLife(IsotopeModel isotope) {
+            string halfLifeString = isotope.HalfLife.Replace(",", "").Replace(".", ",");
+            if (halfLifeString == string.Empty || halfLifeString == "?")
+                return 0;
+
+            if (halfLifeString.Contains("e")) {
+                double.TryParse(halfLifeString.Substring(0, halfLifeString.IndexOf("e")), out double firstNumber);
+                int.TryParse(halfLifeString.Substring(halfLifeString.IndexOf("e") + 1), out int power);
+                return firstNumber * Math.Pow(10, power);
+            }
+            else {
+                return double.Parse(halfLifeString);
+            }
+        }
+
         public static double GetMassInAMU(ElementDataModel element) =>
                 (element.AtomicNumber * Constants.Proton.Mass.AtomicMassUnits) + 
                 ((element.MassNumber - element.AtomicNumber) * Constants.Neutron.Mass.AtomicMassUnits);
@@ -127,15 +142,16 @@ namespace NuclearPhysicsProgram.ViewModels {
                 AddPeriodicTableElement(Elements[i], SeventhRightElements);
         }
 
-        List<double> energies = new List<double>();
-
         private void AddPeriodicTableElement(ElementDataModel element, ObservableCollection<PeriodicTableElementModel> to) {
             double avarageEnergyReleased = mainViewModel.DecayChainViewModel.SetupDecayChains(element);
-            energies.Add(avarageEnergyReleased);
             double normalizedAER = avarageEnergyReleased / 2.4085595817117E-09;
             var aerColor = System.Windows.Media.Color.FromArgb(255, 255, (byte)(255 - (Math.Abs(normalizedAER)/* hm */ * 255)), (byte)(255 - (Math.Abs(normalizedAER)/* hm */ * 255)));
             var aerSolidColorBrush = new System.Windows.Media.SolidColorBrush(aerColor);
-            to.Add(new PeriodicTableElementModel(element, aerSolidColorBrush));
+            double halfLife = GetHalfLife(GetIsotope(element.Symbol, element.MassNumber));
+            double normalizedHalfLife = halfLife / 2.4930504E+28;
+            var instabilityColor = System.Windows.Media.Color.FromArgb(255, 255, (byte)(255 - (normalizedHalfLife * 255)), (byte)(255 - (normalizedHalfLife * 255)));
+            var instabilitySolidColorBrush = new System.Windows.Media.SolidColorBrush(instabilityColor);
+            to.Add(new PeriodicTableElementModel(element, aerSolidColorBrush, instabilitySolidColorBrush));
         }
 
         private ValueTuple<ObservableCollection<ElementDataModel>, ObservableCollection<IsotopeDataModel>> LoadElementData() => 

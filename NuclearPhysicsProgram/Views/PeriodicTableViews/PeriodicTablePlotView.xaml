@@ -15,7 +15,7 @@
                 <!--<GradientStop Color="#a1c4fd" Offset="0"/>
                 <GradientStop Color="#FFC2E9FB" Offset="1"/>-->
                 <GradientStop Color="#243949" Offset="-0.5"/>
-                <GradientStop Color="#517fa4" Offset="1"/>
+                <GradientStop Color="#517FA4" Offset="1"/>
             </LinearGradientBrush>
         </Border.Background>
         <!--ANNOTATIONS - TO BE ADDED-->

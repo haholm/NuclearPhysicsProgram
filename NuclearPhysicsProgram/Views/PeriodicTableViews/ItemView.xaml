@@ -12,7 +12,7 @@
             CornerRadius="6"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
-            Background="#FFEBEBEB">
+            Background="#FF686868">
         <Grid>
             <StackPanel Orientation="Horizontal" 
                         VerticalAlignment="Stretch"
@@ -21,14 +21,16 @@
                            FontSize="10"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Top" 
-                           Padding="1 10"/>
+                           Padding="1 10"
+                           Foreground="White"/>
 
                 <TextBlock Text="{Binding Path=Symbol, FallbackValue='Sy', RelativeSource={RelativeSource AncestorType=local:ItemView}}"
                            FontFamily="{StaticResource OpenSansLight}"
                            FontSize="{Binding Path=SymbolFontSize, FallbackValue='20', RelativeSource={RelativeSource AncestorType=local:ItemView}}"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center" 
-                           Padding="1 0"/>
+                           Padding="1 0"
+                           Foreground="White"/>
             </StackPanel>
 
             <Border Visibility="{Binding Path=PropertiesColorVisibility, RelativeSource={RelativeSource AncestorType=local:ItemView}}"
@@ -37,8 +39,27 @@
                     Margin="3"
                     Width="8"
                     Height="8">
-                <Border Background="{Binding Path=PropertiesColor, RelativeSource={RelativeSource AncestorType=local:ItemView}}"
-                        Visibility="{Binding Path=ItemViewPropertyColorVisibility, TargetNullValue='Hidden', Source={StaticResource mainVM}}"
+                <Border Background="{Binding Path=InstabilityColor, RelativeSource={RelativeSource AncestorType=local:ItemView}}"
+                        Visibility="{Binding Path=ItemViewAERColorVisibility, TargetNullValue='Hidden', Source={StaticResource mainVM}}"
+                        CornerRadius="4"
+                        BorderThickness="0.5"
+                        BorderBrush="Black">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="8"
+                                          ShadowDepth="1"
+                                          Opacity="0.25" 
+                                          Color="Black"/>
+                    </Border.Effect>
+                </Border>
+            </Border>
+            <Border Visibility="{Binding Path=PropertiesColorVisibility, RelativeSource={RelativeSource AncestorType=local:ItemView}}"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Right"
+                    Margin="3"
+                    Width="8"
+                    Height="8">
+                <Border Background="{Binding Path=AERColor, RelativeSource={RelativeSource AncestorType=local:ItemView}}"
+                        Visibility="{Binding Path=ItemViewInstabilityColorVisibility, TargetNullValue='Hidden', Source={StaticResource mainVM}}"
                         CornerRadius="4"
                         BorderThickness="0.5"
                         BorderBrush="Black">
@@ -55,10 +76,11 @@
                      HorizontalAlignment="Center"
                      VerticalAlignment="Bottom"
                      MaxHeight="12"
-                     Margin="3 0 1 0">
+                     Margin="1 0 1 0">
                 <TextBlock Text="{Binding Path=EName, FallbackValue='', RelativeSource={RelativeSource AncestorType=local:ItemView}}"
-                           FontFamily="{StaticResource OpenSansRegular}"
-                           FontSize="12"/>
+                           FontFamily="{StaticResource OpenSansLight}"
+                           FontSize="12"
+                           Foreground="White"/>
             </Viewbox>
         </Grid>
     </Border>

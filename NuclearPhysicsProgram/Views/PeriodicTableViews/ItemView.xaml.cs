@@ -40,12 +40,19 @@ namespace NuclearPhysicsProgram.Views.PeriodicTableViews {
         public static readonly DependencyProperty SymbolFontSizeProperty = DependencyProperty.Register(
             "SymbolFontSize", typeof(double?), typeof(ItemView), new PropertyMetadata(0.0));
 
-        public SolidColorBrush PropertiesColor {
-            get => GetValue(PropertiesColorProperty) as SolidColorBrush;
-            set => SetValue(PropertiesColorProperty, value);
+        public SolidColorBrush InstabilityColor {
+            get => GetValue(InstabilityColorProperty) as SolidColorBrush;
+            set => SetValue(InstabilityColorProperty, value);
         }
-        public static readonly DependencyProperty PropertiesColorProperty = DependencyProperty.Register(
-            "PropertiesColor", typeof(SolidColorBrush), typeof(ItemView), new PropertyMetadata(new SolidColorBrush()));
+        public static readonly DependencyProperty InstabilityColorProperty = DependencyProperty.Register(
+            "InstabilityColor", typeof(SolidColorBrush), typeof(ItemView), new PropertyMetadata(new SolidColorBrush()));
+
+        public SolidColorBrush AERColor {
+            get => GetValue(AERColorProperty) as SolidColorBrush;
+            set => SetValue(AERColorProperty, value);
+        }
+        public static readonly DependencyProperty AERColorProperty = DependencyProperty.Register(
+            "AERColor", typeof(SolidColorBrush), typeof(ItemView), new PropertyMetadata(new SolidColorBrush()));
 
         public Visibility? PropertiesColorVisibility {
             get => GetValue(PropertiesColorVisibilityProperty) as Visibility?;

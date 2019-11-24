@@ -23,7 +23,7 @@
             <Setter Property="Width" Value="{Binding PeriodicTableItemWidth, Source={StaticResource pTableVM}, TargetNullValue=60}"/>
             <Setter Property="Height" Value="{Binding PeriodicTableItemHeight, Source={StaticResource pTableVM}, TargetNullValue=60}"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="BorderBrush" Value="#FFEBEBEB"/>
+            <Setter Property="BorderBrush" Value="Black"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="CornerRadius" Value="6"/>
             <Setter Property="Margin" Value="{Binding PeriodicTableItemMargin, Source={StaticResource pTableVM}}"/>
@@ -151,7 +151,8 @@
                                             VerticalAlignment="Stretch"
                                             Symbol="{Binding Element.Symbol}"
                                             AtomicNumber="{Binding Element.AtomicNumber}"
-                                            PropertiesColor="{Binding AERColor}"
+                                            InstabilityColor="{Binding InstabilityColor}"
+                                            AERColor="{Binding AERColor}"
                                             EName="{Binding Element.Name}"
                                             />
                         </Button>
@@ -197,7 +198,8 @@
                                             VerticalAlignment="Stretch"
                                             Symbol="{Binding Element.Symbol}"
                                             AtomicNumber="{Binding Element.AtomicNumber}"
-                                            PropertiesColor="{Binding AERColor}"
+                                            InstabilityColor="{Binding InstabilityColor}"
+                                            AERColor="{Binding AERColor}"
                                             EName="{Binding Element.Name}"
                                             />
                         </Button>
@@ -242,7 +244,8 @@
                                             VerticalAlignment="Stretch"
                                             Symbol="{Binding Element.Symbol}"
                                             AtomicNumber="{Binding Element.AtomicNumber}"
-                                            PropertiesColor="{Binding AERColor}"
+                                            InstabilityColor="{Binding InstabilityColor}"
+                                            AERColor="{Binding AERColor}"
                                             EName="{Binding Element.Name}"
                                             />
                         </Button>
@@ -288,7 +291,8 @@
                                             VerticalAlignment="Stretch"
                                             Symbol="{Binding Element.Symbol}"
                                             AtomicNumber="{Binding Element.AtomicNumber}"
-                                            PropertiesColor="{Binding AERColor}"
+                                            InstabilityColor="{Binding InstabilityColor}"
+                                            AERColor="{Binding AERColor}"
                                             EName="{Binding Element.Name}"
                                             />
                         </Button>
@@ -334,7 +338,8 @@
                                             VerticalAlignment="Stretch"
                                             Symbol="{Binding Element.Symbol}"
                                             AtomicNumber="{Binding Element.AtomicNumber}"
-                                            PropertiesColor="{Binding AERColor}"
+                                            InstabilityColor="{Binding InstabilityColor}"
+                                            AERColor="{Binding AERColor}"
                                             EName="{Binding Element.Name}"
                                             />
                         </Button>
@@ -379,7 +384,8 @@
                                             VerticalAlignment="Stretch"
                                             Symbol="{Binding Element.Symbol}"
                                             AtomicNumber="{Binding Element.AtomicNumber}"
-                                            PropertiesColor="{Binding AERColor}"
+                                            InstabilityColor="{Binding InstabilityColor}"
+                                            AERColor="{Binding AERColor}"
                                             EName="{Binding Element.Name}"
                                             />
                         </Button>
@@ -424,7 +430,8 @@
                                             VerticalAlignment="Stretch"
                                             Symbol="{Binding Element.Symbol}"
                                             AtomicNumber="{Binding Element.AtomicNumber}"
-                                            PropertiesColor="{Binding AERColor}"
+                                            InstabilityColor="{Binding InstabilityColor}"
+                                            AERColor="{Binding AERColor}"
                                             EName="{Binding Element.Name}"
                                             />
                         </Button>
@@ -469,7 +476,8 @@
                                             VerticalAlignment="Stretch"
                                             Symbol="{Binding Element.Symbol}"
                                             AtomicNumber="{Binding Element.AtomicNumber}"
-                                            PropertiesColor="{Binding AERColor}"
+                                            InstabilityColor="{Binding InstabilityColor}"
+                                            AERColor="{Binding AERColor}"
                                             EName="{Binding Element.Name}"
                                             />
                         </Button>
@@ -513,7 +521,8 @@
                                             VerticalAlignment="Stretch"
                                             Symbol="{Binding Element.Symbol}"
                                             AtomicNumber="{Binding Element.AtomicNumber}"
-                                            PropertiesColor="{Binding AERColor}"
+                                            InstabilityColor="{Binding InstabilityColor}"
+                                            AERColor="{Binding AERColor}"
                                             EName="{Binding Element.Name}"
                                             />
                         </Button>
@@ -558,7 +567,8 @@
                                             VerticalAlignment="Stretch"
                                             Symbol="{Binding Element.Symbol}"
                                             AtomicNumber="{Binding Element.AtomicNumber}"
-                                            PropertiesColor="{Binding AERColor}"
+                                            InstabilityColor="{Binding InstabilityColor}"
+                                            AERColor="{Binding AERColor}"
                                             EName="{Binding Element.Name}"
                                             />
                         </Button>
@@ -651,7 +661,8 @@
                                                     VerticalAlignment="Stretch"
                                                     Symbol="{Binding Element.Symbol}"
                                                     AtomicNumber="{Binding Element.AtomicNumber}"
-                                                    PropertiesColor="{Binding AERColor}"
+                                                    InstabilityColor="{Binding InstabilityColor}"
+                                                    AERColor="{Binding AERColor}"
                                                     EName="{Binding Element.Name}"
                                                     />
                                 </Button>
@@ -698,7 +709,8 @@
                                             VerticalAlignment="Stretch"
                                             Symbol="{Binding Element.Symbol}"
                                             AtomicNumber="{Binding Element.AtomicNumber}"
-                                            PropertiesColor="{Binding AERColor}"
+                                            InstabilityColor="{Binding InstabilityColor}"
+                                            AERColor="{Binding AERColor}"
                                             EName="{Binding Element.Name}"
                                             />
                         </Button>
@@ -743,7 +755,8 @@
                                             VerticalAlignment="Stretch"
                                             Symbol="{Binding Element.Symbol}"
                                             AtomicNumber="{Binding Element.AtomicNumber}"
-                                            PropertiesColor="{Binding AERColor}"
+                                            InstabilityColor="{Binding InstabilityColor}"
+                                            AERColor="{Binding AERColor}"
                                             EName="{Binding Element.Name}"
                                             />
                         </Button>
@@ -836,7 +849,8 @@
                                                     VerticalAlignment="Stretch"
                                                     Symbol="{Binding Element.Symbol}"
                                                     AtomicNumber="{Binding Element.AtomicNumber}"
-                                                    PropertiesColor="{Binding AERColor}"
+                                                    InstabilityColor="{Binding InstabilityColor}"
+                                                    AERColor="{Binding AERColor}"
                                                     EName="{Binding Element.Name}"
                                                     />
                                 </Button>
