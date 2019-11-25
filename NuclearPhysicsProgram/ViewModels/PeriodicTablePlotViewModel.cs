@@ -19,13 +19,17 @@ namespace NuclearPhysicsProgram.ViewModels {
         private double[] massDefects;
         private ObservableCollection<DataPoint> bindingEnergyDataPoints;
 
+        public static string LeftTitle { get => "Binding energy per nucleon (MeV)"; }
+        public static string BottomTitle { get => "Nucleons in nucleus"; }
         public ObservableCollection<DataPoint> DataPoints { get; private set; }
+        public static List<(string elementName, int nucleons, int atomicNumber)> OpenDataPoints { get; private set; }
         public PlotModel PlotModel { get; private set; }
 
         public PeriodicTablePlotViewModel() {
             massDefects = new double[118];
             bindingEnergyDataPoints = new ObservableCollection<DataPoint>();
             DataPoints = new ObservableCollection<DataPoint>();
+            OpenDataPoints = new List<(string, int, int)>();
             PlotModel = new PlotModel();
             InitializePlot();
         }
@@ -46,11 +50,14 @@ namespace NuclearPhysicsProgram.ViewModels {
                 double bindingEnergyMeVPerNucleon = bindingEnergyMeV / element.MassNumber;
                 if (element.Symbol == "H")
                     bindingEnergyDataPoints.Add(new DataPoint(0, 0));
-                if (bindingEnergyMeVPerNucleon < 0 || bindingEnergyMeVPerNucleon > 9 || bindingEnergyMeVPerNucleon < lastBindingEnergy - 2 || bindingEnergyMeVPerNucleon > lastBindingEnergy + 2)
+                else if (bindingEnergyMeVPerNucleon < 0 || bindingEnergyMeVPerNucleon > 9 || bindingEnergyMeVPerNucleon < lastBindingEnergy - 2 || bindingEnergyMeVPerNucleon > lastBindingEnergy + 2)
                     continue;
                 else {
                     bindingEnergyDataPoints.Add(new DataPoint(element.MassNumber, bindingEnergyMeVPerNucleon));
                 }
+
+                ElementViewModel.ElementDataDictionary.TryGetValue(element.Symbol, out var elementData);
+                OpenDataPoints.Add((elementData.Name, (int)bindingEnergyDataPoints.Last().X, elementData.AtomicNumber));
             }
 
             DataPoints = bindingEnergyDataPoints;
@@ -64,7 +71,7 @@ namespace NuclearPhysicsProgram.ViewModels {
             var leftAxis = new OxyPlot.Axes.LinearAxis {
                 MinorStep = 1,
                 Position = OxyPlot.Axes.AxisPosition.Left,
-                Title = "Binding energy per nucleon (MeV)",
+                Title = LeftTitle,
                 Maximum = 9,
                 MajorTickSize = 6,
                 IntervalLength = 22,
@@ -73,7 +80,7 @@ namespace NuclearPhysicsProgram.ViewModels {
             };
             var bottomAxis = new OxyPlot.Axes.LinearAxis {
                 Position = OxyPlot.Axes.AxisPosition.Bottom,
-                Title = "Nucleons in nucleus",
+                Title = BottomTitle,
                 Maximum = 294,
                 MinorTickSize = 0,
                 MajorTickSize = 6,
@@ -90,6 +97,8 @@ namespace NuclearPhysicsProgram.ViewModels {
                 LineStyle = LineStyle.Dash,
                 Color = OxyColors.White
             });
+
+            //PlotModel.Annotations.Add()
         }
 
         private async Task WaitForElements() {

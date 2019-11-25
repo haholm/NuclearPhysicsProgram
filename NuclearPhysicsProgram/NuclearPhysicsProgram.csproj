@@ -113,6 +113,7 @@
     <Compile Include="ViewModels\Constants\Photon.cs" />
     <Compile Include="ViewModels\Constants\Proton.cs" />
     <Compile Include="ViewModels\Converters\MultipleCommandParameterConverter.cs" />
+    <Compile Include="ViewModels\Converters\PlotSeriesConverter.cs" />
     <Compile Include="ViewModels\ElementInfoViewModels\DecayChainViewModel.cs" />
     <Compile Include="ViewModels\ElementInfoViewModels\ElementInfoViewModel.cs" />
     <Compile Include="ViewModels\ElementInfoViewModels\IsotopeDropDownViewModel.cs" />
