@@ -7,15 +7,18 @@
              xmlns:elementInfoViews="clr-namespace:NuclearPhysicsProgram.Views.ElementInfoViews"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+             xmlns:viewModels="clr-namespace:NuclearPhysicsProgram.ViewModels"
+             xmlns:ikriv="clr-namespace:IKriv.Wpf"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="1000"
+             d:DesignHeight="800" d:DesignWidth="1200"
              Background="#55000000"
              DataContext="{Binding ElementInfoViewModel, Source={StaticResource mainVM}}">
     <!--Margin="100,40,50,40"-->
     <Border x:Name="Border"
-            
             Background="#3F3F3F "
             CornerRadius="0">
+        <!--restructure-->
         <Grid Margin="16">
             <Border Name="CloseBorder"
                     HorizontalAlignment="Right"
@@ -80,7 +83,7 @@
                         </TextBlock.RenderTransform>x</TextBlock>
                 </Button>
             </Border>
-            
+
             <!--<elementInfoViews:ElementInfoIsotopeDropDownView HorizontalAlignment="Left"
                                                              VerticalAlignment="Top"
                                                              >
@@ -89,8 +92,9 @@
             <Border x:Name="InfoPagesBorder"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
-                    MaxWidth="600"
-                    MaxHeight="360"
+                    MaxWidth="1300"
+                    MaxHeight="800"
+                    Margin="200 10 200 70"
                     CornerRadius="16"
                     ClipToBounds="True">
                 <Border.Background>
@@ -100,163 +104,251 @@
                         <GradientStop Color="#65689f " Offset="1"/>
                     </LinearGradientBrush>
                 </Border.Background>
-                <Canvas x:Name="InfoPagesCanvas"
-                        Margin="600 0 0 0">
-                    <Grid Width="{Binding ActualWidth, ElementName=InfoPagesBorder}" 
-                          Height="{Binding ActualHeight, ElementName=InfoPagesBorder}"
-                          Canvas.Left="-600">
-                        <Border>
-                            <Border.Effect>
-                                <DropShadowEffect BlurRadius="6"
-                                                  ShadowDepth="2"
-                                                  Direction="-36"
-                                                  Opacity="0.25"
-                                                  Color="Black"/>
-                            </Border.Effect>
+                <Grid>
+                    <Canvas x:Name="InfoPagesCanvas">
+                        <Canvas.RenderTransform>
+                            <TranslateTransform>
+                                <TranslateTransform.X>
+                                    <MultiBinding Converter="{ikriv:MathConverter}" 
+                                                  ConverterParameter="a * b">
+                                        <Binding ElementName="InfoPagesCanvasAnimator"
+                                                  Path="Tag" />
+                                        <Binding ElementName="InfoPagesBorder"
+                                                 Path="ActualWidth" />
+                                    </MultiBinding>
+                                </TranslateTransform.X>
+                            </TranslateTransform>
+                        </Canvas.RenderTransform>
+                        <Border x:Name="InfoPagesCanvasAnimator">
+                            <Border.Tag>
+                                <sys:Double>1</sys:Double>
+                            </Border.Tag>
                         </Border>
+                        <Grid Width="{Binding ActualWidth, ElementName=InfoPagesBorder}" 
+                              Height="{Binding ActualHeight, ElementName=InfoPagesBorder}"
+                              Canvas.Left="{Binding ElementName=InfoPagesBorder, Path=ActualWidth, FallbackValue=-800, Converter={ikriv:MathConverter}, ConverterParameter='-x'}">
+                            <Border>
+                                <Border.Effect>
+                                    <DropShadowEffect BlurRadius="6"
+                                                      ShadowDepth="2"
+                                                      Direction="-36"
+                                                      Opacity="0.25"
+                                                      Color="Black"/>
+                                </Border.Effect>
+                            </Border>
 
-                        <Border HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Margin="0 0 240 0"
-                                Width="100"
-                                Height="100"
-                                Background="#dfdfdf"
-                                CornerRadius="6"
-                                Padding="12"
-                                RenderTransformOrigin="0.8 0.1">
-                            <StackPanel HorizontalAlignment="Center">
-                                <TextBlock HorizontalAlignment="Center"
-                                           Padding="2"
-                                           FontSize="15"
-                                           Text="Protons"/>
-                                <TextBlock HorizontalAlignment="Center"
-                                           FontSize="24"
-                                           Text="{Binding InfoProtons, TargetNullValue='0'}" />
-                            </StackPanel>
-                        </Border>
+                            <Border HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Margin="0 0 240 120"
+                                    Width="80"
+                                    Height="100"
+                                    Background="#dfdfdf"
+                                    CornerRadius="6">
+                                <StackPanel HorizontalAlignment="Center"
+                                            Height="76">
+                                    <TextBlock HorizontalAlignment="Center"
+                                               Padding="2"
+                                               FontSize="15"
+                                               Text="Protons"/>
+                                    <TextBlock HorizontalAlignment="Center"
+                                               FontSize="24"
+                                               FontFamily="{StaticResource OpenSansSemiBold}"
+                                               Text="{Binding InfoProtons, TargetNullValue='0'}" />
+                                </StackPanel>
+                            </Border>
 
-                        <Border HorizontalAlignment="Center"
-                                VerticalAlignment="Center" 
-                                Width="100"
-                                Height="100"
-                                Background="#dfdfdf"
-                                CornerRadius="6"
-                                Padding="12">
-                            <StackPanel HorizontalAlignment="Center">
-                                <TextBlock HorizontalAlignment="Center"
-                                           Padding="2"
-                                           FontSize="15"
-                                           Text="Neutrons"/>
-                                <TextBlock HorizontalAlignment="Center"
-                                           FontSize="24"
-                                           Text="{Binding InfoNeutrons, TargetNullValue='0'}" />
-                            </StackPanel>
-                        </Border>
-                        <Border HorizontalAlignment="Center"
-                                VerticalAlignment="Center" 
-                                Margin="240 0 0 0"
-                                Width="100"
-                                Height="100"
-                                Background="#dfdfdf"
-                                CornerRadius="6"
-                                Padding="12">
-                            <StackPanel HorizontalAlignment="Center">
-                                <TextBlock HorizontalAlignment="Center"
-                                           Padding="2"
-                                           FontSize="15"
-                                           Text="Electrons"/>
-                                <TextBlock HorizontalAlignment="Center"
-                                           FontSize="24"
-                                           Text="{Binding InfoProtons, TargetNullValue='0'}" />
-                            </StackPanel>
-                        </Border>
-                    </Grid>
-                    <Grid>
+                            <Border HorizontalAlignment="Center"
+                                    VerticalAlignment="Center" 
+                                    Margin="0 0 0 120"
+                                    Width="80"
+                                    Height="100"
+                                    Background="#dfdfdf"
+                                    CornerRadius="6">
+                                <StackPanel HorizontalAlignment="Center"
+                                            Height="76">
+                                    <TextBlock HorizontalAlignment="Center"
+                                               Padding="2"
+                                               FontSize="15"
+                                               Text="Neutrons"/>
+                                    <TextBlock HorizontalAlignment="Center"
+                                               FontSize="24"
+                                               FontFamily="{StaticResource OpenSansSemiBold}"
+                                               Text="{Binding InfoNeutrons, TargetNullValue='0'}" />
+                                </StackPanel>
+                            </Border>
+                            <Border HorizontalAlignment="Center"
+                                    VerticalAlignment="Center" 
+                                    Margin="240 0 0 120"
+                                    Width="80"
+                                    Height="100"
+                                    Background="#dfdfdf"
+                                    CornerRadius="6">
+                                <StackPanel HorizontalAlignment="Center" 
+                                            Height="76">
+                                    <TextBlock HorizontalAlignment="Center"
+                                               Padding="2"
+                                               FontSize="15"
+                                               Text="Electrons"/>
+                                    <TextBlock HorizontalAlignment="Center"
+                                               FontSize="24"
+                                               FontFamily="{StaticResource OpenSansSemiBold}"
+                                               Text="{Binding InfoProtons, TargetNullValue='0'}" />
+                                </StackPanel>
+                            </Border>
+                            <Border HorizontalAlignment="Center"
+                                    VerticalAlignment="Center" 
+                                    Margin="0 120 240 0"
+                                    Width="80"
+                                    Height="100"
+                                    Background="#dfdfdf"
+                                    CornerRadius="6">
+                                <StackPanel HorizontalAlignment="Center"
+                                            Height="76">
+                                    <TextBlock HorizontalAlignment="Center"
+                                               Padding="2"
+                                               FontSize="15"
+                                               Text="Half life"/>
+                                    <TextBlock HorizontalAlignment="Center"
+                                               FontSize="24"
+                                               FontFamily="{StaticResource OpenSansSemiBold}"
+                                               Text="{Binding InfoProtons, TargetNullValue='0'}" />
+                                </StackPanel>
+                            </Border>
+                            <Border HorizontalAlignment="Center"
+                                    VerticalAlignment="Center" 
+                                    Margin="0 120 0 0"
+                                    Width="80"
+                                    Height="100"
+                                    Background="#dfdfdf"
+                                    CornerRadius="6">
+                                <StackPanel HorizontalAlignment="Center"
+                                            Height="76">
+                                    <TextBlock TextWrapping="WrapWithOverflow"
+                                               TextAlignment="Center"
+                                               LineStackingStrategy="BlockLineHeight"
+                                               LineHeight="16"
+                                               Margin="0 -8 0 0"
+                                               HorizontalAlignment="Center"
+                                               Padding="2"
+                                               FontSize="15"
+                                               Text="Binding energy"/>
+                                    <TextBlock HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               Margin="0 -4 0 0"
+                                               FontSize="24"
+                                               FontFamily="{StaticResource OpenSansSemiBold}"
+                                               Text="{Binding InfoProtons, TargetNullValue='0'}" />
+                                </StackPanel>
+                            </Border>
+                            <Border HorizontalAlignment="Center"
+                                    VerticalAlignment="Center" 
+                                    Margin="240 120 0 0"
+                                    Width="80"
+                                    Height="100"
+                                    Background="#dfdfdf"
+                                    CornerRadius="6">
+                                <StackPanel HorizontalAlignment="Center"
+                                            Height="76">
+                                    <TextBlock HorizontalAlignment="Center"
+                                               Padding="2"
+                                               FontSize="15"
+                                               Text="TBD"/>
+                                    <TextBlock HorizontalAlignment="Center"
+                                               FontSize="24"
+                                               FontFamily="{StaticResource OpenSansSemiBold}"
+                                               Text="{Binding InfoProtons, TargetNullValue='0'}" />
+                                </StackPanel>
+                            </Border>
+                        </Grid>
                         <elementInfoViews:PlotView x:Name="PlotView" 
                                                    Width="{Binding ActualWidth, ElementName=InfoPagesBorder}" 
                                                    Height="{Binding ActualHeight, ElementName=InfoPagesBorder}"
                                                    Opacity="{Binding PlotViewOpacity, TargetNullValue='1'}"
                                                    Padding="30 30 30 40"
                                                    />
-                    </Grid> <!--???-->
-                </Canvas>
+                        <Border Canvas.Left="{Binding ElementName=InfoPagesBorder, Path=ActualWidth}" 
+                                Width="100"/>
+                        <!--???-->
+                    </Canvas>
+                    <StackPanel HorizontalAlignment="Center"
+                                VerticalAlignment="Bottom"
+                                Orientation="Horizontal"
+                                Margin="0 0 0 20"
+                                >
+                        <Button Style="{StaticResource NoStyle}" 
+                                IsEnabled="{Binding IsArrowLeftEnabled}"
+                                Opacity="{Binding ArrowLeftOpacity}"
+                                Margin="0 0 10 0"
+                                Width="20"
+                                Height="20"
+                                Command="{Binding SwitchInfoCommand}"
+                                CommandParameter="l">
+                            <Button.Triggers>
+                                <EventTrigger RoutedEvent="PreviewMouseDown">
+                                    <BeginStoryboard>
+                                        <Storyboard Timeline.DesiredFrameRate="30">
+                                            <DoubleAnimation Storyboard.TargetName="InfoPagesCanvasAnimator"
+                                                             Storyboard.TargetProperty="Tag"
+                                                             Duration="0:0:0.8" 
+                                                             FillBehavior="HoldEnd"
+                                                             To="1">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <ElasticEase Springiness="12" 
+                                                                 Oscillations="1" 
+                                                                 EasingMode="EaseOut"
+                                                                 />
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Button.Triggers>
+                            <Image Source="{svgc:SvgImage /Images/arrowdown.svg}" 
+                                   Width="12"
+                                   RenderTransformOrigin="0.5 0.5">
+                                <Image.RenderTransform>
+                                    <RotateTransform Angle="90" />
+                                </Image.RenderTransform>
+                            </Image>
+                        </Button>
+                        <Button Style="{StaticResource NoStyle}"
+                                IsEnabled="{Binding IsArrowRightEnabled}"
+                                Opacity="{Binding ArrowRightOpacity, FallbackValue=1}"
+                                Margin="10 0 0 0"
+                                Width="20"
+                                Height="20"
+                                Command="{Binding SwitchInfoCommand}"
+                                CommandParameter="r">
+                            <Button.Triggers>
+                                <EventTrigger RoutedEvent="PreviewMouseDown" >
+                                    <BeginStoryboard>
+                                        <Storyboard Timeline.DesiredFrameRate="30">
+                                            <DoubleAnimation Storyboard.TargetName="InfoPagesCanvasAnimator"
+                                                             Storyboard.TargetProperty="Tag"
+                                                             Duration="0:0:0.8" 
+                                                             FillBehavior="HoldEnd"
+                                                             To="0">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <ElasticEase Springiness="12" 
+                                                                 Oscillations="1" 
+                                                                 EasingMode="EaseOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Button.Triggers>
+                            <Image Source="{svgc:SvgImage /Images/arrowdown.svg}" 
+                                   Width="12"
+                                   RenderTransformOrigin="0.5 0.5">
+                                <Image.RenderTransform>
+                                    <RotateTransform Angle="-90" />
+                                </Image.RenderTransform>
+                            </Image>
+                        </Button>
+                    </StackPanel>
+                </Grid>
             </Border>
-            <StackPanel HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Orientation="Horizontal"
-                        Margin="0 340 0 0"
-                        >
-                <Button Style="{StaticResource NoStyle}" 
-                        IsEnabled="{Binding IsArrowLeftEnabled}"
-                        Opacity="{Binding ArrowLeftOpacity}"
-                        Margin="0 0 10 0"
-                        Width="20"
-                        Height="20"
-                        Command="{Binding SwitchInfoCommand}"
-                        CommandParameter="l">
-                    <Button.Triggers>
-                        <EventTrigger RoutedEvent="PreviewMouseDown">
-                            <BeginStoryboard>
-                                <Storyboard >
-                                    <ThicknessAnimation Storyboard.TargetName="InfoPagesCanvas"
-                                                        Storyboard.TargetProperty="Margin"
-                                                        Duration="0:0:0.8" 
-                                                        FillBehavior="HoldEnd"
-                                                        To="600 0 0 0">
-                                        <ThicknessAnimation.EasingFunction>
-                                            <ElasticEase Springiness="12" 
-                                                         Oscillations="1" 
-                                                         EasingMode="EaseOut"/>
-                                        </ThicknessAnimation.EasingFunction>
-                                    </ThicknessAnimation>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                    </Button.Triggers>
-                    <Image Source="{svgc:SvgImage /Images/arrowdown.svg}" 
-                           Width="12"
-                           RenderTransformOrigin="0.5 0.5">
-                        <Image.RenderTransform>
-                            <RotateTransform Angle="90" />
-                        </Image.RenderTransform>
-                    </Image>
-                </Button>
-                <Button Style="{StaticResource NoStyle}"
-                        IsEnabled="{Binding IsArrowRightEnabled}"
-                        Opacity="{Binding ArrowRightOpacity, FallbackValue=1}"
-                        Margin="10 0 0 0"
-                        Width="20"
-                        Height="20"
-                        Command="{Binding SwitchInfoCommand}"
-                        CommandParameter="r">
-                    <Button.Triggers>
-                        <EventTrigger RoutedEvent="PreviewMouseDown" >
-                            <BeginStoryboard>
-                                <Storyboard >
-                                    <ThicknessAnimation Storyboard.TargetName="InfoPagesCanvas"
-                                                        Storyboard.TargetProperty="Margin"
-                                                        Duration="0:0:0.8" 
-                                                        FillBehavior="HoldEnd"
-                                                        To="0 0 0 0">
-                                        <ThicknessAnimation.EasingFunction>
-                                            <ElasticEase Springiness="12" 
-                                                         Oscillations="1" 
-                                                         EasingMode="EaseOut"/>
-                                        </ThicknessAnimation.EasingFunction>
-                                    </ThicknessAnimation>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                    </Button.Triggers>
-                    <Image Source="{svgc:SvgImage /Images/arrowdown.svg}" 
-                           Width="12"
-                           RenderTransformOrigin="0.5 0.5">
-                        <Image.RenderTransform>
-                            <RotateTransform Angle="-90" />
-                        </Image.RenderTransform>
-                    </Image>
-                </Button>
-            </StackPanel>
 
             <Canvas VerticalAlignment="Bottom"
                     HorizontalAlignment="Center"

@@ -112,6 +112,7 @@
     <Compile Include="ViewModels\Constants\Neutron.cs" />
     <Compile Include="ViewModels\Constants\Photon.cs" />
     <Compile Include="ViewModels\Constants\Proton.cs" />
+    <Compile Include="ViewModels\Converters\MathConverter.cs" />
     <Compile Include="ViewModels\Converters\MultipleCommandParameterConverter.cs" />
     <Compile Include="ViewModels\Converters\PlotSeriesConverter.cs" />
     <Compile Include="ViewModels\ElementInfoViewModels\DecayChainViewModel.cs" />

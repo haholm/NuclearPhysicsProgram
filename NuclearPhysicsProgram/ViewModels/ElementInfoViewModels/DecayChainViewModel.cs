@@ -105,8 +105,10 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
             return avarageEnergyReleased; //return decaychain instead?
         }
 
-        //make multi-threaded
         public void SetupDecayChains(IsotopeDataModel isotopeData, bool constructSortedDecayChain = false) {
+            //SET TO CLICKED ISOTOPE FROM ISOTOPEDECAYCHAINVIEW
+            currentDecayChainIndex = 0;
+            
             currentIsotopeData = isotopeData;
             if (currentIsotopeData.Isotopes.Length == 0)
                 return;
