@@ -589,7 +589,8 @@
                 Margin="116 0 0 0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Background="#f8f8f8">
+                Background="Transparent"
+                >
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseEnter">
                     <i:InvokeCommandAction Command="{Binding ExpandHiddenElementsCommand, Source={StaticResource pTableVM}}"
@@ -777,7 +778,7 @@
                 Margin="116 0 0 0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Background="#f8f8f8">
+                Background="Transparent">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseEnter">
                     <i:InvokeCommandAction Command="{Binding ExpandHiddenElementsCommand, Source={StaticResource pTableVM}}"

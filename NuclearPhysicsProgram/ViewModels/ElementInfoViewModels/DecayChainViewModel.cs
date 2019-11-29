@@ -91,9 +91,11 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
 
                 int secondProtonAmount = secondElementData.AtomicNumber;
                 int secondNeutronAmount = decayChain[1].isotope.MassNumber - secondElementData.AtomicNumber;
-                double secondMass = (firstProtonAmount * Constants.Proton.Mass.Kilograms) + (secondNeutronAmount * Constants.Neutron.Mass.Kilograms);
+                double secondMass = (secondProtonAmount * Constants.Proton.Mass.Kilograms) + (secondNeutronAmount * Constants.Neutron.Mass.Kilograms);
                 //mass defect?
                 double massDifference = firstMass - secondMass;
+                if (massDifference < 0)
+                    continue;
                 energiesReleased.Add(massDifference * (Constants.Photon.Speed * Constants.Photon.Speed));
             }
 
@@ -105,10 +107,7 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
             return avarageEnergyReleased; //return decaychain instead?
         }
 
-        public void SetupDecayChains(IsotopeDataModel isotopeData, bool constructSortedDecayChain = false) {
-            //SET TO CLICKED ISOTOPE FROM ISOTOPEDECAYCHAINVIEW
-            currentDecayChainIndex = 0;
-            
+        public void SetupDecayChains(IsotopeDataModel isotopeData, IsotopeModel selectIsotope = null, bool constructSortedDecayChain = false) {
             currentIsotopeData = isotopeData;
             if (currentIsotopeData.Isotopes.Length == 0)
                 return;
@@ -133,11 +132,19 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
                 rerun = false;
             }
 
+            currentDecayChainIndex = decayChains.FindIndex(decayChain => decayChain.First().isotope == selectIsotope);
+            if (currentDecayChainIndex == -1)
+                currentDecayChainIndex = 0;
+
             if (constructSortedDecayChain)
                 SetupObservableDecayChain(currentDecayChainIndex);
         }
 
+        ValueTuple<IsotopeModel, int, string> initialIsotope;
         private void AnalyzeDecays(IsotopeModel isotope, int index, string isotopeDecayType) {
+            if (index == 0)
+                initialIsotope = (isotope, index, isotopeDecayType);
+
             if (lastIndex == index) {
                 conflict = true;
                 return;
@@ -149,7 +156,20 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
             if (isotope.Decays.Length < 1)  //does isotope contain any decays?
                 return;
 
+            int j = 0;
             for (int i = rerun ? 1 : 0; i < isotope.Decays.Length; i++) {  //iterate through decays of isotope
+                rerun = false;
+                if (j > 0) {
+                    if (decayChains.Last().First() == initialIsotope)
+                        continue;
+
+                    decayChains.Add(new List<(IsotopeModel isotope, int index, string decayType)>());
+                    decayChains.Last().Add(initialIsotope);
+                    index = 0;
+                }
+
+                j++;
+
                 if (isotope.Decays[i].ProductSymbol == "-")
                     return;
 

@@ -44,6 +44,9 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
                 return;
             }
 
+            if (isotope.Symbol == "Og")
+                _ = 0;
+
             Effect = null;
             string unit = ConvertToAppropriateUnit(ref halfLife);
             Unit = unit;

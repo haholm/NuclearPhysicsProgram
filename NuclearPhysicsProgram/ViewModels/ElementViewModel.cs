@@ -72,6 +72,17 @@ namespace NuclearPhysicsProgram.ViewModels {
 
             return isotopeList.First();
         }
+        public static IsotopeModel GetIsotope(IsotopeDataModel isotopeData, int massNumber) {
+            ///
+            if (isotopeData == null)
+                return new IsotopeModel(isotopeData.Symbol, massNumber, "?", new DecayModel[0]);
+            ///
+            IEnumerable<IsotopeModel> isotopeList = isotopeData.Isotopes.Where(i => i.MassNumber == massNumber);
+            if (isotopeList.Count() == 0)
+                return new IsotopeModel(isotopeData.Symbol, massNumber, "", new DecayModel[0]);
+
+            return isotopeList.First();
+        }
 
         public static double GetHalfLife(IsotopeModel isotope) {
             string halfLifeString = isotope.HalfLife.Replace(",", "").Replace(".", ",");
@@ -86,6 +97,16 @@ namespace NuclearPhysicsProgram.ViewModels {
             else {
                 return double.Parse(halfLifeString);
             }
+        }
+
+        public static double GetAvarageHalfLife(IsotopeDataModel isotopeData) {
+            double avarageHalfLife = 0;
+            foreach (var isotope in isotopeData.Isotopes) {
+                avarageHalfLife += GetHalfLife(isotope);
+            }
+
+            avarageHalfLife /= isotopeData.Isotopes.Length;
+            return avarageHalfLife;
         }
 
         public static double GetMassInAMU(ElementDataModel element) =>
@@ -144,12 +165,13 @@ namespace NuclearPhysicsProgram.ViewModels {
 
         private void AddPeriodicTableElement(ElementDataModel element, ObservableCollection<PeriodicTableElementModel> to) {
             double avarageEnergyReleased = mainViewModel.DecayChainViewModel.SetupDecayChains(element);
-            double normalizedAER = avarageEnergyReleased / 2.4085595817117E-09;
-            var aerColor = System.Windows.Media.Color.FromArgb(255, 255, (byte)(255 - (Math.Abs(normalizedAER)/* hm */ * 255)), (byte)(255 - (Math.Abs(normalizedAER)/* hm */ * 255)));
+            double normalizedAER = avarageEnergyReleased / 6.9246087974211306E-09;
+            var aerColor = System.Windows.Media.Color.FromArgb(255, 255, (byte)(255 - (normalizedAER/* hm */ * 255)), (byte)(255 - (normalizedAER/* hm */ * 255)));
             var aerSolidColorBrush = new System.Windows.Media.SolidColorBrush(aerColor);
-            double halfLife = GetHalfLife(GetIsotope(element.Symbol, element.MassNumber));
-            double normalizedHalfLife = halfLife / 2.4930504E+28;
-            var instabilityColor = System.Windows.Media.Color.FromArgb(255, 255, (byte)(255 - (normalizedHalfLife * 255)), (byte)(255 - (normalizedHalfLife * 255)));
+            IsotopeDataDictionary.TryGetValue(element.Symbol, out var isotopeData);
+            double halfLife = GetAvarageHalfLife(isotopeData);
+            double normalizedHalfLife = halfLife / 6.311390375E+28;
+            var instabilityColor = System.Windows.Media.Color.FromArgb(255, 255, (byte)(0 + (normalizedHalfLife * 255)), (byte)(0 + (normalizedHalfLife * 255)));
             var instabilitySolidColorBrush = new System.Windows.Media.SolidColorBrush(instabilityColor);
             to.Add(new PeriodicTableElementModel(element, aerSolidColorBrush, instabilitySolidColorBrush));
         }

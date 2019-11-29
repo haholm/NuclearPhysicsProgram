@@ -11,22 +11,22 @@
              xmlns:ikriv="clr-namespace:IKriv.Wpf"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="1200"
-             Background="#55000000"
+             d:DesignHeight="800" 
+             d:DesignWidth="1200"
              DataContext="{Binding ElementInfoViewModel, Source={StaticResource mainVM}}">
     <!--Margin="100,40,50,40"-->
     <Border x:Name="Border"
-            Background="#3F3F3F "
+            Background="#2B2B2F"
             CornerRadius="0">
         <!--restructure-->
         <Grid Margin="16">
             <Border Name="CloseBorder"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top"
-                    Width="32"
-                    Height="24"
-                    Margin="2"
-                    Background="#dddddd"
+                    Width="38"
+                    Height="26"
+                    Margin="12"
+                    Background="White"
                     CornerRadius="4">
                 <Button Style="{StaticResource NoStyle}"
                         Command="{Binding CloseElementInfoCommand, Source={StaticResource mainVM}}" >
@@ -94,14 +94,14 @@
                     VerticalAlignment="Stretch"
                     MaxWidth="1300"
                     MaxHeight="800"
-                    Margin="200 10 200 70"
+                    Margin="160 10 160 70"
                     CornerRadius="16"
                     ClipToBounds="True">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0.5,0" 
                                          EndPoint="0.6,1">
-                        <GradientStop Color="#505285" Offset="-1"/>
-                        <GradientStop Color="#65689f " Offset="1"/>
+                        <GradientStop Color="#434343" Offset="-1"/>
+                        <GradientStop Color="#000000 " Offset="1"/>
                     </LinearGradientBrush>
                 </Border.Background>
                 <Grid>
@@ -139,69 +139,104 @@
 
                             <Border HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
-                                    Margin="0 0 240 120"
-                                    Width="80"
-                                    Height="100"
-                                    Background="#dfdfdf"
+                                    Margin="0 0 260 124"
+                                    Width="120"
+                                    Height="180"
                                     CornerRadius="6">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="-0.5,0.5" EndPoint="0.5,1">
+                                        <GradientStop Color="#fdfcfb" Offset="0"/>
+                                        <GradientStop Color="#e2d1c3" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
                                 <StackPanel HorizontalAlignment="Center"
-                                            Height="76">
+                                            Height="132">
                                     <TextBlock HorizontalAlignment="Center"
-                                               Padding="2"
+                                               Margin="0"
                                                FontSize="15"
                                                Text="Protons"/>
                                     <TextBlock HorizontalAlignment="Center"
+                                               Padding="2"
                                                FontSize="24"
-                                               FontFamily="{StaticResource OpenSansSemiBold}"
                                                Text="{Binding InfoProtons, TargetNullValue='0'}" />
+                                    <Image Source="{svgc:SvgImage /Images/atom-symbol-proton.svg}"
+                                           HorizontalAlignment="Center"
+                                           Margin="4"
+                                           Width="62"
+                                           Height="72"/>
                                 </StackPanel>
                             </Border>
 
                             <Border HorizontalAlignment="Center"
                                     VerticalAlignment="Center" 
-                                    Margin="0 0 0 120"
-                                    Width="80"
-                                    Height="100"
-                                    Background="#dfdfdf"
+                                    Margin="0 0 0 124"
+                                    Width="120"
+                                    Height="180"
                                     CornerRadius="6">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="-0.5,0.5" EndPoint="0.5,1">
+                                        <GradientStop Color="#fdfcfb" Offset="0"/>
+                                        <GradientStop Color="#e2d1c3" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
                                 <StackPanel HorizontalAlignment="Center"
-                                            Height="76">
+                                            Height="132">
                                     <TextBlock HorizontalAlignment="Center"
-                                               Padding="2"
+                                               Margin="0"
                                                FontSize="15"
                                                Text="Neutrons"/>
                                     <TextBlock HorizontalAlignment="Center"
+                                               Padding="2"
                                                FontSize="24"
-                                               FontFamily="{StaticResource OpenSansSemiBold}"
                                                Text="{Binding InfoNeutrons, TargetNullValue='0'}" />
+                                    <Image Source="{svgc:SvgImage /Images/atom-symbol-neutron.svg}"
+                                           HorizontalAlignment="Center"
+                                           Margin="4"
+                                           Width="62"
+                                           Height="72"/>
                                 </StackPanel>
                             </Border>
                             <Border HorizontalAlignment="Center"
                                     VerticalAlignment="Center" 
-                                    Margin="240 0 0 120"
-                                    Width="80"
-                                    Height="100"
-                                    Background="#dfdfdf"
+                                    Margin="260 0 0 124"
+                                    Width="120"
+                                    Height="180"
                                     CornerRadius="6">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="-0.5,0.5" EndPoint="0.5,1">
+                                        <GradientStop Color="#fdfcfb" Offset="0"/>
+                                        <GradientStop Color="#e2d1c3" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
                                 <StackPanel HorizontalAlignment="Center" 
-                                            Height="76">
+                                            Height="132">
                                     <TextBlock HorizontalAlignment="Center"
-                                               Padding="2"
+                                               Margin="0"
                                                FontSize="15"
                                                Text="Electrons"/>
                                     <TextBlock HorizontalAlignment="Center"
+                                               Padding="2"
                                                FontSize="24"
-                                               FontFamily="{StaticResource OpenSansSemiBold}"
                                                Text="{Binding InfoProtons, TargetNullValue='0'}" />
+                                    <Image Source="{svgc:SvgImage /Images/atom-symbol-electron.svg}"
+                                           HorizontalAlignment="Center"
+                                           Margin="4"
+                                           Width="62"
+                                           Height="72"/>
                                 </StackPanel>
                             </Border>
                             <Border HorizontalAlignment="Center"
                                     VerticalAlignment="Center" 
-                                    Margin="0 120 240 0"
-                                    Width="80"
-                                    Height="100"
-                                    Background="#dfdfdf"
+                                    Margin="0 164 260 0"
+                                    Width="120"
+                                    Height="90"
                                     CornerRadius="6">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="-0.5,0.5" EndPoint="0.5,1">
+                                        <GradientStop Color="#fdfcfb" Offset="0"/>
+                                        <GradientStop Color="#e2d1c3" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
                                 <StackPanel HorizontalAlignment="Center"
                                             Height="76">
                                     <TextBlock HorizontalAlignment="Center"
@@ -210,43 +245,44 @@
                                                Text="Half life"/>
                                     <TextBlock HorizontalAlignment="Center"
                                                FontSize="24"
-                                               FontFamily="{StaticResource OpenSansSemiBold}"
                                                Text="{Binding InfoProtons, TargetNullValue='0'}" />
                                 </StackPanel>
                             </Border>
                             <Border HorizontalAlignment="Center"
                                     VerticalAlignment="Center" 
-                                    Margin="0 120 0 0"
-                                    Width="80"
-                                    Height="100"
-                                    Background="#dfdfdf"
+                                    Margin="0 164 0 0"
+                                    Width="120"
+                                    Height="90"
                                     CornerRadius="6">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="-0.5,0.5" EndPoint="0.5,1">
+                                        <GradientStop Color="#fdfcfb" Offset="0"/>
+                                        <GradientStop Color="#e2d1c3" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
                                 <StackPanel HorizontalAlignment="Center"
                                             Height="76">
-                                    <TextBlock TextWrapping="WrapWithOverflow"
-                                               TextAlignment="Center"
-                                               LineStackingStrategy="BlockLineHeight"
-                                               LineHeight="16"
-                                               Margin="0 -8 0 0"
-                                               HorizontalAlignment="Center"
+                                    <TextBlock HorizontalAlignment="Center"
                                                Padding="2"
                                                FontSize="15"
                                                Text="Binding energy"/>
                                     <TextBlock HorizontalAlignment="Center"
-                                               VerticalAlignment="Center"
-                                               Margin="0 -4 0 0"
                                                FontSize="24"
-                                               FontFamily="{StaticResource OpenSansSemiBold}"
                                                Text="{Binding InfoProtons, TargetNullValue='0'}" />
                                 </StackPanel>
                             </Border>
                             <Border HorizontalAlignment="Center"
                                     VerticalAlignment="Center" 
-                                    Margin="240 120 0 0"
-                                    Width="80"
-                                    Height="100"
-                                    Background="#dfdfdf"
+                                    Margin="260 164 0 0"
+                                    Width="120"
+                                    Height="90"
                                     CornerRadius="6">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="-0.5,0.5" EndPoint="0.5,1">
+                                        <GradientStop Color="#fdfcfb" Offset="0"/>
+                                        <GradientStop Color="#e2d1c3" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
                                 <StackPanel HorizontalAlignment="Center"
                                             Height="76">
                                     <TextBlock HorizontalAlignment="Center"
@@ -255,7 +291,6 @@
                                                Text="TBD"/>
                                     <TextBlock HorizontalAlignment="Center"
                                                FontSize="24"
-                                               FontFamily="{StaticResource OpenSansSemiBold}"
                                                Text="{Binding InfoProtons, TargetNullValue='0'}" />
                                 </StackPanel>
                             </Border>
@@ -355,21 +390,21 @@
                     Width="600"
                     Height="80">
                 <Border Canvas.Top="2" 
-                            Canvas.Left="2" 
-                            Width="596"
-                            Height="76" 
-                            BorderBrush="Black" 
-                            BorderThickness="1"
-                            CornerRadius="6">
+                        Canvas.Left="2" 
+                        Width="596"
+                        Height="76" 
+                        BorderBrush="Black" 
+                        BorderThickness="1"
+                        CornerRadius="6">
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="32" />
                     </Border.Effect>
                 </Border>
                 <Border Width="600"
-                            Height="80"
-                            BorderBrush="#22000000"
-                            CornerRadius="6"
-                            Background="White">
+                        Height="80"
+                        BorderBrush="#22000000"
+                        CornerRadius="6"
+                        Background="#242424">
                     <elementInfoViews:IsotopeDecayChainView 
                                                             />
                 </Border>

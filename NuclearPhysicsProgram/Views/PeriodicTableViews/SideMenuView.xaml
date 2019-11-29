@@ -15,26 +15,126 @@
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
 
-        <!--<Image Grid.Row="0" 
-               Source="/Images/radiation128.png" 
-               Width="22"
-               RenderTransformOrigin="0.5 0.5"
-               HorizontalAlignment="Center"
-               VerticalAlignment="Center"/>-->
-
-        <Border Grid.Row="2"
+        <Border x:Name="InstabilityBorder" 
+                Grid.Row="2"
                 Margin="5"
                 CornerRadius="4"
-                Background="LightGray">
+                Background="Black" 
+                ClipToBounds="True">
             <Button Style="{StaticResource NoStyle}"
                     Cursor="Hand"
                     Command="{Binding TogglePropertyColorCommand, Source={StaticResource mainVM}}"
                     CommandParameter="instability">
-                <TextBlock Text="Instability"
-                           TextWrapping="Wrap"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"/>
+                <Grid>
+                    <Image Source="/Images/broken-chain-on.png"
+                           Margin="2">
+                        <Image.Triggers>
+                            <EventTrigger RoutedEvent="PreviewMouseDown">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="BrokenChainOff" 
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         Duration="0:0:0.3"
+                                                         To="1"/>
+                                        <ColorAnimation Storyboard.TargetName="InstabilityBorder" 
+                                                        Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" 
+                                                        Duration="0:0:0.3"
+                                                        To="Black"/>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BrokenChainOff" 
+                                                                       Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                       Duration="0:0:0"
+                                                                       BeginTime="0:0:0">
+                                            <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <BooleanAnimationUsingKeyFrames Storyboard.TargetName="InstabilityBorder" 
+                                                                       Storyboard.TargetProperty="(UIElement.IsEnabled)"
+                                                                       Duration="0:0:0.3">
+                                            <DiscreteBooleanKeyFrame KeyTime="0:0:0.05" Value="False"/>
+                                            <DiscreteBooleanKeyFrame KeyTime="0:0:0.3" Value="True"/>
+                                        </BooleanAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Image.Triggers>
+                    </Image>
+                    <Image x:Name="BrokenChainOff" 
+                           Source="/Images/broken-chain-off.png"
+                           Margin="2"
+                           Opacity="1"
+                           Visibility="Visible">
+                        <Image.Triggers>
+                            <EventTrigger RoutedEvent="Image.MouseEnter">
+                                <EventTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="InstabilityToolTip" 
+                                                             Storyboard.TargetProperty="Opacity"
+                                                             Duration="0:0:0.5"
+                                                             To="1">
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger.EnterActions>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="PreviewMouseDown">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="BrokenChainOff" 
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         Duration="0:0:0.3"
+                                                         To="0"/>
+                                        <ColorAnimation Storyboard.TargetName="InstabilityBorder" 
+                                                        Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" 
+                                                        Duration="0:0:0.3"
+                                                        To="Red"/>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BrokenChainOff" 
+                                                                       Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                       Duration="0:0:0.3"
+                                                                       BeginTime="0:0:0.3">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0"  Value="{x:Static Visibility.Collapsed}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <BooleanAnimationUsingKeyFrames Storyboard.TargetName="InstabilityBorder" 
+                                                                       Storyboard.TargetProperty="(UIElement.IsEnabled)"
+                                                                       Duration="0:0:0.3">
+                                            <DiscreteBooleanKeyFrame KeyTime="0:0:0.05" Value="False"/>
+                                            <DiscreteBooleanKeyFrame KeyTime="0:0:0.3" Value="True"/>
+                                        </BooleanAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Image.Triggers>
+                    </Image>
+                </Grid>
             </Button>
+        </Border>
+
+        <Border x:Name="InstabilityToolTip"
+                Background="#ffa9a9a9"
+                Grid.Row="1"
+                VerticalAlignment="Bottom"
+                Width="56"
+                CornerRadius="4"
+                Opacity="0">
+            <TextBlock FontSize="12" 
+                       TextAlignment="Center"
+                       Padding="0 2 0 2"
+                       Text="Instability"/>
+        </Border>
+        <Border x:Name="EnergyToolTip"
+                Background="#ffa9a9a9"
+                Grid.Row="2"
+                VerticalAlignment="Bottom"
+                Width="56"
+                CornerRadius="4"
+                Opacity="0"
+                Visibility="Collapsed">
+            <TextBlock FontSize="12" 
+                       TextAlignment="Center"
+                       TextWrapping="Wrap"
+                       LineStackingStrategy="BlockLineHeight"
+                       LineHeight="12"
+                       Padding="0 3 0 2"
+                       Text="Avarage energy released on decay"/>
         </Border>
 
         <Border Grid.Row="3"

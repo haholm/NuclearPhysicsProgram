@@ -12,7 +12,7 @@
             CornerRadius="6"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
-            Background="#FF686868">
+            Background="#FF484848">
         <Grid>
             <StackPanel Orientation="Horizontal" 
                         VerticalAlignment="Stretch"
@@ -22,7 +22,7 @@
                            HorizontalAlignment="Right"
                            VerticalAlignment="Top" 
                            Padding="1 10"
-                           Foreground="White"/>
+                           Foreground="#D0D0D0"/>
 
                 <TextBlock Text="{Binding Path=Symbol, FallbackValue='Sy', RelativeSource={RelativeSource AncestorType=local:ItemView}}"
                            FontFamily="{StaticResource OpenSansLight}"
@@ -30,7 +30,7 @@
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center" 
                            Padding="1 0"
-                           Foreground="White"/>
+                           Foreground="#D0D0D0"/>
             </StackPanel>
 
             <Border Visibility="{Binding Path=PropertiesColorVisibility, RelativeSource={RelativeSource AncestorType=local:ItemView}}"
@@ -39,7 +39,7 @@
                     Margin="3"
                     Width="8"
                     Height="8">
-                <Border Background="{Binding Path=InstabilityColor, RelativeSource={RelativeSource AncestorType=local:ItemView}}"
+                <Border Background="{Binding Path=AERColor, RelativeSource={RelativeSource AncestorType=local:ItemView}}"
                         Visibility="{Binding Path=ItemViewAERColorVisibility, TargetNullValue='Hidden', Source={StaticResource mainVM}}"
                         CornerRadius="4"
                         BorderThickness="0.5"
@@ -58,7 +58,7 @@
                     Margin="3"
                     Width="8"
                     Height="8">
-                <Border Background="{Binding Path=AERColor, RelativeSource={RelativeSource AncestorType=local:ItemView}}"
+                <Border Background="{Binding Path=InstabilityColor, RelativeSource={RelativeSource AncestorType=local:ItemView}}"
                         Visibility="{Binding Path=ItemViewInstabilityColorVisibility, TargetNullValue='Hidden', Source={StaticResource mainVM}}"
                         CornerRadius="4"
                         BorderThickness="0.5"
@@ -80,7 +80,7 @@
                 <TextBlock Text="{Binding Path=EName, FallbackValue='', RelativeSource={RelativeSource AncestorType=local:ItemView}}"
                            FontFamily="{StaticResource OpenSansLight}"
                            FontSize="12"
-                           Foreground="White"/>
+                           Foreground="#D0D0D0"/>
             </Viewbox>
         </Grid>
     </Border>

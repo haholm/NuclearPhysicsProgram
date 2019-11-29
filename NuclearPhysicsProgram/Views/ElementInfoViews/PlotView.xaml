@@ -28,6 +28,27 @@
                   IsEnabled="True"
                   FontFamily="{StaticResource OpenSansRegular}"
                   >
+            <oxy:Plot.DefaultTrackerTemplate>
+                <ControlTemplate>
+                    <oxy:TrackerControl Position="{Binding Position}" 
+                                        BorderBrush="Transparent"
+                                        BorderThickness="0"
+                                        LineStroke="LightGray"
+                                        >
+                        <oxy:TrackerControl.Background>
+                            <SolidColorBrush Color="Transparent"/>
+                        </oxy:TrackerControl.Background>
+                        <oxy:TrackerControl.Content>
+                            <Border CornerRadius="6"
+                                    Background="#ccffffff">
+                                <TextBlock Margin="7" 
+                                           Foreground="Black" 
+                                           Text="{Binding}"/>
+                            </Border>
+                        </oxy:TrackerControl.Content>
+                    </oxy:TrackerControl>
+                </ControlTemplate>
+            </oxy:Plot.DefaultTrackerTemplate>
             <oxy:Plot.Axes>
                 <oxy:LinearAxis Position="Left" 
                                 IsZoomEnabled="False"

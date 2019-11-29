@@ -63,15 +63,15 @@ namespace NuclearPhysicsProgram.ViewModels {
             OpenElementInfoCommand = new OpenElementInfoCommand(this);
             CloseElementInfoCommand = new CloseElementInfoCommand(this);
             TogglePropertyColorCommand = new TogglePropertyColorCommand(this);
-            Task.Run(async () => {
+            Task.Run(() => {
                 while (true) {
-                    await Task.Delay(20);
+                    System.Threading.Thread.Sleep(100);
                     if (!mainWindowSizeChanged)
                         continue;
 
                     mainWindowSizeChanged = false;
                     if (MainWindowState == WindowState.Maximized)
-                        PeriodicTableScale = 1.5;
+                        PeriodicTableScale = 1.25;
                     else if (!double.IsNaN(MainWindowWidth.GetValueOrDefault()))
                         PeriodicTableScale = ((MainWindowWidth / 1340) + (MainWindowHeight / 650)) / 2;
                 }
@@ -145,18 +145,20 @@ namespace NuclearPhysicsProgram.ViewModels {
         }
 
         public void InitializeIsotopeData(string symbol, int massNumber) {
-            if (ElementViewModel.IsotopeDataDictionary.TryGetValue(symbol, out IsotopeDataModel isotopeData))
-                SetIsotopeDatas(isotopeData, massNumber);
+            if (ElementViewModel.IsotopeDataDictionary.TryGetValue(symbol, out IsotopeDataModel isotopeData)) {
+                var selectIsotope = ElementViewModel.GetIsotope(isotopeData, massNumber);
+                SetIsotopeDatas(isotopeData, selectIsotope, massNumber);
+            }
             else if (ElementViewModel.ElementDataDictionary.TryGetValue(symbol, out ElementDataModel elementData)) {
                 var templateIsotope = new IsotopeModel[] { new IsotopeModel(symbol, elementData.MassNumber, "?", new DecayModel[0]) };
-                SetIsotopeDatas(new IsotopeDataModel(symbol, templateIsotope), massNumber);
+                SetIsotopeDatas(new IsotopeDataModel(symbol, templateIsotope), templateIsotope[0], massNumber);
             }
         }
 
-        private void SetIsotopeDatas(IsotopeDataModel isotopeData, int massNumber) {
+        private void SetIsotopeDatas(IsotopeDataModel isotopeData, IsotopeModel selectIsotope, int massNumber) {
             CurrentIsotopeData = isotopeData;
             ElementInfoViewModel.CurrentIsotopeData = isotopeData;
-            DecayChainViewModel.SetupDecayChains(isotopeData, true);
+            DecayChainViewModel.SetupDecayChains(isotopeData, selectIsotope, true);
         }
     }
 }

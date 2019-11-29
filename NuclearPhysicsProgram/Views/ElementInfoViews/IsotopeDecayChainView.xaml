@@ -10,67 +10,71 @@
              xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="800">
-    <Grid>
-        <ItemsControl VerticalAlignment="Stretch" 
-                      ItemsSource="{Binding DecayChainViewModel.IsotopeDecayChain, Source={StaticResource mainVM}}" 
-                      >
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <!--SWITCH OVER TO GRID-->
-                    <Canvas Width="60" 
-                            Margin="11">
-                        <TextBlock Canvas.Left="8" 
-                                   Canvas.Top="20"
-                                   Text="→"/>
-                        <TextBlock Canvas.Left="4" 
-                                   Canvas.Top="10"
-                                   Text="{Binding Item2, TargetNullValue='?'}"/>
-                        <Border Canvas.Left="26" 
-                                BorderBrush="#FFEBEBEB"
-                                Width="{Binding DecayChainViewModel.ItemWidth, TargetNullValue='60', Source={StaticResource mainVM}}"
-                                Height="{Binding DecayChainViewModel.ItemHeight, TargetNullValue='60', Source={StaticResource mainVM}}"
-                                BorderThickness="1"
-                                CornerRadius="6" >
-                            <Border.Effect>
-                                <DropShadowEffect BlurRadius="6" 
-                                                  ShadowDepth="2" 
-                                                  Direction="-36" 
-                                                  Opacity="0.25" 
-                                                  Color="Black" />
-                            </Border.Effect>
-                        </Border>
-                        <Button Canvas.Left="26" 
-                                Style="{Binding Mode=OneWay, Source={StaticResource NoStyle}}"
-                                HorizontalAlignment="Left"
-                                Width="{Binding DecayChainViewModel.ItemWidth, TargetNullValue='60', Source={StaticResource mainVM}}"
-                                Height="{Binding DecayChainViewModel.ItemHeight, TargetNullValue='60', Source={StaticResource mainVM}}"
-                                Command="{Binding OpenElementInfoCommand, Source={StaticResource mainVM}}"
-                                >
-                            <Button.CommandParameter>
-                                <MultiBinding Converter="{StaticResource multipleCommandParameterConverter}">
-                                    <Binding Path="Item1.Symbol"/>
-                                    <Binding Path="Item1.MassNumber"/>
-                                </MultiBinding>
-                            </Button.CommandParameter>
-                            <periodicTableViews:ItemView Symbol="{Binding Item1.Symbol}"
-                                                         AtomicNumber="{Binding Item1.MassNumber}"
-                                                         PropertiesColorVisibility="Hidden"
-                                                         SymbolFontSize="22"/>
-                        </Button>
-                    </Canvas>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
+    <Grid ClipToBounds="True">
+        <ScrollViewer HorizontalScrollBarVisibility="Visible"
+                      VerticalScrollBarVisibility="Disabled"
+                      Margin="0 0 0 -6">
+            <ItemsControl VerticalAlignment="Stretch" 
+                          ItemsSource="{Binding DecayChainViewModel.IsotopeDecayChain, Source={StaticResource mainVM}}" 
+                          >
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <!--SWITCH OVER TO GRID-->
+                        <Canvas Width="60" 
+                                Margin="11">
+                            <TextBlock Canvas.Left="8" 
+                                        Canvas.Top="20"
+                                        Text="→"/>
+                            <TextBlock Canvas.Left="4" 
+                                        Canvas.Top="10"
+                                        Text="{Binding Item2, TargetNullValue='?'}"/>
+                            <Border Canvas.Left="26" 
+                                    BorderBrush="#FFEBEBEB"
+                                    Width="{Binding DecayChainViewModel.ItemWidth, TargetNullValue='60', Source={StaticResource mainVM}}"
+                                    Height="{Binding DecayChainViewModel.ItemHeight, TargetNullValue='60', Source={StaticResource mainVM}}"
+                                    BorderThickness="1"
+                                    CornerRadius="6" >
+                                <Border.Effect>
+                                    <DropShadowEffect BlurRadius="6" 
+                                                        ShadowDepth="2" 
+                                                        Direction="-36" 
+                                                        Opacity="0.25" 
+                                                        Color="Black" />
+                                </Border.Effect>
+                            </Border>
+                            <Button Canvas.Left="26" 
+                                    Style="{Binding Mode=OneWay, Source={StaticResource NoStyle}}"
+                                    HorizontalAlignment="Left"
+                                    Width="{Binding DecayChainViewModel.ItemWidth, TargetNullValue='60', Source={StaticResource mainVM}}"
+                                    Height="{Binding DecayChainViewModel.ItemHeight, TargetNullValue='60', Source={StaticResource mainVM}}"
+                                    Command="{Binding OpenElementInfoCommand, Source={StaticResource mainVM}}"
+                                    >
+                                <Button.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource multipleCommandParameterConverter}">
+                                        <Binding Path="Item1.Symbol"/>
+                                        <Binding Path="Item1.MassNumber"/>
+                                    </MultiBinding>
+                                </Button.CommandParameter>
+                                <periodicTableViews:ItemView Symbol="{Binding Item1.Symbol}"
+                                                                AtomicNumber="{Binding Item1.MassNumber}"
+                                                                PropertiesColorVisibility="Hidden"
+                                                                SymbolFontSize="22"/>
+                            </Button>
+                        </Canvas>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </ScrollViewer>
         <DockPanel HorizontalAlignment="Left"
-                   Margin="4 0 0 0"
+                   Margin="0 0 0 0"
                    Width="30"
                    Height="{Binding DecayChainViewModel.ItemHeight, TargetNullValue='60', Source={StaticResource mainVM}}"
-                   Background="White">
+                   Background="#242424">
             <Button Style="{StaticResource NoStyle}" 
                     DockPanel.Dock="Top"
                     VerticalAlignment="Top"
