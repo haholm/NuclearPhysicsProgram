@@ -61,7 +61,7 @@ namespace NuclearPhysicsProgram.Views.PeriodicTableViews {
         public static readonly DependencyProperty PropertiesColorVisibilityProperty = DependencyProperty.Register(
             "PropertiesColorVisibility", typeof(Visibility), typeof(ItemView), new PropertyMetadata(Visibility.Visible));
 
-        public string EName { // DO I REALLY NEED THIS?
+        public string EName {
             get => GetValue(ENameProperty) as string;
             set => SetValue(ENameProperty, value);
         }

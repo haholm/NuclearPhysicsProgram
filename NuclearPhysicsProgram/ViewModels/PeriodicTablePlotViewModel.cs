@@ -20,9 +20,9 @@ namespace NuclearPhysicsProgram.ViewModels {
         private ObservableCollection<DataPoint> bindingEnergyDataPoints;
 
         public static string LeftTitle { get => "Binding energy per nucleon (MeV)"; }
-        public static string BottomTitle { get => "Nucleons in nucleus"; }
+        public static string BottomTitle { get => "Nucleons in nuclei of elements in periodic table"; }
         public ObservableCollection<DataPoint> DataPoints { get; private set; }
-        public static List<(string elementName, int nucleons, int atomicNumber)> OpenDataPoints { get; private set; }
+        public static List<(string elementName, int massNumber, int atomicNumber)> OpenDataPoints { get; private set; }
         public PlotModel PlotModel { get; private set; }
 
         public PeriodicTablePlotViewModel() {
@@ -60,6 +60,12 @@ namespace NuclearPhysicsProgram.ViewModels {
                 OpenDataPoints.Add((elementData.Name, (int)bindingEnergyDataPoints.Last().X, elementData.AtomicNumber));
             }
 
+            var list = bindingEnergyDataPoints.ToList();
+            List<double> xList = list.Select(item => item.X).ToList();
+            xList.Sort();
+            for (int i = 0; i < list.Count; i++)
+                bindingEnergyDataPoints[i] = new DataPoint(xList[i], bindingEnergyDataPoints[i].Y);
+
             DataPoints = bindingEnergyDataPoints;
         }
 
@@ -72,7 +78,9 @@ namespace NuclearPhysicsProgram.ViewModels {
                 MinorStep = 1,
                 Position = OxyPlot.Axes.AxisPosition.Left,
                 Title = LeftTitle,
+                IsZoomEnabled = false,
                 Maximum = 9,
+                IsPanEnabled = false,
                 MajorTickSize = 6,
                 IntervalLength = 22,
                 AxisTitleDistance = 10,
@@ -81,7 +89,9 @@ namespace NuclearPhysicsProgram.ViewModels {
             var bottomAxis = new OxyPlot.Axes.LinearAxis {
                 Position = OxyPlot.Axes.AxisPosition.Bottom,
                 Title = BottomTitle,
+                IsZoomEnabled = false,
                 Maximum = 294,
+                IsPanEnabled = false,
                 MinorTickSize = 0,
                 MajorTickSize = 6,
                 IntervalLength = 30,
@@ -97,8 +107,6 @@ namespace NuclearPhysicsProgram.ViewModels {
                 LineStyle = LineStyle.Dash,
                 Color = OxyColors.White
             });
-
-            //PlotModel.Annotations.Add()
         }
 
         private async Task WaitForElements() {

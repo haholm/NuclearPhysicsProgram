@@ -36,6 +36,28 @@
     <WarningLevel>4</WarningLevel>
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>8.0</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>8.0</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -107,7 +129,9 @@
     <Compile Include="ViewModels\Commands\ElementInfoCommands\OpenIsotopeDropDownCommand.cs" />
     <Compile Include="ViewModels\Commands\ElementInfoCommands\SwitchDecayChainIsotopeCommand.cs" />
     <Compile Include="ViewModels\Commands\ElementInfoCommands\SwitchInfoCommand.cs" />
+    <Compile Include="ViewModels\Commands\IntroductionCommands\BeginCommand.cs" />
     <Compile Include="ViewModels\Commands\OpenElementInfoCommand.cs" />
+    <Compile Include="ViewModels\Commands\OpenWikipediaCommand.cs" />
     <Compile Include="ViewModels\Commands\TogglePropertyColorCommand.cs" />
     <Compile Include="ViewModels\Constants\Mass.cs" />
     <Compile Include="ViewModels\Constants\Neutron.cs" />
@@ -121,8 +145,11 @@
     <Compile Include="ViewModels\ElementInfoViewModels\IsotopeDropDownViewModel.cs" />
     <Compile Include="ViewModels\ElementInfoViewModels\PlotViewModel.cs" />
     <Compile Include="ViewModels\ElementViewModel.cs" />
+    <Compile Include="ViewModels\IntroductionViewModel.cs" />
+    <Compile Include="ViewModels\IBaseViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Models\PeriodicTableElementModel.cs" />
+    <Compile Include="ViewModels\ApplicationViewModel.cs" />
     <Compile Include="ViewModels\PeriodicTablePlotViewModel.cs" />
     <Compile Include="ViewModels\PropertyHandler\NotifyPropertyChanged.cs" />
     <Compile Include="ViewModels\PeriodicTableViewModel.cs" />
@@ -138,6 +165,12 @@
     <Compile Include="Views\ElementInfoViews\PlotView.xaml.cs">
       <DependentUpon>PlotView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\IntroductionView.xaml.cs">
+      <DependentUpon>IntroductionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PeriodicTableViews\ItemView.xaml.cs">
       <DependentUpon>ItemView.xaml</DependentUpon>
     </Compile>
@@ -149,6 +182,9 @@
     </Compile>
     <Compile Include="Views\PeriodicTableViews\SideMenuView.xaml.cs">
       <DependentUpon>SideMenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -178,6 +214,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\IntroductionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\PeriodicTableViews\ItemView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -191,6 +235,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PeriodicTableViews\SideMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -256,6 +304,19 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\broken-chain-on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\electric-off.png" />
+    <Resource Include="Images\electric-on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\wikipedia-w.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\info.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\cog.svg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions />

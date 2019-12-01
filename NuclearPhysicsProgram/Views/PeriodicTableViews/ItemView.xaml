@@ -12,7 +12,7 @@
             CornerRadius="6"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
-            Background="#FF484848">
+            Background="#484848">
         <Grid>
             <StackPanel Orientation="Horizontal" 
                         VerticalAlignment="Stretch"

@@ -127,7 +127,9 @@
                       HorizontalContentAlignment="Left"
                       VerticalAlignment="Stretch"
                       Background="Transparent"
-                      Opacity="{Binding PeriodicTableOpacity, Source={StaticResource pTableVM}, TargetNullValue=1}">
+                      Opacity="{Binding PeriodicTableOpacity, Source={StaticResource pTableVM}, TargetNullValue=1}"
+                      VirtualizingStackPanel.IsVirtualizing="True"
+                      VirtualizingStackPanel.VirtualizationMode="Recycling">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Canvas Width="58">
@@ -174,7 +176,9 @@
                       HorizontalContentAlignment="Right"
                       VerticalAlignment="Stretch"
                       Background="Transparent"
-                      Opacity="{Binding PeriodicTableOpacity, Source={StaticResource pTableVM}, TargetNullValue=1}">
+                      Opacity="{Binding PeriodicTableOpacity, Source={StaticResource pTableVM}, TargetNullValue=1}"
+                      VirtualizingStackPanel.IsVirtualizing="True"
+                      VirtualizingStackPanel.VirtualizationMode="Recycling">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Canvas Width="58">
@@ -220,7 +224,9 @@
                       HorizontalContentAlignment="Left"
                       VerticalAlignment="Stretch"
                       Background="Transparent"
-                      Opacity="{Binding PeriodicTableOpacity, Source={StaticResource pTableVM}, TargetNullValue=1}">
+                      Opacity="{Binding PeriodicTableOpacity, Source={StaticResource pTableVM}, TargetNullValue=1}"
+                      VirtualizingStackPanel.IsVirtualizing="True"
+                      VirtualizingStackPanel.VirtualizationMode="Recycling">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Canvas Width="58">
@@ -266,7 +272,9 @@
                       HorizontalContentAlignment="Right"
                       VerticalAlignment="Stretch"
                       Background="Transparent"
-                      Opacity="{Binding PeriodicTableOpacity, Source={StaticResource pTableVM}, TargetNullValue=1}">
+                      Opacity="{Binding PeriodicTableOpacity, Source={StaticResource pTableVM}, TargetNullValue=1}"
+                      VirtualizingStackPanel.IsVirtualizing="True"
+                      VirtualizingStackPanel.VirtualizationMode="Recycling">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Canvas Width="58">
@@ -313,7 +321,9 @@
                       HorizontalContentAlignment="Left"
                       VerticalAlignment="Stretch"
                       Background="Transparent"
-                      Opacity="{Binding PeriodicTableOpacity, Source={StaticResource pTableVM}, TargetNullValue=1}">
+                      Opacity="{Binding PeriodicTableOpacity, Source={StaticResource pTableVM}, TargetNullValue=1}"
+                      VirtualizingStackPanel.IsVirtualizing="True"
+                      VirtualizingStackPanel.VirtualizationMode="Recycling">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Canvas Width="58">
@@ -360,7 +370,9 @@
                       HorizontalContentAlignment="Right"
                       VerticalAlignment="Stretch"
                       Background="Transparent"
-                      Opacity="{Binding PeriodicTableOpacity, Source={StaticResource pTableVM}, TargetNullValue=1}">
+                      Opacity="{Binding PeriodicTableOpacity, Source={StaticResource pTableVM}, TargetNullValue=1}"
+                      VirtualizingStackPanel.IsVirtualizing="True"
+                      VirtualizingStackPanel.VirtualizationMode="Recycling">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Canvas Width="58">
@@ -406,7 +418,9 @@
                       HorizontalContentAlignment="Left"
                       VerticalAlignment="Stretch"
                       Background="Transparent"
-                      Opacity="{Binding PeriodicTableOpacity, Source={StaticResource pTableVM}, TargetNullValue=1}">
+                      Opacity="{Binding PeriodicTableOpacity, Source={StaticResource pTableVM}, TargetNullValue=1}"
+                      VirtualizingStackPanel.IsVirtualizing="True"
+                      VirtualizingStackPanel.VirtualizationMode="Recycling">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Canvas Width="58">
@@ -451,7 +465,9 @@
                       HorizontalContentAlignment="Left"
                       VerticalAlignment="Stretch"
                       Background="Transparent"
-                      Opacity="{Binding PeriodicTableOpacity, Source={StaticResource pTableVM}, TargetNullValue=1}">
+                      Opacity="{Binding PeriodicTableOpacity, Source={StaticResource pTableVM}, TargetNullValue=1}"
+                      VirtualizingStackPanel.IsVirtualizing="True"
+                      VirtualizingStackPanel.VirtualizationMode="Recycling">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Canvas Width="58">
@@ -497,7 +513,9 @@
                       HorizontalContentAlignment="Left"
                       VerticalAlignment="Stretch"
                       Background="Transparent"
-                      Opacity="{Binding PeriodicTableOpacity, Source={StaticResource pTableVM}, TargetNullValue=1}">
+                      Opacity="{Binding PeriodicTableOpacity, Source={StaticResource pTableVM}, TargetNullValue=1}"
+                      VirtualizingStackPanel.IsVirtualizing="True"
+                      VirtualizingStackPanel.VirtualizationMode="Recycling">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Canvas Width="58">
@@ -543,7 +561,9 @@
                       HorizontalContentAlignment="Right"
                       VerticalAlignment="Stretch"
                       Background="Transparent"
-                      Opacity="{Binding PeriodicTableOpacity, Source={StaticResource pTableVM}, TargetNullValue=1}">
+                      Opacity="{Binding PeriodicTableOpacity, Source={StaticResource pTableVM}, TargetNullValue=1}"
+                      VirtualizingStackPanel.IsVirtualizing="True"
+                      VirtualizingStackPanel.VirtualizationMode="Recycling">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Canvas Width="58">
@@ -638,6 +658,8 @@
                 </Border>
                 <ItemsControl ItemsSource="{Binding ElementViewModel.SixthHiddenElements, Source={StaticResource mainVM}}"
                               HorizontalAlignment="Stretch"
+                              VirtualizingStackPanel.IsVirtualizing="True"
+                              VirtualizingStackPanel.VirtualizationMode="Recycling"
                               >
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -686,7 +708,9 @@
                       HorizontalContentAlignment="Left"
                       VerticalAlignment="Stretch"
                       Background="Transparent"
-                      Opacity="{Binding PeriodicTableOpacity, Source={StaticResource pTableVM}, TargetNullValue=1}">
+                      Opacity="{Binding PeriodicTableOpacity, Source={StaticResource pTableVM}, TargetNullValue=1}"
+                      VirtualizingStackPanel.IsVirtualizing="True"
+                      VirtualizingStackPanel.VirtualizationMode="Recycling">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Canvas Width="58">
@@ -732,7 +756,9 @@
                       HorizontalContentAlignment="Right"
                       VerticalAlignment="Stretch"
                       Background="Transparent"
-                      Opacity="{Binding PeriodicTableOpacity, Source={StaticResource pTableVM}, TargetNullValue=1}">
+                      Opacity="{Binding PeriodicTableOpacity, Source={StaticResource pTableVM}, TargetNullValue=1}"
+                      VirtualizingStackPanel.IsVirtualizing="True"
+                      VirtualizingStackPanel.VirtualizationMode="Recycling">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Canvas Width="58">
@@ -826,6 +852,8 @@
                 </Border>
                 <ItemsControl ItemsSource="{Binding ElementViewModel.SeventhHiddenElements, Source={StaticResource mainVM}}"
                               HorizontalAlignment="Stretch"
+                              VirtualizingStackPanel.IsVirtualizing="True"
+                              VirtualizingStackPanel.VirtualizationMode="Recycling"
                               >
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>

@@ -23,6 +23,7 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
         public Effect Effect { get => effect; private set { effect = value; SetPropertyChanged(this, "Effect"); } }
         public double? MaximumTime { get => maximumTime; private set { maximumTime = value; SetPropertyChanged(this, "MaximumTime"); } }
         public int? MaximumNuclides { get => maximumNuclides; set { maximumNuclides = value; SetPropertyChanged(this, "MaximumNuclides"); SetupPlot(currentIsotope); } }
+        public double UnitHalfLife { get; private set; }
         public string Unit { get => unit; private set { unit = value; SetPropertyChanged(this, "Unit"); } }
         public double? UnitTitlePosition { get => unitTitlePosition; set { unitTitlePosition = value; SetPropertyChanged(this, "UnitTitlePosition"); } }
         public ObservableCollection<DataPoint> DataPoints { get; private set; }
@@ -39,26 +40,26 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
             double halfLife = ElementViewModel.GetHalfLife(isotope);
             if (halfLife == 0) {
                 Effect = blurryEffect;
+                UnitHalfLife = 0;
                 Unit = " ";
                 MaximumTime = 10;
                 return;
             }
 
-            if (isotope.Symbol == "Og")
-                _ = 0;
-
             Effect = null;
             string unit = ConvertToAppropriateUnit(ref halfLife);
+            UnitHalfLife = halfLife;
             Unit = unit;
             UnitTitlePosition = 1.02 + ((double)(unit.Length - 5) / 1000 * 4);
-            MaximumTime = ((double)Math.Pow(MaximumNuclides.GetValueOrDefault(100), 1d / 5.5) / 0.70) * Math.PI * halfLife;
+            int maximumNuclides = MaximumNuclides.GetValueOrDefault(100);
+            MaximumTime = Math.Pow(Math.PI, 2.01) * halfLife;
             double time = 0;
             double timeStep = 1;
             if (unit == "years" && halfLife > 1000)
                 timeStep = halfLife / 100;
 
             double numberOfNuclides = CalculateNumberOfNuclides(halfLife, 0);
-            for (; numberOfNuclides > 0.1; time += timeStep) {
+            for (; numberOfNuclides > maximumNuclides / 1000d; time += timeStep) {
                 numberOfNuclides = CalculateNumberOfNuclides(halfLife, time);
                 DataPoints.Add(new DataPoint(time, numberOfNuclides));
             }

@@ -9,6 +9,9 @@ using System.Windows.Data;
 namespace NuclearPhysicsProgram.ViewModels.Converters {
     class PlotSeriesConverter : IValueConverter {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
+            if (value == null)
+                return "";
+
             string strippedResult = (value as OxyPlot.TrackerHitResult).Text.Replace($"\n{PeriodicTablePlotViewModel.BottomTitle}: ", "");
             string nucleonAmountString = "";
             foreach (char c in strippedResult) {
@@ -23,8 +26,8 @@ namespace NuclearPhysicsProgram.ViewModels.Converters {
             if (!int.TryParse(nucleonAmountString, out int nucleonAmount))
                 return "-";
 
-            var dataPoint = PeriodicTablePlotViewModel.OpenDataPoints.Find(dataPoint => dataPoint.nucleons == nucleonAmount);
-            return $"{ConvertToSuperScript(dataPoint.atomicNumber.ToString())} {dataPoint.elementName}";
+            var dataPoint = PeriodicTablePlotViewModel.OpenDataPoints.Find(dataPoint => dataPoint.massNumber == nucleonAmount);
+            return $"{ConvertToSuperScript(dataPoint.massNumber.ToString())} {dataPoint.elementName}";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => value;

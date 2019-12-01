@@ -16,6 +16,7 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
     public class ElementInfoViewModel : PropertyHandler.NotifyPropertyChanged {
         private const int infoPages = 2;
         private int currentInfoPage = 1;
+        private string infoIsotopeName;
         private double? infoProtons;
         private double? infoNeutrons;
         private double? plotViewCanvasLeft;
@@ -23,11 +24,14 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
         private Storyboard plotViewStoryboard;
         private bool? isArrowLeftEnabled;
         private bool? isArrowRightEnabled;
+        private string infoHalfLife;
 
         public static IsotopeDataModel CurrentIsotopeData { get; set; }
         public ICommand SwitchInfoCommand { get; private set; }
+        public string InfoIsotopeName { get => infoIsotopeName; set { infoIsotopeName = value; SetPropertyChanged(this, "InfoIsotopeName"); } }
         public double? InfoProtons { get => infoProtons; set { infoProtons = value; SetPropertyChanged(this, "InfoProtons"); } }
         public double? InfoNeutrons { get => infoNeutrons; set { infoNeutrons = value; SetPropertyChanged(this, "InfoNeutrons"); } }
+        public string InfoHalfLife { get => infoHalfLife; set { infoHalfLife = value; SetPropertyChanged(this, "InfoHalfLife"); } }
         public double? PlotViewOpacity { get => plotViewOpacity; set { plotViewOpacity = value; SetPropertyChanged(this, "PlotViewOpacity"); } }
         public Storyboard PlotViewStoryboard { get => plotViewStoryboard; set { plotViewStoryboard = value; SetPropertyChanged(this, "PlotViewStoryboard"); } }
         public bool? IsArrowLeftEnabled {
@@ -65,5 +69,7 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
             IsArrowRightEnabled = currentInfoPage != 2 ? true : false;
             IsArrowLeftEnabled = currentInfoPage != 1 ? true : false;
         }
+
+        public void OpenWikipedia() => System.Diagnostics.Process.Start($"https://wikipedia.org/wiki/{InfoIsotopeName}");
     }
 }

@@ -1,0 +1,174 @@
+﻿<UserControl x:Name="SettingsControl" 
+             x:Class="NuclearPhysicsProgram.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NuclearPhysicsProgram.Views"
+             xmlns:ikriv="clr-namespace:IKriv.Wpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="#2B2B2F">
+        <Border Name="CloseBorder"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Width="38"
+                Height="26"
+                Margin="24"
+                Background="#606060"
+                CornerRadius="4">
+            <Button Style="{StaticResource NoStyle}" 
+                    Command="{Binding CloseElementInfoCommand, Source={StaticResource mainVM}}"
+                    Foreground="#c0c0c0"
+                    >
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="MouseEnter">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation To="#ff4040" 
+                                                Duration="0:0:0.1" 
+                                                Storyboard.TargetName="CloseBorder" 
+                                                Storyboard.TargetProperty="Background.Color"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="MouseLeave">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation To="#606060" 
+                                                Duration="0:0:0.1" 
+                                                Storyboard.TargetName="CloseBorder" 
+                                                Storyboard.TargetProperty="Background.Color"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="MouseEnter">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation To="White" 
+                                                Duration="0:0:0.1"
+                                                Storyboard.TargetName="CloseTextBlock" 
+                                                Storyboard.TargetProperty="Foreground.Color"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="MouseLeave">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation To="#c0c0c0" 
+                                                Duration="0:0:0.1" 
+                                                Storyboard.TargetName="CloseTextBlock" 
+                                                Storyboard.TargetProperty="Foreground.Color"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="PreviewMouseDown">
+                        <BeginStoryboard Storyboard="{StaticResource CloseSettings}"/>
+                    </EventTrigger>
+                </Button.Triggers>
+                <TextBlock x:Name="CloseTextBlock" 
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="18"
+                            Padding="0.3"
+                            FontFamily="{StaticResource OpenSansLight}">
+                    <TextBlock.RenderTransform>
+                        <ScaleTransform ScaleY="0.85"/>
+                    </TextBlock.RenderTransform>x</TextBlock>
+            </Button>
+        </Border>
+        
+        <Border HorizontalAlignment="Stretch" 
+                VerticalAlignment="Stretch" 
+                Margin="420 60"
+                MaxWidth="700"
+                MaxHeight="900"
+                CornerRadius="16">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0.5 0"
+                                     EndPoint="0.5 1">
+                    <GradientStop Color="#cfd9df"
+                                  Offset="0"/>
+                    <GradientStop Color="#e2ebf0"
+                                  Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid>
+                <TextBlock FontSize="38" 
+                           Margin="0 40 0 0"
+                           VerticalAlignment="Top" 
+                           HorizontalAlignment="Center" 
+                           Foreground="Black"
+                           TextAlignment="Center"
+                           >
+                    <Run Text="{Binding ApplicationName, Mode=OneWay, Source={StaticResource applicationVM}}"/>
+                    <LineBreak/>
+                    <Run Text="by Fredrik Forsell and Hampus Holm"
+                         FontSize="14"
+                         FontFamily="{StaticResource OpenSansLight}"
+                         Foreground="#777777"/>
+                </TextBlock>
+
+                <Border CornerRadius="10"
+                        Width="60"
+                        Height="60"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                           Margin="0 0 240 100"
+                        >
+                    <Border.Clip>
+                        <EllipseGeometry Center="30 30" 
+                                         RadiusX="30"
+                                         RadiusY="30"/>
+                    </Border.Clip>
+                    <Image Source="https://cdn.discordapp.com/avatars/225340215034773504/aa8cd7e46dc69b620c36177cac6997ad.png"/>
+                </Border>
+                <TextBlock FontSize="30" 
+                           Margin="60 0 0 100"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           TextWrapping="Wrap"
+                           Width="210">
+                    <Run Text="Fredrik Forsell"/>
+                    <LineBreak/>
+                    <Run Text="Data collection, application resources and user interface design"
+                         FontSize="12"
+                         FontFamily="{StaticResource OpenSansLight}"
+                         Foreground="#777777"/>
+                </TextBlock>
+
+                <Border CornerRadius="10"
+                        Width="60"
+                        Height="60"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Margin="0 100 240 0"
+                        >
+                    <Border.Clip>
+                        <EllipseGeometry Center="30 30" 
+                                         RadiusX="30"
+                                         RadiusY="30"/>
+                    </Border.Clip>
+                    <Image Source="https://cdn.discordapp.com/avatars/104632152712302592/15fc056dcbb10d169a68a83d8eec2711.png"/>
+                </Border>
+                <TextBlock FontSize="30" 
+                           Margin="60 100 0 0"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           TextWrapping="Wrap"
+                           Width="210">
+                    <Run Text="Hampus Holm"/>
+                    <LineBreak/>
+                    <Run Text="Application design, programming and user interface design"
+                         FontSize="12"
+                         FontFamily="{StaticResource OpenSansLight}"
+                         Foreground="#777777"/>
+                </TextBlock>
+
+                <TextBlock VerticalAlignment="Bottom" 
+                           HorizontalAlignment="Center"
+                           Text="CREDITS"/>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

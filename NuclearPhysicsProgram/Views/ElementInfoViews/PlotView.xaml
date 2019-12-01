@@ -9,8 +9,8 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
         <ScrollBar DockPanel.Dock="Left"
-                   Value="{Binding PlotViewModel.MaximumNuclides, TargetNullValue='100', Source={StaticResource mainVM}}" 
-                   Maximum="100" 
+                   Value="{Binding PlotViewModel.MaximumNuclides, TargetNullValue='1000', Source={StaticResource mainVM}}" 
+                   Maximum="1000" 
                    Minimum="1" 
                    LargeChange="0.1"
                    SmallChange="0.1"
@@ -52,7 +52,9 @@
             <oxy:Plot.Axes>
                 <oxy:LinearAxis Position="Left" 
                                 IsZoomEnabled="False"
-                                Maximum="100" 
+                                Title="Nuclides"
+                                TitleColor="LightGray"
+                                Maximum="{Binding PlotViewModel.MaximumNuclides, TargetNullValue='100', Source={StaticResource mainVM}}" 
                                 Minimum="0"
                                 IsPanEnabled="False"
                                 TicklineColor="LightGray"
@@ -63,6 +65,7 @@
                                 Minimum="0" 
                                 Maximum="{Binding PlotViewModel.MaximumTime, Mode=OneWay, Source={StaticResource mainVM}, TargetNullValue=10}" 
                                 IsPanEnabled="False" 
+                                TitleColor="LightGray"
                                 Title="{Binding PlotViewModel.Unit, Mode=OneWay, Source={StaticResource mainVM}, TargetNullValue='Unit'}"
                                 TitlePosition="{Binding PlotViewModel.UnitTitlePosition, Mode=OneWay, Source={StaticResource mainVM}, TargetNullValue='1.02'}"
                                 AxisTitleDistance="-27"

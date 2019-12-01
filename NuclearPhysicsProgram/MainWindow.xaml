@@ -8,7 +8,7 @@
         xmlns:views="clr-namespace:NuclearPhysicsProgram.Views"
         xmlns:periodicTableViews="clr-namespace:NuclearPhysicsProgram.Views.PeriodicTableViews"
         mc:Ignorable="d"
-        Title="Nuclear Physics Program" 
+        Title="{Binding ApplicationName, Source={StaticResource applicationVM}}" 
         MinWidth="1340"
         MinHeight="680"
         FontFamily="{StaticResource OpenSansRegular}"
@@ -81,7 +81,11 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Grid Background="#121212">
+    <Grid>
+        <views:MainView/>
+        <views:IntroductionView Visibility="{Binding IntroductionViewVisibility, TargetNullValue={x:Static Visibility.Visible}, Source={StaticResource applicationVM}}"/>
+    </Grid>
+    <!--<Grid Background="#121212">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="60" />
             <ColumnDefinition Width="*" />
@@ -132,5 +136,5 @@
                                Opacity="{Binding ElementInfoViewOpacity, TargetNullValue='0' , Mode=OneWay, Source={StaticResource mainVM}}" 
                                Visibility="{Binding ElementInfoViewVisibility, TargetNullValue='Collapsed', Mode=OneWay, Source={StaticResource mainVM}}"
                                />
-    </Grid>
+    </Grid>-->
 </Window>

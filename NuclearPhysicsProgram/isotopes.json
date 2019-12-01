@@ -701,7 +701,7 @@
       },
       {
         "Symbol": "K",
-        "MassNumber": 0,
+        "MassNumber": 41,
         "HalfLife": "",
         "Decays": [
         ]
@@ -1530,7 +1530,7 @@
         "Decays": [
           {
             "Type": "Beta-",
-            "Product": "",
+            "Product": "Ge",
             "AtomicNumber": 32,
             "MassNumber": 70
           },
@@ -1564,7 +1564,7 @@
       },
       {
         "Symbol": "Ga",
-        "MassNumber": 72,
+        "MassNumber": 73,
         "HalfLife": "17,640",
         "Decays": [
           {
@@ -1673,7 +1673,7 @@
       },
       {
         "Symbol": "As",
-        "MassNumber": 0,
+        "MassNumber": 74,
         "HalfLife": "1,537,920",
         "Decays": [
           {
@@ -2034,7 +2034,7 @@
             "Type": "Beta-",
             "Product": "Sr",
             "AtomicNumber": 38,
-            "MassNumber": 7
+            "MassNumber": 87
           }
         ]
       }
@@ -3797,7 +3797,7 @@
       },
       {
         "Symbol": "Ce",
-        "MassNumber": 0,
+        "MassNumber": 136,
         "HalfLife": "",
         "Decays": [
 
@@ -3805,7 +3805,7 @@
       },
       {
         "Symbol": "Ce",
-        "MassNumber": 0,
+        "MassNumber": 138,
         "HalfLife": "",
         "Decays": [
 
@@ -3813,7 +3813,7 @@
       },
       {
         "Symbol": "Ce",
-        "MassNumber": 0,
+        "MassNumber": 139,
         "HalfLife": "11,892,096",
         "Decays": [
           {
@@ -3826,7 +3826,7 @@
       },
       {
         "Symbol": "Ce",
-        "MassNumber": 0,
+        "MassNumber": 140,
         "HalfLife": "",
         "Decays": [
 
@@ -3989,7 +3989,7 @@
       },
       {
         "Symbol": "Nd",
-        "MassNumber": 0,
+        "MassNumber": 150,
         "HalfLife": "6.6269599e23",
         "Decays": [
           {
@@ -5070,7 +5070,7 @@
     "Isotopes": [
       {
         "Symbol": "W",
-        "MassNumber": 0,
+        "MassNumber": 180,
         "HalfLife": "5.6802514e25",
         "Decays": [
           {
@@ -5814,7 +5814,7 @@
         ]
       },
       {
-        "Symbol": "Pb",
+        "Symbol": "Po",
         "MassNumber": 210,
         "HalfLife": "11,955,686",
         "Decays": [
@@ -5962,7 +5962,7 @@
         "HalfLife": "288",
         "Decays": [
           {
-            "Type": "Alpah",
+            "Type": "Alpha",
             "Product": "At",
             "AtomicNumber": 85,
             "MassNumber": 217
@@ -6500,10 +6500,10 @@
         "HalfLife": "7.6052254e11",
         "Decays": [
           {
-            "Type": "",
-            "Product": "",
-            "AtomicNumber": 0,
-            "MassNumber": 0
+            "Type": "Alpha",
+            "Product": "U",
+            "AtomicNumber": 92,
+            "MassNumber": 235
           }
         ]
       },
@@ -6823,7 +6823,7 @@
         "HalfLife": "1.1076490e10",
         "Decays": [
           {
-            "Type": "alpha",
+            "Type": "Alpha",
             "Product": "Cm",
             "AtomicNumber": 96,
             "MassNumber": 245
@@ -7238,7 +7238,7 @@
         "HalfLife": "3,480",
         "Decays": [
           {
-            "Type": "EC",
+            "Type": "Alpha",
             "Product": "Fm",
             "AtomicNumber": 100,
             "MassNumber": 255
@@ -7449,7 +7449,7 @@
       },
       {
         "Symbol": "Db",
-        "MassNumber": 240,
+        "MassNumber": 270,
         "HalfLife": "54,000",
         "Decays": [
           {
@@ -7752,7 +7752,7 @@
             "Type": "Alpha",
             "Product": "Mt",
             "AtomicNumber": 109,
-            "MassNumber": 272
+            "MassNumber": 270
           }
         ]
       },
@@ -7801,7 +7801,7 @@
         "HalfLife": "17",
         "Decays": [
           {
-            "Type": "alpha",
+            "Type": "Alpha",
             "Product": "Mt",
             "AtomicNumber": 109,
             "MassNumber": 277
@@ -7904,7 +7904,7 @@
     "Isotopes": [
       {
         "Symbol": "Nh",
-        "MassNumber": 0,
+        "MassNumber": 278,
         "HalfLife": "1.4e-6",
         "Decays": [
           {
@@ -7951,13 +7951,13 @@
             "Product": "Rg",
             "AtomicNumber": 111,
             "MassNumber": 280
-          }//,
-          //{ Causes issues
-          //  "Type": "EC",
-          //  "Product": "Cn",
-          //  "AtomicNumber": 112,
-          //  "MassNumber": 284
-          //}
+          },
+          {
+            "Type": "EC",
+            "Product": "Cn",
+            "AtomicNumber": 112,
+            "MassNumber": 284
+          }
         ]
       },
       {
@@ -8120,8 +8120,8 @@
           {
             "Type": "Alpha",
             "Product": "Nh",
-            "AtomicNumber": 283,
-            "MassNumber": 113
+            "AtomicNumber": 113,
+            "MassNumber": 283
           }
         ]
       },
@@ -8285,7 +8285,7 @@
       },
       {
         "Symbol": "Og",
-        "MassNumber": 195,
+        "MassNumber": 295,
         "HalfLife": "0.000181",
         "Decays": [
           {

@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 
 namespace NuclearPhysicsProgram.ViewModels {
-    public class MainViewModel : PropertyHandler.NotifyPropertyChanged {
+    public class MainViewModel : PropertyHandler.NotifyPropertyChanged, IBaseViewModel {
         private double? mainWindowWidth;
         private double? mainWindowHeight;
         private WindowState mainWindowState;
@@ -38,6 +38,7 @@ namespace NuclearPhysicsProgram.ViewModels {
         public static ICommand OpenElementInfoCommand { get; private set; }
         public static ICommand CloseElementInfoCommand { get; private set; }
         public static ICommand TogglePropertyColorCommand { get; private set; }
+        public ICommand OpenWikipediaCommand { get; private set; }
         public double? MainWindowWidth { get => mainWindowWidth; set { mainWindowWidth = value; SetPropertyChanged(this, "MainWindowWidth"); mainWindowSizeChanged = true; } }
         public double? MainWindowHeight { get => mainWindowHeight; set { mainWindowHeight = value; SetPropertyChanged(this, "MainWindowHeight"); mainWindowSizeChanged = true; } }
         public WindowState MainWindowState { get => mainWindowState; set { mainWindowState = value; SetPropertyChanged(this, "MainWindowState"); mainWindowSizeChanged = true; } }
@@ -63,6 +64,7 @@ namespace NuclearPhysicsProgram.ViewModels {
             OpenElementInfoCommand = new OpenElementInfoCommand(this);
             CloseElementInfoCommand = new CloseElementInfoCommand(this);
             TogglePropertyColorCommand = new TogglePropertyColorCommand(this);
+            OpenWikipediaCommand = new OpenWikipediaCommand(ElementInfoViewModel);
             Task.Run(() => {
                 while (true) {
                     System.Threading.Thread.Sleep(100);
@@ -71,7 +73,7 @@ namespace NuclearPhysicsProgram.ViewModels {
 
                     mainWindowSizeChanged = false;
                     if (MainWindowState == WindowState.Maximized)
-                        PeriodicTableScale = 1.25;
+                        PeriodicTableScale = (double)System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width / 1340;
                     else if (!double.IsNaN(MainWindowWidth.GetValueOrDefault()))
                         PeriodicTableScale = ((MainWindowWidth / 1340) + (MainWindowHeight / 650)) / 2;
                 }

@@ -19,8 +19,6 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
         private List<List<(IsotopeModel isotope, int index, string decayType)>> decayChains;
 
         private int currentDecayChainIndex = 0;
-        private double? itemWidth = 58;
-        private double? itemHeight = 58;
         private bool? isArrowUpEnabled;
         private bool? isArrowDownEnabled;
 
@@ -35,8 +33,6 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
 
         public ICommand SwitchDecayChainIsotopeCommand { get; private set; }
         public ObservableCollection<Tuple<IsotopeModel, string>> IsotopeDecayChain { get; private set; }
-        public double? ItemWidth { get => itemWidth; private set { itemWidth = value; SetPropertyChanged(this, "ItemWidth"); } }
-        public double? ItemHeight { get => itemHeight; private set { itemHeight = value; SetPropertyChanged(this, "ItemHeight"); } }
         public bool? IsArrowUpEnabled {
             get => isArrowUpEnabled; 
             private set {
@@ -191,9 +187,14 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
             IsArrowDownEnabled = decayChainIndex == decayChains.Count - 1 ? false : true;
             IsotopeModel isotope = IsotopeDecayChain.First().Item1;
             ElementViewModel.ElementDataDictionary.TryGetValue(isotope.Symbol, out var elementData);
+            elementInfoViewModel.InfoIsotopeName = elementData.Name;
             elementInfoViewModel.InfoProtons = elementData.AtomicNumber;
             elementInfoViewModel.InfoNeutrons = -elementData.AtomicNumber + isotope.MassNumber;
             plotViewModel.SetupPlot(isotope);
+            double roundedHalfLife = Math.Round(plotViewModel.UnitHalfLife);
+            roundedHalfLife = roundedHalfLife.ToString().Contains("E") ? double.Parse(roundedHalfLife.ToString("E2")) : roundedHalfLife;
+            roundedHalfLife = roundedHalfLife == 0 ? double.PositiveInfinity : roundedHalfLife;
+            elementInfoViewModel.InfoHalfLife = $"{roundedHalfLife}\n{plotViewModel.Unit}";
         }
 
         private string GetDecaySymbol(string decayType) {
@@ -210,6 +211,8 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
                     return "γ";
                 case "Beta-Gamma":
                     return "β-,γ";
+                case "ECGamma":
+                    return "EC,γ";
                 default:
                     return decayType;
             }
