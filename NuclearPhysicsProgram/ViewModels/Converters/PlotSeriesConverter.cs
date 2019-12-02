@@ -12,25 +12,49 @@ namespace NuclearPhysicsProgram.ViewModels.Converters {
             if (value == null)
                 return "";
 
-            string strippedResult = (value as OxyPlot.TrackerHitResult).Text.Replace($"\n{PeriodicTablePlotViewModel.BottomTitle}: ", "");
-            string nucleonAmountString = "";
-            foreach (char c in strippedResult) {
-                if (int.TryParse(c.ToString(), out int digit))
-                    nucleonAmountString += digit;
-                else if (c == ',')
-                    nucleonAmountString += c;
-                else
-                    break;
-            }
+            var hitResult = value as OxyPlot.TrackerHitResult;
+            if (PeriodicTablePlotViewModel.CurrentPlotType == "instability")
+                return ConvertInstabilityPlot(hitResult);
+            else
+                return ConvertBindingEnergyPlot(hitResult);
+        }
 
-            if (!int.TryParse(nucleonAmountString, out int nucleonAmount))
-                return "-";
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => value;
+
+        public object ConvertInstabilityPlot(OxyPlot.TrackerHitResult value) {
+            string strippedResult = value.Text.Replace($"\n{PeriodicTablePlotViewModel.BottomInstabilityTitle}: ", "");
+            double neutronAmount = FindFirstNumber(strippedResult);
+            string secondStrippedResult = strippedResult.Replace($"{neutronAmount}\n{PeriodicTablePlotViewModel.LeftInstabilityTitle}: ", "");
+            double protonAmount = FindFirstNumber(secondStrippedResult);
+
+            var scatterPoint = PeriodicTablePlotViewModel.OpenScatterPoints.Find(scatterPoint => scatterPoint.massNumber - scatterPoint.atomicNumber == neutronAmount && scatterPoint.atomicNumber == protonAmount);
+            return $"{ConvertToSuperScript(scatterPoint.massNumber.ToString())} {scatterPoint.elementName}\nHalf life (s): {scatterPoint.halfLife}";
+        }
+
+        public object ConvertBindingEnergyPlot(OxyPlot.TrackerHitResult value) {
+            string strippedResult = value.Text.Replace($"\n{PeriodicTablePlotViewModel.BottomBindingEnergyTitle}: ", "");
+            double nucleonAmount = FindFirstNumber(strippedResult);
 
             var dataPoint = PeriodicTablePlotViewModel.OpenDataPoints.Find(dataPoint => dataPoint.massNumber == nucleonAmount);
             return $"{ConvertToSuperScript(dataPoint.massNumber.ToString())} {dataPoint.elementName}";
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => value;
+        private double FindFirstNumber(string str) {
+            string numberString = "";
+            foreach (char c in str) {
+                if (int.TryParse(c.ToString(), out int digit))
+                    numberString += digit;
+                else if (c == ',')
+                    numberString += c;
+                else
+                    break;
+            }
+
+            if (!int.TryParse(numberString, out int number))
+                return 0;
+
+            return number;
+        }
 
         private string ConvertToSuperScript(string toConvert) {
             string superScript = "";

@@ -103,7 +103,8 @@
                            Source="/Images/broken-chain-off.png"
                            Margin="1"
                            Opacity="1"
-                           Visibility="Visible">
+                           Visibility="Visible"
+                           >
                         <Image.Triggers>
                             <EventTrigger RoutedEvent="Image.MouseEnter">
                                 <BeginStoryboard Storyboard="{StaticResource InstabilityToolTipOn}"/>

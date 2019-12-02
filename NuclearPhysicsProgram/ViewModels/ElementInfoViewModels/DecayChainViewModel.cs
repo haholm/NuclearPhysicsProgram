@@ -191,10 +191,25 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
             elementInfoViewModel.InfoProtons = elementData.AtomicNumber;
             elementInfoViewModel.InfoNeutrons = -elementData.AtomicNumber + isotope.MassNumber;
             plotViewModel.SetupPlot(isotope);
-            double roundedHalfLife = Math.Round(plotViewModel.UnitHalfLife);
-            roundedHalfLife = roundedHalfLife.ToString().Contains("E") ? double.Parse(roundedHalfLife.ToString("E2")) : roundedHalfLife;
+            double roundedHalfLife = CalculateRoundedHalfLife();
+            string roundedHalfLifeString = double.IsNaN(roundedHalfLife) ? "-" : roundedHalfLife.ToString();
+            elementInfoViewModel.InfoHalfLife = $"{roundedHalfLifeString}\n{plotViewModel.Unit}";
+        }
+
+        private double CalculateRoundedHalfLife() {
+            double roundedHalfLife = plotViewModel.UnitHalfLife;
+            if (roundedHalfLife.ToString().Contains("E"))
+                roundedHalfLife = double.Parse(roundedHalfLife.ToString("E2"));
+            else
+                roundedHalfLife = Math.Round(plotViewModel.UnitHalfLife, 1);
+
             roundedHalfLife = roundedHalfLife == 0 ? double.PositiveInfinity : roundedHalfLife;
-            elementInfoViewModel.InfoHalfLife = $"{roundedHalfLife}\n{plotViewModel.Unit}";
+            if (roundedHalfLife == 0)
+                roundedHalfLife = double.PositiveInfinity;
+            else if (roundedHalfLife == -1)
+                roundedHalfLife = double.NaN;
+
+            return roundedHalfLife;
         }
 
         private string GetDecaySymbol(string decayType) {

@@ -38,9 +38,9 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
             currentIsotope = isotope;
             DataPoints.Clear();
             double halfLife = ElementViewModel.GetHalfLife(isotope);
-            if (halfLife == 0) {
+            if (halfLife <= 0) {
                 Effect = blurryEffect;
-                UnitHalfLife = 0;
+                UnitHalfLife = halfLife;
                 Unit = " ";
                 MaximumTime = 10;
                 return;
@@ -54,9 +54,9 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
             int maximumNuclides = MaximumNuclides.GetValueOrDefault(100);
             MaximumTime = Math.Pow(Math.PI, 2.01) * halfLife;
             double time = 0;
-            double timeStep = 1;
-            if (unit == "years" && halfLife > 1000)
-                timeStep = halfLife / 100;
+            double timeStep = halfLife / 100;
+            //if (unit == "years" && halfLife > 1000)
+            //    timeStep = halfLife / 100;
 
             double numberOfNuclides = CalculateNumberOfNuclides(halfLife, 0);
             for (; numberOfNuclides > maximumNuclides / 1000d; time += timeStep) {
@@ -73,7 +73,7 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
                 return "years";
             }
 
-            TimeSpan halfLifeInSeconds = TimeSpan.FromSeconds(halfLife);
+            var halfLifeInSeconds = TimeSpan.FromSeconds(halfLife);
             if (halfLife >= 60 && halfLife < 3600) {
                 halfLife = halfLifeInSeconds.TotalMinutes;
                 return "minutes";
@@ -91,7 +91,6 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
                 return "years";
             }
             else {
-                halfLife = halfLifeInSeconds.TotalSeconds;
                 return "seconds";
             }
         }

@@ -7,12 +7,12 @@
              xmlns:converters="clr-namespace:NuclearPhysicsProgram.ViewModels.Converters"
              xmlns:oxy="http://oxyplot.org/wpf"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="800" d:DesignWidth="1000">
     <UserControl.Resources>
         <converters:PlotSeriesConverter x:Key="plotSeriesConverter" />
     </UserControl.Resources>
     <Border x:Name="PlotBorder" 
-            CornerRadius="6"
+            CornerRadius="9"
             BorderThickness="0">
         <Border.Background>
             <LinearGradientBrush>
@@ -23,11 +23,11 @@
             </LinearGradientBrush>
         </Border.Background>
         <oxy:PlotView x:Name="PlotView" 
-                        Model="{Binding PeriodicTablePlotViewModel.PlotModel, Mode=OneWay, Source={StaticResource mainVM}}"
-                        Margin="2"
-                        Padding="-1 10 -2 0"
-                        Background="Transparent"
-                        >
+                      Model="{Binding PeriodicTablePlotViewModel.PlotModel, Mode=OneWay, Source={StaticResource mainVM}}"
+                      Margin="0 6 6 0"
+                      Padding="-1 10 -2 0"
+                      Background="Transparent"
+                      >
             <oxy:PlotView.DefaultTrackerTemplate>
                 <ControlTemplate>
                     <oxy:TrackerControl Position="{Binding Position}" 

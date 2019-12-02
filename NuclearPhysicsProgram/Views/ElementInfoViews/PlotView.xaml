@@ -73,7 +73,7 @@
                                 TextColor="LightGray"/>
             </oxy:Plot.Axes>
             <oxy:Plot.Series>
-                <oxy:LineSeries Color="#f09819" 
+                <oxy:AreaSeries Color="#f09819" 
                                 ItemsSource="{Binding PlotViewModel.DataPoints, Mode=OneWay, Source={StaticResource mainVM}}"/>
             </oxy:Plot.Series>
         </oxy:Plot>

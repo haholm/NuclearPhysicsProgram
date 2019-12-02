@@ -84,25 +84,26 @@ namespace NuclearPhysicsProgram.ViewModels {
             return isotopeList.First();
         }
 
-        public static double GetHalfLife(IsotopeModel isotope) {
+        public static double GetHalfLife(IsotopeModel isotope, double unknownValue = -1) {
             string halfLifeString = isotope.HalfLife.Replace(",", "").Replace(".", ",");
-            if (halfLifeString == string.Empty || halfLifeString == "?")
+            if (halfLifeString == string.Empty)
                 return 0;
+            else if (halfLifeString == "?")
+                return unknownValue;
 
             if (halfLifeString.Contains("e")) {
                 double.TryParse(halfLifeString.Substring(0, halfLifeString.IndexOf("e")), out double firstNumber);
                 int.TryParse(halfLifeString.Substring(halfLifeString.IndexOf("e") + 1), out int power);
                 return firstNumber * Math.Pow(10, power);
             }
-            else {
-                return double.Parse(halfLifeString);
-            }
+
+            return double.Parse(halfLifeString);
         }
 
         public static double GetAvarageHalfLife(IsotopeDataModel isotopeData) {
             double avarageHalfLife = 0;
             foreach (var isotope in isotopeData.Isotopes) {
-                avarageHalfLife += GetHalfLife(isotope);
+                avarageHalfLife += GetHalfLife(isotope, 0);
             }
 
             avarageHalfLife /= isotopeData.Isotopes.Length;

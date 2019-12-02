@@ -19,12 +19,7 @@ namespace NuclearPhysicsProgram.ViewModels.Commands {
         public bool CanExecute(object parameter) => true;
 
         public void Execute(object parameter) {
-            if (parameter == null) {
-                elementInfoViewModel.OpenWikipedia();
-                return;
-            }
-
-            System.Diagnostics.Process.Start($"https://wikipedia.org/wiki/{parameter as string}");
+            elementInfoViewModel.OpenWikipedia();
         }
     }
 }

@@ -54,7 +54,8 @@
                         Width="571"
                         Height="280" 
                         CornerRadius="6"
-                        Background="Black">
+                        Background="Black"
+                        Visibility="{Binding PeriodicTablePlotViewModel.Visibility, TargetNullValue={x:Static Visibility.Collapsed}, Source={StaticResource mainVM}}">
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="8"
                                           ShadowDepth="2"
@@ -64,12 +65,13 @@
                     </Border.Effect>
                 </Border>
                 <periodicTableViews:PeriodicTablePlotView Canvas.Left="120" 
-                                                          Canvas.Top="-12" 
-                                                          Width="{Binding Converter={ikriv:MathConverter}, ConverterParameter=761 + 1/3}"
-                                                          Height="{Binding Converter={ikriv:MathConverter}, ConverterParameter=373 + 1/3}">
+                                                          Canvas.Top="-12"
+                                                          Width="{Binding Converter={ikriv:MathConverter}, ConverterParameter=856}"
+                                                          Height="{Binding Converter={ikriv:MathConverter}, ConverterParameter=420}"
+                                                          Visibility="{Binding PeriodicTablePlotViewModel.Visibility, TargetNullValue={x:Static Visibility.Collapsed}, Source={StaticResource mainVM}}">
                     <periodicTableViews:PeriodicTablePlotView.RenderTransform>
-                        <ScaleTransform ScaleX="{Binding Converter={ikriv:MathConverter}, ConverterParameter=3/4}"
-                                        ScaleY="{Binding Converter={ikriv:MathConverter}, ConverterParameter=3/4}"/>
+                        <ScaleTransform ScaleX="{Binding Converter={ikriv:MathConverter}, ConverterParameter=4/6}"
+                                        ScaleY="{Binding Converter={ikriv:MathConverter}, ConverterParameter=4/6}"/>
                     </periodicTableViews:PeriodicTablePlotView.RenderTransform>
                     <!--Make scaling of Canvas look better-->
                 </periodicTableViews:PeriodicTablePlotView>
@@ -79,8 +81,9 @@
                         Canvas.Left="125"
                         Background="#aa999999"
                         Cursor="Hand"
-                        Command="{Binding OpenWikipediaCommand, Source={StaticResource mainVM}}"
-                        CommandParameter="Nuclear_binding_energy#Nuclear_binding_energy_curve"
+                        Command="{Binding OpenWebsiteCommand, Source={StaticResource mainVM}}"
+                        CommandParameter="{Binding PeriodicTablePlotViewModel.CurrentPlotInfo, Source={StaticResource mainVM}}"
+                        Visibility="{Binding PeriodicTablePlotViewModel.Visibility, TargetNullValue={x:Static Visibility.Collapsed}, Source={StaticResource mainVM}}"
                         >
                     <Button.Style>
                         <Style TargetType="Button"

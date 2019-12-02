@@ -38,6 +38,7 @@ namespace NuclearPhysicsProgram.ViewModels {
         public static ICommand OpenElementInfoCommand { get; private set; }
         public static ICommand CloseElementInfoCommand { get; private set; }
         public static ICommand TogglePropertyColorCommand { get; private set; }
+        public ICommand OpenWebsiteCommand { get; private set; }
         public ICommand OpenWikipediaCommand { get; private set; }
         public double? MainWindowWidth { get => mainWindowWidth; set { mainWindowWidth = value; SetPropertyChanged(this, "MainWindowWidth"); mainWindowSizeChanged = true; } }
         public double? MainWindowHeight { get => mainWindowHeight; set { mainWindowHeight = value; SetPropertyChanged(this, "MainWindowHeight"); mainWindowSizeChanged = true; } }
@@ -64,6 +65,7 @@ namespace NuclearPhysicsProgram.ViewModels {
             OpenElementInfoCommand = new OpenElementInfoCommand(this);
             CloseElementInfoCommand = new CloseElementInfoCommand(this);
             TogglePropertyColorCommand = new TogglePropertyColorCommand(this);
+            OpenWebsiteCommand = new OpenWebsiteCommand();
             OpenWikipediaCommand = new OpenWikipediaCommand(ElementInfoViewModel);
             Task.Run(() => {
                 while (true) {
@@ -103,9 +105,11 @@ namespace NuclearPhysicsProgram.ViewModels {
             switch (property) {
                 case "instability":
                     ToggleInstabilityColor();
+                    ToggleInstabilityPlot();
                     return;
                 case "energy":
                     ToggleEnergyColor();
+                    ToggleBindingEnergyPlot();
                     return;
             }
         }
@@ -144,6 +148,18 @@ namespace NuclearPhysicsProgram.ViewModels {
                     ItemViewAERColorVisibility = Visibility.Visible;
                     return;
             }
+        }
+
+        private void ToggleInstabilityPlot() {
+            PeriodicTablePlotViewModel.Visibility = ItemViewInstabilityColorVisibility;
+            if (ItemViewInstabilityColorVisibility == Visibility.Visible)
+                PeriodicTablePlotViewModel.InitializePlot("instability");
+        }
+
+        private void ToggleBindingEnergyPlot(bool plot = true) {
+            PeriodicTablePlotViewModel.Visibility = ItemViewAERColorVisibility;
+            if (ItemViewAERColorVisibility == Visibility.Visible)
+                PeriodicTablePlotViewModel.InitializePlot("energy");
         }
 
         public void InitializeIsotopeData(string symbol, int massNumber) {

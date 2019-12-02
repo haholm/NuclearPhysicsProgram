@@ -131,6 +131,7 @@
     <Compile Include="ViewModels\Commands\ElementInfoCommands\SwitchInfoCommand.cs" />
     <Compile Include="ViewModels\Commands\IntroductionCommands\BeginCommand.cs" />
     <Compile Include="ViewModels\Commands\OpenElementInfoCommand.cs" />
+    <Compile Include="ViewModels\Commands\OpenWebsiteCommand.cs" />
     <Compile Include="ViewModels\Commands\OpenWikipediaCommand.cs" />
     <Compile Include="ViewModels\Commands\TogglePropertyColorCommand.cs" />
     <Compile Include="ViewModels\Constants\Mass.cs" />
