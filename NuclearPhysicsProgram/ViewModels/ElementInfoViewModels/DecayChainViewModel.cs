@@ -29,10 +29,8 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
         bool conflict;
         bool rerun;
 
-
-
         public ICommand SwitchDecayChainIsotopeCommand { get; private set; }
-        public ObservableCollection<Tuple<IsotopeModel, string>> IsotopeDecayChain { get; private set; }
+        public ObservableCollection<Tuple<IsotopeModel, string, string>> IsotopeDecayChain { get; private set; }
         public bool? IsArrowUpEnabled {
             get => isArrowUpEnabled; 
             private set {
@@ -58,7 +56,30 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
             currentIsotopeData = new IsotopeDataModel("", new IsotopeModel[0]);
             decayChains = new List<List<(IsotopeModel, int, string)>>();
             SwitchDecayChainIsotopeCommand = new SwitchDecayChainIsotopeCommand(this);
-            IsotopeDecayChain = new ObservableCollection<Tuple<IsotopeModel, string>>();
+            IsotopeDecayChain = new ObservableCollection<Tuple<IsotopeModel, string, string>>();
+        }
+
+        public static string GetDecaySymbol(string decayType) {
+            switch (decayType) {
+                case "Alpha":
+                    return "α";
+                case "Beta+":
+                    return "β+";
+                case "Beta-":
+                    return "β-";
+                case "Beta-Beta-":
+                    return "β-,β-";
+                case "Gamma":
+                    return "γ";
+                case "Beta-Gamma":
+                    return "β-,γ";
+                case "ECGamma":
+                    return "EC,γ";
+                case "ECEC":
+                    return "EC,EC";
+                default:
+                    return decayType;
+            }
         }
 
         public void SwitchDecayChainIsotope(string direction) {
@@ -180,7 +201,8 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
             for (int i = 0; i < decayChain.Count; i++) {
                 var decayChainItem = decayChain.Where(decayChainItemData => decayChainItemData.index == i).First();
                 string decaySymbol = GetDecaySymbol(decayChainItem.decayType);
-                IsotopeDecayChain.Add(new Tuple<IsotopeModel, string>(decayChainItem.isotope, decaySymbol));
+                ElementViewModel.ElementDataDictionary.TryGetValue(decayChainItem.isotope.Symbol, out var elementDataModel);
+                IsotopeDecayChain.Add(new Tuple<IsotopeModel, string, string>(decayChainItem.isotope, decaySymbol, elementDataModel.Name));
             }
 
             IsArrowUpEnabled = decayChainIndex == 0 ? false : true;
@@ -210,27 +232,6 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
                 roundedHalfLife = double.NaN;
 
             return roundedHalfLife;
-        }
-
-        private string GetDecaySymbol(string decayType) {
-            switch (decayType) {
-                case "Alpha":
-                    return "α";
-                case "Beta+":
-                    return "β+";
-                case "Beta-":
-                    return "β-";
-                case "Beta-Beta-":
-                    return "β-,β-";
-                case "Gamma":
-                    return "γ";
-                case "Beta-Gamma":
-                    return "β-,γ";
-                case "ECGamma":
-                    return "EC,γ";
-                default:
-                    return decayType;
-            }
         }
     }
 }

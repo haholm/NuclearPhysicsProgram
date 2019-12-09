@@ -21,15 +21,16 @@
                            FontSize="10"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Top" 
-                           Padding="1 10"
-                           Foreground="#D0D0D0"/>
+                           Padding="{Binding Path=AtomicNumberPadding, RelativeSource={RelativeSource AncestorType=local:ItemView}}"
+                           Foreground="#D0D0D0"
+                           />
 
                 <TextBlock Text="{Binding Path=Symbol, FallbackValue='Sy', RelativeSource={RelativeSource AncestorType=local:ItemView}}"
                            FontFamily="{StaticResource OpenSansLight}"
                            FontSize="{Binding Path=SymbolFontSize, FallbackValue='20', RelativeSource={RelativeSource AncestorType=local:ItemView}}"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center" 
-                           Padding="1 0"
+                           Padding="{Binding Path=SymbolPadding, RelativeSource={RelativeSource AncestorType=local:ItemView}}"
                            Foreground="#D0D0D0"/>
             </StackPanel>
 
@@ -72,16 +73,27 @@
                 </Border>
             </Border>
 
-            <Viewbox Stretch="Uniform" 
-                     HorizontalAlignment="Center"
-                     VerticalAlignment="Bottom"
-                     MaxHeight="12"
-                     Margin="1 0 1 0">
-                <TextBlock Text="{Binding Path=EName, FallbackValue='', RelativeSource={RelativeSource AncestorType=local:ItemView}}"
-                           FontFamily="{StaticResource OpenSansLight}"
-                           FontSize="12"
-                           Foreground="#D0D0D0"/>
-            </Viewbox>
+            <StackPanel HorizontalAlignment="Center" 
+                        VerticalAlignment="Bottom" 
+                        >
+                <Viewbox Stretch="Uniform" 
+                         MaxHeight="12">
+                    <TextBlock Text="{Binding Path=EName, FallbackValue='', RelativeSource={RelativeSource AncestorType=local:ItemView}}"
+                               FontFamily="{StaticResource OpenSansLight}"
+                               FontSize="12"
+                               Foreground="#D0D0D0"/>
+                </Viewbox>
+                <Viewbox Stretch="Uniform" 
+                         MaxHeight="12"
+                         Margin="-0.5">
+                    <TextBlock Text="{Binding Path=Mass, RelativeSource={RelativeSource AncestorType=local:ItemView}}"
+                               FontFamily="{StaticResource OpenSansLight}"
+                               Margin="{Binding Path=MassMargin, FallbackValue='', RelativeSource={RelativeSource AncestorType=local:ItemView}}"
+                               FontSize="12"
+                               Foreground="#D0D0D0"
+                               HorizontalAlignment="Left"/>
+                </Viewbox>
+            </StackPanel>
         </Grid>
     </Border>
 </UserControl>

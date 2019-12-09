@@ -65,6 +65,7 @@
                                                              Symbol="{Binding Item1.Symbol}"
                                                              AtomicNumber="{Binding Item1.MassNumber}"
                                                              PropertiesColorVisibility="Hidden"
+                                                             EName="{Binding Item3}"
                                                              SymbolFontSize="22"/>
                             </Button>
                         </Canvas>

@@ -4185,7 +4185,7 @@
         "HalfLife": "1.1644515e9",
         "Decays": [
           {
-            "Type": "Ec",
+            "Type": "EC",
             "Product": "Sm",
             "AtomicNumber": 62,
             "MassNumber": 150
@@ -4545,7 +4545,7 @@
         "HalfLife": "102,888",
         "Decays": [
           {
-            "Type": "Ec",
+            "Type": "EC",
             "Product": "Ho",
             "AtomicNumber": 67,
             "MassNumber": 160

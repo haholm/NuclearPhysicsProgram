@@ -43,7 +43,7 @@
             </Border.LayoutTransform>
             <Canvas HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Margin="0 100 0 0"
+                    Margin="{Binding PeriodicTableAreaMargin, Mode=OneWay, Source={StaticResource mainVM}}"
                     Width="1050"
                     Height="600">
                 <periodicTableViews:PeriodicTableView x:Name="ptableview" Canvas.Top="100"

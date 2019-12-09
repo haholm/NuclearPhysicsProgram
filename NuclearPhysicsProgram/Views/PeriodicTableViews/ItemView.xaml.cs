@@ -67,7 +67,20 @@ namespace NuclearPhysicsProgram.Views.PeriodicTableViews {
         }
         public static readonly DependencyProperty ENameProperty = DependencyProperty.Register(
             "EName", typeof(string), typeof(ItemView), new PropertyMetadata(""));
+
+        public double? Mass {
+            get => GetValue(MassProperty) as double?;
+            set => SetValue(MassProperty, value);
+        }
+        public static readonly DependencyProperty MassProperty = DependencyProperty.Register(
+            "Mass", typeof(double), typeof(ItemView), new PropertyMetadata(0.0));
         #endregion
+        private bool MassExists { get => Mass.GetValueOrDefault() != 0.0; }
+
+        public Thickness AtomicNumberPadding { get => MassExists ? new Thickness(1, 3, 1, 3) : new Thickness(1, 10, 1, 10); }
+        public Thickness SymbolPadding { get => MassExists ? new Thickness(1, 0, 0, 16) : new Thickness(1, 0, 0, 0); }
+
+        public Thickness MassMargin { get => MassExists ? new Thickness(0) : new Thickness(0, -12, 0, -12); }
 
         public ItemView() {
             InitializeComponent();

@@ -26,6 +26,7 @@ namespace NuclearPhysicsProgram.ViewModels {
         private bool mainWindowSizeChanged;
         private Visibility? itemViewAERColorVisibility;
         private Visibility? itemViewInstabilityColorVisibility;
+        private Thickness? periodicTableAreaMargin;
 
         /// Ta med binding energy
 
@@ -45,6 +46,7 @@ namespace NuclearPhysicsProgram.ViewModels {
         public WindowState MainWindowState { get => mainWindowState; set { mainWindowState = value; SetPropertyChanged(this, "MainWindowState"); mainWindowSizeChanged = true; } }
         public double? MainWindowMagnification { get => mainWindowMagnification; set { mainWindowMagnification = value; SetPropertyChanged(this, "MainWindowMagnification"); } }
         public double? MainWindowBlurRadius { get => mainWindowBlurRadius; set { mainWindowBlurRadius = value; SetPropertyChanged(this, "MainWindowBlurRadius"); } }
+        public Thickness? PeriodicTableAreaMargin { get => periodicTableAreaMargin /*0 100 0 0*/; private set { periodicTableAreaMargin = value; SetPropertyChanged(this, "PeriodicTableAreaMargin"); } }
         public double? ElementInfoViewOpacity { get => elementInfoViewOpacity; private set { elementInfoViewOpacity = value; SetPropertyChanged(this, "ElementInfoViewOpacity"); } }
         public Visibility? ElementInfoViewVisibility { get => elementInfoViewVisibility; private set { elementInfoViewVisibility = value; SetPropertyChanged(this, "ElementInfoViewVisibility"); } }
         public Visibility? PeriodicTableViewVisibility { get => periodicTableViewVisibility; private set { periodicTableViewVisibility = value; SetPropertyChanged(this, "PeriodicTableViewVisibility"); } }
@@ -120,12 +122,15 @@ namespace NuclearPhysicsProgram.ViewModels {
 
             switch (ItemViewInstabilityColorVisibility) {
                 case Visibility.Visible:
+                    PeriodicTableAreaMargin = new Thickness(0, 50, 0, 0);
                     ItemViewInstabilityColorVisibility = Visibility.Hidden;
                     return;
                 case Visibility.Hidden:
+                    PeriodicTableAreaMargin = new Thickness(0, 100, 0, 0);
                     ItemViewInstabilityColorVisibility = Visibility.Visible;
                     return;
                 default:
+                    PeriodicTableAreaMargin = new Thickness(0, 100, 0, 0);
                     //In case ItemViewAERColorVisibility was never set;
                     ItemViewInstabilityColorVisibility = Visibility.Visible;
                     return;
@@ -138,12 +143,15 @@ namespace NuclearPhysicsProgram.ViewModels {
 
             switch (ItemViewAERColorVisibility) {
                 case Visibility.Visible:
+                    PeriodicTableAreaMargin = new Thickness(0, 50, 0, 0);
                     ItemViewAERColorVisibility = Visibility.Hidden;
                     return;
                 case Visibility.Hidden:
+                    PeriodicTableAreaMargin = new Thickness(0, 100, 0, 0);
                     ItemViewAERColorVisibility = Visibility.Visible;
                     return;
                 default:
+                    PeriodicTableAreaMargin = new Thickness(0, 100, 0, 0);
                     //In case ItemViewAERColorVisibility was never set;
                     ItemViewAERColorVisibility = Visibility.Visible;
                     return;

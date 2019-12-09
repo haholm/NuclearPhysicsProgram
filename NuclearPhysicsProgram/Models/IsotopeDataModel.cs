@@ -18,7 +18,7 @@
         }
 
         public string Symbol { get; private set; }
-        public int MassNumber { get; private set; }   //ÄR DETTA ÄNDRAT TILL MASSNUMBER I ISOTOPES.JSON? JA?
+        public int MassNumber { get; private set; }
         public string HalfLife { get; private set; }
         public DecayModel[] Decays { get; private set; }
     }

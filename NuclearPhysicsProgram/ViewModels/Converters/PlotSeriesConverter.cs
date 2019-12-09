@@ -26,9 +26,12 @@ namespace NuclearPhysicsProgram.ViewModels.Converters {
             double neutronAmount = FindFirstNumber(strippedResult);
             string secondStrippedResult = strippedResult.Replace($"{neutronAmount}\n{PeriodicTablePlotViewModel.LeftInstabilityTitle}: ", "");
             double protonAmount = FindFirstNumber(secondStrippedResult);
-
             var scatterPoint = PeriodicTablePlotViewModel.OpenScatterPoints.Find(scatterPoint => scatterPoint.massNumber - scatterPoint.atomicNumber == neutronAmount && scatterPoint.atomicNumber == protonAmount);
-            return $"{ConvertToSuperScript(scatterPoint.massNumber.ToString())} {scatterPoint.elementName}\nHalf life (s): {scatterPoint.halfLife}";
+            var isotopeModel = ElementViewModel.GetIsotope(scatterPoint.symbol, scatterPoint.massNumber);
+            string decayTypeText = "";
+            if (isotopeModel.Decays.Length > 0)
+                decayTypeText = $"\nDecay type: {ElementInfoViewModels.DecayChainViewModel.GetDecaySymbol(isotopeModel.Decays[0].Type)}";
+            return $"{ConvertToSuperScript(scatterPoint.massNumber.ToString())} {scatterPoint.elementName}\nHalf life (s): {scatterPoint.halfLife}{decayTypeText}";
         }
 
         public object ConvertBindingEnergyPlot(OxyPlot.TrackerHitResult value) {
