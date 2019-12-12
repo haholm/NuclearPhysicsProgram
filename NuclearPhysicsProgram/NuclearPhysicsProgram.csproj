@@ -146,8 +146,6 @@
     <Compile Include="ViewModels\ElementInfoViewModels\IsotopeDropDownViewModel.cs" />
     <Compile Include="ViewModels\ElementInfoViewModels\PlotViewModel.cs" />
     <Compile Include="ViewModels\ElementViewModel.cs" />
-    <Compile Include="ViewModels\IntroductionViewModel.cs" />
-    <Compile Include="ViewModels\IBaseViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Models\PeriodicTableElementModel.cs" />
     <Compile Include="ViewModels\ApplicationViewModel.cs" />
@@ -318,6 +316,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\cog.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\jsondotnet.ico" />
+    <Resource Include="Images\OxyPlot.ico" />
+    <Resource Include="Images\SharpVectors.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions />

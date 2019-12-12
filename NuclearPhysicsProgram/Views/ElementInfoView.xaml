@@ -14,7 +14,6 @@
              d:DesignHeight="800" 
              d:DesignWidth="1200"
              DataContext="{Binding ElementInfoViewModel, Source={StaticResource mainVM}}">
-    <!--Margin="100,40,50,40"-->
     <Border x:Name="Border"
             Background="#2B2B2F"
             CornerRadius="0">
@@ -333,20 +332,20 @@
                             </Border>
                         </Grid>
                         <elementInfoViews:PlotView x:Name="PlotView" 
-                                                Width="{Binding ActualWidth, ElementName=InfoPagesBorder}" 
-                                                Height="{Binding ActualHeight, ElementName=InfoPagesBorder}"
-                                                Opacity="{Binding PlotViewOpacity, TargetNullValue='1'}"
-                                                Padding="30 30 60 40"
-                                                />
+                                                   Width="{Binding ActualWidth, ElementName=InfoPagesBorder}" 
+                                                   Height="{Binding ActualHeight, ElementName=InfoPagesBorder}"
+                                                   Opacity="{Binding PlotViewOpacity, TargetNullValue='1'}"
+                                                   Padding="30 30 60 58"
+                                                   />
                         <Border Canvas.Left="{Binding ElementName=InfoPagesBorder, Path=ActualWidth}" 
-                            Width="100"/>
+                                Width="100"/>
                         <!--???-->
                     </Canvas>
                     <StackPanel HorizontalAlignment="Center"
-                            VerticalAlignment="Bottom"
-                            Orientation="Horizontal"
-                            Margin="0 0 0 15"
-                            >
+                                VerticalAlignment="Bottom"
+                                Orientation="Horizontal"
+                                Margin="0 0 0 18"
+                                >
                         <Button IsEnabled="{Binding IsArrowLeftEnabled}"
                             Opacity="{Binding ArrowLeftOpacity}"
                             Margin="0 0 10 0"
@@ -382,8 +381,9 @@
                                                         </VisualStateGroup>
                                                     </VisualStateManager.VisualStateGroups>
 
-                                                    <Border x:Name="ButtonBorder" CornerRadius="6"
-                                                        ClipToBounds="True"
+                                                    <Border x:Name="ButtonBorder" 
+                                                            CornerRadius="6"
+                                                            ClipToBounds="True"
                                                             Background="Transparent">
                                                         <Grid x:Name="ButtonGrid" >
                                                             <Image Source="{svgc:SvgImage /Images/arrowdown.svg}" 
@@ -407,15 +407,15 @@
                                     <BeginStoryboard>
                                         <Storyboard Timeline.DesiredFrameRate="60">
                                             <DoubleAnimation Storyboard.TargetName="InfoPagesCanvasAnimator"
-                                                            Storyboard.TargetProperty="Tag"
-                                                            Duration="0:0:0.8" 
-                                                            FillBehavior="HoldEnd"
-                                                            To="1">
+                                                             Storyboard.TargetProperty="Tag"
+                                                             Duration="0:0:0.8" 
+                                                             FillBehavior="HoldEnd"
+                                                             To="1">
                                                 <DoubleAnimation.EasingFunction>
                                                     <ElasticEase Springiness="12" 
-                                                                Oscillations="1" 
-                                                                EasingMode="EaseOut"
-                                                                />
+                                                                 Oscillations="1" 
+                                                                 EasingMode="EaseOut"
+                                                                 />
                                                 </DoubleAnimation.EasingFunction>
                                             </DoubleAnimation>
                                         </Storyboard>
@@ -504,26 +504,26 @@
             </Border>
 
             <Canvas x:Name="DecayChainCanvas" VerticalAlignment="Bottom"
-                HorizontalAlignment="Center"
-                Width="600"
-                Height="80">
+                    HorizontalAlignment="Center"
+                    Width="600"
+                    Height="86">
                 <Border Canvas.Top="2" 
-                    Canvas.Left="2" 
-                    Width="596"
-                    Height="76" 
-                    BorderBrush="Black" 
-                    BorderThickness="1"
-                    CornerRadius="6">
+                        Canvas.Left="2" 
+                        Width="596"
+                        Height="84" 
+                        BorderBrush="Black" 
+                        BorderThickness="1"
+                        CornerRadius="6">
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="32" />
                     </Border.Effect>
                 </Border>
                 <Border Width="{Binding ElementName=DecayChainCanvas, Path=Width}"
-                    Height="{Binding ElementName=DecayChainCanvas, Path=Height}"
-                    BorderBrush="#22000000"
-                    CornerRadius="6"
-                    Background="#242424">
-                    <elementInfoViews:IsotopeDecayChainView/>
+                        Height="{Binding ElementName=DecayChainCanvas, Path=Height}"
+                        BorderBrush="#22000000"
+                        CornerRadius="6"
+                        Background="#242424">
+                    <elementInfoViews:IsotopeDecayChainView />
                 </Border>
             </Canvas>
         </Grid>

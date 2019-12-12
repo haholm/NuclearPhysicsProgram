@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 
 namespace NuclearPhysicsProgram.ViewModels {
-    public class MainViewModel : PropertyHandler.NotifyPropertyChanged, IBaseViewModel {
+    public class MainViewModel : PropertyHandler.NotifyPropertyChanged {
         private double? mainWindowWidth;
         private double? mainWindowHeight;
         private WindowState mainWindowState;
@@ -79,12 +79,18 @@ namespace NuclearPhysicsProgram.ViewModels {
                     if (MainWindowState == WindowState.Maximized)
                         PeriodicTableScale = (double)System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width / 1340;
                     else if (!double.IsNaN(MainWindowWidth.GetValueOrDefault()))
-                        PeriodicTableScale = ((MainWindowWidth / 1340) + (MainWindowHeight / 650)) / 2;
+                        PeriodicTableScale = ((MainWindowWidth / 1200) + (MainWindowHeight / 800)) / 2;
                 }
             });
         }
 
         public async void OpenElementInfo(string symbol, int massNumber) {
+            // check if ElementInfoView is open, if true, do not play transitions
+            if (ElementInfoViewOpacity == 1) {
+                InitializeIsotopeData(symbol, massNumber);
+                return;
+            }
+
             await AnimationViewModel.AsyncTransition((opacity) => PeriodicTableViewOpacity = opacity, 1, 0, 0.05, 1);
             PeriodicTableViewVisibility = Visibility.Collapsed;
             InitializeIsotopeData(symbol, massNumber);

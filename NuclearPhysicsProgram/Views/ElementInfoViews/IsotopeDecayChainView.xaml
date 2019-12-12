@@ -14,15 +14,15 @@
     <Grid ClipToBounds="True">
         <ScrollViewer HorizontalScrollBarVisibility="Visible"
                       VerticalScrollBarVisibility="Disabled"
-                      Margin="30 0 30 -6">
-            <ItemsControl Margin="6 0 0 0" VerticalAlignment="Stretch" 
+                      Margin="30 0 30 -4">
+            <ItemsControl Margin="6 0 0 0" 
+                          VerticalAlignment="Stretch" 
                           ItemsSource="{Binding DecayChainViewModel.IsotopeDecayChain, Source={StaticResource mainVM}}" 
                           MaxWidth="752">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <!--SWITCH OVER TO GRID-->
                         <Canvas Width="84" 
-                                Margin="-26 11 28 0">
+                                Margin="-26 14 28 0">
                             <StackPanel Canvas.Left="0" 
                                         Canvas.Top="10"
                                         Width="24">
@@ -81,8 +81,8 @@
         <Border HorizontalAlignment="Left" 
                 Background="Black"
                 Width="20"
-                Height="80"
-                Margin="10 0 0 0"
+                Height="86"
+                Margin="10 0 0 8"
                 CornerRadius="8 0 0 8">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="12"
@@ -94,7 +94,7 @@
         <Border CornerRadius="8 0 0 8"
                 HorizontalAlignment="Left"
                 Width="30"
-                Height="80"
+                Height="86"
                 Background="#242424">
             <DockPanel>
                 <Button Style="{StaticResource NoStyle}" 
@@ -126,8 +126,8 @@
         <Border HorizontalAlignment="Right" 
                 Background="Black"
                 Width="20"
-                Height="80"
-                Margin="0 0 10 0"
+                Height="86"
+                Margin="0 0 10 8"
                 CornerRadius="0 8 8 0">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="12"
@@ -139,7 +139,7 @@
         <Border CornerRadius="0 8 8 0"
                 HorizontalAlignment="Right"
                 Width="30"
-                Height="80"
+                Height="86"
                 Background="#242424"/>
     </Grid>
 </UserControl>

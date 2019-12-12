@@ -39,6 +39,9 @@ namespace NuclearPhysicsProgram.ViewModels.Converters {
             double nucleonAmount = FindFirstNumber(strippedResult);
 
             var dataPoint = PeriodicTablePlotViewModel.OpenDataPoints.Find(dataPoint => dataPoint.massNumber == nucleonAmount);
+            if (dataPoint.elementName == null)
+                return "-";
+
             return $"{ConvertToSuperScript(dataPoint.massNumber.ToString())} {dataPoint.elementName}";
         }
 
@@ -54,7 +57,7 @@ namespace NuclearPhysicsProgram.ViewModels.Converters {
             }
 
             if (!int.TryParse(numberString, out int number))
-                return 0;
+                return -1;
 
             return number;
         }

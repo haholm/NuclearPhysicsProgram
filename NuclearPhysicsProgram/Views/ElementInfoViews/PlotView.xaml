@@ -9,6 +9,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
         <ScrollBar DockPanel.Dock="Left"
+                   Effect="{Binding PlotViewModel.Effect, Mode=OneWay, Source={StaticResource mainVM}}"
                    Value="{Binding PlotViewModel.MaximumNuclides, TargetNullValue='1000', Source={StaticResource mainVM}}" 
                    Maximum="1000" 
                    Minimum="1" 
@@ -54,7 +55,7 @@
                                 IsZoomEnabled="False"
                                 Title="Nuclides"
                                 TitleColor="LightGray"
-                                Maximum="{Binding PlotViewModel.MaximumNuclides, TargetNullValue='100', Source={StaticResource mainVM}}" 
+                                Maximum="{Binding PlotViewModel.MaximumNuclides, TargetNullValue='1000', Source={StaticResource mainVM}}" 
                                 Minimum="0"
                                 IsPanEnabled="False"
                                 TicklineColor="LightGray"

@@ -51,7 +51,7 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
             UnitHalfLife = halfLife;
             Unit = unit;
             UnitTitlePosition = 1.02 + ((double)(unit.Length - 5) / 1000 * 4);
-            int maximumNuclides = MaximumNuclides.GetValueOrDefault(100);
+            int maximumNuclides = MaximumNuclides.GetValueOrDefault(1000);
             MaximumTime = Math.Pow(Math.PI, 2.01) * halfLife;
             double time = 0;
             double timeStep = halfLife / 100;
@@ -65,7 +65,7 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
             }
         }
 
-        private double CalculateNumberOfNuclides(double halfLife, double time) => MaximumNuclides.GetValueOrDefault(100) * Math.Pow(0.5, time / halfLife);
+        private double CalculateNumberOfNuclides(double halfLife, double time) => MaximumNuclides.GetValueOrDefault(1000) * Math.Pow(0.5, time / halfLife);
 
         private string ConvertToAppropriateUnit(ref double halfLife) {
             if (halfLife > TimeSpan.MaxValue.TotalSeconds) {

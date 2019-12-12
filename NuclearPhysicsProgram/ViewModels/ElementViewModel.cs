@@ -16,8 +16,6 @@ namespace NuclearPhysicsProgram.ViewModels {
     public class ElementViewModel : PropertyHandler.NotifyPropertyChanged {
         private MainViewModel mainViewModel;
 
-        public ObservableCollection<ElementDataModel> Elements { get; private set; }
-        public ObservableCollection<IsotopeDataModel> Isotopes { get; private set; }
         public static Dictionary<string, ElementDataModel> ElementDataDictionary { get; private set; }
         public static Dictionary<string, IsotopeDataModel> IsotopeDataDictionary { get; private set; }
         public static double[] PeriodicTableMasses { get; } = {
@@ -30,6 +28,8 @@ namespace NuclearPhysicsProgram.ViewModels {
             223, 226, 227, 232.04, 231.04, 238.03, 237, 244, 243, 247, 247, 251, 252, 257, 258, 259, 266, 267, 268, 269, 270, 270, 278, 281, 282, 285, 286, 289, 290, 293, 294, 294
         };
 
+        public ObservableCollection<ElementDataModel> Elements { get; private set; }
+        public ObservableCollection<IsotopeDataModel> Isotopes { get; private set; }
         public ObservableCollection<PeriodicTableElementModel> FirstLeftElements { get; private set; }
         public ObservableCollection<PeriodicTableElementModel> FirstRightElements { get; private set; }
         public ObservableCollection<PeriodicTableElementModel> SecondLeftElements { get; private set; }
@@ -71,26 +71,18 @@ namespace NuclearPhysicsProgram.ViewModels {
 
         public static IsotopeModel GetIsotope(string symbol, int massNumber) {
             IsotopeDataDictionary.TryGetValue(symbol, out var isotopeData);
-            ///
-            if (isotopeData == null)
-                return new IsotopeModel(symbol, massNumber, "?", new DecayModel[0]);
-            ///
-            IEnumerable<IsotopeModel> isotopeList = isotopeData.Isotopes.Where(i => i.MassNumber == massNumber);
-            if (isotopeList.Count() == 0)
-                return new IsotopeModel(symbol, massNumber, "", new DecayModel[0]);
-
-            return isotopeList.First();
+            return GetIsotope(isotopeData, massNumber);
         }
         public static IsotopeModel GetIsotope(IsotopeDataModel isotopeData, int massNumber) {
-            ///
+            /// No error getting any isotope on default isotopes.json
             if (isotopeData == null)
                 return new IsotopeModel(isotopeData.Symbol, massNumber, "?", new DecayModel[0]);
             ///
-            IEnumerable<IsotopeModel> isotopeList = isotopeData.Isotopes.Where(i => i.MassNumber == massNumber);
-            if (isotopeList.Count() == 0)
+            var isotopeEnumerable = isotopeData.Isotopes.Where(i => i.MassNumber == massNumber);
+            if (isotopeEnumerable.Count() == 0)
                 return new IsotopeModel(isotopeData.Symbol, massNumber, "", new DecayModel[0]);
 
-            return isotopeList.First();
+            return isotopeEnumerable.First();
         }
 
         public static double GetHalfLife(IsotopeModel isotope, double unknownValue = -1) {
@@ -199,7 +191,7 @@ namespace NuclearPhysicsProgram.ViewModels {
             }
             catch (Exception e) {
                 using (StreamWriter sw = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "error_log.txt", true)) {
-                    sw.Write($"\n\n{e.Message}\n{e.StackTrace}");
+                    sw.Write($"{e.Message}\n\n{e.StackTrace}");
                 }
 
                 Environment.Exit(1);
@@ -209,8 +201,7 @@ namespace NuclearPhysicsProgram.ViewModels {
         }
 
         private ObservableCollection<T> DeserializeJson<T>(string json) {
-            ObservableCollection<T> collection = new ObservableCollection<T>();
-
+            var collection = new ObservableCollection<T>();
             T[] models = JsonConvert.DeserializeObject<T[]>(json);
             foreach (var model in models) {
                 collection.Add(model);
@@ -223,8 +214,9 @@ namespace NuclearPhysicsProgram.ViewModels {
             foreach (var element in Elements)
                 ElementDataDictionary.Add(element.Symbol, element);
 
-            foreach (var isotope in Isotopes)
+            foreach (var isotope in Isotopes) {
                 IsotopeDataDictionary.Add(isotope.Symbol, isotope);
+            }
         }
     }
 }

@@ -165,9 +165,97 @@
                          Foreground="#777777"/>
                 </TextBlock>
 
-                <StackPanel>
-                    
-                </StackPanel>
+                <Border Background="#ededed"
+                        CornerRadius="8"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        Height="{Binding ElementName=ScrollView, Path=ActualHeight}"
+                        Width="{Binding ElementName=ScrollView, Path=ActualWidth}"
+                        Margin="0 0 0 40"
+                        >
+                    <Border.Effect>
+                        <DropShadowEffect Color="Black"
+                                          ShadowDepth="2"
+                                          BlurRadius="12"
+                                          Opacity="0.25"/>
+                    </Border.Effect>
+                </Border>
+                <ScrollViewer x:Name="ScrollView" HorizontalAlignment="Center"
+                              VerticalAlignment="Bottom"
+                              Height="100"
+                              MaxWidth="500"
+                              Margin="6 0 6 40"
+                              >
+                    <StackPanel>
+                        <StackPanel HorizontalAlignment="Left" 
+                                    Orientation="Horizontal"
+                                    Margin="6">
+                            <Image VerticalAlignment="Center" 
+                                    Source="/Images/jsondotnet.ico"
+                                    Width="28"
+                                    Height="28"
+                                    Margin="8"/>
+                            <TextBlock FontSize="20"
+                                       TextWrapping="Wrap"
+                                       MaxWidth="380">
+                                <Run Text="Json.NET"/>
+                                <Hyperlink FontSize="16" 
+                                           Command="{Binding Source={StaticResource mainVM}, Path=OpenWebsiteCommand}"
+                                           CommandParameter="https://github.com/JamesNK/Newtonsoft.Json/blob/master/LICENSE.md">
+                                    License and GitHub
+                                </Hyperlink>
+                                <LineBreak/>
+                                <Run Text="Json.NET is a popular high-performance JSON framework for .NET"
+                                     FontSize="12"/>
+                            </TextBlock>
+                        </StackPanel>
+                        <StackPanel HorizontalAlignment="Left" 
+                                    Orientation="Horizontal"
+                                    Margin="6">
+                            <Image VerticalAlignment="Center" 
+                                    Source="/Images/OxyPlot.ico"
+                                    Width="28"
+                                    Height="28"
+                                    Margin="8"/>
+                            <TextBlock FontSize="20"
+                                        TextWrapping="Wrap"
+                                        MaxWidth="380">
+                                <Run Text="OxyPlot"/>
+                                <Hyperlink FontSize="16" 
+                                           Command="{Binding Source={StaticResource mainVM}, Path=OpenWebsiteCommand}"
+                                           CommandParameter="https://github.com/oxyplot/oxyplot/blob/develop/LICENSE">
+                                    License and GitHub
+                                </Hyperlink>
+                                <LineBreak/>
+                                <Run Text="OxyPlot is a cross-platform plotting library for .NET"
+                                        FontSize="12"/>
+                            </TextBlock>
+                        </StackPanel>
+                        <StackPanel HorizontalAlignment="Left" 
+                                    Orientation="Horizontal"
+                                    Margin="6">
+                            <Image VerticalAlignment="Center" 
+                                    Source="/Images/SharpVectors.ico"
+                                    Width="28"
+                                    Height="28"
+                                    Margin="8"/>
+                            <TextBlock FontSize="20"
+                                        TextWrapping="Wrap"
+                                        MaxWidth="380">
+                                <Run Text="SharpVectors"/>
+                                <Hyperlink FontSize="16" 
+                                           Command="{Binding Source={StaticResource mainVM}, Path=OpenWebsiteCommand}"
+                                           CommandParameter="https://github.com/ElinamLLC/SharpVectors/blob/master/License.md"
+                                           >
+                                    License and GitHub
+                                </Hyperlink>
+                                <LineBreak/>
+                                <Run Text="SharpVectors - SVG# Reloaded: SVG DOM and Rendering in C# for the .Net."
+                                        FontSize="12"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
             </Grid>
         </Border>
     </Grid>

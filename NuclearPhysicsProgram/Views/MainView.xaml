@@ -75,9 +75,9 @@
                     </periodicTableViews:PeriodicTablePlotView.RenderTransform>
                     <!--Make scaling of Canvas look better-->
                 </periodicTableViews:PeriodicTablePlotView>
-                <Button Width="12"
-                        Height="12"
-                        Canvas.Top="250"
+                <Button Width="15"
+                        Height="15"
+                        Canvas.Top="248"
                         Canvas.Left="125"
                         Background="#aa999999"
                         Cursor="Hand"

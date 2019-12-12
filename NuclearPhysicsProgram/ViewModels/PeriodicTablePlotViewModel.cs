@@ -134,7 +134,7 @@ namespace NuclearPhysicsProgram.ViewModels {
             instabilityPlotModel.PlotAreaBorderColor = transparent;
             instabilityPlotModel.Background = transparent;
             instabilityPlotModel.DefaultFont = "Open Sans";
-            var leftAxis = new OxyPlot.Axes.LinearAxis {
+            var leftLinearAxis = new OxyPlot.Axes.LinearAxis {
                 Position = OxyPlot.Axes.AxisPosition.Left,
                 Title = LeftInstabilityTitle,
                 IsZoomEnabled = false,
@@ -146,7 +146,7 @@ namespace NuclearPhysicsProgram.ViewModels {
                 AxisTitleDistance = 10,
                 FontSize = 14
             };
-            var bottomAxis = new OxyPlot.Axes.LinearAxis {
+            var bottomLinearAxis = new OxyPlot.Axes.LinearAxis {
                 Position = OxyPlot.Axes.AxisPosition.Bottom,
                 Title = BottomInstabilityTitle,
                 IsZoomEnabled = false,
@@ -157,31 +157,28 @@ namespace NuclearPhysicsProgram.ViewModels {
                 IntervalLength = 30,
                 FontSize = 14
             };
-            var secondBottomAxis = new OxyPlot.Axes.RangeColorAxis {
-                StartPosition = 0.4,
-                EndPosition = 0.8,
+            var rangeColorAxis = new OxyPlot.Axes.RangeColorAxis {
                 HighColor = OxyColors.Black,
                 LowColor = OxyColors.White,
                 Minimum = Math.Pow(10, -15),
                 Maximum = Math.Pow(10, 15)
             };
 
-            //Add color range for unknown half life periods (-1)
-            secondBottomAxis.AddRange(-1, -1, OxyColors.Silver);
-            double lowerBound = secondBottomAxis.Minimum;
+            double lowerBound = rangeColorAxis.Minimum;
             for (int i = 0; i < 18; i++) {
-                double upperBound = Math.Pow(10, -15 + (i * 3 / 1.7));
-                secondBottomAxis.AddRange(lowerBound, upperBound, rangeColors[i]);
+                double step = i * 3 / 1.7;
+                double upperBound = Math.Pow(10, -15 + step);
+                rangeColorAxis.AddRange(lowerBound, upperBound, rangeColors[i]);
                 lowerBound = upperBound;
             }
 
-            instabilityPlotModel.Axes.Add(leftAxis);
-            instabilityPlotModel.Axes.Add(bottomAxis);
-            instabilityPlotModel.Axes.Add(secondBottomAxis);
+            instabilityPlotModel.Axes.Add(leftLinearAxis);
+            instabilityPlotModel.Axes.Add(bottomLinearAxis);
+            instabilityPlotModel.Axes.Add(rangeColorAxis);
             instabilityPlotModel.Series.Add(new ScatterSeries {
                 ItemsSource = ScatterPoints,
                 MarkerType = MarkerType.Square,
-                MarkerSize = 1.2f
+                MarkerSize = 1.4f
             });
         }
 
@@ -215,7 +212,7 @@ namespace NuclearPhysicsProgram.ViewModels {
             };
             bindingEnergyPlotModel.Axes.Add(leftAxis);
             bindingEnergyPlotModel.Axes.Add(bottomAxis);
-            bindingEnergyPlotModel.Series.Add(new OxyPlot.Series.LineSeries {
+            bindingEnergyPlotModel.Series.Add(new LineSeries {
                 ItemsSource = DataPoints,
                 MarkerFill = OxyColors.White,
                 MarkerType = MarkerType.Diamond,
