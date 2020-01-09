@@ -16,8 +16,13 @@ namespace NuclearPhysicsProgram.ViewModels.Commands
 
         public event EventHandler CanExecuteChanged;
 
-        public bool CanExecute(object parameter) => true; // TEMPORARY?
+        public bool CanExecute(object parameter) => true;
 
-        public void Execute(object parameter) => mainViewModel.OpenElementInfo(parameter as string);
+        public void Execute(object parameter) {
+            var values = parameter as object[];
+            var symbol = values[0] as string;
+            var massNumber = values[1] as int?;
+            mainViewModel.OpenElementInfo(symbol as string, massNumber.GetValueOrDefault());
+        }
     }
 }

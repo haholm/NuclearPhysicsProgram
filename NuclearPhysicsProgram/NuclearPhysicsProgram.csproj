@@ -36,16 +36,72 @@
     <WarningLevel>4</WarningLevel>
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>8.0</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>8.0</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BlurryControls, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\BlurryControls.1.0.24\lib\net452\BlurryControls.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot, Version=2.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
+      <HintPath>..\packages\OxyPlot.Core.2.0.0\lib\net45\OxyPlot.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Wpf, Version=2.0.0.0, Culture=neutral, PublicKeyToken=75e952ba404cdbb0, processorArchitecture=MSIL">
+      <HintPath>..\packages\OxyPlot.Wpf.2.0.0\lib\net45\OxyPlot.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="ReachFramework" />
+    <Reference Include="SharpVectors.Converters.Wpf, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b532964b8548be77, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpVectors.Reloaded.1.5.0\lib\net40\SharpVectors.Converters.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpVectors.Core, Version=1.5.0.0, Culture=neutral, PublicKeyToken=7407205e337c98ef, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpVectors.Reloaded.1.5.0\lib\net40\SharpVectors.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpVectors.Css, Version=1.5.0.0, Culture=neutral, PublicKeyToken=7a46e3f532fdb787, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpVectors.Reloaded.1.5.0\lib\net40\SharpVectors.Css.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpVectors.Dom, Version=1.5.0.0, Culture=neutral, PublicKeyToken=517340b6277b1a7a, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpVectors.Reloaded.1.5.0\lib\net40\SharpVectors.Dom.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpVectors.Model, Version=1.5.0.0, Culture=neutral, PublicKeyToken=2236cfc76b505845, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpVectors.Reloaded.1.5.0\lib\net40\SharpVectors.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpVectors.Rendering.Gdi, Version=1.5.0.0, Culture=neutral, PublicKeyToken=03902092284347e3, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpVectors.Reloaded.1.5.0\lib\net40\SharpVectors.Rendering.Gdi.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpVectors.Rendering.Wpf, Version=1.5.0.0, Culture=neutral, PublicKeyToken=d0902381100df30e, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpVectors.Reloaded.1.5.0\lib\net40\SharpVectors.Rendering.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpVectors.Runtime.Wpf, Version=1.5.0.0, Culture=neutral, PublicKeyToken=d16e717f0a981fb9, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpVectors.Reloaded.1.5.0\lib\net40\SharpVectors.Runtime.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Printing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Expression.Blend.Sdk.1.0.2\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -66,28 +122,55 @@
     </ApplicationDefinition>
     <Compile Include="Models\DecayModel.cs" />
     <Compile Include="Models\IsotopeDataModel.cs" />
+    <Compile Include="Models\IsotopeModel.cs" />
     <Compile Include="ViewModels\AnimationViewModel.cs" />
     <Compile Include="ViewModels\Commands\CloseElementInfoCommand.cs" />
-    <Compile Include="ViewModels\Commands\ElementInfoCommands\OpenIsotopeDropDownCommand.cs" />
+    <Compile Include="ViewModels\Commands\ElementInfoCommands\ContractHiddenElementsCommand.cs" />
+    <Compile Include="ViewModels\Commands\ElementInfoCommands\ExpandHiddenElementsCommand.cs" />
+    <Compile Include="ViewModels\Commands\ElementInfoCommands\SwitchDecayChainIsotopeCommand.cs" />
+    <Compile Include="ViewModels\Commands\ElementInfoCommands\SwitchInfoCommand.cs" />
+    <Compile Include="ViewModels\Commands\IntroductionCommands\BeginCommand.cs" />
     <Compile Include="ViewModels\Commands\OpenElementInfoCommand.cs" />
-    <Compile Include="ViewModels\DecayChainViewModel.cs" />
+    <Compile Include="ViewModels\Commands\OpenWebsiteCommand.cs" />
+    <Compile Include="ViewModels\Commands\OpenWikipediaCommand.cs" />
+    <Compile Include="ViewModels\Commands\TogglePropertyColorCommand.cs" />
+    <Compile Include="ViewModels\Constants\Mass.cs" />
+    <Compile Include="ViewModels\Constants\Neutron.cs" />
+    <Compile Include="ViewModels\Constants\Photon.cs" />
+    <Compile Include="ViewModels\Constants\Proton.cs" />
+    <Compile Include="ViewModels\Converters\MathConverter.cs" />
+    <Compile Include="ViewModels\Converters\MultipleCommandParameterConverter.cs" />
+    <Compile Include="ViewModels\Converters\PlotSeriesConverter.cs" />
+    <Compile Include="ViewModels\ElementInfoViewModels\DecayChainViewModel.cs" />
     <Compile Include="ViewModels\ElementInfoViewModels\ElementInfoViewModel.cs" />
-    <Compile Include="ViewModels\ElementInfoViewModels\IsotopeDropDownViewModel.cs" />
+    <Compile Include="ViewModels\ElementInfoViewModels\PlotViewModel.cs" />
     <Compile Include="ViewModels\ElementViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="Models\PeriodicTableElementModel.cs" />
+    <Compile Include="ViewModels\ApplicationViewModel.cs" />
+    <Compile Include="ViewModels\PeriodicTablePlotViewModel.cs" />
     <Compile Include="ViewModels\PropertyHandler\NotifyPropertyChanged.cs" />
     <Compile Include="ViewModels\PeriodicTableViewModel.cs" />
     <Compile Include="Views\ElementInfoView.xaml.cs">
       <DependentUpon>ElementInfoView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ElementInfoViews\ElementInfoIsotopeDropDownView.xaml.cs">
-      <DependentUpon>ElementInfoIsotopeDropDownView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\ElementInfoViews\IsotopeDecayChainView.xaml.cs">
       <DependentUpon>IsotopeDecayChainView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ElementInfoViews\PlotView.xaml.cs">
+      <DependentUpon>PlotView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\IntroductionView.xaml.cs">
+      <DependentUpon>IntroductionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PeriodicTableViews\ItemView.xaml.cs">
       <DependentUpon>ItemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PeriodicTableViews\PeriodicTablePlotView.xaml.cs">
+      <DependentUpon>PeriodicTablePlotView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PeriodicTableViews\PeriodicTableView.xaml.cs">
       <DependentUpon>PeriodicTableView.xaml</DependentUpon>
@@ -95,8 +178,8 @@
     <Compile Include="Views\PeriodicTableViews\SideMenuView.xaml.cs">
       <DependentUpon>SideMenuView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PeriodicTableViews\TableTemplateView.xaml.cs">
-      <DependentUpon>TableTemplateView.xaml</DependentUpon>
+    <Compile Include="Views\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -114,15 +197,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ElementInfoViews\ElementInfoIsotopeDropDownView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\ElementInfoViews\IsotopeDecayChainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ElementInfoViews\PlotView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\IntroductionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\PeriodicTableViews\ItemView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PeriodicTableViews\PeriodicTablePlotView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -134,7 +229,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\PeriodicTableViews\TableTemplateView.xaml">
+    <Page Include="Views\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -155,7 +250,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="elements.json" />
@@ -175,9 +270,56 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="transparent.png" />
+    <Resource Include="Images\arrowdown.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\arrowup.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\radiation.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\radiation128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\atom-symbol-electron.svg" />
+    <Resource Include="Images\atom-symbol-neutron.svg" />
+    <Resource Include="Images\atom-symbol-proton.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\broken-chain-off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\broken-chain-on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\electric-off.png" />
+    <Resource Include="Images\electric-on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\wikipedia-w.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\info.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\cog.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\jsondotnet.ico" />
+    <Resource Include="Images\OxyPlot.ico" />
+    <Resource Include="Images\SharpVectors.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ikriv.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\OpenSans.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions />
 </Project>

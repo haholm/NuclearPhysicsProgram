@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:NuclearPhysicsProgram"
              xmlns:viewModels="clr-namespace:NuclearPhysicsProgram.ViewModels"
              xmlns:elementInfoViewModels="clr-namespace:NuclearPhysicsProgram.ViewModels.ElementInfoViewModels"
+             xmlns:converters="clr-namespace:NuclearPhysicsProgram.ViewModels.Converters"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <Style x:Key="NoStyle" TargetType="{x:Type Button}">
@@ -11,20 +12,50 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border Background="Transparent">
-                            <ContentPresenter/>
+                            <ContentPresenter
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
+        <Storyboard x:Key="OpenSettings">
+            <ObjectAnimationUsingKeyFrames BeginTime="0:0:0"
+                                           Storyboard.TargetName="SettingsControl"
+                                           Storyboard.TargetProperty="Visibility"
+                                           >
+                <DiscreteObjectKeyFrame KeyTime="0"
+                                        Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimation Storyboard.TargetName="SettingsControl"
+                             Storyboard.TargetProperty="Opacity"
+                             Duration="0:0:0.25"
+                             To="1"/>
+        </Storyboard>
+        <Storyboard x:Key="CloseSettings">
+            <DoubleAnimation Storyboard.TargetName="SettingsControl"
+                             Storyboard.TargetProperty="Opacity"
+                             Duration="0:0:0.25"
+                             To="0"/>
+            <ObjectAnimationUsingKeyFrames BeginTime="0:0:0.25"
+                                           Storyboard.TargetName="SettingsControl"
+                                           Storyboard.TargetProperty="Visibility"
+                                           >
+                <DiscreteObjectKeyFrame KeyTime="0"
+                                        Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+
         <FontFamily x:Key="OpenSansBold">pack://application:,,,/Fonts/#Open Sans Bold</FontFamily>
         <FontFamily x:Key="OpenSansExtraBold">pack://application:,,,/Fonts/#Open Sans ExtraBold</FontFamily>
         <FontFamily x:Key="OpenSansLight">pack://application:,,,/Fonts/#Open Sans Light</FontFamily>
         <FontFamily x:Key="OpenSansRegular">pack://application:,,,/Fonts/#Open Sans Regular</FontFamily>
         <FontFamily x:Key="OpenSansSemiBold">pack://application:,,,/Fonts/#Open Sans SemiBold</FontFamily>
 
+        <viewModels:ApplicationViewModel x:Key="applicationVM"/>
         <viewModels:MainViewModel x:Key="mainVM"/>
-        <elementInfoViewModels:ElementInfoViewModel x:Key="elementInfoVM"/>
+        <converters:MultipleCommandParameterConverter x:Key="multipleCommandParameterConverter"/>
     </Application.Resources>
 </Application>

@@ -15,7 +15,7 @@ namespace NuclearPhysicsProgram.ViewModels.Commands {
 
         public event EventHandler CanExecuteChanged;
 
-        public bool CanExecute(object parameter) => true; // TEMPORARY?
+        public bool CanExecute(object parameter) => true;
 
         public void Execute(object parameter) => mainViewModel.CloseElementInfo();
     }

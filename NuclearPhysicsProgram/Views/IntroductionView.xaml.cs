@@ -13,12 +13,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace NuclearPhysicsProgram.Views.PeriodicTableViews {
+namespace NuclearPhysicsProgram.Views {
     /// <summary>
-    /// Interaction logic for TableTemplateView.xaml
+    /// Interaction logic for IntroductionView.xaml
     /// </summary>
-    public partial class TableTemplateView : UserControl {
-        public TableTemplateView() {
+    public partial class IntroductionView : UserControl {
+        public IntroductionView() {
             InitializeComponent();
         }
     }

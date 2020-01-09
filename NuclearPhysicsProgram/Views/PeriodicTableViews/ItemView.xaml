@@ -5,26 +5,95 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NuclearPhysicsProgram.Views.PeriodicTableViews"
              mc:Ignorable="d" 
-             d:DesignHeight="80" d:DesignWidth="80">
+             d:DesignHeight="80" 
+             d:DesignWidth="80"
+             Cursor="Hand">
     <Border x:Name="Border" 
-            Background="#FFEBEBEB" 
             CornerRadius="6"
             HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch">
+            VerticalAlignment="Stretch"
+            Background="#484848">
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" 
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Center">
+                <TextBlock Text="{Binding Path=AtomicNumber, FallbackValue='0', RelativeSource={RelativeSource AncestorType=local:ItemView}}"
+                           FontSize="10"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Top" 
+                           Padding="{Binding Path=AtomicNumberPadding, RelativeSource={RelativeSource AncestorType=local:ItemView}}"
+                           Foreground="#D0D0D0"
+                           />
 
-            <Label Content="{Binding Path=Symbol, RelativeSource={RelativeSource AncestorType=local:ItemView}}"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top" 
-                   Margin="2,2,0,0"/>
+                <TextBlock Text="{Binding Path=Symbol, FallbackValue='Sy', RelativeSource={RelativeSource AncestorType=local:ItemView}}"
+                           FontFamily="{StaticResource OpenSansLight}"
+                           FontSize="{Binding Path=SymbolFontSize, FallbackValue='20', RelativeSource={RelativeSource AncestorType=local:ItemView}}"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center" 
+                           Padding="{Binding Path=SymbolPadding, RelativeSource={RelativeSource AncestorType=local:ItemView}}"
+                           Foreground="#D0D0D0"/>
+            </StackPanel>
+
+            <Border Visibility="{Binding Path=PropertiesColorVisibility, RelativeSource={RelativeSource AncestorType=local:ItemView}}"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Right"
+                    Margin="3"
+                    Width="8"
+                    Height="8">
+                <Border Background="{Binding Path=AERColor, RelativeSource={RelativeSource AncestorType=local:ItemView}}"
+                        Visibility="{Binding Path=ItemViewAERColorVisibility, TargetNullValue='Hidden', Source={StaticResource mainVM}}"
+                        CornerRadius="4"
+                        BorderThickness="0.5"
+                        BorderBrush="Black">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="8"
+                                          ShadowDepth="1"
+                                          Opacity="0.25" 
+                                          Color="Black"/>
+                    </Border.Effect>
+                </Border>
+            </Border>
+            <Border Visibility="{Binding Path=PropertiesColorVisibility, RelativeSource={RelativeSource AncestorType=local:ItemView}}"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Right"
+                    Margin="3"
+                    Width="8"
+                    Height="8">
+                <Border Background="{Binding Path=InstabilityColor, RelativeSource={RelativeSource AncestorType=local:ItemView}}"
+                        Visibility="{Binding Path=ItemViewInstabilityColorVisibility, TargetNullValue='Hidden', Source={StaticResource mainVM}}"
+                        CornerRadius="4"
+                        BorderThickness="0.5"
+                        BorderBrush="Black">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="8"
+                                          ShadowDepth="1"
+                                          Opacity="0.25" 
+                                          Color="Black"/>
+                    </Border.Effect>
+                </Border>
+            </Border>
+
+            <StackPanel HorizontalAlignment="Center" 
+                        VerticalAlignment="Bottom" 
+                        >
+                <Viewbox Stretch="Uniform" 
+                         MaxHeight="12">
+                    <TextBlock Text="{Binding Path=EName, FallbackValue='', RelativeSource={RelativeSource AncestorType=local:ItemView}}"
+                               FontFamily="{StaticResource OpenSansLight}"
+                               FontSize="12"
+                               Foreground="#D0D0D0"/>
+                </Viewbox>
+                <Viewbox Stretch="Uniform" 
+                         MaxHeight="12"
+                         Margin="-0.5">
+                    <TextBlock Text="{Binding Path=Mass, RelativeSource={RelativeSource AncestorType=local:ItemView}}"
+                               FontFamily="{StaticResource OpenSansLight}"
+                               Margin="{Binding Path=MassMargin, FallbackValue='', RelativeSource={RelativeSource AncestorType=local:ItemView}}"
+                               FontSize="12"
+                               Foreground="#D0D0D0"
+                               HorizontalAlignment="Left"/>
+                </Viewbox>
+            </StackPanel>
         </Grid>
     </Border>
 </UserControl>

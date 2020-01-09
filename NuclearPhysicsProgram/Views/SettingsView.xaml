@@ -1,0 +1,316 @@
+﻿<UserControl x:Name="SettingsControl" 
+             x:Class="NuclearPhysicsProgram.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NuclearPhysicsProgram.Views"
+             xmlns:ikriv="clr-namespace:IKriv.Wpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="1200">
+    <Grid Background="#2B2B2F">
+        <Border Name="CloseBorder"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Width="38"
+                Height="26"
+                Margin="24"
+                Background="#606060"
+                CornerRadius="4">
+            <Button Style="{StaticResource NoStyle}" 
+                    Command="{Binding CloseElementInfoCommand, Source={StaticResource mainVM}}"
+                    Foreground="#c0c0c0"
+                    >
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="MouseEnter">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation To="#ff4040" 
+                                                Duration="0:0:0.1" 
+                                                Storyboard.TargetName="CloseBorder" 
+                                                Storyboard.TargetProperty="Background.Color"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="MouseLeave">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation To="#606060" 
+                                                Duration="0:0:0.1" 
+                                                Storyboard.TargetName="CloseBorder" 
+                                                Storyboard.TargetProperty="Background.Color"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="MouseEnter">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation To="White" 
+                                                Duration="0:0:0.1"
+                                                Storyboard.TargetName="CloseTextBlock" 
+                                                Storyboard.TargetProperty="Foreground.Color"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="MouseLeave">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation To="#c0c0c0" 
+                                                Duration="0:0:0.1" 
+                                                Storyboard.TargetName="CloseTextBlock" 
+                                                Storyboard.TargetProperty="Foreground.Color"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="PreviewMouseDown">
+                        <BeginStoryboard Storyboard="{StaticResource CloseSettings}"/>
+                    </EventTrigger>
+                </Button.Triggers>
+                <TextBlock x:Name="CloseTextBlock" 
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="18"
+                            Padding="0.3"
+                            FontFamily="{StaticResource OpenSansLight}">
+                    <TextBlock.RenderTransform>
+                        <ScaleTransform ScaleY="0.85"/>
+                    </TextBlock.RenderTransform>x</TextBlock>
+            </Button>
+        </Border>
+        
+        <Border HorizontalAlignment="Stretch" 
+                VerticalAlignment="Stretch" 
+                Margin="420 60"
+                MaxWidth="700"
+                MaxHeight="900"
+                CornerRadius="16">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0.5 0"
+                                     EndPoint="0.5 1">
+                    <GradientStop Color="#cfd9df"
+                                  Offset="0"/>
+                    <GradientStop Color="#e2ebf0"
+                                  Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid>
+                <TextBlock FontSize="38" 
+                           Margin="0 40 0 0"
+                           VerticalAlignment="Top" 
+                           HorizontalAlignment="Center" 
+                           Foreground="Black"
+                           TextAlignment="Center"
+                           >
+                    <Run Text="{Binding ApplicationName, Mode=OneWay, Source={StaticResource applicationVM}}"/>
+                    <LineBreak/>
+                    <Run Text="by Fredrik Forsell and Hampus Holm"
+                         FontSize="14"
+                         FontFamily="{StaticResource OpenSansLight}"
+                         Foreground="#777777"/>
+                </TextBlock>
+
+                <Border CornerRadius="10"
+                        Width="60"
+                        Height="60"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                           Margin="0 0 240 100"
+                        >
+                    <Border.Clip>
+                        <EllipseGeometry Center="30 30" 
+                                         RadiusX="30"
+                                         RadiusY="30"/>
+                    </Border.Clip>
+                    <Image Source="https://cdn.discordapp.com/avatars/225340215034773504/aa8cd7e46dc69b620c36177cac6997ad.png"/>
+                </Border>
+                <TextBlock FontSize="30" 
+                           Margin="60 0 0 100"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           TextWrapping="Wrap"
+                           Width="210">
+                    <Run Text="Fredrik Forsell"/>
+                    <LineBreak/>
+                    <Run Text="Data collection, application resources and user interface design"
+                         FontSize="12"
+                         FontFamily="{StaticResource OpenSansLight}"
+                         Foreground="#777777"/>
+                </TextBlock>
+
+                <Border CornerRadius="10"
+                        Width="60"
+                        Height="60"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Margin="0 100 240 0"
+                        >
+                    <Border.Clip>
+                        <EllipseGeometry Center="30 30" 
+                                         RadiusX="30"
+                                         RadiusY="30"/>
+                    </Border.Clip>
+                    <Image Source="https://cdn.discordapp.com/avatars/104632152712302592/15fc056dcbb10d169a68a83d8eec2711.png"/>
+                </Border>
+                <TextBlock FontSize="30" 
+                           Margin="60 100 0 0"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           TextWrapping="Wrap"
+                           Width="210">
+                    <Run Text="Hampus Holm"/>
+                    <LineBreak/>
+                    <Run Text="Application design, programming and user interface design"
+                         FontSize="12"
+                         FontFamily="{StaticResource OpenSansLight}"
+                         Foreground="#777777"/>
+                </TextBlock>
+
+                <Border Background="#ededed"
+                        CornerRadius="8"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        Height="{Binding ElementName=ScrollView, Path=ActualHeight}"
+                        Width="{Binding ElementName=ScrollView, Path=ActualWidth}"
+                        Margin="0 0 0 40"
+                        >
+                    <Border.Effect>
+                        <DropShadowEffect Color="Black"
+                                          ShadowDepth="2"
+                                          BlurRadius="12"
+                                          Opacity="0.25"/>
+                    </Border.Effect>
+                </Border>
+                <ScrollViewer x:Name="ScrollView" HorizontalAlignment="Center"
+                              VerticalAlignment="Bottom"
+                              Height="100"
+                              MaxWidth="500"
+                              Margin="6 0 6 40"
+                              >
+                    <StackPanel>
+                        <StackPanel HorizontalAlignment="Left" 
+                                    Orientation="Horizontal"
+                                    Margin="6">
+                            <Image VerticalAlignment="Center" 
+                                    Source="/Images/jsondotnet.ico"
+                                    Width="28"
+                                    Height="28"
+                                    Margin="8"/>
+                            <TextBlock FontSize="20"
+                                       TextWrapping="Wrap"
+                                       MaxWidth="380">
+                                <Run Text="Json.NET"/>
+                                <Hyperlink FontSize="16" 
+                                           Command="{Binding Source={StaticResource mainVM}, Path=OpenWebsiteCommand}"
+                                           CommandParameter="https://github.com/JamesNK/Newtonsoft.Json/blob/master/LICENSE.md">
+                                    License and GitHub
+                                </Hyperlink>
+                                <LineBreak/>
+                                <Run Text="Json.NET is a popular high-performance JSON framework for .NET"
+                                     FontSize="12"/>
+                            </TextBlock>
+                        </StackPanel>
+                        <StackPanel HorizontalAlignment="Left" 
+                                    Orientation="Horizontal"
+                                    Margin="6">
+                            <Image VerticalAlignment="Center" 
+                                    Source="/Images/OxyPlot.ico"
+                                    Width="28"
+                                    Height="28"
+                                    Margin="8"/>
+                            <TextBlock FontSize="20"
+                                        TextWrapping="Wrap"
+                                        MaxWidth="380">
+                                <Run Text="OxyPlot"/>
+                                <Hyperlink FontSize="16" 
+                                           Command="{Binding Source={StaticResource mainVM}, Path=OpenWebsiteCommand}"
+                                           CommandParameter="https://github.com/oxyplot/oxyplot/blob/develop/LICENSE">
+                                    License and GitHub
+                                </Hyperlink>
+                                <LineBreak/>
+                                <Run Text="OxyPlot is a cross-platform plotting library for .NET"
+                                        FontSize="12"/>
+                            </TextBlock>
+                        </StackPanel>
+                        <StackPanel HorizontalAlignment="Left" 
+                                    Orientation="Horizontal"
+                                    Margin="6">
+                            <Image VerticalAlignment="Center" 
+                                    Source="/Images/SharpVectors.ico"
+                                    Width="28"
+                                    Height="28"
+                                    Margin="8"/>
+                            <TextBlock FontSize="20"
+                                        TextWrapping="Wrap"
+                                        MaxWidth="380">
+                                <Run Text="SharpVectors"/>
+                                <Hyperlink FontSize="16" 
+                                           Command="{Binding Source={StaticResource mainVM}, Path=OpenWebsiteCommand}"
+                                           CommandParameter="https://github.com/ElinamLLC/SharpVectors/blob/master/License.md"
+                                           >
+                                    License and GitHub
+                                </Hyperlink>
+                                <LineBreak/>
+                                <Run Text="SharpVectors - SVG# Reloaded: SVG DOM and Rendering in C# for the .Net."
+                                        FontSize="12"/>
+                            </TextBlock>
+                        </StackPanel>
+                        <StackPanel HorizontalAlignment="Left" 
+                                    Orientation="Horizontal"
+                                    Margin="6">
+                            <Image VerticalAlignment="Center" 
+                                    Source="/Images/ikriv.png"
+                                    Width="28"
+                                    Height="28"
+                                    Margin="8"/>
+                            <TextBlock FontSize="20"
+                                        TextWrapping="Wrap"
+                                        MaxWidth="380">
+                                <Run Text="WpfMathConverter"/>
+                                <Hyperlink FontSize="16" 
+                                           Command="{Binding Source={StaticResource mainVM}, Path=OpenWebsiteCommand}"
+                                           CommandParameter="https://www.apache.org/licenses/LICENSE-2.0.html"
+                                           >
+                                    License
+                                </Hyperlink>
+                                <Run FontSize="16"
+                                     Text="and"/>
+                                <Hyperlink FontSize="16" 
+                                           Command="{Binding Source={StaticResource mainVM}, Path=OpenWebsiteCommand}"
+                                           CommandParameter="https://github.com/ikriv/WpfMathConverter"
+                                           >
+                                    GitHub
+                                </Hyperlink>
+                                <LineBreak/>
+                                <Run Text="Math converter for WPF bindings."
+                                     FontSize="12"/>
+                            </TextBlock>
+                        </StackPanel>
+                        <StackPanel HorizontalAlignment="Left" 
+                                    Orientation="Horizontal"
+                                    Margin="6">
+                            <Image VerticalAlignment="Center" 
+                                    Source="/Images/OpenSans.png"
+                                    Width="28"
+                                    Height="28"
+                                    Margin="8"/>
+                            <TextBlock FontSize="20"
+                                        TextWrapping="Wrap"
+                                        MaxWidth="380">
+                                <Run Text="Open Sans"/>
+                                <Hyperlink FontSize="16" 
+                                           Command="{Binding Source={StaticResource mainVM}, Path=OpenWebsiteCommand}"
+                                           CommandParameter="https://www.apache.org/licenses/LICENSE-2.0.html"
+                                           >
+                                    License
+                                </Hyperlink>
+                                <LineBreak/>
+                                <Run Text="Open Sans is a humanist sans-serif typeface designed by Steve Matteson and commissioned by Google."
+                                     FontSize="12"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

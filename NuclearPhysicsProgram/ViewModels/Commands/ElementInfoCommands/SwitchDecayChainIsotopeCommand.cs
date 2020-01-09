@@ -7,17 +7,16 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace NuclearPhysicsProgram.ViewModels.Commands.ElementInfoCommands {
-    class OpenIsotopeDropDownCommand : ICommand {
-        private IsotopeDropDownViewModel isotopeDropDownViewModel;
-        
-        public OpenIsotopeDropDownCommand(IsotopeDropDownViewModel isotopeDropDownViewModel) {
-            this.isotopeDropDownViewModel = isotopeDropDownViewModel;
-        }
-
+    class SwitchDecayChainIsotopeCommand : ICommand {
+        private DecayChainViewModel decayChainViewModel;
         public event EventHandler CanExecuteChanged;
+
+        public SwitchDecayChainIsotopeCommand(DecayChainViewModel decayChainViewModel) {
+            this.decayChainViewModel = decayChainViewModel;
+        }
 
         public bool CanExecute(object parameter) => true;
 
-        public void Execute(object parameter) => isotopeDropDownViewModel.OpenIsotopeDropDown();
+        public void Execute(object parameter) => decayChainViewModel.SwitchDecayChainIsotope(parameter as string);
     }
 }

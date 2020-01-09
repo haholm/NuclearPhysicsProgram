@@ -22,7 +22,7 @@ namespace NuclearPhysicsProgram.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace NuclearPhysicsProgram.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NuclearPhysicsProgram.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace NuclearPhysicsProgram.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -65,33 +65,37 @@ namespace NuclearPhysicsProgram.Properties {
         ///  {
         ///    &quot;Name&quot;: &quot;Hydrogen&quot;,
         ///    &quot;Symbol&quot;: &quot;H&quot;,
-        ///    &quot;ProtonNumber&quot;: 1,
         ///    &quot;AtomicNumber&quot;: 1,
-        ///    &quot;HalfLife&quot;: 0,
-        ///    &quot;Decays&quot;: [
-        ///      {
-        ///        &quot;Type&quot;: &quot;Alpha&quot;,
-        ///        &quot;Product&quot;: &quot;&quot;,
-        ///        &quot;Energy&quot;: 0,
-        ///        &quot;Percent&quot;: 0
-        ///      },
-        ///      {
-        ///        &quot;Type&quot;: &quot;Beta&quot;,
-        ///        &quot;Product&quot;: &quot;&quot;,
-        ///        &quot;Energy&quot;: 0,
-        ///        &quot;Percent&quot;: 0
-        ///      },
-        ///      {
-        ///        &quot;Type&quot;: &quot;Gamma&quot;,
-        ///        &quot;Product&quot;: &quot;&quot;,
-        ///        &quot;Energy&quot;: 0,
-        ///        &quot;Percent&quot;: 0
-        ///      },
-        ///      {
-        ///        &quot;Type&quot;: &quot;EC&quot;,
-        ///     [rest of string was truncated]&quot;;.
+        ///    &quot;MassNumber&quot;: 1
+        ///  },
+        ///  {
+        ///    &quot;Name&quot;: &quot;Helium&quot;,
+        ///    &quot;Symbol&quot;: &quot;He&quot;,
+        ///    &quot;AtomicNumber&quot;: 2,
+        ///    &quot;MassNumber&quot;: 4
+        ///  },
+        ///  {
+        ///    &quot;Name&quot;: &quot;Lithium&quot;,
+        ///    &quot;Symbol&quot;: &quot;Li&quot;,
+        ///    &quot;AtomicNumber&quot;: 3,
+        ///    &quot;MassNumber&quot;: 7
+        ///  },
+        ///  {
+        ///    &quot;Name&quot;: &quot;Beryllium&quot;,
+        ///    &quot;Symbol&quot;: &quot;Be&quot;,
+        ///    &quot;AtomicNumber&quot;: 4,
+        ///    &quot;MassNumber&quot;: 9
+        ///  },
+        ///  {
+        ///    &quot;Name&quot;: &quot;Boron&quot;,
+        ///    &quot;Symbol&quot;: &quot;B&quot;,
+        ///    &quot;AtomicNumber&quot;: 5,
+        ///    &quot;MassNumber&quot;: 11
+        ///  },
+        ///  {
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string Elements {
+        public static string Elements {
             get {
                 return ResourceManager.GetString("Elements", resourceCulture);
             }
@@ -100,42 +104,37 @@ namespace NuclearPhysicsProgram.Properties {
         /// <summary>
         ///   Looks up a localized string similar to [
         ///  {
-        ///    &quot;Symbol&quot;: &quot;&quot;,
+        ///    &quot;Symbol&quot;: &quot;H&quot;,
         ///    &quot;Isotopes&quot;: [
         ///      {
-        ///        &quot;AtomicNumber&quot;: 0,
-        ///        &quot;HalfLife&quot;: 0,
+        ///        &quot;Symbol&quot;: &quot;H&quot;,
+        ///        &quot;MassNumber&quot;: 1,
+        ///        &quot;HalfLife&quot;: &quot;&quot;,
+        ///        &quot;Decays&quot;: [
+        ///
+        ///        ]
+        ///      },
+        ///      {
+        ///        &quot;Symbol&quot;: &quot;H&quot;,
+        ///        &quot;MassNumber&quot;: 2,
+        ///        &quot;HalfLife&quot;: &quot;&quot;,
+        ///        &quot;Decays&quot;: [
+        ///
+        ///        ]
+        ///      },
+        ///      {
+        ///        &quot;Symbol&quot;: &quot;H&quot;,
+        ///        &quot;MassNumber&quot;: 3,
+        ///        &quot;HalfLife&quot;: &quot;388789632&quot;,
         ///        &quot;Decays&quot;: [
         ///          {
-        ///            &quot;Type&quot;: &quot;Alpha&quot;,
-        ///            &quot;Product&quot;: &quot;&quot;,
-        ///            &quot;EnergyReleased&quot;: 0,
-        ///            &quot;Percent&quot;: 0
-        ///          },
-        ///          {
-        ///            &quot;Type&quot;: &quot;Beta&quot;,
-        ///            &quot;Product&quot;: &quot;&quot;,
-        ///            &quot;EnergyReleased&quot;: 0,
-        ///            &quot;Percent&quot;: 0
-        ///          },
-        ///          {
-        ///            &quot;Type&quot;: &quot;Gamma&quot;,
-        ///            &quot;Product&quot;: &quot;&quot;,
-        ///            &quot;EnergyRelea [rest of string was truncated]&quot;;.
+        ///            &quot;Type&quot;: &quot;Beta-&quot;,
+        ///            &quot;Product&quot;: &quot;He&quot;,
+        ///            &quot;AtomicNum [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string Isotopes {
+        public static string Isotopes {
             get {
                 return ResourceManager.GetString("Isotopes", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Transparent {
-            get {
-                object obj = ResourceManager.GetObject("Transparent", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

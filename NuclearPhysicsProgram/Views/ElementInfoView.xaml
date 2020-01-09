@@ -5,48 +5,527 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NuclearPhysicsProgram.Views"
              xmlns:elementInfoViews="clr-namespace:NuclearPhysicsProgram.Views.ElementInfoViews"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+             xmlns:viewModels="clr-namespace:NuclearPhysicsProgram.ViewModels"
+             xmlns:ikriv="clr-namespace:IKriv.Wpf"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.Resources>
-        <Style x:Key="CloseButtonStyle" 
-               BasedOn="{StaticResource NoStyle}"
-               TargetType="Button"
-               >
+             d:DesignHeight="800" 
+             d:DesignWidth="1200"
+             DataContext="{Binding ElementInfoViewModel, Source={StaticResource mainVM}}">
+    <Border x:Name="Border"
+            Background="#2B2B2F"
+            CornerRadius="0">
+        <!--restructure-->
+        <Grid Margin="16">
+            <Border Name="CloseBorder"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Width="38"
+                    Height="26"
+                    Margin="12"
+                    Background="#606060"
+                    CornerRadius="4">
+                <Button Style="{StaticResource NoStyle}" 
+                    Command="{Binding CloseElementInfoCommand, Source={StaticResource mainVM}}"
+                    Foreground="#c0c0c0"
+                    >
+                    <Button.Triggers>
+                        <EventTrigger RoutedEvent="MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation To="#ff4040" 
+                                                Duration="0:0:0.1" 
+                                                Storyboard.TargetName="CloseBorder" 
+                                                Storyboard.TargetProperty="Background.Color"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation To="#606060" 
+                                                Duration="0:0:0.1" 
+                                                Storyboard.TargetName="CloseBorder" 
+                                                Storyboard.TargetProperty="Background.Color"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation To="White" 
+                                                Duration="0:0:0.1"
+                                                Storyboard.TargetName="CloseTextBlock" 
+                                                Storyboard.TargetProperty="Foreground.Color"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation To="#c0c0c0" 
+                                                Duration="0:0:0.1" 
+                                                Storyboard.TargetName="CloseTextBlock" 
+                                                Storyboard.TargetProperty="Foreground.Color"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Button.Triggers>
+                    <TextBlock x:Name="CloseTextBlock" 
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="18"
+                            Padding="0.3"
+                            FontFamily="{StaticResource OpenSansLight}">
+                        <TextBlock.RenderTransform>
+                            <ScaleTransform ScaleY="0.85"/>
+                        </TextBlock.RenderTransform>x</TextBlock>
+                </Button>
+            </Border>
 
-        </Style>
-    </UserControl.Resources>
-    <Grid>
-        <Border x:Name="Border"
-                Margin="100,40,50,40"
-                Background="#f0f2f0"
+            <Border x:Name="InfoPagesBorder"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                MaxWidth="1300"
+                MaxHeight="800"
+                Margin="160 10 160 70"
                 CornerRadius="16"
-                MaxWidth="1600"
-                MaxHeight="800">
-            <Grid Margin="6">
-                <Border HorizontalAlignment="Right"
-                        VerticalAlignment="Top"
-                        Width="32"
-                        Height="24"
-                        Margin="2"
-                        Background="#15000000"
-                        CornerRadius="2">
-                    <Button Style="{StaticResource CloseButtonStyle}" 
-                            Background="Red"
-                            Command="{Binding CloseElementInfoCommand, Source={StaticResource mainVM}}" >
-                        <TextBlock HorizontalAlignment="Center"
-                                   VerticalAlignment="Center">x</TextBlock>
-                    </Button>
+                ClipToBounds="True">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0.5,0" 
+                                        EndPoint="0.6,1">
+                        <GradientStop Color="#434343" Offset="-1"/>
+                        <GradientStop Color="#000000 " Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Grid>
+                    <Canvas x:Name="InfoPagesCanvas">
+                        <Canvas.RenderTransform>
+                            <TranslateTransform>
+                                <TranslateTransform.X>
+                                    <MultiBinding Converter="{ikriv:MathConverter}" 
+                                                ConverterParameter="a * b">
+                                        <Binding ElementName="InfoPagesCanvasAnimator"
+                                                Path="Tag" />
+                                        <Binding ElementName="InfoPagesBorder"
+                                                Path="ActualWidth" />
+                                    </MultiBinding>
+                                </TranslateTransform.X>
+                            </TranslateTransform>
+                        </Canvas.RenderTransform>
+                        <Border x:Name="InfoPagesCanvasAnimator">
+                            <Border.Tag>
+                                <sys:Double>1</sys:Double>
+                            </Border.Tag>
+                        </Border>
+
+                        <Grid Width="{Binding ActualWidth, ElementName=InfoPagesBorder}" 
+                            Height="{Binding ActualHeight, ElementName=InfoPagesBorder}"
+                            Canvas.Left="{Binding ElementName=InfoPagesBorder, Path=ActualWidth, FallbackValue=-800, Converter={ikriv:MathConverter}, ConverterParameter='-x'}">
+                            <Border>
+                                <Border.Effect>
+                                    <DropShadowEffect BlurRadius="6"
+                                                    ShadowDepth="2"
+                                                    Direction="-36"
+                                                    Opacity="0.25"
+                                                    Color="Black"/>
+                                </Border.Effect>
+                            </Border>
+                            <Button Width="40"
+                                Height="40"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Bottom"
+                                Margin="20"
+                                Background="#aa999999"
+                                Cursor="Hand"
+                                Command="{Binding OpenWikipediaCommand, Source={StaticResource mainVM}}"
+                                >
+                                <Button.Style>
+                                    <Style TargetType="Button"
+                                    BasedOn="{StaticResource NoStyle}">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="Button">
+                                                    <Border>
+                                                        <VisualStateManager.VisualStateGroups>
+                                                            <VisualStateGroup>
+                                                                <VisualState x:Name="Normal">
+                                                                    <Storyboard>
+                                                                        <ColorAnimation Storyboard.TargetName="ButtonBorder"
+                                                                            Storyboard.TargetProperty="(Grid.Background).(SolidColorBrush.Color)"
+                                                                            Duration="0:0:0.3"
+                                                                            To="#aa999999"/>
+                                                                    </Storyboard>
+                                                                </VisualState>
+                                                                <VisualState x:Name="MouseOver">
+                                                                    <Storyboard>
+                                                                        <ColorAnimation Storyboard.TargetName="ButtonBorder"
+                                                                            Storyboard.TargetProperty="(Grid.Background).(SolidColorBrush.Color)"
+                                                                            Duration="0:0:0.3"
+                                                                            To="#969696"/>
+                                                                    </Storyboard>
+                                                                </VisualState>
+                                                            </VisualStateGroup>
+                                                        </VisualStateManager.VisualStateGroups>
+
+                                                        <Border x:Name="ButtonBorder" 
+                                                            CornerRadius="20"
+                                                            ClipToBounds="True"
+                                                            Background="Transparent">
+                                                            <Grid x:Name="ButtonGrid" 
+                                                                Margin="0 2 0 0">
+                                                                <Image Source="{svgc:SvgImage /Images/wikipedia-w.svg}" 
+                                                                    Width="20"/>
+                                                                <ContentPresenter/>
+                                                            </Grid>
+                                                        </Border>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+
+                            <Border HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Margin="0 0 130 290"
+                                Width="250"
+                                Height="90"
+                                CornerRadius="6">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="-0.5,0.5" EndPoint="0.5,1">
+                                        <GradientStop Color="#fdfcfb" Offset="0"/>
+                                        <GradientStop Color="#e2d1c3" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <StackPanel HorizontalAlignment="Center"
+                                        Height="76">
+                                    <TextBlock HorizontalAlignment="Center"
+                                            Padding="2"
+                                            FontSize="15"
+                                            Text="Element"/>
+                                    <TextBlock HorizontalAlignment="Center"
+                                            FontSize="24"
+                                            Text="{Binding InfoIsotopeName, TargetNullValue='0'}" />
+                                </StackPanel>
+                            </Border>
+                            <Border HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Margin="0 0 260 0"
+                                Width="120"
+                                Height="180"
+                                CornerRadius="6">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="-0.5,0.5" EndPoint="0.5,1">
+                                        <GradientStop Color="#fdfcfb" Offset="0"/>
+                                        <GradientStop Color="#e2d1c3" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <StackPanel HorizontalAlignment="Center"
+                                        Height="132">
+                                    <TextBlock HorizontalAlignment="Center"
+                                            Margin="0"
+                                            FontSize="15"
+                                            Text="Protons"/>
+                                    <TextBlock HorizontalAlignment="Center"
+                                            Padding="2"
+                                            FontSize="24"
+                                            Text="{Binding InfoProtons, TargetNullValue='0'}" />
+                                    <Image Source="{svgc:SvgImage /Images/atom-symbol-proton.svg}"
+                                        HorizontalAlignment="Center"
+                                        Margin="4"
+                                        Width="62"
+                                        Height="72"/>
+                                </StackPanel>
+                            </Border>
+
+                            <Border HorizontalAlignment="Center"
+                                VerticalAlignment="Center" 
+                                Margin="0 0 0 0"
+                                Width="120"
+                                Height="180"
+                                CornerRadius="6">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="-0.5,0.5" EndPoint="0.5,1">
+                                        <GradientStop Color="#fdfcfb" Offset="0"/>
+                                        <GradientStop Color="#e2d1c3" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <StackPanel HorizontalAlignment="Center"
+                                        Height="132">
+                                    <TextBlock HorizontalAlignment="Center"
+                                            Margin="0"
+                                            FontSize="15"
+                                            Text="Neutrons"/>
+                                    <TextBlock HorizontalAlignment="Center"
+                                            Padding="2"
+                                            FontSize="24"
+                                            Text="{Binding InfoNeutrons, TargetNullValue='0'}" />
+                                    <Image Source="{svgc:SvgImage /Images/atom-symbol-neutron.svg}"
+                                        HorizontalAlignment="Center"
+                                        Margin="4"
+                                        Width="62"
+                                        Height="72"/>
+                                </StackPanel>
+                            </Border>
+                            <Border HorizontalAlignment="Center"
+                                VerticalAlignment="Center" 
+                                Margin="260 0 0 0"
+                                Width="120"
+                                Height="180"
+                                CornerRadius="6">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="-0.5,0.5" EndPoint="0.5,1">
+                                        <GradientStop Color="#fdfcfb" Offset="0"/>
+                                        <GradientStop Color="#e2d1c3" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <StackPanel HorizontalAlignment="Center" 
+                                        Height="132">
+                                    <TextBlock HorizontalAlignment="Center"
+                                            Margin="0"
+                                            FontSize="15"
+                                            Text="Electrons"/>
+                                    <TextBlock HorizontalAlignment="Center"
+                                            Padding="2"
+                                            FontSize="24"
+                                            Text="{Binding InfoProtons, TargetNullValue='0'}" />
+                                    <Image Source="{svgc:SvgImage /Images/atom-symbol-electron.svg}"
+                                        HorizontalAlignment="Center"
+                                        Margin="4"
+                                        Width="62"
+                                        Height="72"/>
+                                </StackPanel>
+                            </Border>
+                            <Border HorizontalAlignment="Center"
+                                VerticalAlignment="Center" 
+                                Margin="130 290 0 0"
+                                Width="250"
+                                Height="90"
+                                CornerRadius="6">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="-0.5,0.5" EndPoint="0.5,1">
+                                        <GradientStop Color="#fdfcfb" Offset="0"/>
+                                        <GradientStop Color="#e2d1c3" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <StackPanel HorizontalAlignment="Center"
+                                        Height="76">
+                                    <TextBlock HorizontalAlignment="Center"
+                                            Padding="2"
+                                            FontSize="15"
+                                            Text="Half life"/>
+                                    <Viewbox HorizontalAlignment="Center"
+                                            Margin="8"
+                                            MaxHeight="42"
+                                            MaxWidth="110">
+                                        <TextBlock FontSize="24"
+                                                LineStackingStrategy="BlockLineHeight"
+                                                LineHeight="22"
+                                                TextAlignment="Center"
+                                                Text="{Binding InfoHalfLife, TargetNullValue='0'}" />
+                                    </Viewbox>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                        <elementInfoViews:PlotView x:Name="PlotView" 
+                                                   Width="{Binding ActualWidth, ElementName=InfoPagesBorder}" 
+                                                   Height="{Binding ActualHeight, ElementName=InfoPagesBorder}"
+                                                   Opacity="{Binding PlotViewOpacity, TargetNullValue='1'}"
+                                                   Padding="30 30 60 58"
+                                                   />
+                        <Border Canvas.Left="{Binding ElementName=InfoPagesBorder, Path=ActualWidth}" 
+                                Width="100"/>
+                        <!--???-->
+                    </Canvas>
+                    <StackPanel HorizontalAlignment="Center"
+                                VerticalAlignment="Bottom"
+                                Orientation="Horizontal"
+                                Margin="0 0 0 18"
+                                >
+                        <Button IsEnabled="{Binding IsArrowLeftEnabled}"
+                            Opacity="{Binding ArrowLeftOpacity}"
+                            Margin="0 0 10 0"
+                            Width="20"
+                            Height="20"
+                            Command="{Binding SwitchInfoCommand}"
+                            CommandParameter="l">
+                            <Button.Style>
+                                <Style TargetType="Button"
+                                    BasedOn="{StaticResource NoStyle}">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border>
+                                                    <VisualStateManager.VisualStateGroups>
+                                                        <VisualStateGroup>
+                                                            <VisualState x:Name="Normal">
+                                                                <Storyboard>
+                                                                    <ColorAnimation Storyboard.TargetName="ButtonBorder"
+                                                                                Storyboard.TargetProperty="(Grid.Background).(SolidColorBrush.Color)"
+                                                                                Duration="0:0:0.3"
+                                                                                To="Transparent"/>
+                                                                </Storyboard>
+                                                            </VisualState>
+                                                            <VisualState x:Name="MouseOver">
+                                                                <Storyboard>
+                                                                    <ColorAnimation Storyboard.TargetName="ButtonBorder"
+                                                                                Storyboard.TargetProperty="(Grid.Background).(SolidColorBrush.Color)"
+                                                                                Duration="0:0:0.3"
+                                                                                To="#969696"/>
+                                                                </Storyboard>
+                                                            </VisualState>
+                                                        </VisualStateGroup>
+                                                    </VisualStateManager.VisualStateGroups>
+
+                                                    <Border x:Name="ButtonBorder" 
+                                                            CornerRadius="6"
+                                                            ClipToBounds="True"
+                                                            Background="Transparent">
+                                                        <Grid x:Name="ButtonGrid" >
+                                                            <Image Source="{svgc:SvgImage /Images/arrowdown.svg}" 
+                                                            Width="12"
+                                                            RenderTransformOrigin="0.5 0.5">
+                                                                <Image.RenderTransform>
+                                                                    <RotateTransform Angle="90" />
+                                                                </Image.RenderTransform>
+                                                            </Image>
+                                                            <ContentPresenter/>
+                                                        </Grid>
+                                                    </Border>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                            <Button.Triggers>
+                                <EventTrigger RoutedEvent="PreviewMouseDown">
+                                    <BeginStoryboard>
+                                        <Storyboard Timeline.DesiredFrameRate="60">
+                                            <DoubleAnimation Storyboard.TargetName="InfoPagesCanvasAnimator"
+                                                             Storyboard.TargetProperty="Tag"
+                                                             Duration="0:0:0.8" 
+                                                             FillBehavior="HoldEnd"
+                                                             To="1">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <ElasticEase Springiness="12" 
+                                                                 Oscillations="1" 
+                                                                 EasingMode="EaseOut"
+                                                                 />
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Button.Triggers>
+                        </Button>
+                        <Button IsEnabled="{Binding IsArrowRightEnabled}"
+                            Opacity="{Binding ArrowRightOpacity, FallbackValue=1}"
+                            Margin="10 0 0 0"
+                            Width="20"
+                            Height="20"
+                            Command="{Binding SwitchInfoCommand}"
+                            CommandParameter="r">
+                            <Button.Style>
+                                <Style TargetType="Button"
+                                    BasedOn="{StaticResource NoStyle}">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border>
+                                                    <VisualStateManager.VisualStateGroups>
+                                                        <VisualStateGroup>
+                                                            <VisualState x:Name="Normal">
+                                                                <Storyboard>
+                                                                    <ColorAnimation Storyboard.TargetName="ButtonBorder"
+                                                                                Storyboard.TargetProperty="(Grid.Background).(SolidColorBrush.Color)"
+                                                                                Duration="0:0:0.3"
+                                                                                To="Transparent"/>
+                                                                </Storyboard>
+                                                            </VisualState>
+                                                            <VisualState x:Name="MouseOver">
+                                                                <Storyboard>
+                                                                    <ColorAnimation Storyboard.TargetName="ButtonBorder"
+                                                                                Storyboard.TargetProperty="(Grid.Background).(SolidColorBrush.Color)"
+                                                                                Duration="0:0:0.3"
+                                                                                To="#969696"/>
+                                                                </Storyboard>
+                                                            </VisualState>
+                                                        </VisualStateGroup>
+                                                    </VisualStateManager.VisualStateGroups>
+
+                                                    <Border x:Name="ButtonBorder" 
+                                                        CornerRadius="6"
+                                                        ClipToBounds="True"
+                                                        Background="Transparent">
+                                                        <Grid x:Name="ButtonGrid" >
+                                                            <Image Source="{svgc:SvgImage /Images/arrowdown.svg}" 
+                                                                Width="12"
+                                                                RenderTransformOrigin="0.5 0.5">
+                                                                <Image.RenderTransform>
+                                                                    <RotateTransform Angle="-90" />
+                                                                </Image.RenderTransform>
+                                                            </Image>
+                                                            <ContentPresenter/>
+                                                        </Grid>
+                                                    </Border>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                            <Button.Triggers>
+                                <EventTrigger RoutedEvent="PreviewMouseDown" >
+                                    <BeginStoryboard>
+                                        <Storyboard Timeline.DesiredFrameRate="60">
+                                            <DoubleAnimation Storyboard.TargetName="InfoPagesCanvasAnimator"
+                                                            Storyboard.TargetProperty="Tag"
+                                                            Duration="0:0:0.8" 
+                                                            FillBehavior="HoldEnd"
+                                                            To="0">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <ElasticEase Springiness="12" 
+                                                                Oscillations="1" 
+                                                                EasingMode="EaseOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Button.Triggers>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Canvas x:Name="DecayChainCanvas" VerticalAlignment="Bottom"
+                    HorizontalAlignment="Center"
+                    Width="600"
+                    Height="86">
+                <Border Canvas.Top="2" 
+                        Canvas.Left="2" 
+                        Width="596"
+                        Height="84" 
+                        BorderBrush="Black" 
+                        BorderThickness="1"
+                        CornerRadius="6">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="32" />
+                    </Border.Effect>
                 </Border>
-
-                <elementInfoViews:ElementInfoIsotopeDropDownView HorizontalAlignment="Left" 
-                                                                 VerticalAlignment="Top" 
-                                                                 >
-                </elementInfoViews:ElementInfoIsotopeDropDownView>
-
-                <elementInfoViews:IsotopeDecayChainView VerticalAlignment="Bottom"
-                                                        HorizontalAlignment="Stretch"
-                                                        Height="200"/>
-            </Grid>
-        </Border>
-    </Grid>
+                <Border Width="{Binding ElementName=DecayChainCanvas, Path=Width}"
+                        Height="{Binding ElementName=DecayChainCanvas, Path=Height}"
+                        BorderBrush="#22000000"
+                        CornerRadius="6"
+                        Background="#242424">
+                    <elementInfoViews:IsotopeDecayChainView />
+                </Border>
+            </Canvas>
+        </Grid>
+    </Border>
 </UserControl>

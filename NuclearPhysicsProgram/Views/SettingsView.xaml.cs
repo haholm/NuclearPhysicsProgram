@@ -1,5 +1,4 @@
-﻿using NuclearPhysicsProgram.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,12 +13,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace NuclearPhysicsProgram.Views.ElementInfoViews {
+namespace NuclearPhysicsProgram.Views {
     /// <summary>
-    /// Interaction logic for ElementInfoIsotopeDropDownView.xaml
+    /// Interaction logic for SettingsView.xaml
     /// </summary>
-    public partial class ElementInfoIsotopeDropDownView : UserControl {
-        public ElementInfoIsotopeDropDownView() {
+    public partial class SettingsView : UserControl {
+        public SettingsView() {
             InitializeComponent();
         }
     }

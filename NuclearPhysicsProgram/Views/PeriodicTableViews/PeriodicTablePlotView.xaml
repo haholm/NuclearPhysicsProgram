@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="NuclearPhysicsProgram.Views.PeriodicTableViews.PeriodicTablePlotView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NuclearPhysicsProgram.Views.PeriodicTableViews"
+             xmlns:converters="clr-namespace:NuclearPhysicsProgram.ViewModels.Converters"
+             xmlns:oxy="http://oxyplot.org/wpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1000">
+    <UserControl.Resources>
+        <converters:PlotSeriesConverter x:Key="plotSeriesConverter" />
+    </UserControl.Resources>
+    <Border x:Name="PlotBorder" 
+            CornerRadius="9"
+            BorderThickness="0">
+        <Border.Background>
+            <LinearGradientBrush>
+                <!--<GradientStop Color="#a1c4fd" Offset="0"/>
+                <GradientStop Color="#FFC2E9FB" Offset="1"/>-->
+                <GradientStop Color="#243949" Offset="-0.5"/>
+                <GradientStop Color="#517FA4" Offset="1"/>
+            </LinearGradientBrush>
+        </Border.Background>
+        <oxy:PlotView x:Name="PlotView" 
+                      Model="{Binding PeriodicTablePlotViewModel.PlotModel, Mode=OneWay, Source={StaticResource mainVM}}"
+                      Margin="0 6 6 0"
+                      Padding="-1 10 -2 0"
+                      Background="Transparent"
+                      >
+            <oxy:PlotView.DefaultTrackerTemplate>
+                <ControlTemplate>
+                    <oxy:TrackerControl Position="{Binding Position}" 
+                                        BorderBrush="Transparent"
+                                        BorderThickness="0"
+                                        VerticalLineVisibility="Collapsed"
+                                        HorizontalLineVisibility="Collapsed"
+                                        >
+                        <oxy:TrackerControl.Background>
+                            <SolidColorBrush Color="Transparent"/>
+                        </oxy:TrackerControl.Background>
+                        <oxy:TrackerControl.Content>
+                            <Border CornerRadius="6"
+                                    Background="#ccffffff">
+                                <TextBlock Margin="7" 
+                                            Foreground="Black">
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0}&#x0a;{1}">
+                                            <Binding Path="."/>
+                                            <Binding Path=".">
+                                                <Binding.Converter>
+                                                    <StaticResource ResourceKey="plotSeriesConverter" />
+                                                </Binding.Converter>
+                                            </Binding>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </Border>
+                        </oxy:TrackerControl.Content>
+                    </oxy:TrackerControl>
+                </ControlTemplate>
+            </oxy:PlotView.DefaultTrackerTemplate>
+        </oxy:PlotView>
+    </Border>
+</UserControl>
