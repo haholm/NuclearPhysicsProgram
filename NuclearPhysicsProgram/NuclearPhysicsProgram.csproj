@@ -122,11 +122,11 @@
     </ApplicationDefinition>
     <Compile Include="Models\DecayModel.cs" />
     <Compile Include="Models\IsotopeDataModel.cs" />
+    <Compile Include="Models\IsotopeModel.cs" />
     <Compile Include="ViewModels\AnimationViewModel.cs" />
     <Compile Include="ViewModels\Commands\CloseElementInfoCommand.cs" />
     <Compile Include="ViewModels\Commands\ElementInfoCommands\ContractHiddenElementsCommand.cs" />
     <Compile Include="ViewModels\Commands\ElementInfoCommands\ExpandHiddenElementsCommand.cs" />
-    <Compile Include="ViewModels\Commands\ElementInfoCommands\OpenIsotopeDropDownCommand.cs" />
     <Compile Include="ViewModels\Commands\ElementInfoCommands\SwitchDecayChainIsotopeCommand.cs" />
     <Compile Include="ViewModels\Commands\ElementInfoCommands\SwitchInfoCommand.cs" />
     <Compile Include="ViewModels\Commands\IntroductionCommands\BeginCommand.cs" />
@@ -143,7 +143,6 @@
     <Compile Include="ViewModels\Converters\PlotSeriesConverter.cs" />
     <Compile Include="ViewModels\ElementInfoViewModels\DecayChainViewModel.cs" />
     <Compile Include="ViewModels\ElementInfoViewModels\ElementInfoViewModel.cs" />
-    <Compile Include="ViewModels\ElementInfoViewModels\IsotopeDropDownViewModel.cs" />
     <Compile Include="ViewModels\ElementInfoViewModels\PlotViewModel.cs" />
     <Compile Include="ViewModels\ElementViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -154,9 +153,6 @@
     <Compile Include="ViewModels\PeriodicTableViewModel.cs" />
     <Compile Include="Views\ElementInfoView.xaml.cs">
       <DependentUpon>ElementInfoView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ElementInfoViews\ElementInfoIsotopeDropDownView.xaml.cs">
-      <DependentUpon>ElementInfoIsotopeDropDownView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ElementInfoViews\IsotopeDecayChainView.xaml.cs">
       <DependentUpon>IsotopeDecayChainView.xaml</DependentUpon>
@@ -198,10 +194,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\ElementInfoView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ElementInfoViews\ElementInfoIsotopeDropDownView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -321,6 +313,12 @@
     <Resource Include="Images\jsondotnet.ico" />
     <Resource Include="Images\OxyPlot.ico" />
     <Resource Include="Images\SharpVectors.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ikriv.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\OpenSans.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions />

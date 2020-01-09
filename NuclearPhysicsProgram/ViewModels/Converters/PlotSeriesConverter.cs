@@ -31,13 +31,13 @@ namespace NuclearPhysicsProgram.ViewModels.Converters {
             string decayTypeText = "";
             if (isotopeModel.Decays.Length > 0)
                 decayTypeText = $"\nDecay type: {ElementInfoViewModels.DecayChainViewModel.GetDecaySymbol(isotopeModel.Decays[0].Type)}";
+
             return $"{ConvertToSuperScript(scatterPoint.massNumber.ToString())} {scatterPoint.elementName}\nHalf life (s): {scatterPoint.halfLife}{decayTypeText}";
         }
 
         public object ConvertBindingEnergyPlot(OxyPlot.TrackerHitResult value) {
             string strippedResult = value.Text.Replace($"\n{PeriodicTablePlotViewModel.BottomBindingEnergyTitle}: ", "");
             double nucleonAmount = FindFirstNumber(strippedResult);
-
             var dataPoint = PeriodicTablePlotViewModel.OpenDataPoints.Find(dataPoint => dataPoint.massNumber == nucleonAmount);
             if (dataPoint.elementName == null)
                 return "-";

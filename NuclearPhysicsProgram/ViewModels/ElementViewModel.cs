@@ -16,6 +16,7 @@ namespace NuclearPhysicsProgram.ViewModels {
     public class ElementViewModel : PropertyHandler.NotifyPropertyChanged {
         private MainViewModel mainViewModel;
 
+        public static bool ElementsLoaded { get; private set; }
         public static Dictionary<string, ElementDataModel> ElementDataDictionary { get; private set; }
         public static Dictionary<string, IsotopeDataModel> IsotopeDataDictionary { get; private set; }
         public static double[] PeriodicTableMasses { get; } = {
@@ -74,10 +75,9 @@ namespace NuclearPhysicsProgram.ViewModels {
             return GetIsotope(isotopeData, massNumber);
         }
         public static IsotopeModel GetIsotope(IsotopeDataModel isotopeData, int massNumber) {
-            /// No error getting any isotope on default isotopes.json
             if (isotopeData == null)
                 return new IsotopeModel(isotopeData.Symbol, massNumber, "?", new DecayModel[0]);
-            ///
+
             var isotopeEnumerable = isotopeData.Isotopes.Where(i => i.MassNumber == massNumber);
             if (isotopeEnumerable.Count() == 0)
                 return new IsotopeModel(isotopeData.Symbol, massNumber, "", new DecayModel[0]);
@@ -119,6 +119,7 @@ namespace NuclearPhysicsProgram.ViewModels {
             (Elements, Isotopes) = LoadElementData();
             FillDictionaries();
             InitializePeriodicTableElements();
+            ElementsLoaded = true;
         }
 
         private void InitializePeriodicTableElements() {

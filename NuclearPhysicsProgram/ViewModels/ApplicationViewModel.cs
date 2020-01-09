@@ -9,28 +9,28 @@ using System.Windows;
 using System.Windows.Input;
 
 namespace NuclearPhysicsProgram.ViewModels {
-    class ApplicationViewModel : PropertyHandler.NotifyPropertyChanged {
+    public class ApplicationViewModel : PropertyHandler.NotifyPropertyChanged {
         private ICommand beginCommand;
         private Visibility? introductionViewVisibility;
 
+        public static string ConfigPath { get => "conf"; }
         public string ApplicationName { get => "Nuclear Physics Program"; }
-        public int FirstRun = 1;
         public ICommand BeginCommand { get => beginCommand; private set => beginCommand = value; }
         public Visibility? IntroductionViewVisibility { get => introductionViewVisibility; private set { introductionViewVisibility = value; SetPropertyChanged(this, "IntroductionViewVisibility"); } }
+        public int FirstRun = 1;
 
         public ApplicationViewModel() {
             BeginCommand = new Commands.IntroductionCommands.BeginCommand(this);
             Initialize();
         }
 
-        public void Begin() => File.WriteAllText("conf", "0");
+        public void Begin() => File.WriteAllText(ConfigPath, "0");
 
         private void Initialize() {
-            string conf = "conf";
-            if (!File.Exists(conf))
-                File.WriteAllText(conf, "1");
+            if (!File.Exists(ConfigPath))
+                File.WriteAllText(ConfigPath, "1");
 
-            string firstRun = File.ReadAllText(conf);
+            string firstRun = File.ReadAllText(ConfigPath);
             int.TryParse(firstRun, out FirstRun);
             if (FirstRun == 0)
                 IntroductionViewVisibility = Visibility.Collapsed;

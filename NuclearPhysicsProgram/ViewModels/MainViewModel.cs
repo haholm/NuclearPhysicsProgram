@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -28,8 +29,6 @@ namespace NuclearPhysicsProgram.ViewModels {
         private Visibility? itemViewInstabilityColorVisibility;
         private Thickness? periodicTableAreaMargin;
 
-        /// Ta med binding energy
-
         public static AnimationViewModel AnimationViewModel { get; set; }
         public ElementViewModel ElementViewModel { get; private set; }
         public PeriodicTablePlotViewModel PeriodicTablePlotViewModel { get; private set; }
@@ -46,7 +45,7 @@ namespace NuclearPhysicsProgram.ViewModels {
         public WindowState MainWindowState { get => mainWindowState; set { mainWindowState = value; SetPropertyChanged(this, "MainWindowState"); mainWindowSizeChanged = true; } }
         public double? MainWindowMagnification { get => mainWindowMagnification; set { mainWindowMagnification = value; SetPropertyChanged(this, "MainWindowMagnification"); } }
         public double? MainWindowBlurRadius { get => mainWindowBlurRadius; set { mainWindowBlurRadius = value; SetPropertyChanged(this, "MainWindowBlurRadius"); } }
-        public Thickness? PeriodicTableAreaMargin { get => periodicTableAreaMargin /*0 100 0 0*/; private set { periodicTableAreaMargin = value; SetPropertyChanged(this, "PeriodicTableAreaMargin"); } }
+        public Thickness? PeriodicTableAreaMargin { get => periodicTableAreaMargin; private set { periodicTableAreaMargin = value; SetPropertyChanged(this, "PeriodicTableAreaMargin"); } }
         public double? ElementInfoViewOpacity { get => elementInfoViewOpacity; private set { elementInfoViewOpacity = value; SetPropertyChanged(this, "ElementInfoViewOpacity"); } }
         public Visibility? ElementInfoViewVisibility { get => elementInfoViewVisibility; private set { elementInfoViewVisibility = value; SetPropertyChanged(this, "ElementInfoViewVisibility"); } }
         public Visibility? PeriodicTableViewVisibility { get => periodicTableViewVisibility; private set { periodicTableViewVisibility = value; SetPropertyChanged(this, "PeriodicTableViewVisibility"); } }
@@ -55,6 +54,8 @@ namespace NuclearPhysicsProgram.ViewModels {
         public Visibility? ItemViewAERColorVisibility { get => itemViewAERColorVisibility; set { itemViewAERColorVisibility = value; SetPropertyChanged(this, "ItemViewAERColorVisibility"); } }
         public Visibility? ItemViewInstabilityColorVisibility { get => itemViewInstabilityColorVisibility; set { itemViewInstabilityColorVisibility = value; SetPropertyChanged(this, "ItemViewInstabilityColorVisibility"); } }
         public IsotopeDataModel CurrentIsotopeData { get => currentIsotopeData; private set { currentIsotopeData = value; SetPropertyChanged(this, "CurrentIsotopeData"); } }
+        public CancellationTokenSource MainWindowSizeUpdateTaskCTS { get; private set; }
+        public Task MainWindowSizeUpdateTask { get; private set; }
 
         public MainViewModel() {
             AnimationViewModel = new AnimationViewModel();
@@ -69,9 +70,10 @@ namespace NuclearPhysicsProgram.ViewModels {
             TogglePropertyColorCommand = new TogglePropertyColorCommand(this);
             OpenWebsiteCommand = new OpenWebsiteCommand();
             OpenWikipediaCommand = new OpenWikipediaCommand(ElementInfoViewModel);
-            Task.Run(() => {
+            MainWindowSizeUpdateTaskCTS = new CancellationTokenSource();
+            MainWindowSizeUpdateTask = Task.Run(() => {
                 while (true) {
-                    System.Threading.Thread.Sleep(100);
+                    Thread.Sleep(100);
                     if (!mainWindowSizeChanged)
                         continue;
 
@@ -81,31 +83,25 @@ namespace NuclearPhysicsProgram.ViewModels {
                     else if (!double.IsNaN(MainWindowWidth.GetValueOrDefault()))
                         PeriodicTableScale = ((MainWindowWidth / 1200) + (MainWindowHeight / 800)) / 2;
                 }
-            });
+            }, MainWindowSizeUpdateTaskCTS.Token);
         }
 
-        public async void OpenElementInfo(string symbol, int massNumber) {
-            // check if ElementInfoView is open, if true, do not play transitions
-            if (ElementInfoViewOpacity == 1) {
-                InitializeIsotopeData(symbol, massNumber);
-                return;
-            }
-
-            await AnimationViewModel.AsyncTransition((opacity) => PeriodicTableViewOpacity = opacity, 1, 0, 0.05, 1);
+        public async Task OpenElementInfo(string symbol, int massNumber, bool test = false) {
+            // check if ElementInfoView is open or unit testing, if true, do not play transitions
+            bool opened = ElementInfoViewOpacity == 1 || test;
+            if (!opened) await AnimationViewModel.AsyncTransition((opacity) => PeriodicTableViewOpacity = opacity, 1, 0, 0.05, 1);
             PeriodicTableViewVisibility = Visibility.Collapsed;
             InitializeIsotopeData(symbol, massNumber);
 
             ElementInfoViewVisibility = Visibility.Visible;
-            //Doesn't work well
-            await AnimationViewModel.AsyncTransition((opacity) => ElementInfoViewOpacity = opacity, 0, 1, 0.1, 1.5);
+            if (!opened) await AnimationViewModel.AsyncTransition((opacity) => ElementInfoViewOpacity = opacity, 0, 1, 0.1, 1.5);
             ElementInfoViewOpacity = 1;
         }
 
-        public async void CloseElementInfo() {
-            await AnimationViewModel.AsyncTransition((opacity) => ElementInfoViewOpacity = opacity, 1, 0, 0.1, 1.5);
-
+        public async Task CloseElementInfo(bool test = false) {
+            if (!test) await AnimationViewModel.AsyncTransition((opacity) => ElementInfoViewOpacity = opacity, 1, 0, 0.1, 1.5);
             PeriodicTableViewVisibility = Visibility.Visible;
-            await AnimationViewModel.AsyncTransition((opacity) => PeriodicTableViewOpacity = opacity, 0, 1, 0.05, 1);
+            if (!test) await AnimationViewModel.AsyncTransition((opacity) => PeriodicTableViewOpacity = opacity, 0, 1, 0.05, 1);
             ElementInfoViewVisibility = Visibility.Collapsed;
         }
 

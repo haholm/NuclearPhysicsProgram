@@ -3,6 +3,7 @@ using NuclearPhysicsProgram.ViewModels.Commands.ElementInfoCommands;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -19,7 +20,6 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
         private string infoIsotopeName;
         private double? infoProtons;
         private double? infoNeutrons;
-        private double? plotViewCanvasLeft;
         private double? plotViewOpacity;
         private Storyboard plotViewStoryboard;
         private bool? isArrowLeftEnabled;
@@ -70,6 +70,6 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
             IsArrowLeftEnabled = currentInfoPage != 1 ? true : false;
         }
 
-        public void OpenWikipedia() => System.Diagnostics.Process.Start($"https://wikipedia.org/wiki/{InfoIsotopeName}");
+        public Process OpenWikipedia() => Process.Start($"https://wikipedia.org/wiki/{InfoIsotopeName}");
     }
 }

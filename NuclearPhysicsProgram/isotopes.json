@@ -3620,7 +3620,7 @@
             "MassNumber": 134
           },
           {
-            "Type": "Beta",
+            "Type": "Beta-",
             "Product": "Ba",
             "AtomicNumber": 56,
             "MassNumber": 134
@@ -6933,7 +6933,7 @@
       },
       {
         "Symbol": "Es",
-        "MassNumber": 252,
+        "MassNumber": 253,
         "HalfLife": "1,768,608",
         "Decays": [
           {

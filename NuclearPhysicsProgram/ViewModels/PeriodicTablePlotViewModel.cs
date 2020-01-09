@@ -50,6 +50,7 @@ namespace NuclearPhysicsProgram.ViewModels {
         public static List<(string elementName, int massNumber, int atomicNumber)> OpenDataPoints { get; private set; }
         public static List<(string symbol, string elementName, int massNumber, int atomicNumber, double halfLife)> OpenScatterPoints { get; private set; }
         public PlotModel PlotModel { get => plotModel; private set { plotModel = value; SetPropertyChanged(this, "PlotModel"); } }
+        public bool SetupFinished { get; private set; }
 
         public PeriodicTablePlotViewModel() {
             bindingEnergyDataPoints = new ObservableCollection<DataPoint>();
@@ -81,11 +82,11 @@ namespace NuclearPhysicsProgram.ViewModels {
             SetupInstabilityPlot();
             await SetupBindingEnergyDataPoints();
             SetupBindingEnergyPlot();
+            SetupFinished = true;
         }
 
         private async Task SetupInstabilityScatterPoints() {
             await WaitForElements();
-
             for (int i = 0; i < ElementViewModel.IsotopeDataDictionary.Count; i++) {
                 var isotopeDataModel = ElementViewModel.IsotopeDataDictionary.ElementAt(i).Value;
                 var elementDataModel = ElementViewModel.ElementDataDictionary.ElementAt(i).Value;
@@ -100,7 +101,6 @@ namespace NuclearPhysicsProgram.ViewModels {
 
         private async Task SetupBindingEnergyDataPoints() {
             await WaitForElements();
-
             double lastBindingEnergy = 7;
             for (int i = 0; i < ElementViewModel.ElementDataDictionary.Count; i++) {
                 var element = ElementViewModel.ElementDataDictionary.Values.ElementAt(i);
@@ -121,7 +121,7 @@ namespace NuclearPhysicsProgram.ViewModels {
             }
 
             var list = bindingEnergyDataPoints.ToList();
-            List<double> xList = list.Select(item => item.X).ToList();
+            var xList = list.Select(item => item.X).ToList();
             xList.Sort();
             for (int i = 0; i < list.Count; i++)
                 bindingEnergyDataPoints[i] = new DataPoint(xList[i], bindingEnergyDataPoints[i].Y);

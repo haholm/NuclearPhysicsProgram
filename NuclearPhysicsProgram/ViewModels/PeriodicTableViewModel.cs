@@ -11,7 +11,7 @@ using System.Windows;
 using System.Windows.Input;
 
 namespace NuclearPhysicsProgram.ViewModels {
-    class PeriodicTableViewModel : PropertyHandler.NotifyPropertyChanged {
+    public class PeriodicTableViewModel : PropertyHandler.NotifyPropertyChanged {
         private double? periodicTableOpacity = 1;
         private Size? firstHiddenElementsSize;
         private Size? secondHiddenElementsSize;
@@ -47,30 +47,39 @@ namespace NuclearPhysicsProgram.ViewModels {
             ContractHiddenElementsCommand = new ContractHiddenElementsCommand(this);
         }
 
-        public async void ExpandHiddenElements(int item) {
+        public async Task ExpandHiddenElements(int item, bool test = false) {
+            Action<double?> propertyUpdater = null;
             MainViewModel.AnimationViewModel.Transition(UpdatePeriodicTableOpacity, 1, 0.5, 0.1, 1);
             if (item == 1 && FirstHiddenElementsVisibility != Visibility.Visible) {
                 FirstHiddenElementsWidth = 870;
                 FirstHiddenElementsVisibility = Visibility.Visible;
-                await MainViewModel.AnimationViewModel.AsyncTransition(UpdateFirstHiddenElementsOpacity, 0, 1, 0.1, 1);
+                propertyUpdater = UpdateFirstHiddenElementsOpacity;
             }
             else if (item == 2 && SecondHiddenElementsVisibility != Visibility.Visible) {
                 SecondHiddenElementsWidth = 870;
                 SecondHiddenElementsVisibility = Visibility.Visible;
-                await MainViewModel.AnimationViewModel.AsyncTransition(UpdateSecondHiddenElementsOpacity, 0, 1, 0.1, 1);
+                propertyUpdater = UpdateSecondHiddenElementsOpacity;
             }
+            else return;
+
+            if (!test)
+                await MainViewModel.AnimationViewModel.AsyncTransition(propertyUpdater, 0, 1, 0.1, 1);
         }
 
-        public async void ContractHiddenElements(int item) {
+        public async Task ContractHiddenElements(int item, bool test = false) {
             MainViewModel.AnimationViewModel.Transition(UpdatePeriodicTableOpacity, 0.5, 1, 0.1, 1);
             if (item == 1 && FirstHiddenElementsVisibility != Visibility.Collapsed) {
                 FirstHiddenElementsWidth = 58;
-                await MainViewModel.AnimationViewModel.AsyncTransition(UpdateFirstHiddenElementsOpacity, 1, 0, 0.1, 1);
+                if (!test)
+                    await MainViewModel.AnimationViewModel.AsyncTransition(UpdateFirstHiddenElementsOpacity, 1, 0, 0.1, 1);
+
                 FirstHiddenElementsVisibility = Visibility.Collapsed;
             }
             else if (item == 2 && SecondHiddenElementsVisibility != Visibility.Collapsed) {
                 SecondHiddenElementsWidth = 58;
-                await MainViewModel.AnimationViewModel.AsyncTransition(UpdateSecondHiddenElementsOpacity, 1, 0, 0.1, 1);
+                if (!test)
+                    await MainViewModel.AnimationViewModel.AsyncTransition(UpdateSecondHiddenElementsOpacity, 1, 0, 0.1, 1);
+
                 SecondHiddenElementsVisibility = Visibility.Collapsed;
             }
         }

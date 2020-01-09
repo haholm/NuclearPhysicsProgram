@@ -254,6 +254,60 @@
                                         FontSize="12"/>
                             </TextBlock>
                         </StackPanel>
+                        <StackPanel HorizontalAlignment="Left" 
+                                    Orientation="Horizontal"
+                                    Margin="6">
+                            <Image VerticalAlignment="Center" 
+                                    Source="/Images/ikriv.png"
+                                    Width="28"
+                                    Height="28"
+                                    Margin="8"/>
+                            <TextBlock FontSize="20"
+                                        TextWrapping="Wrap"
+                                        MaxWidth="380">
+                                <Run Text="WpfMathConverter"/>
+                                <Hyperlink FontSize="16" 
+                                           Command="{Binding Source={StaticResource mainVM}, Path=OpenWebsiteCommand}"
+                                           CommandParameter="https://www.apache.org/licenses/LICENSE-2.0.html"
+                                           >
+                                    License
+                                </Hyperlink>
+                                <Run FontSize="16"
+                                     Text="and"/>
+                                <Hyperlink FontSize="16" 
+                                           Command="{Binding Source={StaticResource mainVM}, Path=OpenWebsiteCommand}"
+                                           CommandParameter="https://github.com/ikriv/WpfMathConverter"
+                                           >
+                                    GitHub
+                                </Hyperlink>
+                                <LineBreak/>
+                                <Run Text="Math converter for WPF bindings."
+                                     FontSize="12"/>
+                            </TextBlock>
+                        </StackPanel>
+                        <StackPanel HorizontalAlignment="Left" 
+                                    Orientation="Horizontal"
+                                    Margin="6">
+                            <Image VerticalAlignment="Center" 
+                                    Source="/Images/OpenSans.png"
+                                    Width="28"
+                                    Height="28"
+                                    Margin="8"/>
+                            <TextBlock FontSize="20"
+                                        TextWrapping="Wrap"
+                                        MaxWidth="380">
+                                <Run Text="Open Sans"/>
+                                <Hyperlink FontSize="16" 
+                                           Command="{Binding Source={StaticResource mainVM}, Path=OpenWebsiteCommand}"
+                                           CommandParameter="https://www.apache.org/licenses/LICENSE-2.0.html"
+                                           >
+                                    License
+                                </Hyperlink>
+                                <LineBreak/>
+                                <Run Text="Open Sans is a humanist sans-serif typeface designed by Steve Matteson and commissioned by Google."
+                                     FontSize="12"/>
+                            </TextBlock>
+                        </StackPanel>
                     </StackPanel>
                 </ScrollViewer>
             </Grid>

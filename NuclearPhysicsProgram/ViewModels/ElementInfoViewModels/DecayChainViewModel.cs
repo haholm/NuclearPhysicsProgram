@@ -10,13 +10,11 @@ using System.Windows.Input;
 
 namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
     public class DecayChainViewModel : PropertyHandler.NotifyPropertyChanged {
+        /// decayType indicates type of decay of which led to said isotope in the decayChain
+        private static List<List<(IsotopeModel isotope, int index, string decayType)>> decayChains;
         private ElementInfoViewModel elementInfoViewModel;
         private PlotViewModel plotViewModel;
         private IsotopeDataModel currentIsotopeData;
-        /// <summary>
-        /// decayType indicates type of decay of which led to said isotope in the decayChain
-        /// </summary>
-        private List<List<(IsotopeModel isotope, int index, string decayType)>> decayChains;
 
         private int currentDecayChainIndex = 0;
         private bool? isArrowUpEnabled;
@@ -25,11 +23,14 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
         ///Related to fix for multiple-decays-of-same-isotope-but-different-decay-type problem causing
         ///multiple consecutive isotopes of the same symbol to show up in the same decay chain instead
         ///of showing up as two different decay chains respectively
+        ValueTuple<IsotopeModel, int, string> initialIsotope;
         int lastIndex;
         bool conflict;
         bool rerun;
 
         public ICommand SwitchDecayChainIsotopeCommand { get; private set; }
+        /// Binding is only possible to Properties, such as the Tuple's. ValueTuples
+        /// only expose fields and as such can not raise PropertyChangedEvent or bind
         public ObservableCollection<Tuple<IsotopeModel, string, string>> IsotopeDecayChain { get; private set; }
         public bool? IsArrowUpEnabled {
             get => isArrowUpEnabled; 
@@ -82,20 +83,8 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
             }
         }
 
-        public void SwitchDecayChainIsotope(string direction) {
-            if (direction == "next")
-                SetupObservableDecayChain(++currentDecayChainIndex);
-            else
-                SetupObservableDecayChain(--currentDecayChainIndex);
-        }
-
-        public double SetupDecayChains(ElementDataModel element) {
-            if (!ElementViewModel.IsotopeDataDictionary.TryGetValue(element.Symbol, out var isotopeData))
-                return 0;
-
-            SetupDecayChains(isotopeData);
-
-            List<double> energiesReleased = new List<double>();
+        public static double GetAvarageEnergyReleased(ElementDataModel element) {
+            var energiesReleased = new List<double>();
             int firstProtonAmount = element.AtomicNumber;
             int firstNeutronAmount = element.MassNumber - element.AtomicNumber;
             double firstMass = (firstProtonAmount * Constants.Proton.Mass.Kilograms) + (firstNeutronAmount * Constants.Neutron.Mass.Kilograms);
@@ -109,7 +98,6 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
                 int secondProtonAmount = secondElementData.AtomicNumber;
                 int secondNeutronAmount = decayChain[1].isotope.MassNumber - secondElementData.AtomicNumber;
                 double secondMass = (secondProtonAmount * Constants.Proton.Mass.Kilograms) + (secondNeutronAmount * Constants.Neutron.Mass.Kilograms);
-                //mass defect?
                 double massDifference = firstMass - secondMass;
                 if (massDifference < 0)
                     continue;
@@ -121,7 +109,23 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
             if (energiesReleased.Count == 0)
                 return 0;
             avarageEnergyReleased /= energiesReleased.Count;
-            return avarageEnergyReleased; //return decaychain instead?
+            return avarageEnergyReleased;
+        }
+
+        public void SwitchDecayChainIsotope(string direction) {
+            if (direction == "next")
+                SetupObservableDecayChain(++currentDecayChainIndex);
+            else
+                SetupObservableDecayChain(--currentDecayChainIndex);
+        }
+
+        /// <returns>Avarage energy released out of all of the element's isotopes' first decays</returns>
+        public double SetupDecayChains(ElementDataModel element, IsotopeModel selectIsotope = null, bool constructSortedDecayChain = false) {
+            if (!ElementViewModel.IsotopeDataDictionary.TryGetValue(element.Symbol, out var isotopeData))
+                return 0;
+
+            SetupDecayChains(isotopeData, selectIsotope, constructSortedDecayChain);
+            return GetAvarageEnergyReleased(element);
         }
 
         public void SetupDecayChains(IsotopeDataModel isotopeData, IsotopeModel selectIsotope = null, bool constructSortedDecayChain = false) {
@@ -157,7 +161,6 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
                 SetupObservableDecayChain(currentDecayChainIndex);
         }
 
-        ValueTuple<IsotopeModel, int, string> initialIsotope;
         private void AnalyzeDecays(IsotopeModel isotope, int index, string isotopeDecayType) {
             if (index == 0)
                 initialIsotope = (isotope, index, isotopeDecayType);
@@ -169,8 +172,7 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
 
             lastIndex = index;
             decayChains.Last().Add((isotope, index, isotopeDecayType));  //add isotope as branch to decay tree
-
-            if (isotope.Decays.Length < 1)  //does isotope contain any decays?
+            if (isotope.Decays.Length < 1)  //does isotope not contain any decays?
                 return;
 
             int j = 0;
@@ -185,13 +187,12 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels {
                     index = 0;
                 }
 
-                j++;
-
                 if (isotope.Decays[i].ProductSymbol == "-")
                     return;
 
                 var nextIsotope = ElementViewModel.GetIsotope(isotope.Decays[i].ProductSymbol, isotope.Decays[i].MassNumber);
-                AnalyzeDecays(nextIsotope, index + 1, isotope.Decays[i].Type);
+                AnalyzeDecays(nextIsotope, index + 1, isotope.Decays[i].Type);  //
+                j++;
             }
         }
 
