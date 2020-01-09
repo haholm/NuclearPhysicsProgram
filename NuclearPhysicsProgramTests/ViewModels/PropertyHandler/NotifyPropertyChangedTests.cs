@@ -37,11 +37,6 @@ namespace NuclearPhysicsProgram.ViewModels.PropertyHandler.Tests {
         }
 
         [TestMethod()]
-        public void NotifyPropertyChangedTest() {
-
-        }
-
-        [TestMethod()]
         public void SetPropertyChangedTest() {
             propertyClass.Property = true;
             Assert.IsTrue(propertyChanged && (propertyClass.Property == true));

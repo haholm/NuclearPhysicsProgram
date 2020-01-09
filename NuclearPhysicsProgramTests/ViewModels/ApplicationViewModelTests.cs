@@ -2,6 +2,7 @@
 using NuclearPhysicsProgram.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,8 +14,8 @@ namespace NuclearPhysicsProgram.ViewModels.Tests {
 
         [TestInitialize]
         public void TestInitialize() {
-            if (System.IO.File.Exists(ApplicationViewModel.ConfigPath))
-                System.IO.File.Delete(ApplicationViewModel.ConfigPath);
+            if (File.Exists(ApplicationViewModel.ConfigPath))
+                File.Delete(ApplicationViewModel.ConfigPath);
 
             applicationViewModel = new ApplicationViewModel();
         }
@@ -26,24 +27,20 @@ namespace NuclearPhysicsProgram.ViewModels.Tests {
 
         [TestMethod()]
         public void ApplicationViewModelTest() {
-            Assert.AreEqual("1",
-                            System.IO.File.ReadAllText(ApplicationViewModel.ConfigPath));
+            Assert.AreEqual("1", File.ReadAllText(ApplicationViewModel.ConfigPath));
 
             applicationViewModel.Begin();
-            Assert.AreEqual("0",
-                            System.IO.File.ReadAllText(ApplicationViewModel.ConfigPath));
+            Assert.AreEqual("0", File.ReadAllText(ApplicationViewModel.ConfigPath));
 
             // reinit and confirm reinit
             TestInitialize();
-            Assert.AreEqual("1",
-                            System.IO.File.ReadAllText(ApplicationViewModel.ConfigPath));
+            Assert.AreEqual("1", File.ReadAllText(ApplicationViewModel.ConfigPath));
         }
 
         [TestMethod()]
         public void BeginTest() {
             applicationViewModel.Begin();
-            Assert.AreEqual("0",
-                            System.IO.File.ReadAllText(ApplicationViewModel.ConfigPath));
+            Assert.AreEqual("0", File.ReadAllText(ApplicationViewModel.ConfigPath));
         }
     }
 }

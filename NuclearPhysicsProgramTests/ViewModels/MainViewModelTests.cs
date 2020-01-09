@@ -31,6 +31,9 @@ namespace NuclearPhysicsProgram.ViewModels.Tests {
         [TestMethod()]
         public void OpenElementInfoTest() {
             mainViewModel.OpenElementInfo("H", 1, test: true).Wait();
+            Assert.AreEqual(Visibility.Collapsed, mainViewModel.PeriodicTableViewVisibility);
+            Assert.AreEqual(Visibility.Visible, mainViewModel.ElementInfoViewVisibility);
+            Assert.AreEqual(1, mainViewModel.ElementInfoViewOpacity);
             Assert.IsInstanceOfType((mainViewModel.CurrentIsotopeData, ElementInfoViewModels.ElementInfoViewModel.CurrentIsotopeData), typeof(ValueTuple<Models.IsotopeDataModel, Models.IsotopeDataModel>));
             Assert.IsTrue(mainViewModel.DecayChainViewModel.IsotopeDecayChain.Count > 0 && mainViewModel.DecayChainViewModel.IsArrowUpEnabled.HasValue && mainViewModel.DecayChainViewModel.IsArrowDownEnabled.HasValue);
         }
@@ -38,7 +41,8 @@ namespace NuclearPhysicsProgram.ViewModels.Tests {
         [TestMethod()]
         public void CloseElementInfoTest() {
             mainViewModel.CloseElementInfo(test: true).Wait();
-            //
+            Assert.AreEqual(Visibility.Visible, mainViewModel.PeriodicTableViewVisibility);
+            Assert.AreEqual(Visibility.Collapsed, mainViewModel.ElementInfoViewVisibility);
         }
 
         [TestMethod()]

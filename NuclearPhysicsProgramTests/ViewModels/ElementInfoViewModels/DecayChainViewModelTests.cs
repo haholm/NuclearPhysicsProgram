@@ -44,7 +44,7 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels.Tests {
                 case "EC":
                     return;
                 case "β-,β-":
-                    return ;
+                    return;
                 case "γ":
                     return;
                 case "β-,γ":
@@ -69,18 +69,17 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels.Tests {
         public void SetupDecayChainsTest() {
             foreach (var elementData in ElementViewModel.ElementDataDictionary.Values) {
                 double avarageEnergyReleased = mainViewModel.DecayChainViewModel.SetupDecayChains(elementData, null, true);
-                VerifyDecayChainsTest(elementData, avarageEnergyReleased);
+                Assert.AreEqual(DecayChainViewModel.GetAvarageEnergyReleased(elementData), avarageEnergyReleased);
+                Assert.IsTrue(mainViewModel.DecayChainViewModel.IsotopeDecayChain.Count > 0);
             }
-        }
-
-        private void VerifyDecayChainsTest(Models.ElementDataModel elementData, double avarageEnergyReleased) {
-
-            Assert.AreEqual(DecayChainViewModel.GetAvarageEnergyReleased(elementData), avarageEnergyReleased);
         }
 
         [TestMethod()]
         public void SetupDecayChainsTest1() {
-
+            foreach (var isotopeData in ElementViewModel.IsotopeDataDictionary.Values) {
+                mainViewModel.DecayChainViewModel.SetupDecayChains(isotopeData, null, true);
+                Assert.IsTrue(mainViewModel.DecayChainViewModel.IsotopeDecayChain.Count > 0);
+            }
         }
     }
 }

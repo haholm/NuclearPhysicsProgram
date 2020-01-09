@@ -84,8 +84,7 @@ namespace NuclearPhysicsProgram.ViewModels.Tests {
         [TestMethod()]
         public void GetMassInAMUTest() {
             foreach (var elementData in ElementViewModel.ElementDataDictionary.Values) {
-                Assert.AreEqual((elementData.AtomicNumber * Constants.Proton.Mass.AtomicMassUnits) +
-                    ((elementData.MassNumber - elementData.AtomicNumber) * Constants.Neutron.Mass.AtomicMassUnits), 
+                Assert.AreEqual((elementData.AtomicNumber * Constants.Proton.Mass.AtomicMassUnits) + ((elementData.MassNumber - elementData.AtomicNumber) * Constants.Neutron.Mass.AtomicMassUnits), 
                                 ElementViewModel.GetMassInAMU(elementData));
             }
         }

@@ -24,11 +24,6 @@ namespace NuclearPhysicsProgram.ViewModels.ElementInfoViewModels.Tests {
         }
 
         [TestMethod()]
-        public void PlotViewModelTest() {
-
-        }
-
-        [TestMethod()]
         public void SetupPlotTest() {
             foreach (var isotopeData in ElementViewModel.IsotopeDataDictionary.Values) {
                 foreach (var isotope in isotopeData.Isotopes) {
