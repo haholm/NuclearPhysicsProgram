@@ -1,7 +1,7 @@
 # NuclearPhysicsProgram
 ### Facilitating learning of nuclear physics
 
-- Built around the WPF Framework and according to the MVVM software architecture standard
+- Built around WPF and .NET Framework according to the MVVM software architecture standard
 
 &nbsp;
 
